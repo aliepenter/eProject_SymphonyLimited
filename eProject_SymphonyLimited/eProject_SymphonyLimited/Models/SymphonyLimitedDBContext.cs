@@ -25,5 +25,6 @@ namespace eProject_SymphonyLimited.Models
         public virtual DbSet<Student> Student { get; set; }
         public virtual DbSet<StudentResult> StudentResult { get; set; }
         public virtual DbSet<Teacher> Teacher { get; set; }
+        public virtual DbSet<Class> Class { get; set; }
     }
 }

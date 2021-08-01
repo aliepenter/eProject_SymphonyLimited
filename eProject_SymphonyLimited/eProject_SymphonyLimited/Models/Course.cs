@@ -38,10 +38,10 @@ namespace eProject_SymphonyLimited.Models
 
         [Display(Name = "Image")]
         public string Image { get; set; }
-
         public int CategoryId { get; set; }
 
         [ForeignKey("CategoryId")]
+
         public Category Category { get; set; }
 
         public ICollection<StudentResult> StudentResults { get; set; }

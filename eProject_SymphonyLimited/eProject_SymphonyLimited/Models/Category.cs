@@ -24,7 +24,5 @@ namespace eProject_SymphonyLimited.Models
         public int ParentId { get; set; }
 
         public ICollection<Course> Courses { get; set; }
-
-        public ICollection<Student> Students { get; set; }
     }
 }

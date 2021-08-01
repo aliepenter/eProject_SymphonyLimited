@@ -27,13 +27,9 @@ namespace eProject_SymphonyLimited.Models
         [Display(Name = "Email")]
         [Required(ErrorMessage = "Please enter student's email!")]
         public string Email { get; set; }
-
-        [Required]
-        public int CategoryId { get; set; }
-
-        [ForeignKey("CategoryId")]
-        public Category Category { get; set; }
-
+        public int ClassId{ get; set; }
+        [ForeignKey("ClassId")]
+        public Class Class{ get; set;}
         public ICollection<StudentResult> StudentResults { get; set; }
     }
 }

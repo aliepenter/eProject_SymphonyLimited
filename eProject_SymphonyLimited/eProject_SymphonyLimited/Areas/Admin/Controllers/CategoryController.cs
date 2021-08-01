@@ -17,5 +17,27 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
             var categories = db.Category.AsEnumerable();
             return View(categories);
         }
+        public ActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Create(Category c)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    db.Category.Add(c);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (Exception)
+                {
+
+                }
+            }
+            return View();
+        }
     }
 }
