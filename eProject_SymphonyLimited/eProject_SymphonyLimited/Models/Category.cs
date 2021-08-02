@@ -11,15 +11,17 @@ namespace eProject_SymphonyLimited.Models
         [Key]
         public int EntityId { get; set; }
 
-        [Display(Name = "Category")]
+        [Display(Name = "Category Name")]
         [Required(ErrorMessage = "Please enter category name!")]
         public string Name { get; set; }
 
+        [Display(Name = "Path")]
+        public string Path { get; set; }
+
         [Display(Name = "Level")]
-        [Required(ErrorMessage = "Please choose level!")]
         public int Level { get; set; }
 
-        [Display(Name = "Category")]
+        [Display(Name = "Parent")]
         [Required(ErrorMessage = "Please choose parent category!")]
         public int ParentId { get; set; }
 
