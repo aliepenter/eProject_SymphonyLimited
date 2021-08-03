@@ -15,7 +15,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         // GET: Admin/Category
         public ActionResult Index()
         {
-            return View(db.Category.Where(x => x.EntityId != 1).AsEnumerable());
+            return View(db.Category.Where(x => x.ParentId == 0).AsEnumerable());
         }
 
         public ActionResult Create()
@@ -36,11 +36,11 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                     {
                         if (categoryById.Level == 1)
                         {
-                            c.Path = categoryById.Path;
+                            c.Path = categoryById.Path + "/";
                         }
                         else
                         {
-                            c.Path = categoryById.Path + "/" + categoryById.EntityId;
+                            c.Path = categoryById.Path + categoryById.EntityId + "/";
                         }
                         c.Level = categoryById.Level + 1;
                         db.Category.Add(c);
@@ -75,29 +75,27 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
             {
                 try
                 {
-                    var categoryById = db.Category.FirstOrDefault(x => x.EntityId == c.ParentId);
-                    var currentCategory = db.Category.FirstOrDefault(x => x.EntityId == c.EntityId);
-                    var childCategory = db.Category.Where(x => x.Path.Contains(c.EntityId.ToString())).AsEnumerable();
-                    var oldPath = currentCategory.Path;
-                    var oldLevel = currentCategory.Level;
-                    if (categoryById != null)
+                    var parentCategory = db.Category.FirstOrDefault(x => x.EntityId == c.ParentId);
+                    var childCategories = db.Category.Where(x => x.Path.Contains("/" + c.EntityId.ToString() + "/")).AsEnumerable();
+                    var mainCategory = db.Category.Find(c.EntityId);
+                    var oldPath = mainCategory.Path;
+                    if (parentCategory != null)
                     {
-                        if (categoryById.Level == 1)
+                        if (parentCategory.Level == 1)
                         {
-                            c.Path = categoryById.Path;
+                            mainCategory.Path = parentCategory.Path + "/"; 
                         }
                         else
                         {
-                            c.Path = categoryById.Path + "/" + categoryById.EntityId;
-                            c.Level = categoryById.Level + 1;
-                            db.Entry(c).State = EntityState.Modified;
-                            foreach (var item in childCategory)
-                            {
-                                item.Level = c.Level + (item.Level - oldLevel);
-                                item.Path = item.Path.Replace(oldPath, c.Path);
-                                db.Entry(item).State = EntityState.Modified;
-                            }
+                            mainCategory.Path = parentCategory.Path + parentCategory.EntityId + "/";
                         }
+                        foreach (var child in childCategories)
+                        {
+                            child.Level = parentCategory.Level + (child.Level - mainCategory.Level) + 1;
+                            child.Path = child.Path.Replace(oldPath, mainCategory.Path);
+                        }
+                        mainCategory.Level = parentCategory.Level + 1;
+                        mainCategory.ParentId = parentCategory.EntityId;
                     }
                     db.SaveChanges();
                     return RedirectToAction("Index");
@@ -117,7 +115,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
             {
                 try
                 {
-                    var childCategories = db.Category.Where(x => x.ParentId == id);
+                    var childCategories = db.Category.Where(x => x.Path.Contains("/" + id.ToString() + "/")).AsEnumerable();
                     foreach (var item in childCategories)
                     {
                         db.Category.Remove(db.Category.Find(item.EntityId));
