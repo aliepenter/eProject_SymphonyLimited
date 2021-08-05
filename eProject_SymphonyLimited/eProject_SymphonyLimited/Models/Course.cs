@@ -21,16 +21,15 @@ namespace eProject_SymphonyLimited.Models
         public string Time { get; set; }
 
         [Display(Name = "Description")]
-        [Required(ErrorMessage = "Please enter course's description!")]
         public string Description { get; set; }
 
         [Display(Name = "Price")]
         [Required(ErrorMessage = "Please enter course's price!")]
         public float Price { get; set; }
 
-        [Display(Name = "Object")]
-        [Required(ErrorMessage = "Please enter course's object!")]
-        public string Object { get; set; }
+        [Display(Name = "Subject")]
+        [Required(ErrorMessage = "Please enter course's subject!")]
+        public string Subject { get; set; }
 
         [Display(Name = "Certificate")]
         [Required(ErrorMessage = "Please enter course's certificate!")]
@@ -38,14 +37,12 @@ namespace eProject_SymphonyLimited.Models
 
         [Display(Name = "Image")]
         public string Image { get; set; }
+
+        [Display(Name = "Category")]
         public int CategoryId { get; set; }
 
         [ForeignKey("CategoryId")]
 
         public Category Category { get; set; }
-
-        public ICollection<StudentResult> StudentResults { get; set; }
-
-        public ICollection<RegisterInfo> RegisterInfos { get; set; }
     }
 }

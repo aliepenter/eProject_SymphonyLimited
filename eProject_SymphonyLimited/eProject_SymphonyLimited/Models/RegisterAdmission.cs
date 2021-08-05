@@ -7,14 +7,16 @@ using System.Web;
 
 namespace eProject_SymphonyLimited.Models
 {
-    public class Class
+    public class RegisterAdmission
     {
         [Key]
         public int EntityId { get; set; }
 
-        public string Name { get; set; }
+        public string RollNumber { get; set; }
 
-        public int QuantityStudent { get; set; }
+        public double Mark { get; set; }
+
+        public bool StatusInClass { get; set; }
 
         public int AdmissionId { get; set; }
 

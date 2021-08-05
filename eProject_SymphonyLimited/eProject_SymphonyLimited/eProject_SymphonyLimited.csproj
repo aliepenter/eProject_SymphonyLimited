@@ -128,25 +128,25 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CourseController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Branch.cs" />
+    <Compile Include="Models\Admission.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Class.cs" />
-    <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\CoreConfigData.cs" />
     <Compile Include="Models\Course.cs" />
-    <Compile Include="Models\Faq.cs" />
-    <Compile Include="Models\MarkType.cs" />
-    <Compile Include="Models\Partner.cs" />
+    <Compile Include="Models\EavAttribute.cs" />
+    <Compile Include="Models\EavEntity.cs" />
+    <Compile Include="Models\EavValue.cs" />
+    <Compile Include="Models\RegisterAdmission.cs" />
     <Compile Include="Models\RegisterInfo.cs" />
     <Compile Include="Models\Student.cs" />
-    <Compile Include="Models\StudentResult.cs" />
     <Compile Include="Models\SymphonyLimitedDBContext.cs" />
-    <Compile Include="Models\Teacher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -2005,6 +2005,8 @@
     <Content Include="Areas\Admin\Views\Category\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Category\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Category\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Course\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Course\Create.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

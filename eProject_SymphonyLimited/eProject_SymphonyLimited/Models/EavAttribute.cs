@@ -6,15 +6,15 @@ using System.Web;
 
 namespace eProject_SymphonyLimited.Models
 {
-    public class Comment
+    public class EavAttribute
     {
         [Key]
         public int EntityId { get; set; }
 
-        [Display(Name = "Comment")]
-        [Required(ErrorMessage = "Please enter comment!")]
         public string Name { get; set; }
 
-        public ICollection<StudentResult> StudentResults { get; set; }
+        public string Code { get; set; }
+
+        public int EavEntityId { get; set; }
     }
 }

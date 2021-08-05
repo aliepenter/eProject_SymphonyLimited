@@ -23,10 +23,5 @@ namespace eProject_SymphonyLimited.Models
 
         [Display(Name = "Comment")]
         public string Comment { get; set; }
-
-        public int CourseId { get; set; }
-
-        [ForeignKey("CourseId")]
-        public Course Course { get; set; }
     }
 }

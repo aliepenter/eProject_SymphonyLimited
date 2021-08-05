@@ -6,15 +6,14 @@ using System.Web;
 
 namespace eProject_SymphonyLimited.Models
 {
-    public class Faq
+    public class EavEntity
     {
         [Key]
         public int EntityId { get; set; }
 
-        [Display(Name = "Question")]
-        public string Question { get; set; }
+        public string Name { get; set; }
 
-        [Display(Name = "Answer")]
-        public string Answer { get; set; }
+        public string Code { get; set; }
+
     }
 }

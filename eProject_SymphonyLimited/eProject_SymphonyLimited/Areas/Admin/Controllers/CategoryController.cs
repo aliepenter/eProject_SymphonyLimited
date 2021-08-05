@@ -15,7 +15,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         // GET: Admin/Category
         public ActionResult Index()
         {
-            return View(db.Category.Where(x => x.ParentId == 0).AsEnumerable());
+            return View(db.Category.Where(x => x.ParentId != 0).AsEnumerable());
         }
 
         public ActionResult Create()

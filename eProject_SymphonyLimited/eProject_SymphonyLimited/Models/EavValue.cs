@@ -6,15 +6,13 @@ using System.Web;
 
 namespace eProject_SymphonyLimited.Models
 {
-    public class MarkType
+    public class EavValue
     {
         [Key]
         public int EntityId { get; set; }
 
-        [Display(Name = "Mark Type Name")]
-        [Required(ErrorMessage = "Please enter mark type name!")]
-        public string Name { get; set; }
+        public int AttributeId { get; set; }
 
-        public ICollection<StudentResult> StudentResults { get; set; }
+        public string Value { get; set; }
     }
 }

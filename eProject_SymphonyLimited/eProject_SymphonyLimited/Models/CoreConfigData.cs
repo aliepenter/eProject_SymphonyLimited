@@ -6,13 +6,13 @@ using System.Web;
 
 namespace eProject_SymphonyLimited.Models
 {
-    public class Student
+    public class CoreConfigData
     {
         [Key]
         public int EntityId { get; set; }
 
-        public int RegisterInfoId { get; set; }
+        public string Name { get; set; }
 
-        public int ClassId { get; set; }
+        public string Value { get; set; }
     }
 }
