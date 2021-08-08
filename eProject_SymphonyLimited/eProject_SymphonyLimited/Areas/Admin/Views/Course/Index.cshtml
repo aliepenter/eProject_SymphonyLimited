@@ -1,4 +1,4 @@
-﻿@model IEnumerable<eProject_SymphonyLimited.Models.Course>
+﻿
 
 @{
     ViewBag.Title = "Index";
@@ -12,69 +12,64 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.EntityId)
+            Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            Time
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Image)
+            Description
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Time)
+            Price
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            Subject
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Price)
+            Certificate
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Subject)
+            Image
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Certificate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Category.Name)
+            Category
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.EntityId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Image)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Time)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Subject)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Certificate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category.Name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.EntityId }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.EntityId })
-        </td>
-    </tr>
-}
+    @foreach (var item in ViewBag.Courses)
+    {
+        <tr>
+            <td>
+                @item.Name
+            </td>
+            <td>
+                @item.Time
+            </td>
+            <td>
+                @item.Description
+            </td>
+            <td>
+                @item.Price
+            </td>
+            <td>
+                @item.Subject
+            </td>
+            <td>
+                @item.Certificate
+            </td>
+            <td>
+                @item.Image
+            </td>
+            <td>
+                @item.Category
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.EntityId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.EntityId })
+            </td>
+        </tr>
+    }
 
 </table>

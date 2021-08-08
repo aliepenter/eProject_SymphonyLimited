@@ -17,7 +17,7 @@
 
     <!-- Custom styles for this template-->
     <link href="~/Areas/Admin/Content/css/sb-admin-2.min.css" rel="stylesheet">
-
+    @RenderSection("css", required: false)
 </head>
 
 <body id="page-top">
@@ -142,6 +142,20 @@
                 </a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Index","Admission")">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Admission Manager</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Index","Attribute")">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Attributes</span>
+                </a>
+            </li>
+
             <!-- Nav Item - Tables -->
             <li class="nav-item">
                 <a class="nav-link" href="tables.html">
@@ -245,10 +259,10 @@
                     </ul>
                 </nav>
                 <!-- End of Topbar -->
-
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     @RenderBody()
+                    @RenderSection("scripts", required: false)
                 </div>
                 <!-- /.container-fluid -->
 
@@ -258,7 +272,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                        <span>Copyright &copy; Your Website 2021</span>
                     </div>
                 </div>
             </footer>
@@ -303,7 +317,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="~/Areas/Admin/Content/js/sb-admin-2.min.js"></script>
-
+    @RenderSection("script", required: false)
 </body>
 
 </html>

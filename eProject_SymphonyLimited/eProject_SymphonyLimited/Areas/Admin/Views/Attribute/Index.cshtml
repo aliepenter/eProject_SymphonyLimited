@@ -1,0 +1,224 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <button type="button" class="btn btn-primary btn-create" data-toggle="modal" data-target="#exampleModalScrollable">
+        Create New
+    </button>
+    <div class="form-inline">
+        <label class="control-label">Search: </label>
+        <input type="search" name="key" id="key" value="" placeholder="Enter name to search...." />
+    </div>
+</p>
+<table class="table table-products"></table>
+<div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <form id="frmProduct">
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <input type="hidden" name="Id" id="Id" value="" />
+                        <input type="hidden" name="type" id="Type" value="CREATE" />
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="Name">Name</label>
+                            <div class="col-md-10">
+                                <input class="form-control text-box single-line" id="Name" name="Name" type="text" value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="Price">Price</label>
+                            <div class="col-md-10">
+                                <input class="form-control text-box single-line" id="Price" name="Price" type="text" value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="Quantity">Quantity</label>
+                            <div class="col-md-10">
+                                <input class="form-control text-box single-line" id="Quantity" name="Quantity" type="number" value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="Image">Image</label>
+                            <div class="col-md-10">
+                                <input class="form-control text-box single-line" id="Image" name="Image" type="file" value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="Category">Category</label>
+                            <div class="col-md-10">
+                                <select class="form-control category-options"></select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="save-form">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var baseUrl = window.location.protocol + "//" + window.location.host + "/";
+            //var formValid = $("#frmProduct").validate({
+            //    submitHandler: function () {
+            //        var frmData = new FormData();
+            //        frmData.append("Name", $("#Name").val());
+            //        frmData.append("Price", $("#Price").val());
+            //        frmData.append("Quantity", $("#Quantity").val());
+            //        frmData.append("CategoryId", $(".category-options").val());
+            //        var img = $("#Image")[0].files[0];
+            //        frmData.append("Image", img);
+            //        //var product = {
+            //        //    Name: $('#Name').val(),
+            //        //    Price: $('#Price').val(),
+            //        //    Quantity: $('#Quantity').val(),
+            //        //    CategoryId: $('.category-options').val(),
+            //        //};
+            //        if ($('#Type').val() == "EDIT") {
+            //            frmData.append("Id", $("#Id").val());
+            //            //product.Id = $('#Id').val();
+            //            productManager.put(frmData);
+            //        } else {
+            //            productManager.post(frmData);
+            //        }
+            //    }
+            //})
+            var productManager = {
+                load: function (page = 1, key = null) {
+                    $.ajax({
+                        type: "GET",
+                        url: baseUrl + "Product",
+                        data: { page: page, key: key },
+                        success: function (res) {
+                            var _html = '<tr><th>Id</th><th>Name</th><th>Price</th><th>Quantity</th><th>Category</th><th></th></tr>';
+                            for (var item of JSON.parse(res.Data)) {
+                                _html += '<tr>' +
+                                    '<td>' + item.Id + '</td>' +
+                                    '<td>' + item.Name + '</td>' +
+                                    '<td>' + item.Price + '</td>' +
+                                    '<td>' + item.Quantity + '</td>' +
+                                    '<td>' + item.Category + '</td>' +
+                                    '<td>' +
+                                    '<button class="btn btn-warning btn-edit" data-id="' + item.Id + '">Edit</button>' +
+                                    '<button class="btn btn-danger btn-delete" data-id="' + item.Id + '">Delete</button>' +
+                                    '</td>'
+                                    + '</tr>';
+                            }
+                            $('.table-products').html(_html);
+                            var pages = '';
+                            for (var i = 1; i <= res.TotalPages; i++) {
+                                if (i == res.CurrentPage) {
+                                    pages += '<li class="active"><a href="javascript:void(0)"><button class="btn btn-warning">' + i + '</button></a></li>';
+                                } else {
+                                    pages += '<li><a class="item_page" href="javascript:void(0)"><button class="btn btn-warning">' + i + '</button></a></li>';
+                                }
+                            }
+                            $(".pagination").html(pages);
+                        }
+                    })
+                    $.ajax({
+                        type: "GET",
+                        url: "http://localhost:63634/api/Category",
+                        success: function (res) {
+                            var _html = '<option value="">--Please Select--</option>'
+                            for (var item of JSON.parse(res.Data)) {
+                                _html += '<option value="' + item.Id + '">' + item.Name + '</option>';
+                            }
+                            $('.category-options').html(_html);
+                        }
+                    })
+                },
+                //post: function (product) {
+                //    $.ajax({
+                //        type: "POST",
+                //        url: "http://localhost:63634/api/Product",
+                //        data: product,
+                //        processData: false,
+                //        contentType: false,
+                //        success: function (res) {
+                //            if (res.StatusCode == 200) {
+                //                productManager.load();
+                //                $("#exampleModalScrollable").modal('hide');
+                //            } else {
+                //                formValid.showErrors(res.Data);
+                //            }
+                //        }
+                //    })
+                //    return;
+                //},
+                //put: function (product) {
+                //    $.ajax({
+                //        type: "PUT",
+                //        url: "http://localhost:63634/api/Product",
+                //        data: product,
+                //        success: function (res) {
+                //            productManager.load();
+                //            $("#exampleModalScrollable").modal('hide');
+                //        }
+                //    })
+                //    return;
+                //},
+                //get: function (id) {
+                //    $.ajax({
+                //        type: "GET",
+                //        url: "http://localhost:63634/api/Product/" + id,
+                //        success: function (res) {
+                //            var data = JSON.parse(res.Data);
+                //            $('#Name').val(data.Name);
+                //            $('#Price').val(data.Price);
+                //            $('#Quantity').val(data.Quantity);
+                //            $('.category-options').val(data.CategoryId);
+                //            $("#exampleModalScrollable").modal('show');
+                //        }
+                //    })
+                //},
+                //delete: function (id) {
+                //    $.ajax({
+                //        type: "DELETE",
+                //        url: "http://localhost:63634/api/Product/" + id,
+                //        success: function (res) {
+                //            productManager.load();
+                //        }
+                //    })
+                //}
+            }
+            productManager.load();
+            //$(document).on("click", ".btn-edit", function () {
+            //    $('#Type').val('EDIT');
+            //    var productId = $(this).data("id");
+            //    $('#Id').val(productId);
+            //    productManager.get(productId);
+            //})
+            //$(document).on("click", ".btn-create", function () {
+            //    $('#Name').val(null);
+            //    $('#Price').val(null);
+            //    $('#Quantity').val(null);
+            //    $('.category-options').val(null);
+            //    $('#Type').val('CREATE');
+            //})
+            //$(document).on("click", ".item_page", function () {
+            //    var page = $(this).text(),
+            //        key = $('#key').val();
+            //    productManager.load(page, key);
+            //})
+            //$('#key').keyup(function () {
+            //    var key = $("#key").val();
+            //    productManager.load(1, key);
+            //})
+            //$(document).on("click", ".btn-delete", function () {
+            //    var productId = $(this).data("id");
+            //    productManager.delete(productId);
+            //})
+        });
+    </script>
+}

@@ -1,0 +1,853 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+/* responsive header */
+
+.mobile-header {
+    display: block;
+}
+
+.mobile-header .left {
+    margin: auto;
+    font-size: 30px;
+}
+
+.mobile-header .left i {
+    border-right: 1px dotted black;
+    padding-right: 10px;
+}
+
+.mobile-header .right {
+    text-align: center;
+}
+
+.mobile-menu {
+    height: 100%;
+    position: fixed;
+    top: 0;
+    width: 50%;
+    background-color: white;
+    z-index: 20;
+    display: none;
+}
+
+.mobile-menu .logo {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.mobile-menu .menu {
+    padding: 0 20px;
+}
+
+.mobile-menu ul li {
+    padding: 20px 0;
+    border-bottom: 1px dotted black;
+    list-style: none
+}
+
+.mobile-menu ul li a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #000;
+    text-transform: uppercase;
+}
+
+
+/* Header css */
+
+.containerHeader {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.header {
+    padding: 20px 0;
+}
+
+.menuDefault {
+    display: none;
+}
+
+.header .marquee {
+    height: 50px;
+    overflow: hidden;
+    position: relative;
+    background: #fefefe;
+    color: #333;
+    background-color: rgb(110, 19, 19);
+}
+
+.header .marquee p {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    line-height: 50px;
+    text-align: center;
+    transform: translateX(100%);
+    font-size: 20px;
+    color: white;
+}
+
+
+/* main css */
+
+.main .page1 .category {
+    display: none;
+}
+
+.main .page1 .mid {
+    width: 100%;
+}
+
+.main .cusBanner .fa-chevron-left,
+.fa-chevron-right {
+    font-size: 30px;
+    position: relative;
+    top: 50%;
+}
+
+.main .page1 .vCrs {
+    display: none;
+}
+
+
+/*Page2*/
+
+.main .page2 {
+    padding: 30px 0;
+}
+
+.main .page2 .bg {
+    background-image: url("../images/banner/tubebanner-0247c6d0e0891.jpg");
+    background-position: center center;
+    background-size: cover;
+    display: flex;
+    min-height: 400px;
+}
+
+.main .page2 .bg .bgEl {
+    position: absolute;
+    right: 10%;
+    padding: 60px 0px;
+}
+
+.main .page2 .bg h2 {
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: white;
+    text-align: center;
+}
+
+.main .page2 .countdown {
+    padding: 30px 0;
+    color: white;
+}
+
+.main .page2 .countdown .countdownEl {
+    text-align: center;
+}
+
+.main .page2 .countdown .countdownEl span {
+    font-size: 12px;
+}
+
+.main .page2 .countdown .countdownEl .big-text {
+    font-size: 3rem;
+    line-height: 1;
+    margin: 0 10px;
+}
+
+.main .page2 .butt {
+    text-align: center;
+    padding: 10px;
+}
+
+.main .page2 .butt button {
+    padding: 10px;
+    width: 50%;
+    font-size: 12px;
+    font-weight: bold;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+}
+
+
+/* css Footer */
+
+.containerFooter {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.footer .titleFooter {
+    text-align: center;
+    width: 100%;
+}
+
+.footer .titleFooter .slogan span {
+    text-transform: uppercase;
+    font-size: 20px;
+}
+
+.footer .titleFooter .contactInfor {
+    font-size: 15px;
+    padding: 10px 0;
+}
+
+.footer .titleFooter .contactInfor a i {
+    margin: 0 20px;
+    color: black;
+}
+
+.footer .mainFooter {
+    margin-top: 20px;
+    background-color: #6E1313;
+    color: white;
+    padding: 20px 0px;
+}
+
+.footer .mainFooter .title {
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-bottom: 1px groove white;
+}
+
+.footer .mainFooter .item {
+    padding: 20px 0;
+}
+
+.footer .mainFooter .icon i {
+    width: 100%;
+}
+
+.footer .mainFooter .infor {
+    margin: auto;
+}
+
+.footer .mainFooter ul li {
+    list-style: none;
+    display: list-item;
+    line-height: 2.5;
+}
+
+.footer .mainFooter ul li a {
+    color: white;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.footer .mainFooter .map iframe {
+    border-radius: 20px;
+}
+
+.cusFooter {
+    padding: 0 20px 0 0;
+    width: 100%;
+}
+
+.cusItemFooter {
+    padding: 20px 0px;
+}
+
+.cusItemFooter .icon {
+    text-align: center;
+}
+
+
+/* page3 */
+
+.page3 .title {
+    background-color: #6E1313;
+    height: 50px;
+}
+
+.page3 .title .left {
+    margin: auto;
+}
+
+.page3 .title .left span {
+    padding: 0 20px;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.page3 .title .right {
+    margin: auto;
+    text-align: right;
+}
+
+.page3 .title .right a {
+    padding: 0 20px;
+    color: white;
+    font-style: italic;
+    font-size: 10px;
+}
+
+.page3 .title .right i {
+    color: white;
+    font-style: italic;
+    font-size: 10px;
+}
+
+.page3 .item {
+    padding: 20px 0;
+}
+
+.page3 .item .description {
+    padding: 10px 10px 10px 0;
+    font-size: 20px;
+}
+
+.cusCourseItem {
+    width: 100%;
+    position: relative;
+    top: 0;
+    transition: top ease 0.5s;
+    padding: 10px;
+    margin-bottom: 30px;
+}
+
+.cusCourseItem:hover {
+    top: -10px;
+    background-color: lightgray;
+}
+
+.cusCourseItem .moreInfor {
+    border-top: 1px groove #6E1313;
+    padding: 10px 0;
+}
+
+.containerMoreInfor {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.cusCourseItem .moreInfor .price {
+    text-align: right;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+/* js menumobi */
+
+.menuMobileActive {
+    display: block;
+    animation-duration: 01s;
+    animation-delay: 0s;
+    animation-name: fadeInDown;
+    z-index: 1001
+}
+
+.header .childMenu .menu {
+    position: relative;
+    height: 50px;
+    width: 100%;
+    background: linear-gradient(to bottom, #474747 0, #212121 100%);
+}
+
+.header .childMenu .btnBar .bor {
+    color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px 10px;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    margin: 0 10px;
+    font-size: 20px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.header .childMenu .btnBar i {
+    transition: all 0.4s ease;
+}
+
+.childBarActive {
+    transform: rotateZ(90deg);
+}
+
+
+/* css child course Category Menu */
+
+.childCourseCategory {
+    background-color: black;
+    opacity: 0.8;
+    height: 100%;
+    position: fixed;
+    width: 100%;
+    z-index: 16;
+    top: -1000px;
+    display: block;
+}
+
+
+/* css Course Page */
+
+.main .containerCourseMain {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.main .containerCourseMain .left {
+    display: none;
+}
+
+.main .containerCourseMain .right {
+    width: 100%;
+}
+
+
+/* minwidth 768 */
+
+@media screen and (min-width: 768px) {
+    .main .page2 {
+        padding: 30px 0;
+    }
+    .main .page2 .bg {
+        background-image: url("../images/banner/tubebanner-0247c6d0e0891.jpg");
+        background-position: center center;
+        background-size: cover;
+        display: flex;
+        min-height: 400px;
+    }
+    .main .page2 .bg .bgEl {
+        position: absolute;
+        right: 10%;
+        padding: 60px 0px;
+    }
+    .main .page2 .bg h2 {
+        font-size: 30px;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: white;
+        text-align: center;
+    }
+    .main .page2 .countdown {
+        padding: 30px 0;
+        color: white;
+    }
+    .main .page2 .countdown .countdownEl {
+        text-align: center;
+    }
+    .main .page2 .countdown .countdownEl span {
+        font-size: 17px;
+    }
+    .main .page2 .countdown .countdownEl .big-text {
+        font-size: 8rem;
+        line-height: 1;
+        margin: 0 30px;
+    }
+    .main .page2 .butt {
+        text-align: center;
+        padding: 20px;
+    }
+    .main .page2 .butt button {
+        padding: 10px;
+        width: 50%;
+        font-size: 20px;
+        font-weight: bold;
+        border: none;
+        border-radius: 20px;
+        outline: none;
+    }
+    .main .page2 .butt button:hover {
+        background-color: #6E1313;
+        color: white;
+    }
+    /* page3 */
+    .cusCourseItem {
+        padding: 10px;
+        width: 50%;
+    }
+    .containerCourseItem {
+        width: 80%;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .menuDefault {
+        display: block;
+    }
+    .mobile-header {
+        display: none;
+    }
+    .menuMobileActive {
+        display: none;
+    }
+    .childMenu {
+        display: none;
+    }
+    .childCourseCategory {
+        display: none;
+    }
+    .header .right ul li a {
+        text-transform: uppercase;
+        font-size: 13px;
+        text-decoration: none;
+        padding: 0px 5px;
+        line-height: 35px;
+        display: inline-block;
+        font-weight: bold;
+    }
+    .header .left img {
+        width: 120px;
+    }
+    .header .right ul li {
+        list-style: none;
+        position: relative;
+        display: list-item;
+    }
+    .header .right ul li a:hover {
+        color: red;
+    }
+    .opacityAll {
+        display: none;
+    }
+    /* page1 */
+    .cusBanner {
+        width: 90%;
+        margin: 0 auto;
+    }
+    .main .cusBanner .category {
+        /*padding: 0px 30px;*/
+        display: block;
+        position: relative;
+    }
+    .main .cusBanner .mid {
+        width: 50%;
+    }
+    .main .cusBanner .category .cat {
+        background-color: #6E1313;
+        padding: 10px 0px;
+    }
+    .main .cusBanner .category .cat span {
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        padding: 0px 10px;
+    }
+    .main .cusBanner .category ul li {
+        list-style: none;
+        display: list-item;
+    }
+    .main .cusBanner .category ul li .defaultMenu {
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 0 24px;
+        line-height: 46px;
+        display: block;
+        border: 1px dotted #6E1313;
+        border-top: none;
+        border-right: none;
+        font-weight: bold;
+    }
+        .main .cusBanner .category ul li .defaultMenu i {
+            font-size: 10px;
+        }
+        .main .cusBanner .category ul li .defaultMenu span {
+            font-size: 10px;
+        }
+        .main .cusBanner .category ul li ul .subMenu {
+            left: 100%;
+            z-index: 17;
+            background-color: #6E1313;
+            top: 0;
+            width: 200%;
+            height: 100px;
+            position: absolute;
+            display: none;
+        }
+        .main .cusBanner .category ul li:hover ul .subMenu {
+            display: block
+        }
+        .main .cusBanner .category ul li ul li {
+            padding: 10px
+        }
+        .main .cusBanner .category ul li ul .subMenu a{
+            color: white;
+            
+        }
+    .main .cusBanner .fa-chevron-left,
+    .fa-chevron-right {
+        font-size: 30px;
+        position: relative;
+        top: 50%;
+    }
+    .main .cusBanner .vCrs {
+        padding: 0px 30px;
+        border: none;
+        display: block;
+    }
+    .table-responsive {
+        height: 215px;
+        width: 100%;
+        overflow-y: auto;
+        border: none
+    }
+    .main .vCrs .table-responsive {
+        overflow: hidden;
+        border: none;
+    }
+    .main .vCrs table {
+        width: 100%;
+        border: none;
+    }
+    .main .vCrs td {
+        padding: 10px 20px 20px 20px;
+    }
+    .main .vCrs td .img {
+        text-align: center;
+    }
+    .main .vCrs td .price {
+        text-align: center;
+        font-weight: bold;
+        font-size: 16px;
+        padding-top: 10px;
+        color: red;
+    }
+    .main .vCrs td:hover .img h3 {
+        color: red;
+    }
+    .main .vCrs .table-bordered>thead>tr>th,
+    .table-bordered>tbody>tr>th,
+    .table-bordered>tfoot>tr>th,
+    .table-bordered>thead>tr>td,
+    .table-bordered>tbody>tr>td,
+    .table-bordered>tfoot>tr>td {
+        border: none;
+        border-bottom: 1px dotted gray;
+    }
+    /* common Course css */
+    .main .containerCourseMain {
+        width: 90%;
+        margin: 0 auto;
+    }
+    .containerCourseMain .cusCourseItem {
+        padding: 10px;
+        width: 33.333333%;
+    }
+    .containerCourseItem {
+        width: 70%;
+        margin: 0 auto;
+    }
+    /* Course css */
+    .main .containerCourseMain .left {
+        display: block;
+        width: 25%;
+    }
+    .main .containerCourseMain .right {
+        width: 75%;
+    }
+    /* footer */
+    .containerFooter {
+        width: 80%;
+        margin: 0 auto;
+    }
+    .footer .titleFooter {
+        text-align: center;
+        width: 100%;
+    }
+    .footer .titleFooter .slogan span {
+        text-transform: uppercase;
+        font-size: 30px;
+    }
+    .footer .titleFooter .contactInfor {
+        font-size: 18px;
+    }
+    .footer .titleFooter .contactInfor a i {
+        margin: 0 20px;
+    }
+    .footer .mainFooter .icon i {
+        font-size: 30px;
+    }
+    .cusFooter {
+        padding: 0 20px 0 0;
+        width: 50%;
+    }
+}
+
+@media screen and (min-width:1440px) {
+    .table-responsive {
+        height: 300px;
+    }
+    .cusFooter {
+        padding: 0 20px 0 0;
+        width: 25%;
+    }
+    .header .left img {
+        width: 120px;
+    }
+    .header .right ul li {
+        list-style: none;
+        position: relative;
+        display: list-item;
+    }
+    .header .right ul li a {
+        text-transform: uppercase;
+        font-size: 16px;
+        text-decoration: none;
+        padding: 0 24px;
+        line-height: 46px;
+        display: inline-block;
+        font-weight: bold;
+    }
+    .header .right ul li a:hover {
+        color: red;
+    }
+    .main .containerCourseMain {
+        width: 70%;
+        margin: 0 auto;
+    }
+    .cusCourseItem {
+        padding: 10px;
+        width: 25%;
+    }
+    /* page3 */
+}
+
+@media screen and (min-width:1920px) {
+    .table-responsive {
+        height: 400px;
+    }
+}
+
+@media screen and (min-width:2560px) {
+    .table-responsive {
+        height: 535px;
+    }
+}
+
+
+/*Animation*/
+
+.menufix {
+    box-shadow: 0 0px 30px 5px grey;
+    animation-duration: 0.5s;
+    animation-delay: 0s;
+    animation-name: fadeInDown;
+    position: fixed;
+    background-color: white;
+    width: 100%;
+    z-index: 16;
+    top: 0;
+    padding: 10px 0px;
+}
+
+.childMenufix {
+    box-shadow: 0 0px 30px 5px grey;
+    animation-duration: 0.5s;
+    animation-delay: 0s;
+    animation-name: fadeInDown;
+    position: fixed;
+    background-color: white;
+    width: 100%;
+    z-index: 16;
+    top: 92px;
+}
+
+.marqueeAni {
+    animation: scroll-left 50s linear infinite;
+}
+
+.menuMobileActive {
+    display: block;
+    animation-duration: .6s;
+    animation-delay: 0s;
+    animation-name: fadeInDown;
+    z-index: 20;
+}
+
+.childMenuMobileActiveDown {
+    top: 142px;
+    animation-duration: .6s;
+    animation-delay: 0s;
+    animation-name: fadeInDown;
+    z-index: 16;
+}
+
+.childMenuMobileActiveUp {
+    top: -1000px;
+    animation-duration: 1s;
+    animation-delay: 0s;
+    animation-name: fadeInUp;
+    z-index: 16;
+}
+
+@keyframes scroll-left {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes animatetop {
+    0% {
+        top: -300px;
+        opacity: 0;
+    }
+    20% {
+        top: -240px;
+        opacity: 0.20;
+    }
+    40% {
+        top: -180px;
+        opacity: 0.4;
+    }
+    60% {
+        top: -120px;
+        opacity: 0.6;
+    }
+    80% {
+        top: -60px;
+        opacity: 0.8;
+    }
+    100% {
+        top: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInDown {
+    0% {
+        /* opacity: 0; */
+        transform: translate3d(0, -100%, 0);
+    }
+    100% {
+        /* opacity: 1; */
+        transform: none;
+    }
+}
+
+@keyframes fadeInUp {
+    0% {
+        top: 142px;
+    }
+    100% {
+        top: -1000px;
+    }
+}
+
+@keyframes menuleft {
+    0% {
+        left: -300px;
+        opacity: 0;
+    }
+    100% {
+        left: 0;
+        opacity: 1;
+    }
+}

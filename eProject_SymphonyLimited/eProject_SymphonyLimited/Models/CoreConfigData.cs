@@ -11,8 +11,10 @@ namespace eProject_SymphonyLimited.Models
         [Key]
         public int EntityId { get; set; }
 
+        [Required]
         public string Name { get; set; }
 
+        [Required]
         public string Value { get; set; }
     }
 }

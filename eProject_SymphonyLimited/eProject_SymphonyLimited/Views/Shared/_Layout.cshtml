@@ -1,42 +1,220 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1, width=device-width, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title>Symphony Limited</title>
+    <link rel=”stylesheet” href=”https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css”>
+    <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/css/commonStyle.css" rel="stylesheet" />
+    <link href="~/Content/css/style.css" rel="stylesheet" />
+    <link href="~/Content/fontawesome-free-5.11.2-web/css/all.min.css" rel="stylesheet" />
+    <link href="~/Content/fontawesome-free-5.15.3-web/css/all.min.css" rel="stylesheet" />
 </head>
+
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <div class="mobile-menu" id="menu-ac">
+        <div class="logo">
+            <img src="~/Content/images/Logo/coollogo_com-18441964-removebg-preview.png" alt="" width="100px">
+        </div>
+        <div class="menu">
+            <ul>
+                <li>
+                    <a class="" href="@Url.Action("Index","Home")">Home page</a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index","Course")">Course Details</a>
+                </li>
+                <li>
+                    <a href="entranceExam.html">Entrance Examitaion</a>
+                </li>
+                <li>
+                    <a href="aboutUs.html">About us</a>
+                </li>
+                <li>
+                    <a href="FAQ.html">FAQ</a>
+                </li>
+                <li>
+                    <a href="contactUs.html">Contact us</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="" id="opAll" onclick="back()">
+
+    </div>
+    <div class="header">
+        <div class="menuDefault" id="headerDefault">
+            <div class="containerHeader flex">
+                <div class="left width20">
+                    <div class="logo">
+                        <img src="~/Content/images/Logo/coollogo_com-18441964-removebg-preview.png" alt="">
+                    </div>
+                </div>
+                <div class="right width80">
+                    <div class="menu">
+                        <ul>
+                            <li>
+                                <a class="" href="@Url.Action("Index","Home")">Home page</a>
+                                <a href="@Url.Action("Index","Course")">Course Details</a>
+                                <a href="">Entrance Examitaion</a>
+                                <a href="">About us</a>
+                                <a href="">FAQ</a>
+                                <a href="">Contact us</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+        </div>
+        <div class="mobile-header" id="headerMobile">
+            <div class="containerHeader flex">
+                <div class="left width20">
+                    <i class="fas fa-bars" id="menuBar" onclick="check()"></i>
+                </div>
+                <div class="right width80">
+                    <div class="logo">
+                        <img src="~/Content/images/Logo/coollogo_com-18441964-removebg-preview.png" alt="" width="150px">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="childMenu" id="childMenu">
+            <div class="menu flex">
+                <div class="btnBar width20">
+                    <div class="bor" id="childBar">
+                        <i class="fas fa-chevron-right" id="childBarI"></i>
+                    </div>
+                </div>
+                <div class="btnSearch width80">
+
+                </div>
+            </div>
+        </div>
+        <div class="childCourseCategory" id="childCourseCategory">
+            <div class="menu">
+                <ul>
+                    <li>
+                        <a href="/">Home page</a>
+                    </li>
                 </ul>
             </div>
         </div>
+        <div class="marquee">
+            <div class="text">
+                <p class="marqueeAni">Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores deserunt iusto non accusantium, nisi quae repellendus culpa suscipit doloremque rem nam. Dicta asperiores labore itaque ratione quam magnam placeat unde?</p>
+            </div>
+        </div>
     </div>
-    <div class="container body-content">
+    <div class="main">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+        
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    <div class="footer">
+        <div class="titleFooter">
+            <div class="logo">
+                <img src="~/Content/images/Logo/coollogo_com-18441964-removebg-preview.png" alt="" width="200px">
+            </div>
+            <div class="slogan">
+                <span>Symphony Ltd. International IT Training Institute</span>
+            </div>
+            <div class="contactInfor">
+                <span><i class="fa fa-phone" aria-hidden="true"></i> HOTLINE: +84818260399 <a href=""><i class="fab fa-facebook-f"></i> </a><a href=""><i class="fas fa-envelope"></i></a></span>
+            </div>
+        </div>
+        <div class="mainFooter">
+            <div class="containerFooter flex">
+                <div class="contact cusFooter">
+                    <div class="title">
+                        <span>Contact</span>
+                    </div>
+                    <div class="item">
+                        <div class="address cusItemFooter flex">
+                            <div class="icon width20">
+                                <i class="fas fa-map-marked-alt"></i>
+                                <!-- <i class="fa fa-phone" aria-hidden="true"></i>
+                                <i class="fas fa-envelope"></i> -->
+                            </div>
+                            <div class="infor width80">
+                                <span>xxx</span>
+                            </div>
+                        </div>
+                        <div class="phone cusItemFooter flex">
+                            <div class="icon width20">
+                                <i class="fa fa-phone" aria-hidden="true"></i>
+                            </div>
+                            <div class="infor width80">
+                                <span>xxx</span>
+                            </div>
+                        </div>
+                        <div class="mail cusItemFooter flex">
+                            <div class="icon width20">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="infor width80">
+                                <span>xxx</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="aboutInstitute cusFooter">
+                    <div class="title">
+                        <span>About Symphony ltd</span>
+                    </div>
+                    <div class="item">
+                        <ul>
+                            <li>
+                                <a href="">Home Page</a>
+                            </li>
+                            <li>
+                                <a href="">About Us</a>
+                            </li>
+                            <li>
+                                <a href="">FAQ</a>
+                            </li>
+                            <li>
+                                <a href="">Contact Us</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="course cusFooter">
+                    <div class="title">
+                        <span>Courses</span>
+                    </div>
+                    <div class="item">
+                        <ul>
+                            <li>
+                                <a href=""></a>
+                            </li>
+                            <li>
+                                <a href=""></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="map cusFooter">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.6576008138977!2d105.78126221534751!3d21.04638198598892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab3b4220c2bd%3A0x1c9e359e2a4f618c!2sB%C3%A1ch%20Khoa%20Aptech!5e0!3m2!1svi!2s!4v1628077954173!5m2!1svi!2s"
+                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="~/Scripts/js/jquery.min.js"></script>
+    <script src="~/Scripts/js/jquery.validate.min.js"></script>
+    <script src="~/Scripts/js/bootstrap.min.js"></script>
+    <script src="~/Scripts/js/wow.min.js"></script>
+    <script>
+        new WOW().init();
+    </script>
+    <script src="~/Scripts/js/scritp.js"></script>
 </body>
+
 </html>
