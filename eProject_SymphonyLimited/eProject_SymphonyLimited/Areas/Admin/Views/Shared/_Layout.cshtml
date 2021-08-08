@@ -262,7 +262,6 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
                     @RenderBody()
-                    @RenderSection("scripts", required: false)
                 </div>
                 <!-- /.container-fluid -->
 
@@ -317,7 +316,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="~/Areas/Admin/Content/js/sb-admin-2.min.js"></script>
-    @RenderSection("script", required: false)
+    @RenderSection("scripts", required: false)
 </body>
 
 </html>

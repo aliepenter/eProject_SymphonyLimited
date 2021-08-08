@@ -11,10 +11,12 @@ namespace eProject_SymphonyLimited.Models
         [Key]
         public int EntityId { get; set; }
 
+        [Required(ErrorMessage = "Please enter attribute name!")]
         public string Name { get; set; }
 
         public string Code { get; set; }
 
+        [Required(ErrorMessage = "Please choose entity!")]
         public int EavEntityId { get; set; }
     }
 }

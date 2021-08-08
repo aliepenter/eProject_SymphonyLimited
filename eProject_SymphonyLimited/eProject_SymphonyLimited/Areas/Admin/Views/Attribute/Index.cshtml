@@ -9,7 +9,7 @@
     <button type="button" class="btn btn-primary btn-create-entity" data-toggle="modal" data-target="#formEntity">
         Create New Entity
     </button>
-    <button type="button" class="btn btn-primary btn-create-entity" data-toggle="modal" data-target="#formAttribute">
+    <button type="button" class="btn btn-primary btn-create-attribute" data-toggle="modal" data-target="#formAttribute">
         Create New Attribute
     </button>
     <div class="form-inline">
@@ -18,18 +18,17 @@
     </div>
 </p>
 <table class="table table-attributes"></table>
+<ul class="pagination"></ul>
 <div class="modal fade" id="formEntity" tabindex="-1" role="dialog" aria-labelledby="formEntity" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <form id="frmEntity">
                 <div class="modal-body">
                     <div class="form-horizontal">
-                        <input type="hidden" name="EavEntityId" id="EavEntityId" value="" />
-                        <input type="hidden" name="EavEntityType" id="EavEntityType" value="CREATE" />
                         <div class="form-group">
                             <label class="control-label col-md-2" for="Name">Name</label>
                             <div class="col-md-10">
-                                <input class="form-control text-box single-line" id="EntityName" name="EntityName" type="text" value="">
+                                <input class="form-control text-box single-line" id="EavEntityName" name="EavEntityName" type="text" value="">
                             </div>
                         </div>
                     </div>
@@ -45,53 +44,34 @@
 <div class="modal fade" id="formAttribute" tabindex="-1" role="dialog" aria-labelledby="formAttribute" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
-            <form id="frmProduct">
+            <form id="frmAttribute">
                 <div class="modal-body">
                     <div class="form-horizontal">
-                        <input type="hidden" name="Id" id="Id" value="" />
-                        <input type="hidden" name="type" id="Type" value="CREATE" />
+                        <input type="hidden" name="EntityId" id="EntityId" value="" />
+                        <input type="hidden" name="Type" id="Type" value="CREATE" />
                         <div class="form-group">
                             <label class="control-label col-md-2" for="Name">Name</label>
                             <div class="col-md-10">
-                                <input class="form-control text-box single-line" id="Name" name="Name" type="text" value="">
+                                <input class="form-control text-box single-line" id="EavAttributeName" name="EavAttributeName" type="text" value="">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-2" for="Price">Price</label>
+                            <label class="control-label col-md-2" for="Entity">Entity</label>
                             <div class="col-md-10">
-                                <input class="form-control text-box single-line" id="Price" name="Price" type="text" value="">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-2" for="Quantity">Quantity</label>
-                            <div class="col-md-10">
-                                <input class="form-control text-box single-line" id="Quantity" name="Quantity" type="number" value="">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-2" for="Image">Image</label>
-                            <div class="col-md-10">
-                                <input class="form-control text-box single-line" id="Image" name="Image" type="file" value="">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-2" for="Category">Category</label>
-                            <div class="col-md-10">
-                                <select class="form-control category-options"></select>
+                                <select class="form-control entity-options"></select>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" id="save-form">Save changes</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
 @section scripts{
-    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -99,12 +79,20 @@
             var formEntityValid = $("#frmEntity").validate({
                 submitHandler: function () {
                     var frmDataEntity = new FormData();
-                    frmDataEntity.append("Name", $("#EntityName").val());
-                    if ($('#EavEntityType').val() == "EDIT") {
-                        //frmDataEntity.append("Id", $("#EavEntityId").val());
-                        //manager.put(frmDataEntity);
+                    frmDataEntity.append("Name", $("#EavEntityName").val());
+                    manager.postEntity(frmDataEntity);
+                }
+            });
+            var formAttributeValid = $("#frmAttribute").validate({
+                submitHandler: function () {
+                    var frmDataAttribute = new FormData();
+                    frmDataAttribute.append("Name", $("#EavAttributeName").val());
+                    frmDataAttribute.append("EavEntityId", $(".entity-options").val());
+                    if ($('#Type').val() == "EDIT") {
+                        frmDataAttribute.append("EntityId", $("#EntityId").val());
+                        manager.updateAttribute(frmDataAttribute);
                     } else {
-                        manager.postEntity(frmDataEntity);
+                        manager.postAttribute(frmDataAttribute);
                     }
                 }
             });
@@ -140,17 +128,17 @@
                             $(".pagination").html(pages);
                         }
                     })
-                    //$.ajax({
-                    //    type: "GET",
-                    //    url: "http://localhost:63634/api/Category",
-                    //    success: function (res) {
-                    //        var _html = '<option value="">--Please Select--</option>'
-                    //        for (var item of JSON.parse(res.Data)) {
-                    //            _html += '<option value="' + item.Id + '">' + item.Name + '</option>';
-                    //        }
-                    //        $('.category-options').html(_html);
-                    //    }
-                    //})
+                    $.ajax({
+                        type: "GET",
+                        url: baseUrl + "Attribute/GetEntitties",
+                        success: function (res) {
+                            var _html = '<option value="">--Please Select--</option>'
+                            for (var item of JSON.parse(res.Data)) {
+                                _html += '<option value="' + item.EntityId + '">' + item.Name + '</option>';
+                            }
+                            $('.entity-options').html(_html);
+                        }
+                    })
                 },
                 postEntity: function (entity) {
                     $.ajax({
@@ -161,6 +149,7 @@
                         contentType: false,
                         success: function (res) {
                             if (res.StatusCode == 200) {
+                                manager.load();
                                 $("#formEntity").modal('hide');
                             } else {
                                 formEntityValid.showErrors(res.Data);
@@ -169,81 +158,106 @@
                     })
                     return;
                 },
-                //put: function (product) {
-                //    $.ajax({
-                //        type: "PUT",
-                //        url: "http://localhost:63634/api/Product",
-                //        data: product,
-                //        success: function (res) {
-                //            productManager.load();
-                //            $("#exampleModalScrollable").modal('hide');
-                //        }
-                //    })
-                //    return;
-                //},
-                //get: function (id) {
-                //    $.ajax({
-                //        type: "GET",
-                //        url: "http://localhost:63634/api/Product/" + id,
-                //        success: function (res) {
-                //            var data = JSON.parse(res.Data);
-                //            $('#Name').val(data.Name);
-                //            $('#Price').val(data.Price);
-                //            $('#Quantity').val(data.Quantity);
-                //            $('.category-options').val(data.CategoryId);
-                //            $("#exampleModalScrollable").modal('show');
-                //        }
-                //    })
-                //},
-                //delete: function (id) {
-                //    $.ajax({
-                //        type: "DELETE",
-                //        url: "http://localhost:63634/api/Product/" + id,
-                //        success: function (res) {
-                //            productManager.load();
-                //        }
-                //    })
-                //}
+                postAttribute: function (attribute) {
+                    $.ajax({
+                        type: "POST",
+                        url: baseUrl + "Attribute/PostAttribute",
+                        data: attribute,
+                        processData: false,
+                        contentType: false,
+                        success: function (res) {
+                            if (res.StatusCode == 200) {
+                                manager.load();
+                                $("#formAttribute").modal('hide');
+                            } else {
+                                formAttributeValid.showErrors(res.Data);
+                            }
+                        }
+                    })
+                    return;
+                },
+                updateAttribute: function (attribute) {
+                    $.ajax({
+                        type: "POST",
+                        url: baseUrl + "Attribute/UpdateAttribute",
+                        data: attribute,
+                        processData: false,
+                        contentType: false,
+                        success: function (res) {
+                            if (res.StatusCode == 200) {
+                                manager.load();
+                                $("#formAttribute").modal('hide');
+                            } else {
+                                formAttributeValid.showErrors(res.Data);
+                            }
+                        }
+                    })
+                    return;
+                },
+                get: function (id) {
+                    $.ajax({
+                        type: "GET",
+                        url: baseUrl + "Attribute/GetAttributeById",
+                        data: { id: id },
+                        success: function (res) {
+                            var data = JSON.parse(res.Data);
+                            $('#EavAttributeName').val(data.Name);
+                            $('.entity-options').val(data.EavEntityId);
+                            $("#formAttribute").modal('show');
+                        }
+                    })
+                },
+                delete: function (id) {
+                    $.ajax({
+                        type: "POST",
+                        url: baseUrl + "Attribute/DeleteAttributeById",
+                        data: { id: id },
+                        success: function (res) {
+                            manager.load();
+                        }
+                    })
+                }
             }
             manager.load();
-            //$("#frmEntity").submit(function () {
-            //    var entity = {
-            //        Name: $('#EntityName').val(),
-            //        Code: ""
-            //    };
-            //    if ($('#Type').val() == "EDIT") {
-            //        //frmDataEntity.append("Id", $("#Id").val());
-            //        //manager.put(frmDataEntity);
-            //    } else {
-            //        manager.postEntity(entity);
-            //    }
-            //});
-            //$(document).on("click", ".btn-edit", function () {
-            //    $('#Type').val('EDIT');
-            //    var productId = $(this).data("id");
-            //    $('#Id').val(productId);
-            //    productManager.get(productId);
-            //})
-            //$(document).on("click", ".btn-create", function () {
-            //    $('#Name').val(null);
-            //    $('#Price').val(null);
-            //    $('#Quantity').val(null);
-            //    $('.category-options').val(null);
-            //    $('#Type').val('CREATE');
-            //})
-            //$(document).on("click", ".item_page", function () {
-            //    var page = $(this).text(),
-            //        key = $('#key').val();
-            //    productManager.load(page, key);
-            //})
-            //$('#key').keyup(function () {
-            //    var key = $("#key").val();
-            //    productManager.load(1, key);
-            //})
-            //$(document).on("click", ".btn-delete", function () {
-            //    var productId = $(this).data("id");
-            //    productManager.delete(productId);
-            //})
+            $(document).on("click", ".btn-edit", function () {
+                $('#Type').val('EDIT');
+                var attributeId = $(this).data("id");
+                $('#EntityId').val(attributeId);
+                manager.get(attributeId);
+            })
+            $(document).on("click", ".btn-create-attribute", function () {
+                $('#EavAttributeName').val(null);
+                $('.entity-options').val(null);
+                $('#Type').val('CREATE');
+            })
+            $(document).on("click", ".btn-create-entity", function () {
+                $('#EavEntityName').val(null);
+            })
+            $(document).on("click", ".item_page", function () {
+                var page = $(this).text(),
+                    key = $('#key').val();
+                manager.load(page, key);
+            })
+            $('#key').keyup(function () {
+                var key = $("#key").val();
+                manager.load(1, key);
+            })
+            $(document).on("click", ".btn-delete", function () {
+                if (confirm("Are you sure you want to delete this?")) {
+                    var attributeId = $(this).data("id");
+                    manager.delete(attributeId);
+                }
+                else {
+                    return false;
+                }
+            })
         });
     </script>
 }
+<style>
+    .error {
+        font-size: unset;
+        width: 100%;
+        color: red;
+    }
+</style>

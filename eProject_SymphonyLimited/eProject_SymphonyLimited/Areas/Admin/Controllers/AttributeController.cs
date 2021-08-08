@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -65,7 +66,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                 var entity = new EavEntity
                 {
                     Name = e.Name,
-                    Code = e.Code
+                    Code = e.Name.ToLower()
                 };
                 db.EavEntity.Add(entity);
                 db.SaveChanges();
@@ -84,7 +85,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                     string key = Regex.Replace(k, @"(\w+)\.(\w+)", @"$2");
                     if (!errors.ContainsKey(key))
                     {
-                        errors.Add(key, err.ErrorMessage);
+                        errors.Add("EavEntity" + key, err.ErrorMessage);
                     }
                 }
             }
@@ -94,6 +95,143 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                 Data = errors,
                 Message = "Add entity fail!"
             }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetEntitties()
+        {
+            var entities = db.EavEntity.AsEnumerable();
+            string jsonData = JsonConvert.SerializeObject(entities);
+            return Json(new
+            {
+                StatusCode = 200,
+                Data = jsonData
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetAttributeById(int id)
+        {
+            var attributeById = db.EavAttribute.Find(id);
+            string jsonData = JsonConvert.SerializeObject(attributeById);
+            return Json(new
+            {
+                StatusCode = 200,
+                Data = jsonData
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult PostAttribute(EavAttribute e)
+        {
+            if (ModelState.IsValid)
+            {
+                var attribute = new EavAttribute
+                {
+                    Name = e.Name,
+                    Code = e.Name.ToLower(),
+                    EavEntityId = e.EavEntityId
+                };
+                db.EavAttribute.Add(attribute);
+                db.SaveChanges();
+                return Json(new
+                {
+                    StatusCode = 200,
+                    Data = attribute,
+                    Message = "Add attribute success!"
+                }, JsonRequestBehavior.AllowGet);
+            }
+            Dictionary<string, string> errors = new Dictionary<string, string>();
+            foreach (var k in ModelState.Keys)
+            {
+                foreach (var err in ModelState[k].Errors)
+                {
+                    string key = Regex.Replace(k, @"(\w+)\.(\w+)", @"$2");
+                    if (!errors.ContainsKey(key))
+                    {
+                        errors.Add("EavAttribute" + key, err.ErrorMessage);
+                    }
+                }
+            }
+            return Json(new
+            {
+                StatusCode = 400,
+                Data = errors,
+                Message = "Add attribute fail!"
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateAttribute(EavAttribute e)
+        {
+            var attributeById = db.EavAttribute.Find(e.EntityId);
+            if (attributeById != null)
+            {
+                if (ModelState.IsValid)
+                {
+                    attributeById.Code = e.Name.ToLower();
+                    attributeById.Name = e.Name;
+                    attributeById.EavEntityId = e.EavEntityId;
+                    db.SaveChanges();
+                    return Json(new
+                    {
+                        StatusCode = 200,
+                        Data = e,
+                        Message = "Update attribute success!"
+                    }, JsonRequestBehavior.AllowGet);
+                }
+                Dictionary<string, string> errors = new Dictionary<string, string>();
+                foreach (var k in ModelState.Keys)
+                {
+                    foreach (var err in ModelState[k].Errors)
+                    {
+                        string key = Regex.Replace(k, @"(\w+)\.(\w+)", @"$2");
+                        if (!errors.ContainsKey(key))
+                        {
+                            errors.Add("EavAttribute" + key, err.ErrorMessage);
+                        }
+                    }
+                }
+                return Json(new
+                {
+                    StatusCode = 400,
+                    Data = errors,
+                    Message = "Update attribute fail!"
+                }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new
+                {
+                    StatusCode = 400,
+                    Message = "Can't find attribute with id = " + e.EntityId + "!"
+                }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult DeleteAttributeById(int id)
+        {
+            var attributeById = db.EavAttribute.Find(id);
+            if (attributeById != null)
+            {
+                db.EavAttribute.Remove(attributeById);
+                db.SaveChanges();
+                return Json(new
+                {
+                    StatusCode = 200,
+                    Message = "Delete attribute with id = " + id + " success!"
+                }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new
+                {
+                    StatusCode = 400,
+                    Message = "Can't find attribute with id = " + id + "!"
+                }, JsonRequestBehavior.AllowGet);
+            }
+
         }
     }
 }

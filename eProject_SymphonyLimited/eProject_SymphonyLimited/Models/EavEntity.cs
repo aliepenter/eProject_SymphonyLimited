@@ -11,6 +11,7 @@ namespace eProject_SymphonyLimited.Models
         [Key]
         public int EntityId { get; set; }
 
+        [Required(ErrorMessage = "Please enter entity name!")]
         public string Name { get; set; }
 
         public string Code { get; set; }
