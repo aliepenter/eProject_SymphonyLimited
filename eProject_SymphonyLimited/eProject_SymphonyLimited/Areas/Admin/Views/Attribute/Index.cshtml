@@ -6,16 +6,43 @@
 <h2>Index</h2>
 
 <p>
-    <button type="button" class="btn btn-primary btn-create" data-toggle="modal" data-target="#exampleModalScrollable">
-        Create New
+    <button type="button" class="btn btn-primary btn-create-entity" data-toggle="modal" data-target="#formEntity">
+        Create New Entity
+    </button>
+    <button type="button" class="btn btn-primary btn-create-entity" data-toggle="modal" data-target="#formAttribute">
+        Create New Attribute
     </button>
     <div class="form-inline">
         <label class="control-label">Search: </label>
         <input type="search" name="key" id="key" value="" placeholder="Enter name to search...." />
     </div>
 </p>
-<table class="table table-products"></table>
-<div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+<table class="table table-attributes"></table>
+<div class="modal fade" id="formEntity" tabindex="-1" role="dialog" aria-labelledby="formEntity" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <form id="frmEntity">
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <input type="hidden" name="EavEntityId" id="EavEntityId" value="" />
+                        <input type="hidden" name="EavEntityType" id="EavEntityType" value="CREATE" />
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="Name">Name</label>
+                            <div class="col-md-10">
+                                <input class="form-control text-box single-line" id="EntityName" name="EntityName" type="text" value="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="formAttribute" tabindex="-1" role="dialog" aria-labelledby="formAttribute" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <form id="frmProduct">
@@ -68,53 +95,40 @@
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script>
         $(document).ready(function () {
-            var baseUrl = window.location.protocol + "//" + window.location.host + "/";
-            //var formValid = $("#frmProduct").validate({
-            //    submitHandler: function () {
-            //        var frmData = new FormData();
-            //        frmData.append("Name", $("#Name").val());
-            //        frmData.append("Price", $("#Price").val());
-            //        frmData.append("Quantity", $("#Quantity").val());
-            //        frmData.append("CategoryId", $(".category-options").val());
-            //        var img = $("#Image")[0].files[0];
-            //        frmData.append("Image", img);
-            //        //var product = {
-            //        //    Name: $('#Name').val(),
-            //        //    Price: $('#Price').val(),
-            //        //    Quantity: $('#Quantity').val(),
-            //        //    CategoryId: $('.category-options').val(),
-            //        //};
-            //        if ($('#Type').val() == "EDIT") {
-            //            frmData.append("Id", $("#Id").val());
-            //            //product.Id = $('#Id').val();
-            //            productManager.put(frmData);
-            //        } else {
-            //            productManager.post(frmData);
-            //        }
-            //    }
-            //})
-            var productManager = {
+            var baseUrl = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname.split('/')[1] + "/";
+            var formEntityValid = $("#frmEntity").validate({
+                submitHandler: function () {
+                    var frmDataEntity = new FormData();
+                    frmDataEntity.append("Name", $("#EntityName").val());
+                    if ($('#EavEntityType').val() == "EDIT") {
+                        //frmDataEntity.append("Id", $("#EavEntityId").val());
+                        //manager.put(frmDataEntity);
+                    } else {
+                        manager.postEntity(frmDataEntity);
+                    }
+                }
+            });
+            var manager = {
                 load: function (page = 1, key = null) {
                     $.ajax({
                         type: "GET",
-                        url: baseUrl + "Product",
+                        url: baseUrl + "Attribute/GetAttributes",
                         data: { page: page, key: key },
                         success: function (res) {
-                            var _html = '<tr><th>Id</th><th>Name</th><th>Price</th><th>Quantity</th><th>Category</th><th></th></tr>';
+                            var _html = '<tr><th>Id</th><th>Name</th><th>Attribute Code</th><th>Entity</th><th></th></tr>';
                             for (var item of JSON.parse(res.Data)) {
                                 _html += '<tr>' +
-                                    '<td>' + item.Id + '</td>' +
+                                    '<td>' + item.EntityId + '</td>' +
                                     '<td>' + item.Name + '</td>' +
-                                    '<td>' + item.Price + '</td>' +
-                                    '<td>' + item.Quantity + '</td>' +
-                                    '<td>' + item.Category + '</td>' +
+                                    '<td>' + item.AttributeCode + '</td>' +
+                                    '<td>' + item.Entity + '</td>' +
                                     '<td>' +
-                                    '<button class="btn btn-warning btn-edit" data-id="' + item.Id + '">Edit</button>' +
-                                    '<button class="btn btn-danger btn-delete" data-id="' + item.Id + '">Delete</button>' +
+                                    '<button class="btn btn-warning btn-edit" data-id="' + item.EntityId + '">Edit</button>' +
+                                    '<button class="btn btn-danger btn-delete" data-id="' + item.EntityId + '">Delete</button>' +
                                     '</td>'
                                     + '</tr>';
                             }
-                            $('.table-products').html(_html);
+                            $('.table-attributes').html(_html);
                             var pages = '';
                             for (var i = 1; i <= res.TotalPages; i++) {
                                 if (i == res.CurrentPage) {
@@ -126,36 +140,35 @@
                             $(".pagination").html(pages);
                         }
                     })
+                    //$.ajax({
+                    //    type: "GET",
+                    //    url: "http://localhost:63634/api/Category",
+                    //    success: function (res) {
+                    //        var _html = '<option value="">--Please Select--</option>'
+                    //        for (var item of JSON.parse(res.Data)) {
+                    //            _html += '<option value="' + item.Id + '">' + item.Name + '</option>';
+                    //        }
+                    //        $('.category-options').html(_html);
+                    //    }
+                    //})
+                },
+                postEntity: function (entity) {
                     $.ajax({
-                        type: "GET",
-                        url: "http://localhost:63634/api/Category",
+                        type: "POST",
+                        url: baseUrl + "Attribute/PostEntity",
+                        data: entity,
+                        processData: false,
+                        contentType: false,
                         success: function (res) {
-                            var _html = '<option value="">--Please Select--</option>'
-                            for (var item of JSON.parse(res.Data)) {
-                                _html += '<option value="' + item.Id + '">' + item.Name + '</option>';
+                            if (res.StatusCode == 200) {
+                                $("#formEntity").modal('hide');
+                            } else {
+                                formEntityValid.showErrors(res.Data);
                             }
-                            $('.category-options').html(_html);
                         }
                     })
+                    return;
                 },
-                //post: function (product) {
-                //    $.ajax({
-                //        type: "POST",
-                //        url: "http://localhost:63634/api/Product",
-                //        data: product,
-                //        processData: false,
-                //        contentType: false,
-                //        success: function (res) {
-                //            if (res.StatusCode == 200) {
-                //                productManager.load();
-                //                $("#exampleModalScrollable").modal('hide');
-                //            } else {
-                //                formValid.showErrors(res.Data);
-                //            }
-                //        }
-                //    })
-                //    return;
-                //},
                 //put: function (product) {
                 //    $.ajax({
                 //        type: "PUT",
@@ -192,7 +205,19 @@
                 //    })
                 //}
             }
-            productManager.load();
+            manager.load();
+            //$("#frmEntity").submit(function () {
+            //    var entity = {
+            //        Name: $('#EntityName').val(),
+            //        Code: ""
+            //    };
+            //    if ($('#Type').val() == "EDIT") {
+            //        //frmDataEntity.append("Id", $("#Id").val());
+            //        //manager.put(frmDataEntity);
+            //    } else {
+            //        manager.postEntity(entity);
+            //    }
+            //});
             //$(document).on("click", ".btn-edit", function () {
             //    $('#Type').val('EDIT');
             //    var productId = $(this).data("id");
