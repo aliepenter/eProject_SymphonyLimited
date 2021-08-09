@@ -1,9 +1,8 @@
 ﻿using eProject_SymphonyLimited.Models;
+using eProject_SymphonyLimited.Models.ViewModel;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace eProject_SymphonyLimited.Areas.Admin.Controllers

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace eProject_SymphonyLimited.Models
+namespace eProject_SymphonyLimited.Models.ViewModel
 {
     public class CourseViewModel
     {

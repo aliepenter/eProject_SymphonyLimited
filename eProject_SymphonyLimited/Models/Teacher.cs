@@ -6,17 +6,16 @@ using System.Web;
 
 namespace eProject_SymphonyLimited.Models
 {
-    public class EavAttribute
+    public class Teacher
     {
         [Key]
         public int EntityId { get; set; }
 
-        [Required(ErrorMessage = "Please enter attribute name!")]
+        [Required(ErrorMessage = "Please enter name!")]
         public string Name { get; set; }
 
-        public string Code { get; set; }
+        public string Image { get; set; }
 
-        [Required(ErrorMessage = "Please choose entity!")]
-        public int EavEntityId { get; set; }
+        public string Description { get; set; }
     }
 }

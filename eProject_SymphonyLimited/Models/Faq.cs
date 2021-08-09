@@ -6,15 +6,15 @@ using System.Web;
 
 namespace eProject_SymphonyLimited.Models
 {
-    public class EavEntity
+    public class Faq
     {
         [Key]
         public int EntityId { get; set; }
 
-        [Required(ErrorMessage = "Please enter entity name!")]
-        public string Name { get; set; }
+        [Required(ErrorMessage = "Please enter question!")]
+        public string Question { get; set; }
 
-        public string Code { get; set; }
-
+        [Required(ErrorMessage = "Please enter answer!")]
+        public string Answer { get; set; }
     }
 }

@@ -1,51 +1,36 @@
 ﻿using eProject_SymphonyLimited.Models;
-using eProject_SymphonyLimited.Models.ViewModel;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace eProject_SymphonyLimited.Areas.Admin.Controllers
 {
-    public class AdmissionController : Controller
+    public class FaqController : Controller
     {
         SymphonyLimitedDBContext db = new SymphonyLimitedDBContext();
 
-        // GET: Admin/Admission
+        // GET: Admin/Faq
         public ActionResult Index()
         {
-            ViewBag.Admissions = db.Admission.Join(db.Course,
-                a => a.CourseId,
-                c => c.EntityId,
-                (a, c) => new
-                AdmissionViewModel
-                {
-                    EntityId = a.EntityId,
-                    Name = a.Name,
-                    Price = a.Price,
-                    StartTime = a.StartTime,
-                    EndTime = a.EndTime,
-                    QuantityStudent = a.QuantityStudent,
-                    MarkPass = a.MarkPass,
-                    Course = c.Name
-                }).AsEnumerable();
-            return View();
+            return View(db.Faq.AsEnumerable());
         }
 
         public ActionResult Create()
         {
-            ViewBag.CourseList = db.Course.ToList();
             return View();
         }
 
         [HttpPost]
-        public ActionResult Create(Admission a)
+        public ActionResult Create(Faq f)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    db.Admission.Add(a);
+                    db.Faq.Add(f);
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
@@ -54,29 +39,27 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
 
                 }
             }
-            ViewBag.CourseList = db.Course.ToList();
             return View();
         }
 
         public ActionResult Edit(int id)
         {
-            var admissionById = db.Admission.FirstOrDefault(x => x.EntityId == id);
-            if (admissionById != null)
+            var faqById = db.Faq.FirstOrDefault(x => x.EntityId == id);
+            if (faqById != null)
             {
-                ViewBag.CourseList = db.Course.ToList();
-                return View(admissionById);
+                return View(faqById);
             }
             return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public ActionResult Edit(Admission a)
+        public ActionResult Edit(Faq f)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    db.Entry(a).State = EntityState.Modified;
+                    db.Entry(f).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
@@ -85,17 +68,16 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
 
                 }
             }
-            ViewBag.CourseList = db.Course.ToList();
             return View();
         }
 
         public ActionResult Delete(int id)
         {
-            if (db.Admission.Find(id) != null)
+            if (db.Faq.Find(id) != null)
             {
                 try
                 {
-                    db.Admission.Remove(db.Admission.Find(id));
+                    db.Faq.Remove(db.Faq.Find(id));
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }

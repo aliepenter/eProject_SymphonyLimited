@@ -6,13 +6,15 @@ using System.Web;
 
 namespace eProject_SymphonyLimited.Models
 {
-    public class EavValue
+    public class User
     {
         [Key]
         public int EntityId { get; set; }
 
-        public int AttributeId { get; set; }
+        [Required(ErrorMessage = "Please enter account!")]
+        public string Account { get; set; }
 
-        public string Value { get; set; }
+        [Required(ErrorMessage = "Please enter password!")]
+        public string Password { get; set; }
     }
 }

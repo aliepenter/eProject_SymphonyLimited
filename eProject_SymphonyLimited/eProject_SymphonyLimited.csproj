@@ -128,30 +128,34 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdmissionController.cs" />
-    <Compile Include="Areas\Admin\Controllers\AttributeController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\CoreConfigDataController.cs" />
     <Compile Include="Areas\Admin\Controllers\CourseController.cs" />
+    <Compile Include="Areas\Admin\Controllers\FaqController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PartnerController.cs" />
+    <Compile Include="Areas\Admin\Data\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admission.cs" />
-    <Compile Include="Models\AdmissionViewModel.cs" />
+    <Compile Include="Models\ViewModel\AdmissionViewModel.cs" />
+    <Compile Include="Models\Branch.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Class.cs" />
     <Compile Include="Models\CoreConfigData.cs" />
     <Compile Include="Models\Course.cs" />
-    <Compile Include="Models\CourseViewModel.cs" />
-    <Compile Include="Models\EavAttribute.cs" />
-    <Compile Include="Models\EavEntity.cs" />
-    <Compile Include="Models\EavValue.cs" />
+    <Compile Include="Models\ViewModel\CourseViewModel.cs" />
+    <Compile Include="Models\Faq.cs" />
+    <Compile Include="Models\Partner.cs" />
     <Compile Include="Models\RegisterAdmission.cs" />
     <Compile Include="Models\RegisterInfo.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\SymphonyLimitedDBContext.cs" />
+    <Compile Include="Models\Teacher.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -2011,7 +2015,6 @@
     <Content Include="Areas\Admin\Views\Admission\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Admission\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Admission\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Attribute\Index.cshtml" />
     <Content Include="Areas\Admin\Views\CoreConfigData\Create.cshtml" />
     <Content Include="Areas\Admin\Views\CoreConfigData\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\CoreConfigData\Index.cshtml" />
@@ -2026,6 +2029,12 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\Admin\Views\Partner\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Partner\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Partner\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Faq\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Faq\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Faq\Edit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -2055,7 +2064,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Data\" />
+    <Folder Include="Areas\Admin\Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
