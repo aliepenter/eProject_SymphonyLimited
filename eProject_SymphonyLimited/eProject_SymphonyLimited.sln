@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.28307.1525
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eProject_SymphonyLimited", "eProject_SymphonyLimited\eProject_SymphonyLimited.csproj", "{7FB5E1B8-51CF-4D5F-A99F-C21332383282}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "..\..\..\ASP\WebApi\Web\Web.csproj", "{D937A2BF-086D-4E2E-8517-496D18757185}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{7FB5E1B8-51CF-4D5F-A99F-C21332383282}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FB5E1B8-51CF-4D5F-A99F-C21332383282}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FB5E1B8-51CF-4D5F-A99F-C21332383282}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D937A2BF-086D-4E2E-8517-496D18757185}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D937A2BF-086D-4E2E-8517-496D18757185}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D937A2BF-086D-4E2E-8517-496D18757185}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D937A2BF-086D-4E2E-8517-496D18757185}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -128,7 +128,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdmissionController.cs" />
-    <Compile Include="Areas\Admin\Controllers\AttributeController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\CoreConfigDataController.cs" />
     <Compile Include="Areas\Admin\Controllers\CourseController.cs" />
@@ -140,18 +139,20 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admission.cs" />
     <Compile Include="Models\AdmissionViewModel.cs" />
+    <Compile Include="Models\Branch.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Class.cs" />
     <Compile Include="Models\CoreConfigData.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\CourseViewModel.cs" />
-    <Compile Include="Models\EavAttribute.cs" />
-    <Compile Include="Models\EavEntity.cs" />
-    <Compile Include="Models\EavValue.cs" />
+    <Compile Include="Models\Faq.cs" />
+    <Compile Include="Models\Partner.cs" />
     <Compile Include="Models\RegisterAdmission.cs" />
     <Compile Include="Models\RegisterInfo.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\SymphonyLimitedDBContext.cs" />
+    <Compile Include="Models\Teacher.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -2103,7 +2104,6 @@
     <Content Include="Content\bootstrap-grid.rtl.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <Content Include="Areas\Admin\Views\Attribute\Index.cshtml" />
     <Content Include="Areas\Admin\Views\CoreConfigData\Create.cshtml" />
     <Content Include="Areas\Admin\Views\CoreConfigData\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\CoreConfigData\Index.cshtml" />
@@ -2141,7 +2141,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Views\Entity\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

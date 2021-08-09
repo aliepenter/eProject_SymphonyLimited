@@ -22,8 +22,5 @@ namespace eProject_SymphonyLimited.Models
         public virtual DbSet<CoreConfigData> CoreConfigData { get; set; }
         public virtual DbSet<Student> Student { get; set; }
         public virtual DbSet<RegisterAdmission> RegisterAdmission { get; set; }
-        public virtual DbSet<EavAttribute> EavAttribute { get; set; }
-        public virtual DbSet<EavEntity> EavEntity { get; set; }
-        public virtual DbSet<EavValue> EavValue { get; set; }
     }
 }
