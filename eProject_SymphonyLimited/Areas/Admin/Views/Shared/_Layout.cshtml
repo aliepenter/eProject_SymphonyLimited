@@ -17,7 +17,6 @@
 
     <!-- Custom styles for this template-->
     <link href="~/Areas/Admin/Content/css/sb-admin-2.min.css" rel="stylesheet">
-    @RenderSection("css", required: false)
 </head>
 
 <body id="page-top">
@@ -82,7 +81,7 @@
             <hr class="sidebar-divider d-none d-md-block">
 
             <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("Login","Home")">
+                <a class="nav-link" href="@Url.Action("Logout","Home")">
                     <i class="fas fa-fw fa-sign-out-alt"></i>
                     <span>Log out</span>
                 </a>
@@ -237,7 +236,6 @@
 
     <!-- Custom scripts for all pages-->
     <script src="~/Areas/Admin/Content/js/sb-admin-2.min.js"></script>
-    @RenderSection("scripts", required: false)
 </body>
 
 </html>

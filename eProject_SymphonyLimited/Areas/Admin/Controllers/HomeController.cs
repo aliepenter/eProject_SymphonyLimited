@@ -23,25 +23,26 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(string account,string password)
+        public ActionResult Login(string account, string password)
         {
-            var findUserId = db.EavEntity.Where(x => x.Name == "User").SingleOrDefault().EntityId;
+            //var findUserId = db.EavEntity.Where(x => x.Name == "User").SingleOrDefault().EntityId;
 
-            if (db.EavAttribute.Where(x => x.Name)
-            {
+            //if (db.EavAttribute.Where(x => x.Name)
+            //{
 
-            }
-            if (users.Get(x => x.Email == email && x.Password == password) != null)
-            {
-                Session["user"] = users.Get(x => x.Email == email && x.Password == password).FirstOrDefault();
-                return RedirectToAction("Index");
-            }
+            //}
+            //if (users.Get(x => x.Email == email && x.Password == password) != null)
+            //{
+            //    Session["user"] = users.Get(x => x.Email == email && x.Password == password).FirstOrDefault();
+            //    return RedirectToAction("Index");
+            //}
             return View();
         }
 
-        public ActionResult Register()
+        public ActionResult Logout()
         {
-            return View();
+            Session.Remove("user");
+            return RedirectToAction("Login");
         }
 
         public ActionResult ForgotPassword()
@@ -54,9 +55,5 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
             return View();
         }
 
-        public ActionResult Tables()
-        {
-            return View();
-        }
     }
 }

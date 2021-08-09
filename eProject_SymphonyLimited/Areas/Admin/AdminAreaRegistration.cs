@@ -17,7 +17,8 @@ namespace eProject_SymphonyLimited.Areas.Admin
             context.MapRoute(
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                new { action = "Index", id = UrlParameter.Optional },
+                new[] { "eProject_SymphonyLimited.Areas.Admin.Controllers" }
             );
         }
     }
