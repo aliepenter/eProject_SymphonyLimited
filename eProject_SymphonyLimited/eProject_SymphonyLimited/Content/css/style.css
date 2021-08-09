@@ -3,9 +3,7 @@
     padding: 0;
 }
 
-
 /* responsive header */
-
 .mobile-header {
     display: block;
 }
@@ -382,7 +380,7 @@
 
 .childCourseCategory {
     background-color: black;
-    opacity: 0.8;
+    opacity: 0.9;
     height: 100%;
     position: fixed;
     width: 100%;
@@ -492,7 +490,20 @@
     .childCourseCategory {
         display: none;
     }
-    .header .right ul li a {
+    .menuDefault .right .subMenuCourse {
+        position: absolute;
+        z-index: 1;
+        background-color: white;
+        left: 15%;
+        display: none;
+    }
+    .menuDefault .right .subMenuCourse li{
+        width: 300px;
+    }
+    .menuDefault .right .courseSubMenu:hover .subMenuCourse {
+        display: block;
+    }
+    .header .right ul li .menuA {
         text-transform: uppercase;
         font-size: 13px;
         text-decoration: none;
@@ -565,7 +576,7 @@
             background-color: #6E1313;
             top: 0;
             width: 200%;
-            height: 100px;
+            height: 300px;
             position: absolute;
             display: none;
         }
@@ -577,7 +588,6 @@
         }
         .main .cusBanner .category ul li ul .subMenu a{
             color: white;
-            
         }
     .main .cusBanner .fa-chevron-left,
     .fa-chevron-right {
@@ -694,7 +704,7 @@
         position: relative;
         display: list-item;
     }
-    .header .right ul li a {
+    .header .right ul li .menuA {
         text-transform: uppercase;
         font-size: 16px;
         text-decoration: none;
@@ -848,6 +858,15 @@
     }
     100% {
         left: 0;
+        opacity: 1;
+    }
+}
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
         opacity: 1;
     }
 }

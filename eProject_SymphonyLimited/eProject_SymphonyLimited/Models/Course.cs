@@ -37,7 +37,6 @@ namespace eProject_SymphonyLimited.Models
 
         [Display(Name = "Image")]
         public string Image { get; set; }
-
         [Display(Name = "Category")]
         public int CategoryId { get; set; }
 

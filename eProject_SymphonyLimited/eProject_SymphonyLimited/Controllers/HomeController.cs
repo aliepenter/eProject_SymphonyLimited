@@ -19,7 +19,7 @@ namespace eProject_SymphonyLimited.Controllers
         {
             var cate = db.Category.Where(x => x.Level == 2).AsEnumerable();
             ViewBag.categoryLevel2 = cate;
-            var subcate = db.Category.Where(x => x.Level == 3 && x.ParentId == cate.FirstOrDefault().EntityId).AsEnumerable();
+            var subcate = db.Category.Where(x => x.Level == 3).AsEnumerable();
             ViewBag.categoryLevel3 = subcate;
             return View();
         }

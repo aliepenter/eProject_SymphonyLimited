@@ -1,7 +1,6 @@
 ﻿
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="page1">
@@ -14,21 +13,26 @@
                 <ul>
                     @{ foreach (var item in ViewBag.categoryLevel2)
                         {
-                            <li>
+                            <li id="">
                                 <a class="defaultMenu" href="">@item.Name</a>
-                                @*<ul>
-                                    <div class="subMenu">
+                                <ul>
+                                    <div class="subMenu flex" id="subMenu">
 
-                                        @{ 
+                                        @{
                                             foreach (var subItem in ViewBag.categoryLevel3)
                                             {
-                                                    <li>
-                                                        <a href="">@subItem.Name</a>
+                                                if (item.EntityId == subItem.ParentId)
+                                                {
+                                                    <li class="width20" style="display: inline-block">
+                                                             <div class="">
+                                                                   <a href="" class="subMenuATag">@subItem.Name</a>
+                                                             </div>
                                                     </li>
                                             }
                                         }
+                                        }
                                     </div>
-                                </ul>*@
+                                </ul>
                             </li>
                         }
                     }

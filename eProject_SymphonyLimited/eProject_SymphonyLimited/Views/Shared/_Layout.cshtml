@@ -8,11 +8,11 @@
     <title>Symphony Limited</title>
     <link rel=”stylesheet” href=”https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css”>
     <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
-    <link href="~/Content/css/bootstrap.css" rel="stylesheet" />
-    <link href="~/Content/css/commonStyle.css" rel="stylesheet" />
-    <link href="~/Content/css/style.css" rel="stylesheet" />
-    <link href="~/Content/fontawesome-free-5.11.2-web/css/all.min.css" rel="stylesheet" />
-    <link href="~/Content/fontawesome-free-5.15.3-web/css/all.min.css" rel="stylesheet" />
+    <link href="~/Content/css/bootstrap.css?v=@Guid.NewGuid().ToString()" rel="stylesheet" />
+    <link href="~/Content/css/commonStyle.css?v=@Guid.NewGuid().ToString()" rel="stylesheet" />
+    <link href="~/Content/fontawesome-free-5.11.2-web/css/all.min.css?v=@Guid.NewGuid().ToString()" rel="stylesheet" />
+    <link href="~/Content/fontawesome-free-5.15.3-web/css/all.min.css?v=@Guid.NewGuid().ToString()" rel="stylesheet" />
+    <link href="~/Content/css/style.css?v=@Guid.NewGuid().ToString()" rel="stylesheet" />
 </head>
 
 <body>
@@ -56,14 +56,53 @@
                 </div>
                 <div class="right width80">
                     <div class="menu">
-                        <ul>
+                        <ul class="flex">
                             <li>
-                                <a class="" href="@Url.Action("Index","Home")">Home page</a>
-                                <a href="@Url.Action("Index","Course")">Course Details</a>
-                                <a href="">Entrance Examitaion</a>
-                                <a href="">About us</a>
-                                <a href="">FAQ</a>
-                                <a href="">Contact us</a>
+                                <a class="menuA" href="@Url.Action("Index","Home")">Home page</a>
+                            </li>
+                            <li class="courseSubMenu" style="position:relative">
+                                <a class="menuA" id="courseSubMenu" href="@Url.Action("Index","Course")">Course Details</a>
+                                
+                                    <ul class="subMenuCourse" id="subMenuCourse">
+                                         @{ foreach (var item in ViewBag.categoryLevel2)
+                                            {
+                                                <li id="@item.EntityId" style="" class="getId">
+                                                    <a class="menuA" href="">@item.Name</a>
+                                                    @*<ul>
+                                                        <div class="subMenu">
+
+                                                            @{
+                                                                var x = 3;
+                                                                foreach (var subItem in ViewBag.categoryLevel3)
+                                                                {
+                                                                    if ((subItem.ParentId == 4) != null)
+                                                                    {
+                                                                    <li class="" style="padding: 10px">
+                                                                        <div class="">
+                                                                            <a href="" class="subMenuATag">@subItem.Name</a>
+                                                                        </div>
+                                                                    </li>
+                                                                    }
+                                                                }
+                                                            }
+                                                        </div>
+                                                    </ul>*@
+                                                </li>
+                                            }
+                                         }
+                                    </ul>
+                            </li>
+                            <li>
+                                <a class="menuA" href="">Entrance Examitaion</a>
+                            </li>
+                            <li>
+                                <a class="menuA" href="">About us</a>
+                            </li> 
+                            <li>
+                                <a class="menuA" href="">FAQ</a>
+                            </li> 
+                            <li>
+                                <a class="menuA" href="">Contact us</a>
                             </li>
                         </ul>
                     </div>
@@ -98,11 +137,33 @@
         <div class="childCourseCategory" id="childCourseCategory">
             <div class="menu">
                 <ul>
-                    <li>
-                        <a href="/">Home page</a>
-                    </li>
-                </ul>
-            </div>
+                    @{ foreach (var item in ViewBag.categoryLevel2)
+                        {
+                            <li id="fLi" style="padding-top: 20px; padding-left:20%; border-bottom: 1px solid white">
+                                <a class="defaultMenu" href="" style="color: white; text-transform: uppercase;">@item.Name</a>
+                                @*<ul>
+                                    <div class="subMenu flex" id="subMenu">
+
+                                        @{
+                                            foreach (var subItem in ViewBag.categoryLevel3)
+                                            {
+                                                if (item.EntityId == subItem.ParentId)
+                                                {
+                                                <li class="width20" style="display: inline-block">
+                                                    <div class="">
+                                                        <a href="" class="subMenuATag">@subItem.Name</a>
+                                                    </div>
+                                                </li>
+                                            }
+                                        }
+                                        }
+                                    </div>
+                                </ul>*@
+                        </li>
+                    }
+                    }
+                    </ul>
+                </div>
         </div>
         <div class="marquee">
             <div class="text">
@@ -188,13 +249,14 @@
                         <span>Courses</span>
                     </div>
                     <div class="item">
-                        <ul>
-                            <li>
-                                <a href=""></a>
-                            </li>
-                            <li>
-                                <a href=""></a>
-                            </li>
+                        <ul class="" id="">
+                            @{ foreach (var item in ViewBag.categoryLevel2)
+                                {
+                                    <li id="@item.EntityId" style="" class="getId">
+                                        <a class="menuA" href="">@item.Name</a>
+                                    </li>
+                                }
+                            }
                         </ul>
                     </div>
                 </div>
@@ -214,7 +276,7 @@
     <script>
         new WOW().init();
     </script>
-    <script src="~/Scripts/js/scritp.js"></script>
+    <script src="~/Scripts/js/scritp.js?v=@Guid.NewGuid().ToString()"></script>
 </body>
 
 </html>

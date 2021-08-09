@@ -73,3 +73,14 @@ $("#childBar").click(function() {
         flagChildBar = true;
     }
 });
+//$("#courseSubMenu").hover(
+//    function () {
+//        $("#subMenuCourse").css("display","block");
+//    }, function () {
+//        $("#subMenuCourse").css("display", "none");
+//    }
+//);
+var x = 0;
+$('.getId').mouseover(function () {
+    x = this.id;
+});
