@@ -131,7 +131,9 @@
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\CoreConfigDataController.cs" />
     <Compile Include="Areas\Admin\Controllers\CourseController.cs" />
+    <Compile Include="Areas\Admin\Controllers\FaqController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PartnerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -2107,6 +2109,12 @@
     <Content Include="Areas\Admin\Views\CoreConfigData\Create.cshtml" />
     <Content Include="Areas\Admin\Views\CoreConfigData\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\CoreConfigData\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Faq\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Faq\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Faq\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Partner\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Partner\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Partner\Edit.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
