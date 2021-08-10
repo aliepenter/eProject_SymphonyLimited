@@ -1,5 +1,6 @@
 ﻿using eProject_SymphonyLimited.Models;
 using System;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -15,7 +16,27 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         // GET: Admin/Faq
         public ActionResult Index()
         {
-            return View(db.Faq.AsEnumerable());
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Get(int page = 1, string key = null)
+        {
+            int pageSize = 5;
+            var faqs = db.Faq.AsEnumerable();
+            if (!String.IsNullOrEmpty(key))
+            {
+                faqs = db.Faq.Where(x => x.Question.Contains(key)).AsEnumerable();
+            }
+            decimal totalPages = Math.Ceiling((decimal)faqs.Count() / pageSize);
+            string jsonData = JsonConvert.SerializeObject(faqs.Skip((page - 1) * pageSize).Take(pageSize));
+            return Json(new
+            {
+                TotalPages = totalPages,
+                CurrentPage = page,
+                StatusCode = 200,
+                Data = jsonData
+            }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Create()

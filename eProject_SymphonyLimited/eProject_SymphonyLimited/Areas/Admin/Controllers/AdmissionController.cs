@@ -1,4 +1,5 @@
 ﻿using eProject_SymphonyLimited.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -15,7 +16,14 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         // GET: Admin/Admission
         public ActionResult Index()
         {
-            ViewBag.Admissions = db.Admission.Join(db.Course,
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Get(int page = 1, string key = null)
+        {
+            int pageSize = 5;
+            var admissions = db.Admission.Join(db.Course,
                 a => a.CourseId,
                 c => c.EntityId,
                 (a, c) => new
@@ -30,11 +38,43 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                     MarkPass = a.MarkPass,
                     Course = c.Name
                 }).AsEnumerable();
-            return View();
+            if (!String.IsNullOrEmpty(key))
+            {
+                admissions = db.Admission.Join(db.Course,
+                a => a.CourseId,
+                c => c.EntityId,
+                (a, c) => new
+                AdmissionViewModel
+                {
+                    EntityId = a.EntityId,
+                    Name = a.Name,
+                    Price = a.Price,
+                    StartTime = a.StartTime,
+                    EndTime = a.EndTime,
+                    QuantityStudent = a.QuantityStudent,
+                    MarkPass = a.MarkPass,
+                    Course = c.Name
+                }).Where(x => x.Name.Contains(key)).AsEnumerable();
+            }
+            decimal totalPages = Math.Ceiling((decimal)admissions.Count() / pageSize);
+            string jsonData = JsonConvert.SerializeObject(admissions.Skip((page - 1) * pageSize).Take(pageSize));
+            return Json(new
+            {
+                TotalPages = totalPages,
+                CurrentPage = page,
+                StatusCode = 200,
+                Data = jsonData
+            }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Create()
         {
+            var courseCollection = db.Course.AsEnumerable();
+            if (courseCollection.Count() == 0)
+            {
+                TempData["ErrorMessage"] = "Please create course before create admission!";
+                return RedirectToAction("Index", new { ErrorMessage = "Please create course before create admission!" });
+            }
             ViewBag.CourseList = db.Course.ToList();
             return View();
         }

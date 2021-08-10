@@ -1,4 +1,5 @@
 ﻿using eProject_SymphonyLimited.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -15,7 +16,14 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         // GET: Admin/Course
         public ActionResult Index()
         {
-            ViewBag.Courses = db.Course.Join(db.Category,
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Get(int page = 1, string key = null)
+        {
+            int pageSize = 5;
+            var courses = db.Course.Join(db.Category,
                 co => co.CategoryId,
                 ca => ca.EntityId,
                 (co, ca) => new
@@ -31,7 +39,34 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                     Time = co.Time,
                     Category = ca.Name
                 }).AsEnumerable();
-            return View();
+            if (!String.IsNullOrEmpty(key))
+            {
+                courses = db.Course.Join(db.Category,
+                co => co.CategoryId,
+                ca => ca.EntityId,
+                (co, ca) => new
+                CourseViewModel
+                {
+                    EntityId = co.EntityId,
+                    Name = co.Name,
+                    Price = co.Price,
+                    Subject = co.Subject,
+                    Certificate = co.Certificate,
+                    Image = co.Image,
+                    Description = co.Description,
+                    Time = co.Time,
+                    Category = ca.Name
+                }).Where(x => x.Name.Contains(key)).AsEnumerable();
+            }
+            decimal totalPages = Math.Ceiling((decimal)courses.Count() / pageSize);
+            string jsonData = JsonConvert.SerializeObject(courses.Skip((page - 1) * pageSize).Take(pageSize));
+            return Json(new
+            {
+                TotalPages = totalPages,
+                CurrentPage = page,
+                StatusCode = 200,
+                Data = jsonData
+            }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Create()
