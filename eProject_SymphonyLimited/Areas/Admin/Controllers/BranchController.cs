@@ -9,19 +9,19 @@ using System.Web.Mvc;
 
 namespace eProject_SymphonyLimited.Areas.Admin.Controllers
 {
-    public class CoreConfigDataController : BaseController
+    public class BranchController : BaseController
     {
         SymphonyLimitedDBContext db = new SymphonyLimitedDBContext();
 
         // GET: Admin/CoreConfigData
         public ActionResult Index()
         {
-            return View(db.CoreConfigData.AsEnumerable());
+            return View(db.Branch.AsEnumerable());
         }
 
         public ActionResult FindId(int id)
         {
-            return Json(db.CoreConfigData.Find(id), JsonRequestBehavior.AllowGet);
+            return Json(db.Branch.Find(id), JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -29,10 +29,10 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var findCoreConfigData = db.CoreConfigData.Find(id);
-                if (findCoreConfigData != null)
+                var findBranch = db.Branch.Find(id);
+                if (findBranch != null)
                 {
-                    db.CoreConfigData.Remove(findCoreConfigData);
+                    db.Branch.Remove(findBranch);
                     db.SaveChanges();
                     return Json(new
                     {
@@ -65,14 +65,14 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(CoreConfigData ccd)
+        public ActionResult Create(Branch b)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var coreConfigData = db.CoreConfigData.FirstOrDefault(x => x.EntityId == ccd.EntityId);
-                    db.CoreConfigData.Add(ccd);
+                    var branch = db.Branch.FirstOrDefault(x => x.EntityId == b.EntityId);
+                    db.Branch.Add(b);
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
@@ -86,22 +86,22 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
 
         public ActionResult Edit(int id)
         {
-            var coreConfigData = db.CoreConfigData.FirstOrDefault(x => x.EntityId == id);
-            if (coreConfigData != null)
+            var branch = db.Branch.FirstOrDefault(x => x.EntityId == id);
+            if (branch != null)
             {
-                return View(coreConfigData);
+                return View(branch);
             }
             return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public ActionResult Edit(CoreConfigData ccd)
+        public ActionResult Edit(Branch b)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    db.Entry(ccd).State = EntityState.Modified;
+                    db.Entry(b).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
@@ -111,6 +111,11 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                 }
             }
             return View();
+        }
+
+        public ActionResult Details(int id)
+        {
+            return View(db.Branch.Find(id));
         }
     }
 }

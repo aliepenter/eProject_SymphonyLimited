@@ -1,4 +1,6 @@
-﻿using eProject_SymphonyLimited.Models;
+﻿using eProject_SymphonyLimited.Areas.Admin.Data;
+using eProject_SymphonyLimited.Areas.Admin.Data.Model;
+using eProject_SymphonyLimited.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,42 +9,12 @@ using System.Web.Mvc;
 
 namespace eProject_SymphonyLimited.Areas.Admin.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        SymphonyLimitedDBContext db = new SymphonyLimitedDBContext();
-
         // GET: Admin/Home
         public ActionResult Index()
         {
             return View();
-        }
-
-        public ActionResult Login()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Login(string account, string password)
-        {
-            //var findUserId = db.EavEntity.Where(x => x.Name == "User").SingleOrDefault().EntityId;
-
-            //if (db.EavAttribute.Where(x => x.Name)
-            //{
-
-            //}
-            //if (users.Get(x => x.Email == email && x.Password == password) != null)
-            //{
-            //    Session["user"] = users.Get(x => x.Email == email && x.Password == password).FirstOrDefault();
-            //    return RedirectToAction("Index");
-            //}
-            return View();
-        }
-
-        public ActionResult Logout()
-        {
-            Session.Remove("user");
-            return RedirectToAction("Login");
         }
 
         public ActionResult ForgotPassword()
@@ -54,6 +26,5 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         {
             return View();
         }
-
     }
 }

@@ -9,19 +9,19 @@ using System.Web.Mvc;
 
 namespace eProject_SymphonyLimited.Areas.Admin.Controllers
 {
-    public class CoreConfigDataController : BaseController
+    public class UserController : BaseController
     {
         SymphonyLimitedDBContext db = new SymphonyLimitedDBContext();
 
         // GET: Admin/CoreConfigData
         public ActionResult Index()
         {
-            return View(db.CoreConfigData.AsEnumerable());
+            return View(db.User.AsEnumerable());
         }
 
         public ActionResult FindId(int id)
         {
-            return Json(db.CoreConfigData.Find(id), JsonRequestBehavior.AllowGet);
+            return Json(db.User.Find(id), JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -29,10 +29,10 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var findCoreConfigData = db.CoreConfigData.Find(id);
-                if (findCoreConfigData != null)
+                var findUser = db.User.Find(id);
+                if (findUser != null)
                 {
-                    db.CoreConfigData.Remove(findCoreConfigData);
+                    db.User.Remove(findUser);
                     db.SaveChanges();
                     return Json(new
                     {
@@ -65,14 +65,14 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(CoreConfigData ccd)
+        public ActionResult Create(User u)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var coreConfigData = db.CoreConfigData.FirstOrDefault(x => x.EntityId == ccd.EntityId);
-                    db.CoreConfigData.Add(ccd);
+                    var user = db.User.FirstOrDefault(x => x.EntityId == u.EntityId);
+                    db.User.Add(u);
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
@@ -86,22 +86,22 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
 
         public ActionResult Edit(int id)
         {
-            var coreConfigData = db.CoreConfigData.FirstOrDefault(x => x.EntityId == id);
-            if (coreConfigData != null)
+            var user = db.User.FirstOrDefault(x => x.EntityId == id);
+            if (user != null)
             {
-                return View(coreConfigData);
+                return View(user);
             }
             return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public ActionResult Edit(CoreConfigData ccd)
+        public ActionResult Edit(User u)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    db.Entry(ccd).State = EntityState.Modified;
+                    db.Entry(u).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }

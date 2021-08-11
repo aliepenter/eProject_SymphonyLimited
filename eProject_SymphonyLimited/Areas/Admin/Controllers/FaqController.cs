@@ -1,4 +1,5 @@
-﻿using eProject_SymphonyLimited.Models;
+﻿using eProject_SymphonyLimited.Areas.Admin.Data;
+using eProject_SymphonyLimited.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,7 +9,7 @@ using System.Web.Mvc;
 
 namespace eProject_SymphonyLimited.Areas.Admin.Controllers
 {
-    public class FaqController : Controller
+    public class FaqController : BaseController
     {
         SymphonyLimitedDBContext db = new SymphonyLimitedDBContext();
 

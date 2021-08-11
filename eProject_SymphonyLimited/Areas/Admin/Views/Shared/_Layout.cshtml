@@ -77,11 +77,32 @@
                 </a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Index","CoreConfigData")">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Core Config Data</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Index","User")">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>User</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Index","Branch")">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Branch</span>
+                </a>
+            </li>
+
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
             <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("Logout","Home")">
+                <a class="nav-link" href="@Url.Action("Logout","Auth")">
                     <i class="fas fa-fw fa-sign-out-alt"></i>
                     <span>Log out</span>
                 </a>
@@ -150,9 +171,9 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">@Session["AdminName"]</span>
                                 <img class="img-profile rounded-circle"
-                                     src="~/Areas/Admin/Content/img/undraw_profile.svg">
+                                     src="~/Areas/Admin/Content/img/@Session["AdminImage"]">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -236,6 +257,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="~/Areas/Admin/Content/js/sb-admin-2.min.js"></script>
+    @RenderSection("scripts", required: false)
 </body>
 
 </html>

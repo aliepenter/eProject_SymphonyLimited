@@ -1,4 +1,5 @@
-﻿using eProject_SymphonyLimited.Models;
+﻿using eProject_SymphonyLimited.Areas.Admin.Data;
+using eProject_SymphonyLimited.Models;
 using eProject_SymphonyLimited.Models.ViewModel;
 using System;
 using System.Data.Entity;
@@ -7,7 +8,7 @@ using System.Web.Mvc;
 
 namespace eProject_SymphonyLimited.Areas.Admin.Controllers
 {
-    public class CourseController : Controller
+    public class CourseController : BaseController
     {
         SymphonyLimitedDBContext db = new SymphonyLimitedDBContext();
 

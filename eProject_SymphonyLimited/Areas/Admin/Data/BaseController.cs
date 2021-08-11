@@ -8,10 +8,11 @@ namespace eProject_SymphonyLimited.Areas.Admin.Data
 {
     public class BaseController : Controller
     {
-        protected override void OnActionExecuted(ActionExecutedContext filterContext)
+        public BaseController()
         {
-            if (Session["User"] == null)
+            if (System.Web.HttpContext.Current.Session["User"].Equals(""))
             {
+                System.Web.HttpContext.Current.Response.Redirect("~/Admin/Login");
             }
         }
     }

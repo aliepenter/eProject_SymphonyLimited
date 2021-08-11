@@ -1,8 +1,8 @@
-﻿@model IEnumerable<eProject_SymphonyLimited.Models.CoreConfigData>
+﻿@model IEnumerable<eProject_SymphonyLimited.Models.Branch>
 
-@{ 
+@{
     ViewBag.Title = "Index";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml"; 
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Index</h2>
@@ -16,11 +16,24 @@
             @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Value)
+            @Html.DisplayNameFor(model => model.Email)
         </th>
         <th>
-            Action
+            @Html.DisplayNameFor(model => model.Image)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Time)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th></th>
     </tr>
 
     @foreach (var item in Model)
@@ -30,7 +43,22 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Value)
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Image)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.EntityId }) |
@@ -38,7 +66,9 @@
             </td>
         </tr>
     }
+
 </table>
+
 
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
@@ -48,7 +78,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
-                
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary btn-modal-delete">Delete</button>
@@ -64,15 +94,25 @@
             get: function (id) {
                 $.ajax({
                     type: "GET",
-                    url: "/Admin/CoreConfigData/FindId",
+                    url: "/Admin/Branch/FindId",
                     data: { id: id },
                     success: function (res) {
-                        let label = 
+                        let label =
                             `
                                 <input type="hidden" name="Id" id="Id" value="${res.EntityId}" />
                                 <b>Name : </b>${res.Name}
                                 <br/>
-                                <b>Value : </b>${res.Value}
+                                <b>Email : </b>${res.Email}
+                                <br/>
+                                <b>Image : </b>${res.Image}
+                                <br/>
+                                <b>Time : </b>${res.Time} 
+                                <br/>
+                                <b>Phone : </b>${res.Phone} 
+                                <br/>
+                                <b>Description : </b>${res.Description} 
+                                <br/>
+                                <b>Address : </b>${res.Address}
                             `;
                         $(".modal-body").html(label);
                         $("#myModal").modal("show");
@@ -82,7 +122,7 @@
             delete: function (id) {
                 $.ajax({
                     type: "POST",
-                    url: "/Admin/CoreConfigData/DeleteData",
+                    url: "/Admin/Branch/DeleteData",
                     data: { id: id },
                     success: function (res) {
                         if (res.statusCode == 200) {
@@ -100,12 +140,12 @@
 
         $(function () {
             $(document).on("click", ".btn-delete", function () {
-                let coreConfigDataId = $(this).data("id");
-                manager.get(coreConfigDataId);
+                let branchId = $(this).data("id");
+                manager.get(branchId);
             })
             $(document).on("click", ".btn-modal-delete", function () {
-                let coreConfigDataId = $("#Id").val();
-                manager.delete(coreConfigDataId);
+                let branchId = $("#Id").val();
+                manager.delete(branchId);
             })
         })
     </script>

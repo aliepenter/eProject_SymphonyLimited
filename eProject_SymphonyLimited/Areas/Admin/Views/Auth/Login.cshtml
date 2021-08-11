@@ -1,4 +1,8 @@
-﻿@{ Layout = ""; }
+﻿@model eProject_SymphonyLimited.Areas.Admin.Data.Model.Login
+@{ 
+    Layout = ""; 
+}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,15 +44,16 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
-                                    <form class="user">
+
+                                    @using (Html.BeginForm("Login", "Auth", null, FormMethod.Post, new { @class = "user" }))
+                                    {
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                   id="exampleInputEmail" name="account" aria-describedby="emailHelp"
-                                                   placeholder="Enter Email Address...">
+                                            <input type="text" class="form-control form-control-user" id="exampleInputEmail" name="Account" aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                                            @Html.ValidationMessageFor(model => model.Account, "", new { @class = "text-danger" })
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
-                                                   id="exampleInputPassword" name="password" placeholder="Password">
+                                            <input type="password" class="form-control form-control-user" id="exampleInputPassword" name="Password" placeholder="Password">
+                                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
@@ -58,24 +63,20 @@
                                                 </label>
                                             </div>
                                         </div>
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block">
-                                            Login
-                                        </a>
-                                    </form>
+                                        <button class="btn btn-primary btn-user btn-block" type="submit">Login</button>
+                                    }
+
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                        <a class="small" href="@Url.Action("ForgotPassword","Home")">Forgot Password?</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
 
     <!-- Bootstrap core JavaScript-->
@@ -87,7 +88,12 @@
 
     <!-- Custom scripts for all pages-->
     <script src="~/Areas/Admin/Content/js/sb-admin-2.min.js"></script>
-
+    @if (TempData["Message"] != null)
+    {
+        <script>
+            alert("@TempData["Message"]")
+        </script>
+    }
 </body>
 
 </html>
