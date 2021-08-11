@@ -1,17 +1,95 @@
-﻿@{
-    ViewBag.Title = "Contact";
-}
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+﻿@{ ViewBag.Title = "Contact"; }
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
-
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<div class="ContactUsMain">
+    <div class="bannerContactUs">
+        <div class="containerBannerContactUs">
+            <div class="title">
+                <span class="cusSpan">Contact Us</span>
+            </div>
+        </div>
+    </div>
+    <div class="containerContactUs">
+        <div class="title">
+            <span>
+                Contact us
+            </span>
+            <p>
+                With a team of enthusiastic consultants, 24/7 support will help you answer any questions about Symphony Limited's products and training programs.
+            </p>
+        </div>
+        <div class="content flex">
+            <div class="phone flex cusItemContact">
+                <div class="item">
+                    <div class="icon width100">
+                        <img src="https://bachkhoa-aptech.edu.vn/public/assets/imgs/themes/icon-smartphone.png" alt="Alternate Text" />
+                    </div>
+                    <div class="detail width100">
+                        <span>0123456673</span>
+                    </div>
+                    <div class="description width100">
+                        <span>Support 24/7 - Online 24 hours</span>
+                    </div>
+                </div>
+            </div>
+            <div class="address flex cusItemContact">
+                <div class="item">
+                    <div class="icon width100">
+                        <img src="https://bachkhoa-aptech.edu.vn/public/assets/imgs/themes/icon-location.png" alt="Alternate Text" />
+                    </div>
+                    <div class="detail width100">
+                        <span>0123456673</span>
+                    </div>
+                    <div class="description width100">
+                        <span>Support 24/7 - Online 24 hours</span>
+                    </div>
+                </div>
+            </div>
+            <div class="email flex cusItemContact">
+                <div class="item">
+                    <div class="icon width100">
+                        <img src="https://bachkhoa-aptech.edu.vn/public/assets/imgs/themes/icon-email.png" alt="Alternate Text" />
+                    </div>
+                    <div class="detail width100">
+                        <span>0123456673</span>
+                    </div>
+                    <div class="description width100">
+                        <span>Support 24/7 - Online 24 hours</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="formRegister">
+            <form>
+                <div class="title">
+                    <span>Register</span>
+                </div>
+                <div class="containerForm">
+                    <div class="form-row flex">
+                        <div class="left">
+                            <input type="type" name="name" value="" placeholder="Fullname*" />
+                        </div>
+                        <div class="right">
+                            <input type="type" name="name" value="" placeholder="Email*" />
+                        </div>
+                    </div>
+                    <div class="form-row flex">
+                        <div class="left">
+                            <input type="type" name="name" value="" placeholder="Phone*" />
+                        </div>
+                        <div class="right">
+                            <select name="cars" id="cars" placeholder="Give us questions">
+                                <option selected>Choose course</option>
+                                <option value="saab">Saab</option>
+                                <option value="mercedes">Mercedes</option>
+                                <option value="audi">Audi</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <textarea rows="10" placeholder="Give us questions"></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

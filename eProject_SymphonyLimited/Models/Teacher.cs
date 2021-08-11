@@ -11,11 +11,12 @@ namespace eProject_SymphonyLimited.Models
         [Key]
         public int EntityId { get; set; }
 
-        [Required(ErrorMessage = "Please enter name!")]
+        [Required(ErrorMessage = "Please enter Name!")]
         public string Name { get; set; }
-        
         public string Image { get; set; }
-
-        public string Description { get; set; }
+        [Required(ErrorMessage = "Please enter Specialize!")]
+        public string Specialize { get; set; }
+        [Required(ErrorMessage = "Please enter Subject!")]
+        public string Subject { get; set; }
     }
 }

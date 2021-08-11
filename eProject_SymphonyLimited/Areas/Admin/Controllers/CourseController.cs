@@ -4,7 +4,9 @@ using eProject_SymphonyLimited.Models.ViewModel;
 using Newtonsoft.Json;
 using System;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace eProject_SymphonyLimited.Areas.Admin.Controllers
@@ -76,14 +78,26 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Course c)
+        public ActionResult Create(Course c, HttpPostedFileBase imgFile)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    db.Course.Add(c);
-                    db.SaveChanges();
+                    string imgName = Path.GetFileName(imgFile.FileName);
+                    string imgText = Path.GetExtension(imgName);
+                    string imgPath = Path.Combine(Server.MapPath("~/Areas/Admin/Content/img/"), imgName);
+                    c.Image = "~/Areas/Admin/Content/img/" + imgName;
+                    if (imgFile.ContentLength > 0)
+                    {
+                        db.Course.Add(c);
+                        if (db.SaveChanges() > 0)
+                        {
+                            imgFile.SaveAs(imgPath);
+                            ViewBag.msg = "Record Added";
+                            ModelState.Clear();
+                        }
+                    }
                     return RedirectToAction("Index");
                 }
                 catch (Exception)
@@ -100,6 +114,11 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
             var courseById = db.Course.FirstOrDefault(x => x.EntityId == id);
             if (courseById != null)
             {
+                Session["imgPath"] = courseById.Image;
+                if (courseById.Image == null)
+                {
+                    return HttpNotFound();
+                }
                 ViewBag.CategoryList = db.Category.ToList();
                 return View(courseById);
             }
@@ -107,14 +126,42 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Course c)
+        public ActionResult Edit(Course c, HttpPostedFileBase imgFile)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    db.Entry(c).State = EntityState.Modified;
-                    db.SaveChanges();
+                    if (imgFile != null)
+                    {
+                        string imgName = Path.GetFileName(imgFile.FileName);
+                        string imgText = Path.GetExtension(imgName);
+                        string imgPath = Path.Combine(Server.MapPath("~/Areas/Admin/Content/img/"), imgName);
+                        c.Image = "~/Areas/Admin/Content/img/" + imgName;
+                        if (imgFile.ContentLength > 0)
+                        {
+                            db.Entry(c).State = EntityState.Modified;
+                            string oldImagePath = Request.MapPath(Session["imgPath"].ToString());
+                            if (db.SaveChanges() > 0)
+                            {
+                                imgFile.SaveAs(imgPath);
+                                TempData["msg"] = "Record Updated";
+                                //ViewBag.msg = "Record Added";
+                                //ModelState.Clear();
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        c.Image = Session["imgPath"].ToString();
+                        db.Entry(c).State = EntityState.Modified;
+                        if (db.SaveChanges() > 0)
+                        {
+                            TempData["msg"] = "Data Updated";
+
+                        }
+                    }
                     return RedirectToAction("Index");
                 }
                 catch (Exception)

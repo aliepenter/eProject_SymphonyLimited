@@ -1,0 +1,129 @@
+﻿
+@{
+    ViewBag.Title = "Courses Detail";
+}
+
+<div class="containerCourseMain flex">
+    <div class="left cusBanner">
+        <div class="category">
+            <div class="cat">
+                <span>Course Details</span>
+            </div>
+            <div class="menu">
+                <ul>
+                    @{ foreach (var item in ViewBag.categoryLevel2)
+                        {
+                            <li id="">
+                                <a class="defaultMenu" href="">@item.Name</a>
+                                <ul>
+                                    <div class="subMenu flex" id="subMenu">
+
+                                        @{
+                                            foreach (var subItem in ViewBag.categoryLevel3)
+                                            {
+                                                if (item.EntityId == subItem.ParentId)
+                                                {
+                                                <li class="width20" style="display: inline-block">
+                                                    <div class="">
+                                                        <a href="" class="subMenuATag">@subItem.Name</a>
+                                                    </div>
+                                                </li>
+                                            }
+                                        }
+                                        }
+                        </div>
+                        </ul>
+                        </li>
+                    }
+                    }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="courseItem flex">
+                <div class="course cusCourseItem">
+                    <div class="img">
+                        <img src="~/Content/images/Course/android.png" alt="" width="100%">
+                    </div>
+                    <div class="description">
+                        <span>hello world</span>
+                    </div>
+                    <div class="moreInfor ">
+                        <div class="containerMoreInfor flex">
+                            <div class="admissionCriteria width50">
+                                <span>
+                                    <i class="fa fa-user" aria-hidden="true"></i> 100
+                                </span>
+                            </div>
+                            <div class="price width50">
+                                <span>2000000 đ</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="course cusCourseItem">
+                    <div class="img">
+                        <img src="~/Content/images/Course/android.png" alt="" width="100%">
+                    </div>
+                    <div class="description">
+                        <span>hello world</span>
+                    </div>
+                    <div class="moreInfor ">
+                        <div class="containerMoreInfor flex">
+                            <div class="admissionCriteria width50">
+                                <span>
+                                    <i class="fa fa-user" aria-hidden="true"></i> 100
+                                </span>
+                            </div>
+                            <div class="price width50">
+                                <span>2000000 đ</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="course cusCourseItem">
+                    <div class="img">
+                        <img src="~/Content/images/Course/android.png" alt="" width="100%">
+                    </div>
+                    <div class="description">
+                        <span>hello world</span>
+                    </div>
+                    <div class="moreInfor ">
+                        <div class="containerMoreInfor flex">
+                            <div class="admissionCriteria width50">
+                                <span>
+                                    <i class="fa fa-user" aria-hidden="true"></i> 100
+                                </span>
+                            </div>
+                            <div class="price width50">
+                                <span>2000000 đ</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="course cusCourseItem">
+                    <div class="img">
+                        <img src="~/Content/images/Course/android.png" alt="" width="100%">
+                    </div>
+                    <div class="description">
+                        <span>hello world</span>
+                    </div>
+                    <div class="moreInfor ">
+                        <div class="containerMoreInfor flex">
+                            <div class="admissionCriteria width50">
+                                <span>
+                                    <i class="fa fa-user" aria-hidden="true"></i> 100
+                                </span>
+                            </div>
+                            <div class="price width50">
+                                <span>2000000 đ</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+

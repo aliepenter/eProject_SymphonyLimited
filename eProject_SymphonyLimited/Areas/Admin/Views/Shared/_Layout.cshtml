@@ -17,6 +17,7 @@
 
     <!-- Custom styles for this template-->
     <link href="~/Areas/Admin/Content/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="~/Areas/Admin/Content/css/sb-admin-2.css?v=@Guid.NewGuid().ToString()" rel="stylesheet" />
 </head>
 
 <body id="page-top">
@@ -71,13 +72,6 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("Index","Attribute")">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Attributes Manager</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
                 <a class="nav-link" href="@Url.Action("Index","CoreConfigData")">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Core Config Data Manager</span>
@@ -104,7 +98,12 @@
                     <span>Partner Manager</span>
                 </a>
             </li>
-
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Index","Lecturer")">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Lecturer Manager</span>
+                </a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="@Url.Action("Index","Faq")">
                     <i class="fas fa-fw fa-chart-area"></i>
