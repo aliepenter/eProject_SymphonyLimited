@@ -1,0 +1,133 @@
+﻿@model IEnumerable<eProject_SymphonyLimited.Models.User>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Account)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Image)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Account)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Image)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.EntityId }) |
+                <a class="btn-delete" href="#" data-id="@item.EntityId">Delete</a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Do you want to delete ?</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-modal-delete">Delete</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        var manager = {
+            get: function (id) {
+                $.ajax({
+                    type: "GET",
+                    url: "/Admin/User/FindId",
+                    data: { id: id },
+                    success: function (res) {
+                        let label =
+                            `
+                                <input type="hidden" name="Id" id="Id" value="${res.EntityId}" />
+                                <b>Account : </b>${res.Account}
+                                <br/>
+                                <b>Name : </b>${res.Name}
+                                <br/>
+                                <b>Email : </b>${res.Email}
+                                <br/>
+                                <b>Image : </b>${res.Image}
+                            `;
+                        $(".modal-body").html(label);
+                        $("#myModal").modal("show");
+                    }
+                })
+            },
+            delete: function (id) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Admin/User/DeleteData",
+                    data: { id: id },
+                    success: function (res) {
+                        if (res.statusCode == 200) {
+                            $("#myModal").modal("hide");
+                            alert(res.message);
+                            location.reload();
+                        } else {
+                            $("#myModal").modal("hide");
+                            alert(res.message);
+                        }
+                    }
+                })
+            },
+        }
+
+        $(function () {
+            $(document).on("click", ".btn-delete", function () {
+                let userId = $(this).data("id");
+                manager.get(userId);
+            })
+            $(document).on("click", ".btn-modal-delete", function () {
+                let userId = $("#Id").val();
+                manager.delete(userId);
+            })
+        })
+    </script>
+}
