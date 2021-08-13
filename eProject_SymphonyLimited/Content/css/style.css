@@ -716,7 +716,7 @@
             border-radius: 5px;
             line-height: 1.5
         }
-        .page4 .registerPage .containerFormIndex form {
+        .page4 .registerPage .containerFormIndex .form {
             margin: 10px 0 
         }
         .page4 .registerPage .containerFormIndex .form-row{
@@ -944,8 +944,194 @@ table, th, td {
     padding: 10px;
     border: 1px groove #DADCE0
 }
+.mainEE{
+    margin: 30px 0
+}
+.containerEE {
+    width: 90%;
+    margin: 0 auto
+}
+.containerEE .left{
+    width: 0%;
+    display: none;
+}
+.containerEE .midEE{
+    width: 100%
+}
+.containerEE .right{
+    width: 100%
+}
+.containerEE .right .formRegis .title{
+    text-align: center;
+    padding: 20px;
+    font-size: 25px;
+    text-transform: uppercase;
+    font-weight: bold;
+    background: #E0A800
+}
+.mainEE .containerEE .form {
+    margin: 10px 0
+}
+
+.mainEE .containerEE .form-row {
+    margin: 30px 0;
+}
+
+.mainEE .containerEE .form-row input {
+    padding: 25px;
+    width: 100%;
+    outline: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+}
+
+
+.mainEE .containerEE .form-row textarea {
+    padding: 25px;
+    width: 100%;
+    outline: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+}
+
+.mainEE .containerEE button {
+    padding: 10px;
+    width: 50%;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #CED4DA;
+    background-color: #E0A800;
+    text-transform: uppercase;
+    font-weight: bold
+}
+
+.mainEE .containerEE button:hover {
+    background-color: #FF9600
+}
+
+.main .cusBannerEE .category {
+    /*padding: 0px 30px;*/
+    display: block;
+    position: relative;
+}
+
+
+.main .cusBannerEE .category .cat {
+    background-color: #6E1313;
+    padding: 10px 0px;
+}
+
+    .main .cusBannerEE .category .cat span {
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        padding: 0px 10px;
+    }
+
+.main .cusBannerEE .category ul li {
+    list-style: none;
+    display: list-item;
+}
+
+    .main .cusBannerEE .category ul li .defaultMenu {
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 0 24px;
+        line-height: 46px;
+        display: block;
+        border: 1px dotted #6E1313;
+        border-top: none;
+        font-weight: bold;
+    }
+.midEE .infor .title{
+    text-align: center;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color:#E0A800
+}
+.midEE .containerItem{
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px 0
+}
+.midEE .containerItem .csSpan{
+    font-weight: bold
+}
+.midEE .cusItem{
+    padding: 20px 0;
+    font-size: 15px
+}
+
+.st, .et{
+    width: 100%;
+    padding: 10px 0
+}
+.menuEEMobi .menu {
+    position: fixed;
+    width: 100%;
+    height: 76%;
+    top: 24%;
+    background: black;
+    z-index: 15;
+}
+.menuEEMobi .menu ul{
+    width: 80%;
+    margin: 0 auto
+}
+.menuEEMobi .menu ul li{
+    list-style: none;
+    padding: 10px;
+}
+.menuEEMobi .menu ul li a{
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    
+}
+.containerCourseDetail{
+    width: 90%;
+    margin: 30px auto
+}
+.containerCourseDetail .left{
+    width: 100%
+}
+.containerCourseDetail .right{
+    width: 100%
+}
+.containerCourseDetail .left .price{
+    font-weight: bold;
+    font-size: 20px;
+    padding: 10px 0
+}
+.containerCourseDetail .right .containerItem{
+    font-size: 18px
+}
+.containerCourseDetail .right .containerItem .cusItem{
+    padding: 10px 0
+}
+.cdSpan{
+    font-weight:bold;
+    
+}
 /* minwidth 768 */
 @media screen and (min-width: 768px) {
+    .containerCourseDetail .left {
+        width: 50%
+    }
+
+    .containerCourseDetail .right {
+        width: 50%;
+        padding:0 20px
+    }
+    .st, .et {
+        width: 50%;
+        padding: 10px 0
+    }
     .bannerFaq .title {
         font-size: 35px
     }
@@ -1390,6 +1576,145 @@ table, th, td {
 }
 
 @media screen and (min-width:1440px) {
+    .containerCourseDetail .left {
+        width: 30%
+    }
+
+    .containerCourseDetail .right {
+        width: 70%;
+        padding: 0 20px 0 200px;
+    }
+    .containerCourseDetail .right span{
+        font-size: 25px
+    }
+    .menuEEMobi{
+        display:none
+    }
+    .st, .et{
+        font-size: 20px
+    }
+    .mainEE{
+    margin: 30px 0
+}
+.containerEE {
+    width: 90%;
+    margin: 0 auto
+}
+.containerEE .left{
+    width: 25%;
+    display: block
+}
+.containerEE .midEE{
+    width: 50%
+}
+.containerEE .right{
+    width: 25%
+}
+.containerEE .right .formRegis .title{
+    text-align: center;
+    padding: 20px;
+    font-size: 25px;
+    text-transform: uppercase;
+    font-weight: bold;
+    background: #E0A800
+}
+.mainEE .containerEE .form {
+    margin: 10px 0
+}
+
+.mainEE .containerEE .form-row {
+    margin: 30px 0;
+}
+
+.mainEE .containerEE .form-row input {
+    padding: 25px;
+    width: 100%;
+    outline: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+}
+
+
+.mainEE .containerEE .form-row textarea {
+    padding: 25px;
+    width: 100%;
+    outline: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+}
+
+.mainEE .containerEE button {
+    padding: 10px;
+    width: 50%;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #CED4DA;
+    background-color: #E0A800;
+    text-transform: uppercase;
+    font-weight: bold
+}
+
+.mainEE .containerEE button:hover {
+    background-color: #FF9600
+}
+
+.main .cusBannerEE .category {
+    /*padding: 0px 30px;*/
+    display: block;
+    position: relative;
+}
+
+
+.main .cusBannerEE .category .cat {
+    background-color: #6E1313;
+    padding: 10px 0px;
+}
+
+    .main .cusBannerEE .category .cat span {
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        padding: 0px 10px;
+    }
+
+.main .cusBannerEE .category ul li {
+    list-style: none;
+    display: list-item;
+}
+
+    .main .cusBannerEE .category ul li .defaultMenu {
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 0 24px;
+        line-height: 46px;
+        display: block;
+        border: 1px dotted #6E1313;
+        border-top: none;
+        font-weight: bold;
+    }
+.midEE .infor .title{
+    text-align: center;
+    font-size: 30px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color:#E0A800
+}
+.midEE .containerItem{
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px 0
+}
+.midEE .containerItem .csSpan{
+    font-weight: bold
+}
+.midEE .cusItem{
+    padding: 20px 0;
+    font-size: 20px
+}
     .bannerFaq {
         background-image: url("https://ssl.gstatic.com/support/content/images/static/banners/youtube.svg");
         background-position: center center;
@@ -1662,7 +1987,13 @@ table, th, td {
     animation-name: fadeInUp;
     z-index: 16;
 }
-
+.fadeinAni {
+    animation-duration: 1s;
+    animation-delay: 0s;
+    animation-name: fadeIn;
+    z-index: 15;
+    opacity: .9 
+}
 @keyframes scroll-left {
     0% {
         transform: translateX(100%);
@@ -1718,7 +2049,6 @@ table, th, td {
         top: -1000px;
     }
 }
-
 @keyframes menuleft {
     0% {
         left: -300px;
@@ -1735,6 +2065,19 @@ table, th, td {
     }
 
     100% {
-        opacity: 1;
+        opacity: 0.9;
+    }
+}
+@keyframes boxs2 {
+    0% {
+        box-shadow: 0 0 0 0px rgba(255, 0, 0, 0.9);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(255, 0, 0, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0px rgba(255, 0, 0, 0);
     }
 }

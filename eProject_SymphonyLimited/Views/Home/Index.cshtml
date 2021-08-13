@@ -349,31 +349,36 @@
                         <div class="title">
                             <span>Register now to receive many offers from <br />Symphony Limited</span>
                         </div>
-                        <form action="/" method="post">
-                            <div class="form-row">
-                                <input type="type" name="name" value="" placeholder="Fullname*" />
-                            </div>
-                            <div class="form-row">
-                                <input type="type" name="name" value="" placeholder="Email*" />
-                            </div>
-                            <div class="form-row">
-                                <input type="type" name="name" value="" placeholder="Phone*" />
-                            </div>
-                            <div class="form-row">
-                                <select name="cars" id="cars" placeholder="Give us questions">
-                                    <option selected>Choose course</option>
-                                    <option value="saab">Saab</option>
-                                    <option value="mercedes">Mercedes</option>
-                                    <option value="audi">Audi</option>
-                                </select>
-                            </div>
-                            <div class="form-row">
-                                <textarea rows="5" placeholder="Give us questions"></textarea>
-                            </div>
-                            <div class="btnFormIndex">
-                                <button type="submit">Send</button>
-                            </div>
-                        </form>
+                        @using (Html.BeginForm("Application", "Lecturer", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class ="form">
+                                <div class="form-row">
+                                    <input type="type" name="name" value="" placeholder="Fullname*" />
+                                </div>
+                                <div class="form-row">
+                                    <input type="type" name="name" value="" placeholder="Email*" />
+                                </div>
+                                <div class="form-row">
+                                    <input type="type" name="name" value="" placeholder="Phone*" />
+                                </div>
+                                <div class="form-row">
+                                    <select name="cars" id="cars" placeholder="Give us questions">
+                                        <option selected>Choose course</option>
+                                        <option value="saab">Saab</option>
+                                        <option value="mercedes">Mercedes</option>
+                                        <option value="audi">Audi</option>
+                                    </select>
+                                </div>
+                                <div class="form-row">
+                                    <textarea rows="5" placeholder="Give us questions"></textarea>
+                                </div>
+                                <div class="btnFormIndex">
+                                    <button type="submit">Send</button>
+                                </div>
+                            </div>  
+                        }
                     </div>
                 </div>
 

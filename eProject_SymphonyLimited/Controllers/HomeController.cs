@@ -17,6 +17,8 @@ namespace eProject_SymphonyLimited.Controllers
             ViewBag.categoryLevel2 = cate;
             var subcate = db.Category.Where(x => x.Level == 3).AsEnumerable();
             ViewBag.categoryLevel3 = subcate;
+            var admission = db.Admission.AsEnumerable();
+            ViewBag.admission = admission;
         }
         public ActionResult Index()
         {
@@ -62,6 +64,17 @@ namespace eProject_SymphonyLimited.Controllers
             return View();
         }
         public ActionResult ExamResult()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Application(Faq f)
+        {
+            db.Faq.Add(f);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public ActionResult CourseDetail()
         {
             return View();
         }

@@ -112,4 +112,10 @@ $('.play').on('click', function () {
 })
 $('.stop').on('click', function () {
     owl.trigger('stop.owl.autoplay')
-})
+});
+$('#barE').click(function () {
+    $('#menuEE').removeClass('disNone');
+});
+$("#exitEE").click(function () {
+    $("#menuEE").addClass("disNone");
+});
