@@ -129,6 +129,8 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdmissionController.cs" />
     <Compile Include="Areas\Admin\Controllers\AuthController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Authorize\BusinessController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Authorize\GroupUserController.cs" />
     <Compile Include="Areas\Admin\Controllers\BranchController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\CoreConfigDataController.cs" />
@@ -139,13 +141,20 @@
     <Compile Include="Areas\Admin\Controllers\PartnerController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Areas\Admin\Data\BaseController.cs" />
-    <Compile Include="Areas\Admin\Data\Model\Login.cs" />
+    <Compile Include="Areas\Admin\Data\CustomizeAuthorizeAttribute.cs" />
+    <Compile Include="Areas\Admin\Data\Helpers.cs" />
+    <Compile Include="Areas\Admin\Data\ViewModel\LoginViewModel.cs" />
+    <Compile Include="Areas\Admin\Data\ViewModel\PermissionViewModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admission.cs" />
+    <Compile Include="Models\Authorize\Business.cs" />
+    <Compile Include="Models\Authorize\GroupPermission.cs" />
+    <Compile Include="Models\Authorize\GroupUser.cs" />
+    <Compile Include="Models\Authorize\Permission.cs" />
     <Compile Include="Models\ViewModel\AdmissionViewModel.cs" />
     <Compile Include="Models\Branch.cs" />
     <Compile Include="Models\Category.cs" />
@@ -160,7 +169,7 @@
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\SymphonyLimitedDBContext.cs" />
     <Compile Include="Models\Teacher.cs" />
-    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Authorize\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -4012,6 +4021,8 @@
     <Content Include="Content\font\font-awesome-4.7.0\scss\_screen-reader.scss" />
     <Content Include="Content\font\font-awesome-4.7.0\scss\_stacked.scss" />
     <Content Include="Content\font\font-awesome-4.7.0\scss\_variables.scss" />
+    <Content Include="Areas\Admin\Views\Business\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\GroupUser\GrantPermission.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />

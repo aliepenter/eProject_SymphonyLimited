@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "GrantPermission";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>GrantPermission</h2>
+
+<div class="form-inline">
+    @Html.DropDownList("GroupUser", null, new { @class = "form-control" })
+    @Html.DropDownList("Business", null, new { @class = "form-control" })
+</div>
+
+<div class="row lst_permission">
+
+</div>
+
+@section scripts{
+    <script>
+        function loadPermission() {
+            let grId = $("#GroupUser").val();
+            let busId = $("#Business").val();
+            $.ajax({
+                type: 'Get',
+                url: '/Admin/GroupUser/GetPermission',
+                data: { groupId: grId, businessId: busId },
+                success: function (res) {
+                    let html = '';
+                    $.each(res, function (idex, item) {
+                        html += `<div class="col-md-4">
+                                    <label>
+                                        <input class="item_per" type="checkbox"  ${item.IsGranted ? "checked" : ""} ${item.IsAdmin ? "disabled" : ""}   name="name" value=" ${item.EntityId}"/>${item.Description}
+                                    </label>
+                                </div>`;
+                    });
+                    $(".lst_permission").html(html);
+                }
+            })
+        }
+        $(function () {
+            loadPermission();
+            $("#GroupUser").change(function () {
+                loadPermission();
+            })
+            $("#Business").change(function () {
+                loadPermission();
+            })
+            $(document).on('change', '.item_per', function () {
+                let grId = $("#GroupUser").val();
+                let perId = $(this).val();
+                $.ajax({
+                    type: "Get",
+                    url: "/Admin/GroupUser/ChangePermission",
+                    data: { grId: grId, perId: perId },
+                    success: function (res) {
+                        alert(res.msg)
+                    }
+                })
+            })
+        })
+    </script>
+}

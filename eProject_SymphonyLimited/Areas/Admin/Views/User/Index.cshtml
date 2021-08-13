@@ -1,4 +1,4 @@
-﻿@model IEnumerable<eProject_SymphonyLimited.Models.User>
+﻿@model IEnumerable<eProject_SymphonyLimited.Models.Authorize.User>
 
 @{
     ViewBag.Title = "Index";
@@ -19,7 +19,7 @@
             @Html.DisplayNameFor(model => model.Password)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.FullName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Email)
@@ -40,7 +40,7 @@
                 @Html.DisplayFor(modelItem => item.Password)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.FullName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
