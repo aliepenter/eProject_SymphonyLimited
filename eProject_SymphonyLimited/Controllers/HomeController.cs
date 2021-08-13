@@ -57,5 +57,13 @@ namespace eProject_SymphonyLimited.Controllers
                 data = StartTime
             }, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult Faq()
+        {
+            return View();
+        }
+        public ActionResult ExamResult()
+        {
+            return View();
+        }
     }
 }

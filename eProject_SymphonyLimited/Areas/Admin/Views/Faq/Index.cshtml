@@ -33,7 +33,7 @@
                                     '<td>' + item.Question + '</td>' +
                                     '<td>' + item.Answer + '</td>' +
                                     '<td>' +
-                                    '<button class="btn btn-warning btn-edit" data-id="' + item.EntityId + '">Edit</button>' +
+                                    '<button class="btn btn-warning btn-edit mr-1" data-id="' + item.EntityId + '">Edit</button>' +
                                     '<button class="btn btn-danger btn-delete" data-id="' + item.EntityId + '">Delete</button>' +
                                     '</td>'
                                     + '</tr>';
@@ -42,9 +42,9 @@
                             var pages = '';
                             for (var i = 1; i <= res.TotalPages; i++) {
                                 if (i == res.CurrentPage) {
-                                    pages += '<li class="active"><a href="javascript:void(0)"><button class="btn btn-warning">' + i + '</button></a></li>';
+                                    pages += '<li class="active mr-1"><a href="javascript:void(0)"><button class="btn btn-info">' + i + '</button></a></li>';
                                 } else {
-                                    pages += '<li><a class="item_page" href="javascript:void(0)"><button class="btn btn-warning">' + i + '</button></a></li>';
+                                    pages += '<li><a class="item_page mr-1" href="javascript:void(0)"><button class="btn btn-info">' + i + '</button></a></li>';
                                 }
                             }
                             $(".pagination").html(pages);

@@ -568,8 +568,8 @@ D:\ProjectASP\eProject_SymphonyLimited\eProject_SymphonyLimited\bin\System.Web.W
 D:\ProjectASP\eProject_SymphonyLimited\eProject_SymphonyLimited\bin\Newtonsoft.Json.xml
 D:\ProjectASP\eProject_SymphonyLimited\eProject_SymphonyLimited\bin\Antlr3.Runtime.pdb
 D:\ProjectASP\eProject_SymphonyLimited\eProject_SymphonyLimited\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\ProjectASP\eProject_SymphonyLimited\eProject_SymphonyLimited\obj\Debug\eProject_SymphonyLimited.csproj.AssemblyReference.cache
 D:\ProjectASP\eProject_SymphonyLimited\eProject_SymphonyLimited\obj\Debug\eProject_SymphonyLimited.csproj.CoreCompileInputs.cache
 D:\ProjectASP\eProject_SymphonyLimited\eProject_SymphonyLimited\obj\Debug\eProject_SymphonyLimited.csproj.CopyComplete
 D:\ProjectASP\eProject_SymphonyLimited\eProject_SymphonyLimited\obj\Debug\eProject_SymphonyLimited.dll
 D:\ProjectASP\eProject_SymphonyLimited\eProject_SymphonyLimited\obj\Debug\eProject_SymphonyLimited.pdb
+D:\ProjectASP\eProject_SymphonyLimited\eProject_SymphonyLimited\obj\Debug\eProject_SymphonyLimited.csproj.AssemblyReference.cache
