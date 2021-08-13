@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace eProject_SymphonyLimited.Areas.Admin.Data.Model
+namespace eProject_SymphonyLimited.Areas.Admin.Data.ViewModel
 {
     public class LoginViewModel
     {

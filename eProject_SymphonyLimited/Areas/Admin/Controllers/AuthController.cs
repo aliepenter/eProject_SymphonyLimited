@@ -1,4 +1,4 @@
-﻿using eProject_SymphonyLimited.Areas.Admin.Data.Model;
+﻿using eProject_SymphonyLimited.Areas.Admin.Data.ViewModel;
 using eProject_SymphonyLimited.Models;
 using System.Linq;
 using System.Web.Mvc;
