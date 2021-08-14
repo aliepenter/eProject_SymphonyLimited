@@ -1,16 +1,19 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Categories";
 }
-
-<h2>Index</h2>
+<h2>Categories</h2>
 <p>@ViewBag.ErrorMessage</p>
 <p>
     @Html.ActionLink("Create New", "Create")
-    <div class="form-inline">
-        <label class="control-label">Search: </label>
-        <input type="search" name="key" id="key" value="" placeholder="Enter name to search...." />
-    </div>
 </p>
+<div class="form-inline">
+    <input type="search" name="key" id="key" value="" />
+    <select id="type">
+        <option value="EntityId" selected>Id</option>
+        <option value="Name">Name</option>
+        <option value="ParentId">Parent Id</option>
+    </select>
+</div>
 <table class="table"></table>
 <ul class="pagination"></ul>
 @section scripts{
@@ -20,11 +23,11 @@
             var getUrl = window.location;
             var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
             var manager = {
-                load: function (page = 1, key = null) {
+                load: function (page = 1, type = null, key = null) {
                     $.ajax({
                         type: "GET",
                         url: baseUrl + "Admin/Category/Get",
-                        data: { page: page, key: key },
+                        data: { page: page, type: type, key: key },
                         success: function (res) {
                             var _html = '<tr><th>Id</th><th>Name</th><th>Parent Id</th><th></th></tr>';
                             for (var item of JSON.parse(res.Data)) {
@@ -59,12 +62,14 @@
             });
             $(document).on("click", ".item_page", function () {
                 var page = $(this).text(),
-                    key = $('#key').val();
-                manager.load(page, key);
+                    key = $('#key').val(),
+                    type = $("#type").val();
+                manager.load(page, type, key);
             });
             $('#key').keyup(function () {
-                var key = $("#key").val();
-                manager.load(1, key);
+                var key = $("#key").val(),
+                    type = $("#type").val();
+                manager.load(1, type, key);
             });
             $(document).on("click", ".btn-delete", function () {
                 var id = $(this).data("id");

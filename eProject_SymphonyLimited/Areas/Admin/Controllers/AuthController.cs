@@ -38,7 +38,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                 }
                 else
                 {
-                    TempData["Message"] = "Account or Password does not exist";
+                    TempData["ErrorMessage"] = "Account or Password is not valid!";
                 }
             }
             return View();
