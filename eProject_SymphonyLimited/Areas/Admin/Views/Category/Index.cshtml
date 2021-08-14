@@ -71,6 +71,11 @@
                     type = $("#type").val();
                 manager.load(1, type, key);
             });
+            $(document).on("change", "#type", function () {
+                var key = $("#key").val(),
+                    type = $("#type").val();
+                manager.load(1, type, key);
+            });
             $(document).on("click", ".btn-delete", function () {
                 var id = $(this).data("id");
                 if (confirm('Are you sure want delete category with id = ' + id + '?')) {

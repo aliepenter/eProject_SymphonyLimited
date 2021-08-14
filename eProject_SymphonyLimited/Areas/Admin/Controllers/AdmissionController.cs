@@ -73,7 +73,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
             if (courseCollection.Count() == 0)
             {
                 TempData["ErrorMessage"] = "Please create course before create admission!";
-                return RedirectToAction("Index", new { ErrorMessage = "Please create course before create admission!" });
+                return RedirectToAction("Index");
             }
             ViewBag.CourseList = db.Course.ToList();
             return View();
@@ -84,16 +84,37 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                try
+                var validateName = db.Admission.FirstOrDefault(x => x.Name == a.Name);
+                if (validateName == null)
                 {
-                    db.Admission.Add(a);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-                catch (Exception)
-                {
+                    if (a.StartTime < DateTime.Now)
+                    {
+                        ModelState.AddModelError("StartTime", "Start time must bigger than current time!");
+                    }
+                    else if (a.EndTime < DateTime.Now)
+                    {
+                        ModelState.AddModelError("EndTime", "End time must bigger than current time!");
+                    }
+                    else if (a.StartTime > a.EndTime)
+                    {
+                        ModelState.AddModelError("EndTime", "End time must bigger than start time!");
+                    }
+                    try
+                    {
+                        db.Admission.Add(a);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    catch (Exception)
+                    {
 
+                    }
                 }
+                else
+                {
+                    ModelState.AddModelError("Name", "Admission is already exist!");
+                }
+
             }
             ViewBag.CourseList = db.Course.ToList();
             return View();

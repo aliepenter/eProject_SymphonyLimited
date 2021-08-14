@@ -25,15 +25,13 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
             var categories = db.Category.Where(x => x.ParentId != 0).AsEnumerable();
             if (!String.IsNullOrEmpty(type) && !String.IsNullOrEmpty(key))
             {
-                int number;
-                bool result = Int32.TryParse(key, out number);
                 switch (type)
                 {
                     case "EntityId":
-                        categories = db.Category.Where(x => x.ParentId != 0 && x.EntityId == number).AsEnumerable();
+                        categories = db.Category.Where(x => x.ParentId != 0 && x.EntityId.ToString().Contains(key)).AsEnumerable();
                         break;
                     case "ParentId":
-                        categories = db.Category.Where(x => x.ParentId != 0 && x.ParentId == number).AsEnumerable();
+                        categories = db.Category.Where(x => x.ParentId != 0 && x.ParentId.ToString().Contains(key)).AsEnumerable();
                         break;
                     case "Name":
                         categories = db.Category.Where(x => x.ParentId != 0 && x.Name.Contains(key)).AsEnumerable();
@@ -179,7 +177,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                 }
                 catch (Exception)
                 {
-
+                    ModelState.AddModelError("", "Some thing went wrong while delete category!");
                 }
             }
             return View();
