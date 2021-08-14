@@ -219,47 +219,44 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create(Course c, HttpPostedFileBase imgFile)
         {
+            var validateName = db.Course.FirstOrDefault(x => x.Name == c.Name);
+            if (validateName != null)
+            {
+                ModelState.AddModelError("Name", "Course name can't be the same!");
+            }
             if (ModelState.IsValid)
             {
-                var validateName = db.Course.FirstOrDefault(x => x.Name == c.Name);
-                if (validateName == null)
+                try
                 {
-                    try
+                    if (imgFile == null && c.Image == null)
                     {
-                        if (imgFile == null && c.Image == null)
-                        {
-                            c.Image = "default.png";
-                            db.Course.Add(c);
-                            db.SaveChanges();
-                            return RedirectToAction("Index");
-                        }
-                        else
-                        {
-                            string imgName = Path.GetFileName(imgFile.FileName);
-                            string imgText = Path.GetExtension(imgName);
-                            string imgPath = Path.Combine(Server.MapPath("~/Areas/Admin/Content/img/"), imgName);
-                            c.Image = imgName;
-                            if (imgFile.ContentLength > 0)
-                            {
-                                db.Course.Add(c);
-                                if (db.SaveChanges() > 0)
-                                {
-                                    imgFile.SaveAs(imgPath);
-                                    ViewBag.msg = "Record Added";
-                                    ModelState.Clear();
-                                }
-                            }
-                            return RedirectToAction("Index");
-                        }
+                        c.Image = "default.png";
+                        db.Course.Add(c);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
                     }
-                    catch (Exception)
+                    else
                     {
-                        ModelState.AddModelError("", "Some thing went wrong while save course!");
+                        string imgName = Path.GetFileName(imgFile.FileName);
+                        string imgText = Path.GetExtension(imgName);
+                        string imgPath = Path.Combine(Server.MapPath("~/Areas/Admin/Content/img/"), imgName);
+                        c.Image = imgName;
+                        if (imgFile.ContentLength > 0)
+                        {
+                            db.Course.Add(c);
+                            if (db.SaveChanges() > 0)
+                            {
+                                imgFile.SaveAs(imgPath);
+                                ViewBag.msg = "Record Added";
+                                ModelState.Clear();
+                            }
+                        }
+                        return RedirectToAction("Index");
                     }
                 }
-                else
+                catch (Exception)
                 {
-                    ModelState.AddModelError("Name", "Course is already exist!");
+                    ModelState.AddModelError("", "Some thing went wrong while save course!");
                 }
             }
             ViewBag.CategoryList = db.Category.Where(x => x.ParentId != 0).ToList();
@@ -285,48 +282,45 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         public ActionResult Edit(Course c, HttpPostedFileBase imgFile)
         {
             var currentCourse = db.Course.Find(c.EntityId);
+            var validateName = db.Course.FirstOrDefault(x => x.Name != currentCourse.Name && x.Name == c.Name);
+            if (validateName != null)
+            {
+                ModelState.AddModelError("Name", "Course name can't be the same!");
+            }
             if (ModelState.IsValid)
             {
-                var validateName = db.Course.FirstOrDefault(x => x.Name != currentCourse.Name && x.Name == c.Name);
-                if (validateName == null)
+                try
                 {
-                    try
+                    currentCourse.Name = c.Name;
+                    currentCourse.Price = c.Price;
+                    currentCourse.Subject = c.Subject;
+                    currentCourse.Time = c.Time;
+                    currentCourse.Certificate = c.Certificate;
+                    currentCourse.CategoryId = c.CategoryId;
+                    currentCourse.Description = c.Description;
+                    if (imgFile != null)
                     {
-                        currentCourse.Name = c.Name;
-                        currentCourse.Price = c.Price;
-                        currentCourse.Subject = c.Subject;
-                        currentCourse.Time = c.Time;
-                        currentCourse.Certificate = c.Certificate;
-                        currentCourse.CategoryId = c.CategoryId;
-                        currentCourse.Description = c.Description;
-                        if (imgFile != null)
+                        string imgName = Path.GetFileName(imgFile.FileName);
+                        string imgText = Path.GetExtension(imgName);
+                        string imgPath = Path.Combine(Server.MapPath("~/Areas/Admin/Content/img/"), imgName);
+                        currentCourse.Image = imgName;
+                        if (imgFile.ContentLength > 0)
                         {
-                            string imgName = Path.GetFileName(imgFile.FileName);
-                            string imgText = Path.GetExtension(imgName);
-                            string imgPath = Path.Combine(Server.MapPath("~/Areas/Admin/Content/img/"), imgName);
-                            currentCourse.Image = imgName;
-                            if (imgFile.ContentLength > 0)
+                            if (db.SaveChanges() > 0)
                             {
-                                if (db.SaveChanges() > 0)
-                                {
-                                    imgFile.SaveAs(imgPath);
-                                }
+                                imgFile.SaveAs(imgPath);
                             }
                         }
-                        else
-                        {
-                            db.SaveChanges();
-                        }
-                        return RedirectToAction("Index");
                     }
-                    catch (Exception)
+                    else
                     {
-                        ModelState.AddModelError("", "Some thing went wrong while save course!");
+                        db.SaveChanges();
                     }
+                    return RedirectToAction("Index");
                 }
-                else
+                catch (Exception)
                 {
-                    ModelState.AddModelError("Name", "Course name can't be the same!");
+                    ModelState.AddModelError("", "Some thing went wrong while save course!");
                 }
             }
             ViewBag.CategoryList = db.Category.Where(x => x.ParentId != 0).ToList();

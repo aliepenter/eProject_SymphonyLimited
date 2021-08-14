@@ -19,13 +19,26 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult Get(int page = 1, string key = null)
+        public ActionResult Get(int page = 1, string type = null, string key = null)
         {
             int pageSize = 5;
             var faqs = db.Faq.AsEnumerable();
             if (!String.IsNullOrEmpty(key))
             {
-                faqs = db.Faq.Where(x => x.Question.Contains(key)).AsEnumerable();
+                switch (type)
+                {
+                    case "EntityId":
+                        faqs = db.Faq.Where(x => x.EntityId.ToString().Contains(key)).AsEnumerable();
+                        break;
+                    case "Question":
+                        faqs = db.Faq.Where(x => x.Question.Contains(key)).AsEnumerable();
+                        break;
+                    case "Answer":
+                        faqs = db.Faq.Where(x => x.Answer.Contains(key)).AsEnumerable();
+                        break;
+                    default:
+                        break;
+                }
             }
             decimal totalPages = Math.Ceiling((decimal)faqs.Count() / pageSize);
             string jsonData = JsonConvert.SerializeObject(faqs.Skip((page - 1) * pageSize).Take(pageSize));

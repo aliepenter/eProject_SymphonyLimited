@@ -20,7 +20,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult Get(int page = 1, string key = null)
+        public ActionResult Get(int page = 1, string type = null, string key = null)
         {
             int pageSize = 5;
             var admissions = db.Admission.Join(db.Course,
@@ -40,7 +40,27 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                 }).AsEnumerable();
             if (!String.IsNullOrEmpty(key))
             {
-                admissions = db.Admission.Join(db.Course,
+                switch (type)
+                {
+                    case "EntityId":
+                        admissions = db.Admission.Join(db.Course,
+                a => a.CourseId,
+                c => c.EntityId,
+                (a, c) => new
+                AdmissionViewModel
+                {
+                    EntityId = a.EntityId,
+                    Name = a.Name,
+                    Price = a.Price,
+                    StartTime = a.StartTime,
+                    EndTime = a.EndTime,
+                    QuantityStudent = a.QuantityStudent,
+                    MarkPass = a.MarkPass,
+                    Course = c.Name
+                }).Where(x => x.EntityId.ToString().Contains(key)).AsEnumerable();
+                        break;
+                    case "Name":
+                        admissions = db.Admission.Join(db.Course,
                 a => a.CourseId,
                 c => c.EntityId,
                 (a, c) => new
@@ -55,6 +75,112 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                     MarkPass = a.MarkPass,
                     Course = c.Name
                 }).Where(x => x.Name.Contains(key)).AsEnumerable();
+                        break;
+                    case "StartTime":
+                        admissions = db.Admission.Join(db.Course,
+                a => a.CourseId,
+                c => c.EntityId,
+                (a, c) => new
+                AdmissionViewModel
+                {
+                    EntityId = a.EntityId,
+                    Name = a.Name,
+                    Price = a.Price,
+                    StartTime = a.StartTime,
+                    EndTime = a.EndTime,
+                    QuantityStudent = a.QuantityStudent,
+                    MarkPass = a.MarkPass,
+                    Course = c.Name
+                }).Where(x => x.StartTime.ToString().Contains(key)).AsEnumerable();
+                        break;
+                    case "EndTime":
+                        admissions = db.Admission.Join(db.Course,
+                a => a.CourseId,
+                c => c.EntityId,
+                (a, c) => new
+                AdmissionViewModel
+                {
+                    EntityId = a.EntityId,
+                    Name = a.Name,
+                    Price = a.Price,
+                    StartTime = a.StartTime,
+                    EndTime = a.EndTime,
+                    QuantityStudent = a.QuantityStudent,
+                    MarkPass = a.MarkPass,
+                    Course = c.Name
+                }).Where(x => x.EndTime.ToString().Contains(key)).AsEnumerable();
+                        break;
+                    case "Price":
+                        admissions = db.Admission.Join(db.Course,
+                a => a.CourseId,
+                c => c.EntityId,
+                (a, c) => new
+                AdmissionViewModel
+                {
+                    EntityId = a.EntityId,
+                    Name = a.Name,
+                    Price = a.Price,
+                    StartTime = a.StartTime,
+                    EndTime = a.EndTime,
+                    QuantityStudent = a.QuantityStudent,
+                    MarkPass = a.MarkPass,
+                    Course = c.Name
+                }).Where(x => x.Price.ToString().Contains(key)).AsEnumerable();
+                        break;
+                    case "QuantityStudent":
+                        admissions = db.Admission.Join(db.Course,
+                a => a.CourseId,
+                c => c.EntityId,
+                (a, c) => new
+                AdmissionViewModel
+                {
+                    EntityId = a.EntityId,
+                    Name = a.Name,
+                    Price = a.Price,
+                    StartTime = a.StartTime,
+                    EndTime = a.EndTime,
+                    QuantityStudent = a.QuantityStudent,
+                    MarkPass = a.MarkPass,
+                    Course = c.Name
+                }).Where(x => x.QuantityStudent.ToString().Contains(key)).AsEnumerable();
+                        break;
+                    case "MarkPass":
+                        admissions = db.Admission.Join(db.Course,
+                a => a.CourseId,
+                c => c.EntityId,
+                (a, c) => new
+                AdmissionViewModel
+                {
+                    EntityId = a.EntityId,
+                    Name = a.Name,
+                    Price = a.Price,
+                    StartTime = a.StartTime,
+                    EndTime = a.EndTime,
+                    QuantityStudent = a.QuantityStudent,
+                    MarkPass = a.MarkPass,
+                    Course = c.Name
+                }).Where(x => x.MarkPass.ToString().Contains(key)).AsEnumerable();
+                        break;
+                    case "Course":
+                        admissions = db.Admission.Join(db.Course,
+                a => a.CourseId,
+                c => c.EntityId,
+                (a, c) => new
+                AdmissionViewModel
+                {
+                    EntityId = a.EntityId,
+                    Name = a.Name,
+                    Price = a.Price,
+                    StartTime = a.StartTime,
+                    EndTime = a.EndTime,
+                    QuantityStudent = a.QuantityStudent,
+                    MarkPass = a.MarkPass,
+                    Course = c.Name
+                }).Where(x => x.Course.Contains(key)).AsEnumerable();
+                        break;
+                    default:
+                        break;
+                }
             }
             decimal totalPages = Math.Ceiling((decimal)admissions.Count() / pageSize);
             string jsonData = JsonConvert.SerializeObject(admissions.Skip((page - 1) * pageSize).Take(pageSize));
@@ -82,37 +208,44 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create(Admission a)
         {
+            var validateName = db.Admission.FirstOrDefault(x => x.Name == a.Name);
+            var validateStartTime = db.Admission.FirstOrDefault(x => x.StartTime <= a.StartTime && x.EndTime >= a.StartTime && x.CourseId == a.CourseId);
+            var validateEndTime = db.Admission.FirstOrDefault(x => x.StartTime <= a.EndTime && x.EndTime >= a.EndTime && x.CourseId == a.CourseId);
+            if (a.StartTime <= DateTime.Now)
+            {
+                ModelState.AddModelError("StartTime", "Start time must bigger than current time!");
+            }
+            if (a.EndTime <= DateTime.Now)
+            {
+                ModelState.AddModelError("EndTime", "End time must bigger than current time!");
+            }
+            if (a.StartTime >= a.EndTime)
+            {
+                ModelState.AddModelError("EndTime", "End time must bigger than start time!");
+            }
+            if (validateName != null)
+            {
+                ModelState.AddModelError("Name", "Admission name can't be the same!");
+            }
+            if (validateStartTime != null)
+            {
+                ModelState.AddModelError("StartTime", "Start time is already in another admission!");
+            }
+            if (validateEndTime != null)
+            {
+                ModelState.AddModelError("EndTime", "End time is already in another admission!");
+            }
             if (ModelState.IsValid)
             {
-                var validateName = db.Admission.FirstOrDefault(x => x.Name == a.Name);
-                if (validateName == null)
+                try
                 {
-                    if (a.StartTime < DateTime.Now)
-                    {
-                        ModelState.AddModelError("StartTime", "Start time must bigger than current time!");
-                    }
-                    else if (a.EndTime < DateTime.Now)
-                    {
-                        ModelState.AddModelError("EndTime", "End time must bigger than current time!");
-                    }
-                    else if (a.StartTime > a.EndTime)
-                    {
-                        ModelState.AddModelError("EndTime", "End time must bigger than start time!");
-                    }
-                    try
-                    {
-                        db.Admission.Add(a);
-                        db.SaveChanges();
-                        return RedirectToAction("Index");
-                    }
-                    catch (Exception)
-                    {
-
-                    }
+                    db.Admission.Add(a);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
                 }
-                else
+                catch (Exception)
                 {
-                    ModelState.AddModelError("Name", "Admission is already exist!");
+                    ModelState.AddModelError("", "Some thing went wrong while save admission!");
                 }
 
             }
@@ -134,17 +267,51 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Edit(Admission a)
         {
+            var currentAdmission = db.Admission.Find(a.EntityId);
+            var validateName = db.Course.FirstOrDefault(x => x.Name != currentAdmission.Name && x.Name == a.Name);
+            var validateStartTime = db.Admission.FirstOrDefault(x => x.StartTime <= a.StartTime && x.EndTime >= a.StartTime && x.CourseId == a.CourseId);
+            var validateEndTime = db.Admission.FirstOrDefault(x => x.StartTime <= a.EndTime && x.EndTime >= a.EndTime && x.CourseId == a.CourseId);
+            if (a.StartTime <= DateTime.Now)
+            {
+                ModelState.AddModelError("StartTime", "Start time must bigger than current time!");
+            }
+            if (a.EndTime <= DateTime.Now)
+            {
+                ModelState.AddModelError("EndTime", "End time must bigger than current time!");
+            }
+            if (a.StartTime >= a.EndTime)
+            {
+                ModelState.AddModelError("EndTime", "End time must bigger than start time!");
+            }
+            if (validateName != null)
+            {
+                ModelState.AddModelError("Name", "Admission name can't be the same!");
+            }
+            if (validateStartTime != null)
+            {
+                ModelState.AddModelError("StartTime", "Start time is already in another admission!");
+            }
+            if (validateEndTime != null)
+            {
+                ModelState.AddModelError("EndTime", "End time is already in another admission!");
+            }
             if (ModelState.IsValid)
             {
                 try
                 {
-                    db.Entry(a).State = EntityState.Modified;
+                    currentAdmission.Name = a.Name;
+                    currentAdmission.StartTime = a.StartTime;
+                    currentAdmission.EndTime = a.EndTime;
+                    currentAdmission.QuantityStudent = a.QuantityStudent;
+                    currentAdmission.Price = a.Price;
+                    currentAdmission.MarkPass = a.MarkPass;
+                    currentAdmission.CourseId = a.CourseId;
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
                 catch (Exception)
                 {
-
+                    ModelState.AddModelError("", "Some thing went wrong while save admission!");
                 }
             }
             ViewBag.CourseList = db.Course.ToList();
@@ -163,7 +330,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                 }
                 catch (Exception)
                 {
-
+                    ModelState.AddModelError("", "Some thing went wrong while save admission!");
                 }
             }
             return View();
