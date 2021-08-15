@@ -98,15 +98,6 @@ $('.slider-nav').slick({
     autoplay: true,
     autoplaySpeed: 3000
 });
-var owl = $('.owl-carousel');
-owl.owlCarousel({
-    items: 5,
-    loop: true,
-    margin: 10,
-    autoplay: true,
-    autoplayTimeout: 3000,
-    autoplayHoverPause: true
-});
 $('.play').on('click', function () {
     owl.trigger('play.owl.autoplay', [1000])
 })
@@ -118,4 +109,13 @@ $('#barE').click(function () {
 });
 $("#exitEE").click(function () {
     $("#menuEE").addClass("disNone");
+});
+var owl = $('.owl-carousel');
+owl.owlCarousel({
+    items: 5,
+    loop: true,
+    margin: 10,
+    autoplay: true,
+    autoplayTimeout: 3000,
+    autoplayHoverPause: true
 });

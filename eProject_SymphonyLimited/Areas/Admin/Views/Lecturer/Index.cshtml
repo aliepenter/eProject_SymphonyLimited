@@ -39,7 +39,7 @@
                 @item.Subject
             </td>
             <td>
-                @item.Image
+                <img src="~/Areas/Admin/Content/img/Teacher/@item.Image" alt="Alternate Text" width="100px" height="100px"/>
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.EntityId }) |

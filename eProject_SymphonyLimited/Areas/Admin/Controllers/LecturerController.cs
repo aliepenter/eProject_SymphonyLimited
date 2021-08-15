@@ -35,7 +35,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                     string lecturerImgName = Path.GetFileName(lecturerimg.FileName);
                     string lecturerImgText = Path.GetExtension(lecturerImgName);
                     string lecturerImgPath = Path.Combine(Server.MapPath("~/Areas/Admin/Content/img/Teacher/"), lecturerImgName);
-                    t.Image = "~/Areas/Admin/Content/img/Teacher/" + lecturerImgName;
+                    t.Image = lecturerImgName;
                     if (lecturerimg.ContentLength > 0)
                     {
                         db.Teacher.Add(t);
@@ -78,7 +78,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                         string lecturerImgName = Path.GetFileName(lecturerimg.FileName);
                         string lecturerImgText = Path.GetExtension(lecturerImgName);
                         string lecturerImgPath = Path.Combine(Server.MapPath("~/Areas/Admin/Content/img/Teacher/"), lecturerImgName);
-                        t.Image = "~/Areas/Admin/Content/img/Teacher/" + lecturerImgName;
+                        t.Image = lecturerImgName;
                         if (lecturerimg.ContentLength > 0)
                         {
                             db.Entry(t).State = EntityState.Modified;

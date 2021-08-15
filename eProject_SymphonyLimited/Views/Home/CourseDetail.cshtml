@@ -44,28 +44,21 @@
         <div class="mainLecturesInfor">
             <div class="title">
                 <span>
-                    excellent lecturers
+                    excellent Teachers
                 </span>
             </div>
             <section id="features" class="blue">
                 <div class="content">
                     <div class="slider slider-nav">
-                        <div class="cusLecturer">
-                            <img src="https://bachkhoa-aptech.edu.vn/public/assets/uploads/images/gv_nguyen_duy_quang.jpg" width="100px" height="100px" />
-                            <span>abc</span>
-                        </div>
-                        <div class="cusLecturer">
-                            <img src="https://bachkhoa-aptech.edu.vn/public/assets/uploads/images/gv_nguyen_van_luan.jpg" width="100px" height="100px" />
-                            <span>abc</span>
-                        </div>
-                        <div class="cusLecturer">
-                            <img src="https://bachkhoa-aptech.edu.vn/public/assets/uploads/images/gv_vu_tuan_minh.jpg" width="100px" height="100px" />
-                            <span>abc</span>
-                        </div>
-                        <div class="cusLecturer">
-                            <img src="https://bachkhoa-aptech.edu.vn/public/assets/uploads/images/gv_nguyen_anh_luong.jpg" width="100px" height="100px" />
-                            <span>abc</span>
-                        </div>
+                        @{
+                            foreach (var item in ViewBag.teacher)
+                            {
+                                <div class="cusLecturer">
+                                    <img src="/Areas/Admin/Content/img/Teacher/@item.Image" width="100px" height="100px" />
+                                    <span><br />Mr. @item.Name</span>
+                                </div>
+                            }
+                        }
                     </div>
                 </div>
             </section>
@@ -75,66 +68,34 @@
                         <div class="text">
                             <span>Lecturer</span>
                             <div class="slider slider-for">
-                                <div>
-                                    <div class="name cusInfor">
-                                        <span>Đoàn Văn Năng1</span>
-                                    </div>
-                                    <div class="specialize cusInfor">
-                                        <span>Giảng viên java</span>
-                                    </div>
-                                    <div class="subject cusInfor">
-                                        <span>Các môn giảng dạy: <span>Java, .NET, PHP, Angular</span></span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="name cusInfor">
-                                        <span>Đoàn Văn Năng1</span>
-                                    </div>
-                                    <div class="specialize cusInfor">
-                                        <span>Giảng viên java</span>
-                                    </div>
-                                    <div class="subject cusInfor">
-                                        <span>Các môn giảng dạy: <span>Java, .NET, PHP, Angular</span></span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="name cusInfor">
-                                        <span>Đoàn Văn Năng1</span>
-                                    </div>
-                                    <div class="specialize cusInfor">
-                                        <span>Giảng viên java</span>
-                                    </div>
-                                    <div class="subject cusInfor">
-                                        <span>Các môn giảng dạy: <span>Java, .NET, PHP, Angular</span></span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="name cusInfor">
-                                        <span>Đoàn Văn Năng1</span>
-                                    </div>
-                                    <div class="specialize cusInfor">
-                                        <span>Giảng viên java</span>
-                                    </div>
-                                    <div class="subject cusInfor">
-                                        <span>Các môn giảng dạy: <span>Java, .NET, PHP, Angular</span></span>
-                                    </div>
-                                </div>
+                                @{
+                                    foreach (var item in ViewBag.teacher)
+                                    {
+                                        <div>
+                                            <div class="name cusInfor">
+                                                <span>@item.Name</span>
+                                            </div>
+                                            <div class="specialize cusInfor">
+                                                <span>@item.Specialize</span>
+                                            </div>
+                                            <div class="subject cusInfor">
+                                                <span>Các môn giảng dạy: <span>@item.Subject</span></span>
+                                            </div>
+                                        </div>
+                                    }
+                                }
                             </div>
                         </div>
                         <div class="img">
                             <div class="slider slider-for">
-                                <div>
-                                    <img src="https://bachkhoa-aptech.edu.vn/public/assets/uploads/images/gv_nguyen_duy_quang.jpg" />
-                                </div>
-                                <div>
-                                    <img src="https://bachkhoa-aptech.edu.vn/public/assets/uploads/images/gv_nguyen_van_luan.jpg" />
-                                </div>
-                                <div>
-                                    <img src="https://bachkhoa-aptech.edu.vn/public/assets/uploads/images/gv_vu_tuan_minh.jpg" />
-                                </div>
-                                <div>
-                                    <img src="https://bachkhoa-aptech.edu.vn/public/assets/uploads/images/gv_nguyen_anh_luong.jpg" />
-                                </div>
+                                @{
+                                    foreach (var item in ViewBag.teacher)
+                                    {
+                                        <div>
+                                            <img src="/Areas/Admin/Content/img/Teacher/@item.Image" />
+                                        </div>
+                                    }
+                                }
                             </div>
                         </div>
                     </div>

@@ -18,12 +18,13 @@
     <link href="~/Content/css/owl.carousel.min.css?v=@Guid.NewGuid().ToString()" rel="stylesheet" />
     <link href="~/Content/css/owl.theme.default.min.css?v=@Guid.NewGuid().ToString()" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet">
 </head>
 
 <body>
     <div class="mobile-menu" id="menu-ac">
         <div class="logo">
-            <img src="~/Content/images/Logo/coollogo_com-18441964-removebg-preview.png" alt="" width="100px">
+            <a href="@Url.Action("Index","Home")"><img src="~/Content/images/Logo/coollogo_com-18441964-removebg-preview.png" alt="" width="100px"></a>
         </div>
         <div class="menu">
             <ul>
@@ -48,20 +49,21 @@
             </ul>
         </div>
     </div>
-    <div class="" id="opAll" onclick="back()">
+    <div class="" id="opAll">
 
     </div>
     <div class="header">
         <div class="menuDefault" id="headerDefault">
             <div class="containerHeader flex">
-                <div class="left width20">
+                <div class="left width20" style="text-align: center">
                     <div class="logo">
-                        <img src="~/Content/images/Logo/coollogo_com-18441964-removebg-preview.png" alt="">
+                        <a href="@Url.Action("Index","Home")"><img src="~/Content/images/Logo/coollogo_com-18441964-removebg-preview.png" alt=""></a>
                     </div>
                 </div>
                 <div class="right width80">
                     <div class="menu">
-                        <ul class="flex">
+                        <ul class="flex" style="    align-items: center;
+    justify-content: center;">
                             <li>
                                 <a class="menuA" href="@Url.Action("Index","Home")">Home page</a>
                             </li>
@@ -117,11 +119,11 @@
                     <div class="mobile-header" id="headerMobile">
                         <div class="containerHeader flex">
                             <div class="left width20">
-                                <i class="fas fa-bars" id="menuBar" onclick="check()"></i>
+                                <i class="fas fa-bars" id="menuBar"></i>
                             </div>
                             <div class="right width80">
                                 <div class="logo">
-                                    <img src="~/Content/images/Logo/coollogo_com-18441964-removebg-preview.png" alt="" width="150px">
+                                    <a href="@Url.Action("Index","Home")"><img src="~/Content/images/Logo/coollogo_com-18441964-removebg-preview.png" alt="" width="150px"></a>
                                 </div>
 
                             </div>
@@ -190,7 +192,7 @@
                                 <span>Symphony Ltd. International IT Training Institute</span>
                             </div>
                             <div class="contactInfor">
-                                <span><i class="fa fa-phone" aria-hidden="true"></i> HOTLINE: +84818260399 <a href=""><i class="fab fa-facebook-f"></i> </a><a href=""><i class="fas fa-envelope"></i></a></span>
+                                <span><i class="fa fa-phone" aria-hidden="true"></i> HOTLINE: <span style="font-weight: bold">+84818 260 399</span> <a href=""><i class="fab fa-facebook-f"></i> </a><a href=""><i class="fas fa-envelope"></i></a></span>
                             </div>
                         </div>
                         <div class="mainFooter">
@@ -246,22 +248,6 @@
                                             <li>
                                                 <a href="@Url.Action("Contact","Home")">Contact Us</a>
                                             </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="course cusFooter">
-                                    <div class="title">
-                                        <span>Courses</span>
-                                    </div>
-                                    <div class="item">
-                                        <ul class="" id="">
-                                            @{ foreach (var item in ViewBag.categoryLevel2)
-                                                {
-                                                    <li id="@item.EntityId" style="" class="getId">
-                                                        <a class="menuA" href="">@item.Name</a>
-                                                    </li>
-                                                }
-                                            }
                                         </ul>
                                     </div>
                                 </div>

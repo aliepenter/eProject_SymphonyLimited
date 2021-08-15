@@ -19,6 +19,8 @@ namespace eProject_SymphonyLimited.Controllers
             ViewBag.categoryLevel3 = subcate;
             var admission = db.Admission.AsEnumerable();
             ViewBag.admission = admission;
+            var teacher = db.Teacher.AsEnumerable();
+            ViewBag.teacher = teacher;
         }
         public ActionResult Index()
         {
@@ -27,10 +29,13 @@ namespace eProject_SymphonyLimited.Controllers
         public ActionResult About()
         {
             return View();
+            return View();
         }
 
         public ActionResult Contact()
         {
+            var branch = db.Branch.AsEnumerable();
+            ViewBag.branch = branch;
             return View();
         }
         public ActionResult EntranceExam()
