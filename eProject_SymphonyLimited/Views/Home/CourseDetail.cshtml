@@ -1,4 +1,4 @@
-﻿
+﻿@model eProject_SymphonyLimited.Models.Course
 @{
     ViewBag.Title = "Courses Detail";
 }
@@ -12,26 +12,26 @@
     <div class="containerCourseDetail flex">
         <div class="left">
             <div class="img">
-                <img src="/Content/images/Course/android.png" alt="Alternate Text" width="100%" />
-            </div>
-            <div class="price">
-                <span><span>Course fees: </span>100000</span>$
+                <img src="~/Areas/Admin/Content/img/@Model.Image" alt="Alternate Text" width="100%" />
             </div>
         </div>
         <div class="right">
             <div class="infor">
                 <div class="containerItem">
                     <div class="name cusItem">
-                        <span><span class="cdSpan">Course's Name: </span>Tên</span>
+                        <span><span class="cdSpan">Course's Name: </span>@Model.Name</span>
+                    </div>
+                    <div class="name cusItem">
+                        <span><span class="cdSpan">Course's fees: </span>@Model.Price</span>
                     </div>
                     <div class="time">
-                        <span><span class="cdSpan">Time: </span>Thời gian khoá học</span>
+                        <span><span class="cdSpan">Time: </span>@Model.Time</span>
                     </div>
                     <div class="subject cusItem">
-                        <span><span class="cdSpan">Subject: </span>Môn học</span>
+                        <span><span class="cdSpan">Subject: </span>@Model.Subject</span>
                     </div>
                     <div class="certi cusItem">
-                        <span><span class="cdSpan">Certificate: </span>chứng nhận</span>
+                        <span><span class="cdSpan">Certificate: </span>@Model.Certificate</span>
                     </div>
                     <div class="at cusItem">
                         <span><span class="cdSpan">Admission time: </span>thời gian tuyển sinh</span>

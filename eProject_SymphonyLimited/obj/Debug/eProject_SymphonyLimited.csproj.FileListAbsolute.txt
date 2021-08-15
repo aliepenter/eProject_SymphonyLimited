@@ -571,6 +571,7 @@ D:\ProjectASP\eProject_SymphonyLimited\eProject_SymphonyLimited\obj\Debug\eProje
 D:\ProjectASP\eProject_SymphonyLimited\eProject_SymphonyLimited\obj\Debug\eProject_SymphonyLimited.csproj.CopyComplete
 D:\ProjectASP\eProject_SymphonyLimited\eProject_SymphonyLimited\obj\Debug\eProject_SymphonyLimited.dll
 D:\ProjectASP\eProject_SymphonyLimited\eProject_SymphonyLimited\obj\Debug\eProject_SymphonyLimited.pdb
+D:\ProjectASP\eProject_SymphonyLimited\eProject_SymphonyLimited\obj\Debug\eProject_SymphonyLimited.csproj.AssemblyReference.cache
 E:\ccc\eProject_SymphonyLimited\eProject_SymphonyLimited\bin\eProject_SymphonyLimited.dll.config
 E:\ccc\eProject_SymphonyLimited\eProject_SymphonyLimited\bin\eProject_SymphonyLimited.dll
 E:\ccc\eProject_SymphonyLimited\eProject_SymphonyLimited\bin\eProject_SymphonyLimited.pdb
@@ -653,4 +654,3 @@ E:\ccc\eProject_SymphonyLimited\eProject_SymphonyLimited\obj\Debug\eProject_Symp
 E:\ccc\eProject_SymphonyLimited\eProject_SymphonyLimited\obj\Debug\eProject_SymphonyLimited.csproj.CopyComplete
 E:\ccc\eProject_SymphonyLimited\eProject_SymphonyLimited\obj\Debug\eProject_SymphonyLimited.dll
 E:\ccc\eProject_SymphonyLimited\eProject_SymphonyLimited\obj\Debug\eProject_SymphonyLimited.pdb
-D:\ProjectASP\eProject_SymphonyLimited\eProject_SymphonyLimited\obj\Debug\eProject_SymphonyLimited.csproj.AssemblyReference.cache
