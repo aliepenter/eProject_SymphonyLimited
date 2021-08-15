@@ -23,10 +23,13 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         {
             int pageSize = 5;
             var faqs = db.Faq.AsEnumerable();
-            if (!String.IsNullOrEmpty(type) && !String.IsNullOrEmpty(key))
+            if (!String.IsNullOrEmpty(key))
             {
                 switch (type)
                 {
+                    case "EntityId":
+                        faqs = db.Faq.Where(x => x.EntityId.ToString().Contains(key)).AsEnumerable();
+                        break;
                     case "Question":
                         faqs = db.Faq.Where(x => x.Question.Contains(key)).AsEnumerable();
                         break;
@@ -58,31 +61,15 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var validateQuestion = db.Faq.FirstOrDefault(x => x.Question == f.Question);
-                var validateAnswer = db.Faq.FirstOrDefault(x => x.Answer == f.Answer);
-                if (validateQuestion == null)
+                try
                 {
-                    if (validateAnswer == null)
-                    {
-                        try
-                        {
-                            db.Faq.Add(f);
-                            db.SaveChanges();
-                            return RedirectToAction("Index");
-                        }
-                        catch (Exception)
-                        {
-                            ModelState.AddModelError("", "Some thing went wrong while save faq!");
-                        }
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("Answer", "Faq Answer is already exist!");
-                    }
+                    db.Faq.Add(f);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
                 }
-                else
+                catch (Exception)
                 {
-                    ModelState.AddModelError("Question", "Faq Question is already exist!");
+
                 }
             }
             return View();
@@ -103,33 +90,15 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var currentFaq = db.Faq.Find(f.EntityId);
-                var validateQuestion = db.Faq.FirstOrDefault(x => x.Question != currentFaq.Question && x.Question == f.Question);
-                var validateAnswer = db.Faq.FirstOrDefault(x => x.Answer != currentFaq.Answer && x.Answer == f.Answer);
-                if (validateQuestion == null)
+                try
                 {
-                    if (validateAnswer == null)
-                    {
-                        try
-                        {
-                            currentFaq.Question = f.Question;
-                            currentFaq.Answer = f.Answer;
-                            db.SaveChanges();
-                            return RedirectToAction("Index");
-                        }
-                        catch (Exception)
-                        {
-                            ModelState.AddModelError("", "Some thing went wrong while save faq!");
-                        }
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("Answer", "Faq Answer is already exist!");
-                    }
+                    db.Entry(f).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
                 }
-                else
+                catch (Exception)
                 {
-                    ModelState.AddModelError("Question", "Faq Question is already exist!");
+
                 }
             }
             return View();

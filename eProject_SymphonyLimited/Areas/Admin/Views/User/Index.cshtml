@@ -1,6 +1,4 @@
-﻿@model IEnumerable<eProject_SymphonyLimited.Models.Authorize.User>
-
-@{
+﻿@{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
@@ -15,11 +13,11 @@
     </div>
     <div class="input-group">
         <label class="font-weight-bold m-0 mr-1 d-flex align-items-center">Search By : </label>
-        <select id="type">
+        <select id="type" class="form-control">
             <option value="Account" selected>Account</option>
             <option value="FullName">Full Name</option>
             <option value="Email">Email</option>
-            <option value="GroupName">Group Name</option>
+            <option value="GroupName">Role</option>
         </select>
     </div>
 </div>
@@ -29,24 +27,6 @@
 </div>
 
 <ul class="pagination"></ul>
-
-<div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Do you want to delete ?</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            </div>
-            <div class="modal-body">
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary btn-modal-delete">Delete</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 @section scripts{
     <script>
@@ -59,7 +39,7 @@
                     url: baseUrl + "Admin/User/Get",
                     data: { page: page, type: type, key: key },
                     success: function (res) {
-                        var _html = ' <thead class="thead-dark"><tr><th>Entity</th><th>Account</th><th>FullName</th><th>Email</th><th>Phone</th><th>Image</th><th>Address</th><th>Role</th><th>Action</th></tr></thead>';
+                        var _html = ' <thead class="thead-dark"><tr><th>Entity Id</th><th>Account</th><th>FullName</th><th>Email</th><th>Phone</th><th>Image</th><th>Address</th><th>Role</th><th>Action</th></tr></thead>';
                         for (var item of JSON.parse(res.Data)) {
                             _html += '<tbody><tr>' +
                                 '<td>' + item.EntityId + '</td>' +
@@ -89,50 +69,13 @@
                     }
                 })
             },
-            get: function (id) {
-                $.ajax({
-                    type: "GET",
-                    url: "/Admin/User/FindId",
-                    data: { id: id },
-                    success: function (res) {
-                        let label =
-                            `
-                                <input type="hidden" name="Id" id="Id" value="${res.EntityId}" />
-                                <b>Account : </b>${res.Account}
-                                <br/>
-                                <b>Name : </b>${res.Name}
-                                <br/>
-                                <b>Email : </b>${res.Email}
-                                <br/>
-                                <b>Image : </b>${res.Image}
-                            `;
-                        $(".modal-body").html(label);
-                        $("#myModal").modal("show");
-                    }
-                })
-            },
-            delete: function (id) {
-                $.ajax({
-                    type: "POST",
-                    url: "/Admin/User/DeleteData",
-                    data: { id: id },
-                    success: function (res) {
-                        if (res.statusCode == 200) {
-                            $("#myModal").modal("hide");
-                            location.reload();
-                        } else {
-                            $("#myModal").modal("hide");
-                        }
-                    }
-                })
-            },
         }
 
         $(function () {
             manager.load();
             $(document).on("click", ".btn-edit", function () {
-                var branchId = $(this).data("id");
-                window.location.href = baseUrl + "Admin/User/Edit/" + branchId;
+                var userId = $(this).data("id");
+                window.location.href = baseUrl + "Admin/User/Edit/" + userId;
             });
             $(document).on("click", ".item_page", function () {
                 var page = $(this).text(),
@@ -156,13 +99,13 @@
                 manager.load(1, type, key);
             });
             $(document).on("click", ".btn-delete", function () {
-                let userId = $(this).data("id");
-                manager.get(userId);
-            })
-            $(document).on("click", ".btn-modal-delete", function () {
-                let userId = $("#Id").val();
-                manager.delete(userId);
-            })
+                var id = $(this).data("id");
+                if (confirm('Are you sure want delete user with id = ' + id + '?')) {
+                    window.location.href = baseUrl + "Admin/User/Delete/" + id;
+                } else {
+                    return false;
+                }
+            });
         })
     </script>
 }

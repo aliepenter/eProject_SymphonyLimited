@@ -1,10 +1,12 @@
-﻿@{
+﻿@model IEnumerable<eProject_SymphonyLimited.Models.RegisterInfo>
+
+@{
     ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Teachers</h2>
+<h2>Register Infos</h2>
 
-@Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary float-left mb-3" })
 <div class="form-inline mb-3 float-right">
     <div class="input-group">
         <label class="font-weight-bold m-0 mr-1 d-flex align-items-center">Search : </label>
@@ -35,19 +37,18 @@
                 load: function (page = 1, type = null, key = null) {
                     $.ajax({
                         type: "GET",
-                        url: baseUrl + "Admin/Teacher/Get",
+                        url: baseUrl + "Admin/RegisterInfo/Get",
                         data: { page: page, type: type, key: key },
                         success: function (res) {
-                            var _html = ' <thead class="thead-dark"><tr><th>Entity Id</th>><th>Name</th><th>Image</th><th>Specialize</th><th>Subject</th><th>Action</th></tr></thead>';
+                            var _html = ' <thead class="thead-dark"><tr><th>Entity Id</th>><th>Name</th><th>Phone</th><th>Email</th><th>Comment</th><th>Action</th></tr></thead>';
                             for (var item of JSON.parse(res.Data)) {
                                 _html += '<tbody><tr>' +
                                     '<td>' + item.EntityId + '</td>' +
                                     '<td>' + item.Name + '</td>' +
-                                    '<td>' + '<img style="width: 100px" src="' + baseUrl + "Areas/Admin/Content/img/" + item.Image + '">' + '</td>' +
-                                    '<td>' + item.Specialize + '</td>' +
-                                    '<td>' + item.Subject + '</td>' +
+                                    '<td>' + item.Phone + '</td>' +
+                                    '<td>' + item.Email + '</td>' +
+                                    '<td>' + item.Comment + '</td>' +
                                     '<td>' +
-                                    '<button class="btn btn-warning btn-edit mr-1 mb-1" data-id="' + item.EntityId + '">Edit</button>' +
                                     '<button class="btn btn-danger btn-delete mb-1" data-id="' + item.EntityId + '">Delete</button>' +
                                     '</td>'
                                     + '</tr></tbody>';
@@ -67,10 +68,6 @@
                 },
             }
             manager.load();
-            $(document).on("click", ".btn-edit", function () {
-                var id = $(this).data("id");
-                window.location.href = baseUrl + "Admin/Teacher/Edit/" + id;
-            });
             $(document).on("click", ".item_page", function () {
                 var page = $(this).text(),
                     key = $('#key').val(),
@@ -98,4 +95,3 @@
         });
     </script>
 }
-

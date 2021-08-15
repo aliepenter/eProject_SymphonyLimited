@@ -18,11 +18,6 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
             return View(db.CoreConfigData.AsEnumerable());
         }
 
-        public ActionResult FindId(int id)
-        {
-            return Json(db.CoreConfigData.Find(id), JsonRequestBehavior.AllowGet);
-        }
-
         [HttpGet]
         public ActionResult Get(int page = 1, string type = null, string key = null)
         {
@@ -50,41 +45,6 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                 CurrentPage = page,
                 StatusCode = 200,
                 Data = jsonData
-            }, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpPost]
-        public ActionResult DeleteData(int id)
-        {
-            if (ModelState.IsValid)
-            {
-                var findCoreConfigData = db.CoreConfigData.Find(id);
-                if (findCoreConfigData != null)
-                {
-                    db.CoreConfigData.Remove(findCoreConfigData);
-                    db.SaveChanges();
-                    return Json(new
-                    {
-                        statusCode = 200,
-                        message = "Xóa thành công!",
-                        data = id,
-                    }, JsonRequestBehavior.AllowGet);
-                }
-                else
-                {
-                    return Json(new
-                    {
-                        statusCode = 403,
-                        message = "Xóa thất bại!",
-                        data = id,
-                    }, JsonRequestBehavior.AllowGet);
-                }
-            }
-            return Json(new
-            {
-                statusCode = 403,
-                message = "Xóa thất bại!",
-                data = id,
             }, JsonRequestBehavior.AllowGet);
         }
 
@@ -155,6 +115,24 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                 else
                 {
                     ModelState.AddModelError("Name", "CoreConfigData Name is already exist!");
+                }
+            }
+            return View();
+        }
+
+        public ActionResult Delete(int id)
+        {
+            if (db.CoreConfigData.Find(id) != null)
+            {
+                try
+                {
+                    db.CoreConfigData.Remove(db.CoreConfigData.Find(id));
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (Exception)
+                {
+                    ModelState.AddModelError("", "Some thing went wrong while delete core config data!");
                 }
             }
             return View();

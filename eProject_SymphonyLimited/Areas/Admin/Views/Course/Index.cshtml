@@ -2,17 +2,35 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Courses</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-    <div class="form-inline">
-        <label class="control-label">Search: </label>
-        <input type="search" name="key" id="key" value="" placeholder="Enter name to search...." />
+@Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary float-left mb-3" })
+<div class="form-inline mb-3 float-right">
+    <div class="input-group">
+        <label class="font-weight-bold m-0 mr-1 d-flex align-items-center">Search : </label>
+        <input type="text" name="key" id="key" value="" class="form-control mr-1 bg-light border-0 small" placeholder="Enter to search..." aria-label="Search" aria-describedby="basic-addon2">
     </div>
-</p>
-<table class="table"></table>
+    <div class="input-group">
+        <label class="font-weight-bold m-0 mr-1 d-flex align-items-center">Search By : </label>
+        <select id="type" class="form-control">
+            <option value="EntityId" selected>Entity Id</option>
+            <option value="Name">Name</option>
+            <option value="Time">Time</option>
+            <option value="Description">Description</option>
+            <option value="Price">Price</option>
+            <option value="Subject">Subject</option>
+            <option value="Certificate">Certificate</option>
+            <option value="Category">Category</option>
+        </select>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-bordered"></table>
+</div>
+
 <ul class="pagination"></ul>
+       
 @section scripts{
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script>
@@ -20,29 +38,29 @@
             var getUrl = window.location;
             var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
             var manager = {
-                load: function (page = 1, key = null) {
+                load: function (page = 1, type = null, key = null) {
                     $.ajax({
                         type: "GET",
                         url: baseUrl + "Admin/Course/Get",
-                        data: { page: page, key: key },
+                        data: { page: page, type: type, key: key },
                         success: function (res) {
-                            var _html = '<tr><th>Id</th><th>Name</th><th>Time</th><th>Description</th><th>Price</th><th>Subject</th><th>Certificate</th><th>Category</th><th>Image</th><th>Action</th></tr>';
+                            var _html = ' <thead class="thead-dark"><tr><th>Entity Id</th><th>Name</th><th>Image</th><th>Price</th><th>Description</th><th>Time</th><th>Subject</th><th>Certificate</th><th>Category</th><th>Action</th></tr></thead>';
                             for (var item of JSON.parse(res.Data)) {
-                                _html += '<tr>' +
+                                _html += '<tbody><tr>' +
                                     '<td>' + item.EntityId + '</td>' +
                                     '<td>' + item.Name + '</td>' +
-                                    '<td>' + item.Time + '</td>' +
-                                    '<td>' + item.Description + '</td>' +
+                                    '<td>' + '<img style="width: 100px" src="' + baseUrl + "Areas/Admin/Content/img/" + item.Image + '">' + '</td>' +
                                     '<td>' + item.Price + '</td>' +
+                                    '<td>' + item.Description + '</td>' +
+                                    '<td>' + item.Time + '</td>' +
                                     '<td>' + item.Subject + '</td>' +
                                     '<td>' + item.Certificate + '</td>' +
                                     '<td>' + item.Category + '</td>' +
-                                    '<td>' + item.Image + '</td>' +
                                     '<td>' +
-                                    '<button class="btn btn-warning btn-edit mr-1 " data-id="' + item.EntityId + '">Edit</button>' +
-                                    '<button class="btn btn-danger btn-delete" data-id="' + item.EntityId + '">Delete</button>' +
+                                    '<button class="btn btn-warning btn-edit mr-1 mb-1" data-id="' + item.EntityId + '">Edit</button>' +
+                                    '<button class="btn btn-danger btn-delete mb-1" data-id="' + item.EntityId + '">Delete</button>' +
                                     '</td>'
-                                    + '</tr>';
+                                    + '</tr></tbody>';
                             }
                             $('.table').html(_html);
                             var pages = '';
@@ -65,12 +83,24 @@
             });
             $(document).on("click", ".item_page", function () {
                 var page = $(this).text(),
-                    key = $('#key').val();
-                manager.load(page, key);
+                    key = $('#key').val(),
+                    type = $("#type").val();
+                manager.load(page, type, key);
             });
             $('#key').keyup(function () {
-                var key = $("#key").val();
-                manager.load(1, key);
+                var key = $("#key").val(),
+                    type = $("#type").val();
+                manager.load(1, type, key);
+            });
+            $(document).on("change", "#key", function () {
+                var key = $("#key").val(),
+                    type = $("#type").val();
+                manager.load(1, type, key);
+            });
+            $(document).on("change", "#type", function () {
+                var key = $("#key").val(),
+                    type = $("#type").val();
+                manager.load(1, type, key);
             });
             $(document).on("click", ".btn-delete", function () {
                 var id = $(this).data("id");

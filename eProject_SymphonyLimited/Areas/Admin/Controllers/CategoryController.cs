@@ -19,13 +19,26 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult Get(int page = 1, string key = null)
+        public ActionResult Get(int page = 1, string type = null, string key = null)
         {
             int pageSize = 5;
             var categories = db.Category.Where(x => x.ParentId != 0).AsEnumerable();
-            if (!String.IsNullOrEmpty(key))
+            if (!String.IsNullOrEmpty(type) && !String.IsNullOrEmpty(key))
             {
-                categories = db.Category.Where(x => x.ParentId != 0 && x.Name.Contains(key)).AsEnumerable();
+                switch (type)
+                {
+                    case "EntityId":
+                        categories = db.Category.Where(x => x.ParentId != 0 && x.EntityId.ToString().Contains(key)).AsEnumerable();
+                        break;
+                    case "ParentId":
+                        categories = db.Category.Where(x => x.ParentId != 0 && x.ParentId.ToString().Contains(key)).AsEnumerable();
+                        break;
+                    case "Name":
+                        categories = db.Category.Where(x => x.ParentId != 0 && x.Name.Contains(key)).AsEnumerable();
+                        break;
+                    default:
+                        break;
+                }
             }
             decimal totalPages = Math.Ceiling((decimal)categories.Count() / pageSize);
             string jsonData = JsonConvert.SerializeObject(categories.Skip((page - 1) * pageSize).Take(pageSize));
@@ -49,29 +62,38 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                try
+                var validateName = db.Category.FirstOrDefault(x => x.Name == c.Name);
+                if (validateName == null)
                 {
-                    var categoryById = db.Category.FirstOrDefault(x => x.EntityId == c.ParentId);
-                    if (categoryById != null)
+                    try
                     {
-                        if (categoryById.Level == 1)
+                        var categoryById = db.Category.FirstOrDefault(x => x.EntityId == c.ParentId);
+                        if (categoryById != null)
                         {
-                            c.Path = categoryById.Path + "/";
+                            if (categoryById.Level == 1)
+                            {
+                                c.Path = categoryById.Path + "/";
+                            }
+                            else
+                            {
+                                c.Path = categoryById.Path + categoryById.EntityId + "/";
+                            }
+                            c.Level = categoryById.Level + 1;
+                            db.Category.Add(c);
+                            db.SaveChanges();
+                            return RedirectToAction("Index");
                         }
-                        else
-                        {
-                            c.Path = categoryById.Path + categoryById.EntityId + "/";
-                        }
-                        c.Level = categoryById.Level + 1;
-                        db.Category.Add(c);
-                        db.SaveChanges();
-                        return RedirectToAction("Index");
+                    }
+                    catch (Exception)
+                    {
+                        ModelState.AddModelError("", "Some thing went wrong while save category!");
                     }
                 }
-                catch (Exception)
+                else
                 {
-
+                    ModelState.AddModelError("Name", "Category is already exist!");
                 }
+
             }
             ViewBag.ParentList = db.Category.ToList();
             return View();
@@ -91,6 +113,12 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Edit(Category c)
         {
+            var currentCategory = db.Category.FirstOrDefault(x => x.EntityId == c.EntityId);
+            var validateName = db.Category.FirstOrDefault(x => x.Name != currentCategory.Name && x.Name == c.Name);
+            if (validateName != null)
+            {
+                ModelState.AddModelError("Name", "Category is already exist!");
+            }
             if (ModelState.IsValid)
             {
                 try
@@ -103,7 +131,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                     {
                         if (parentCategory.Level == 1)
                         {
-                            mainCategory.Path = parentCategory.Path + "/"; 
+                            mainCategory.Path = parentCategory.Path + "/";
                         }
                         else
                         {
@@ -114,6 +142,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                             child.Level = parentCategory.Level + (child.Level - mainCategory.Level) + 1;
                             child.Path = child.Path.Replace(oldPath, mainCategory.Path);
                         }
+                        mainCategory.Name = c.Name;
                         mainCategory.Level = parentCategory.Level + 1;
                         mainCategory.ParentId = parentCategory.EntityId;
                     }
@@ -122,7 +151,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                 }
                 catch (Exception)
                 {
-
+                    ModelState.AddModelError("", "Some thing went wrong while save category!");
                 }
             }
             ViewBag.ParentList = db.Category.Where(x => x.ParentId != c.EntityId).ToList();
@@ -146,7 +175,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                 }
                 catch (Exception)
                 {
-
+                    ModelState.AddModelError("", "Some thing went wrong while delete category!");
                 }
             }
             return View();

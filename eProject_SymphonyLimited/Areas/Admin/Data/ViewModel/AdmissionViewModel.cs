@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace eProject_SymphonyLimited.Models.ViewModel
+namespace eProject_SymphonyLimited.Areas.Admin.Data.ViewModel
 {
     public class AdmissionViewModel
     {

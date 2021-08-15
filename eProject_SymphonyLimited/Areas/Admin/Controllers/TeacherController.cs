@@ -1,5 +1,6 @@
 ﻿using eProject_SymphonyLimited.Areas.Admin.Data;
 using eProject_SymphonyLimited.Models;
+using Newtonsoft.Json;
 using System;
 using System.Data.Entity;
 using System.IO;
@@ -11,106 +12,146 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
 {
     public class TeacherController : BaseController
     {
-        // GET: Admin/Lecturer
         SymphonyLimitedDBContext db = new SymphonyLimitedDBContext();
-        // GET: Admin/Lecturer
+
+        // GET: Admin/Partner
         public ActionResult Index()
         {
-            ViewBag.Lecturers = db.Teacher.AsEnumerable();
-
             return View();
         }
+
+        [HttpGet]
+        public ActionResult Get(int page = 1, string type = null, string key = null)
+        {
+            int pageSize = 5;
+            var teachers = db.Teacher.AsEnumerable();
+            if (!String.IsNullOrEmpty(key))
+            {
+                switch (type)
+                {
+                    case "EntityId":
+                        teachers = db.Teacher.Where(x => x.EntityId.ToString().Contains(key)).AsEnumerable();
+                        break;
+                    case "Name":
+                        teachers = db.Teacher.Where(x => x.Name.Contains(key)).AsEnumerable();
+                        break;
+                    default:
+                        break;
+                }
+            }
+            decimal totalPages = Math.Ceiling((decimal)teachers.Count() / pageSize);
+            string jsonData = JsonConvert.SerializeObject(teachers.Skip((page - 1) * pageSize).Take(pageSize));
+            return Json(new
+            {
+                TotalPages = totalPages,
+                CurrentPage = page,
+                StatusCode = 200,
+                Data = jsonData
+            }, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Create(Teacher t, HttpPostedFileBase lecturerimg)
+        public ActionResult Create(Teacher t, HttpPostedFileBase imgFile)
         {
+            var validateName = db.Teacher.FirstOrDefault(x => x.Name == t.Name);
+            if (validateName != null)
+            {
+                ModelState.AddModelError("Name", "Teacher name can't be the same!");
+            }
             if (ModelState.IsValid)
             {
                 try
                 {
-                    string lecturerImgName = Path.GetFileName(lecturerimg.FileName);
-                    string lecturerImgText = Path.GetExtension(lecturerImgName);
-                    string lecturerImgPath = Path.Combine(Server.MapPath("~/Areas/Admin/Content/img/Teacher/"), lecturerImgName);
-                    t.Image = "~/Areas/Admin/Content/img/Teacher/" + lecturerImgName;
-                    if (lecturerimg.ContentLength > 0)
+                    if (imgFile == null && t.Image == null)
                     {
+                        t.Image = "default.png";
                         db.Teacher.Add(t);
-                        if (db.SaveChanges() > 0)
-                        {
-                            lecturerimg.SaveAs(lecturerImgPath);
-                            ViewBag.msg = "Record Added";
-                            ModelState.Clear();
-                        }
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
                     }
-                    return RedirectToAction("Index");
+                    else
+                    {
+                        string imgName = Path.GetFileName(imgFile.FileName);
+                        string imgPath = Path.Combine(Server.MapPath("~/Areas/Admin/Content/img/"), imgName);
+                        t.Image = imgName;
+                        if (imgFile.ContentLength > 0)
+                        {
+                            db.Teacher.Add(t);
+                            if (db.SaveChanges() > 0)
+                            {
+                                imgFile.SaveAs(imgPath);
+                                ModelState.Clear();
+                            }
+                        }
+                        return RedirectToAction("Index");
+                    }
                 }
                 catch (Exception)
                 {
-
+                    ModelState.AddModelError("", "Some thing went wrong while save teacher!");
                 }
             }
             return View();
         }
+
         public ActionResult Edit(int id)
         {
-            var Lecturer = db.Teacher.FirstOrDefault(x => x.EntityId == id);
-            if (Lecturer != null)
+            var teacherId = db.Teacher.Find(id);
+            if (teacherId != null)
             {
-                Session["lecturerImgPath"] = Lecturer.Image;
-                return View(Lecturer);
+                return View(teacherId);
             }
             return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public ActionResult Edit(Teacher t, HttpPostedFileBase lecturerimg)
+        public ActionResult Edit(Teacher t, HttpPostedFileBase imgFile)
         {
+            var currentTeacher = db.Teacher.Find(t.EntityId);
+            var validateName = db.Teacher.FirstOrDefault(x => x.Name != currentTeacher.Name && x.Name == t.Name);
+            if (validateName != null)
+            {
+                ModelState.AddModelError("Name", "Teacher name can't be the same!");
+            }
             if (ModelState.IsValid)
             {
                 try
                 {
-                    if (lecturerimg != null)
+                    currentTeacher.Name = t.Name;
+                    currentTeacher.Specialize = t.Specialize;
+                    currentTeacher.Subject = t.Subject;
+                    if (imgFile != null)
                     {
-                        string lecturerImgName = Path.GetFileName(lecturerimg.FileName);
-                        string lecturerImgText = Path.GetExtension(lecturerImgName);
-                        string lecturerImgPath = Path.Combine(Server.MapPath("~/Areas/Admin/Content/img/Teacher/"), lecturerImgName);
-                        t.Image = "~/Areas/Admin/Content/img/Teacher/" + lecturerImgName;
-                        if (lecturerimg.ContentLength > 0)
+                        string imgName = Path.GetFileName(imgFile.FileName);
+                        string imgPath = Path.Combine(Server.MapPath("~/Areas/Admin/Content/img/"), imgName);
+                        currentTeacher.Image = imgName;
+                        if (imgFile.ContentLength > 0)
                         {
-                            db.Entry(t).State = EntityState.Modified;
-                            string oldImagePath = Request.MapPath(Session["lecturerImgPath"].ToString());
                             if (db.SaveChanges() > 0)
                             {
-                                lecturerimg.SaveAs(lecturerImgPath);
-                                TempData["msg"] = "Record Updated";
-                                //ViewBag.msg = "Record Added";
-                                //ModelState.Clear();
+                                imgFile.SaveAs(imgPath);
                             }
                         }
-
                     }
                     else
                     {
-                        t.Image = Session["lecturerImgPath"].ToString();
-                        db.Entry(t).State = EntityState.Modified;
-                        if (db.SaveChanges() > 0)
-                        {
-                            TempData["msg"] = "Data Updated";
-                        }
+                        db.SaveChanges();
                     }
                     return RedirectToAction("Index");
                 }
                 catch (Exception)
                 {
-
+                    ModelState.AddModelError("", "Some thing went wrong while save partner!");
                 }
             }
             return View();
         }
+
         public ActionResult Delete(int id)
         {
             if (db.Teacher.Find(id) != null)

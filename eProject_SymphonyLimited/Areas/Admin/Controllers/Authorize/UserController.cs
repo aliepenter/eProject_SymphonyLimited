@@ -129,45 +129,6 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers.Authorize
             }, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult FindId(int id)
-        {
-            return Json(db.User.Find(id), JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpPost]
-        public ActionResult DeleteData(int id)
-        {
-            if (ModelState.IsValid)
-            {
-                var findUser = db.User.Find(id);
-                if (findUser != null)
-                {
-                    db.User.Remove(findUser);
-                    db.SaveChanges();
-                    return Json(new
-                    {
-                        statusCode = 200,
-                        message = "Xóa thành công!",
-                        data = id,
-                    }, JsonRequestBehavior.AllowGet);
-                }
-                else
-                {
-                    return Json(new
-                    {
-                        statusCode = 403,
-                        message = "Xóa thất bại!",
-                        data = id,
-                    }, JsonRequestBehavior.AllowGet);
-                }
-            }
-            return Json(new
-            {
-                statusCode = 403,
-                message = "Xóa thất bại!",
-                data = id,
-            }, JsonRequestBehavior.AllowGet);
-        }
 
         public ActionResult Create()
         {
@@ -313,6 +274,24 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers.Authorize
                 }
             }
             return View(currentUser);
+        }
+
+        public ActionResult Delete(int id)
+        {
+            if (db.User.Find(id) != null)
+            {
+                try
+                {
+                    db.User.Remove(db.User.Find(id));
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (Exception)
+                {
+                    ModelState.AddModelError("", "Some thing went wrong while delete user!");
+                }
+            }
+            return View();
         }
     }
 }

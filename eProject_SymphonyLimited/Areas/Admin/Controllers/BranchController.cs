@@ -18,11 +18,6 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
             return View(db.Branch.AsEnumerable());
         }
 
-        public ActionResult FindId(int id)
-        {
-            return Json(db.Branch.Find(id), JsonRequestBehavior.AllowGet);
-        }
-
         [HttpGet]
         public ActionResult Get(int page = 1, string type = null, string key = null)
         {
@@ -56,41 +51,6 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                 CurrentPage = page,
                 StatusCode = 200,
                 Data = jsonData
-            }, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpPost]
-        public ActionResult DeleteData(int id)
-        {
-            if (ModelState.IsValid)
-            {
-                var findBranch = db.Branch.Find(id);
-                if (findBranch != null)
-                {
-                    db.Branch.Remove(findBranch);
-                    db.SaveChanges();
-                    return Json(new
-                    {
-                        statusCode = 200,
-                        message = "Xóa thành công!",
-                        data = id,
-                    }, JsonRequestBehavior.AllowGet);
-                }
-                else
-                {
-                    return Json(new
-                    {
-                        statusCode = 403,
-                        message = "Xóa thất bại!",
-                        data = id,
-                    }, JsonRequestBehavior.AllowGet);
-                }
-            }
-            return Json(new
-            {
-                statusCode = 403,
-                message = "Xóa thất bại!",
-                data = id,
             }, JsonRequestBehavior.AllowGet);
         }
 
@@ -183,6 +143,24 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                     ModelState.AddModelError("Name", "Branch Name is already exist!");
                 }
 
+            }
+            return View();
+        }
+
+        public ActionResult Delete(int id)
+        {
+            if (db.Branch.Find(id) != null)
+            {
+                try
+                {
+                    db.Branch.Remove(db.Branch.Find(id));
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (Exception)
+                {
+                    ModelState.AddModelError("", "Some thing went wrong while delete branch!");
+                }
             }
             return View();
         }
