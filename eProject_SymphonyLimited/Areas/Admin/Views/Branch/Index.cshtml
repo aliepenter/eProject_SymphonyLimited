@@ -5,70 +5,30 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Branches</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Image)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Time)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Phone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Address)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th></th>
-    </tr>
+@Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary float-left mb-3" })
+<div class="form-inline mb-3 float-right">
+    <div class="input-group">
+        <label class="font-weight-bold m-0 mr-1 d-flex align-items-center">Search : </label>
+        <input type="text" name="key" id="key" value="" class="form-control mr-1 bg-light border-0 small" placeholder="Enter to search..." aria-label="Search" aria-describedby="basic-addon2">
+    </div>
+    <div class="input-group">
+        <label class="font-weight-bold m-0 mr-1 d-flex align-items-center">Search By : </label>
+        <select id="type">
+            <option value="Name" selected>Name</option>
+            <option value="Email">Email</option>
+            <option value="Address">Address</option>
+            <option value="Phone">Phone</option>
+        </select>
+    </div>
+</div>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Image)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Time)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.EntityId }) |
-                <a class="btn-delete" href="#" data-id="@item.EntityId">Delete</a>
-            </td>
-        </tr>
-    }
+<div class="table-responsive">
+    <table class="table table-bordered"></table>
+</div>
 
-</table>
-
+<ul class="pagination"></ul>
 
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
@@ -90,7 +50,45 @@
 
 @section scripts{
     <script>
+        var getUrl = window.location;
+        var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
         var manager = {
+            load: function (page = 1, type = null, key = null) {
+                $.ajax({
+                    type: "GET",
+                    url: baseUrl + "Admin/Branch/Get",
+                    data: { page: page, type: type, key: key },
+                    success: function (res) {
+                        var _html = ' <thead class="thead-dark"><tr><th>Entity</th><th>Name</th><th>Email</th><th>Image</th><th>Time</th><th>Phone</th><th>Address</th><th>Description</th><th>Action</th></tr></thead>';
+                        for (var item of JSON.parse(res.Data)) {
+                            _html += '<tbody><tr>' +
+                                '<td>' + item.EntityId + '</td>' +
+                                '<td>' + item.Name + '</td>' +
+                                '<td>' + item.Email + '</td>' +
+                                '<td>' + item.Image + '</td>' +
+                                '<td>' + item.Time + '</td>' +
+                                '<td>' + item.Phone + '</td>' +
+                                '<td>' + item.Address + '</td>' +
+                                '<td>' + item.Description + '</td>' +
+                                '<td>' +
+                                '<button class="btn btn-warning btn-edit mr-1 mb-1" data-id="' + item.EntityId + '">Edit</button>' +
+                                '<button class="btn btn-danger btn-delete mb-1" data-id="' + item.EntityId + '">Delete</button>' +
+                                '</td>'
+                                + '</tr></tbody>';
+                        }
+                        $('.table').html(_html);
+                        var pages = '';
+                        for (var i = 1; i <= res.TotalPages; i++) {
+                            if (i == res.CurrentPage) {
+                                pages += '<li class="active mr-1"><a href="javascript:void(0)"><button class="btn btn-info">' + i + '</button></a></li>';
+                            } else {
+                                pages += '<li><a class="item_page mr-1" href="javascript:void(0)"><button class="btn btn-info">' + i + '</button></a></li>';
+                            }
+                        }
+                        $(".pagination").html(pages);
+                    }
+                })
+            },
             get: function (id) {
                 $.ajax({
                     type: "GET",
@@ -106,11 +104,11 @@
                                 <br/>
                                 <b>Image : </b>${res.Image}
                                 <br/>
-                                <b>Time : </b>${res.Time} 
+                                <b>Time : </b>${res.Time}
                                 <br/>
-                                <b>Phone : </b>${res.Phone} 
+                                <b>Phone : </b>${res.Phone}
                                 <br/>
-                                <b>Description : </b>${res.Description} 
+                                <b>Description : </b>${res.Description}
                                 <br/>
                                 <b>Address : </b>${res.Address}
                             `;
@@ -127,11 +125,9 @@
                     success: function (res) {
                         if (res.statusCode == 200) {
                             $("#myModal").modal("hide");
-                            alert(res.message);
                             location.reload();
                         } else {
                             $("#myModal").modal("hide");
-                            alert(res.message);
                         }
                     }
                 })
@@ -139,6 +135,22 @@
         }
 
         $(function () {
+            manager.load();
+            $(document).on("click", ".btn-edit", function () {
+                var branchId = $(this).data("id");
+                window.location.href = baseUrl + "Admin/Branch/Edit/" + branchId;
+            });
+            $(document).on("click", ".item_page", function () {
+                var page = $(this).text(),
+                    key = $('#key').val(),
+                    type = $("#type").val();
+                manager.load(page, type, key);
+            });
+            $('#key').keyup(function () {
+                var key = $("#key").val(),
+                    type = $("#type").val();
+                manager.load(1, type, key);
+            });
             $(document).on("click", ".btn-delete", function () {
                 let branchId = $(this).data("id");
                 manager.get(branchId);

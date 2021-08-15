@@ -1,9 +1,6 @@
 ﻿using eProject_SymphonyLimited.Migrations;
-using System;
-using System.Collections.Generic;
+using eProject_SymphonyLimited.Models.Authorize;
 using System.Data.Entity;
-using System.Linq;
-using System.Web;
 
 namespace eProject_SymphonyLimited.Models
 {
@@ -23,9 +20,13 @@ namespace eProject_SymphonyLimited.Models
         public virtual DbSet<Student> Student { get; set; }
         public virtual DbSet<RegisterAdmission> RegisterAdmission { get; set; }
         public virtual DbSet<Branch> Branch { get; set; }
-        public virtual DbSet<User> User { get; set; }
         public virtual DbSet<Partner> Partner { get; set; }
         public virtual DbSet<Teacher> Teacher { get; set; }
         public virtual DbSet<Faq> Faq { get; set; }
+        public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<GroupUser> GroupUser { get; set; }
+        public virtual DbSet<Business> Business { get; set; }
+        public virtual DbSet<Permission> Permission { get; set; }
+        public virtual DbSet<GroupPermission> GroupPermission { get; set; }
     }
 }

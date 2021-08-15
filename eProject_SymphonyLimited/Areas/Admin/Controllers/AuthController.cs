@@ -1,4 +1,4 @@
-﻿using eProject_SymphonyLimited.Areas.Admin.Data.Model;
+﻿using eProject_SymphonyLimited.Areas.Admin.Data.ViewModel;
 using eProject_SymphonyLimited.Models;
 using System.Linq;
 using System.Web.Mvc;
@@ -24,7 +24,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(Login l)
+        public ActionResult Login(LoginViewModel l)
         {
             if (ModelState.IsValid)
             {
@@ -32,9 +32,10 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                 if (findUser != null)
                 {
                     Session["User"] = findUser;
-                    Session["AdminName"] = findUser.Name;
-                    Session["AdminImage"] = findUser.Image;
-                    return RedirectToAction("Index","Home");
+                    Session["UserName"] = findUser.FullName;
+                    Session["UserImage"] = findUser.Image;
+                    Session["UserRole"] = findUser.GroupUsers.Name;
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {

@@ -34,6 +34,7 @@ namespace eProject_SymphonyLimited.Models
 
         public double MarkPass { get; set; }
 
+        [Display(Name = "Course")]
         public int CourseId { get; set; }
 
         [ForeignKey("CourseId")]

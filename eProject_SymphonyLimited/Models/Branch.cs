@@ -20,9 +20,10 @@ namespace eProject_SymphonyLimited.Models
         public string Image { get; set; }
 
         public string Time { get; set; }
-
+        [Required(ErrorMessage = "Please enter phone!")]
+        [RegularExpression("^(84|0[3|5|7|8|9])+([0-9]{8})$", ErrorMessage = "Please enter valid phone no.")]
         public string Phone { get; set; }
-
+        [Required(ErrorMessage = "Please enter address!")]
         public string Address { get; set; }
 
         public string Description { get; set; }

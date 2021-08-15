@@ -1,10 +1,9 @@
 ﻿using eProject_SymphonyLimited.Areas.Admin.Data;
 using eProject_SymphonyLimited.Models;
+using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace eProject_SymphonyLimited.Areas.Admin.Controllers
@@ -22,6 +21,36 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         public ActionResult FindId(int id)
         {
             return Json(db.CoreConfigData.Find(id), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult Get(int page = 1, string type = null, string key = null)
+        {
+            int pageSize = 5;
+            var coreConfigDatas = db.CoreConfigData.AsEnumerable();
+            if (!String.IsNullOrEmpty(type) && !String.IsNullOrEmpty(key))
+            {
+                switch (type)
+                {
+                    case "Name":
+                        coreConfigDatas = db.CoreConfigData.Where(x => x.Name.Contains(key)).AsEnumerable();
+                        break;
+                    case "Value":
+                        coreConfigDatas = db.CoreConfigData.Where(x => x.Value.Contains(key)).AsEnumerable();
+                        break;
+                    default:
+                        break;
+                }
+            }
+            decimal totalPages = Math.Ceiling((decimal)coreConfigDatas.Count() / pageSize);
+            string jsonData = JsonConvert.SerializeObject(coreConfigDatas.Skip((page - 1) * pageSize).Take(pageSize));
+            return Json(new
+            {
+                TotalPages = totalPages,
+                CurrentPage = page,
+                StatusCode = 200,
+                Data = jsonData
+            }, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -69,16 +98,24 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                try
+                var validateName = db.CoreConfigData.FirstOrDefault(x => x.Name == ccd.Name);
+                if (validateName == null)
                 {
-                    var coreConfigData = db.CoreConfigData.FirstOrDefault(x => x.EntityId == ccd.EntityId);
-                    db.CoreConfigData.Add(ccd);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                    try
+                    {
+                        ccd.Code = ccd.Name.ToLower().Replace(" ", "_");
+                        db.CoreConfigData.Add(ccd);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    catch (Exception)
+                    {
+                        ModelState.AddModelError("", "Some thing went wrong while save coreconfigdata!");
+                    }
                 }
-                catch (Exception)
+                else
                 {
-
+                    ModelState.AddModelError("Name", "CoreConfigData Name is already exist!");
                 }
             }
             return View();
@@ -99,15 +136,25 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                try
+                var currentCoreConfigData = db.CoreConfigData.Find(ccd.EntityId);
+                var validateName = db.CoreConfigData.FirstOrDefault(x => x.Name != currentCoreConfigData.Name && x.Name == ccd.Name);
+                if (validateName == null)
                 {
-                    db.Entry(ccd).State = EntityState.Modified;
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                    try
+                    {
+                        currentCoreConfigData.Name = ccd.Name;
+                        currentCoreConfigData.Code = ccd.Name.ToLower().Replace(" ", "_");
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    catch (Exception)
+                    {
+                        ModelState.AddModelError("", "Some thing went wrong while save coreconfigdata!");
+                    }
                 }
-                catch (Exception)
+                else
                 {
-
+                    ModelState.AddModelError("Name", "CoreConfigData Name is already exist!");
                 }
             }
             return View();

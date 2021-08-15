@@ -1,10 +1,9 @@
 ﻿using eProject_SymphonyLimited.Areas.Admin.Data;
 using eProject_SymphonyLimited.Models;
+using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace eProject_SymphonyLimited.Areas.Admin.Controllers
@@ -16,7 +15,27 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         // GET: Admin/Category
         public ActionResult Index()
         {
-            return View(db.Category.Where(x => x.ParentId != 0).AsEnumerable());
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Get(int page = 1, string key = null)
+        {
+            int pageSize = 5;
+            var categories = db.Category.Where(x => x.ParentId != 0).AsEnumerable();
+            if (!String.IsNullOrEmpty(key))
+            {
+                categories = db.Category.Where(x => x.ParentId != 0 && x.Name.Contains(key)).AsEnumerable();
+            }
+            decimal totalPages = Math.Ceiling((decimal)categories.Count() / pageSize);
+            string jsonData = JsonConvert.SerializeObject(categories.Skip((page - 1) * pageSize).Take(pageSize));
+            return Json(new
+            {
+                TotalPages = totalPages,
+                CurrentPage = page,
+                StatusCode = 200,
+                Data = jsonData
+            }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Create()

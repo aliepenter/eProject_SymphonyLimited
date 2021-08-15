@@ -1,10 +1,9 @@
 ﻿using eProject_SymphonyLimited.Areas.Admin.Data;
 using eProject_SymphonyLimited.Models;
+using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace eProject_SymphonyLimited.Areas.Admin.Controllers
@@ -16,7 +15,37 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         // GET: Admin/Partner
         public ActionResult Index()
         {
-            return View(db.Partner.AsEnumerable());
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Get(int page = 1, string type = null, string key = null)
+        {
+            int pageSize = 5;
+            var partners = db.Partner.AsEnumerable();
+            if (!String.IsNullOrEmpty(type) && !String.IsNullOrEmpty(key))
+            {
+                switch (type)
+                {
+                    case "Name":
+                        partners = db.Partner.Where(x => x.Name.Contains(key)).AsEnumerable();
+                        break;
+                    case "Description":
+                        partners = db.Partner.Where(x => x.Description.Contains(key)).AsEnumerable();
+                        break;
+                    default:
+                        break;
+                }
+            }
+            decimal totalPages = Math.Ceiling((decimal)partners.Count() / pageSize);
+            string jsonData = JsonConvert.SerializeObject(partners.Skip((page - 1) * pageSize).Take(pageSize));
+            return Json(new
+            {
+                TotalPages = totalPages,
+                CurrentPage = page,
+                StatusCode = 200,
+                Data = jsonData
+            }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Create()
@@ -29,15 +58,23 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                try
+                var validateName = db.Partner.FirstOrDefault(x => x.Name == p.Name);
+                if (validateName == null)
                 {
-                    db.Partner.Add(p);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                    try
+                    {
+                        db.Partner.Add(p);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    catch (Exception)
+                    {
+                        ModelState.AddModelError("", "Some thing went wrong while save partner!");
+                    }
                 }
-                catch (Exception)
+                else
                 {
-
+                    ModelState.AddModelError("Name", "Partner Name is already exist!");
                 }
             }
             return View();
@@ -58,15 +95,25 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                try
+                var currentPartner = db.Partner.Find(p.EntityId);
+                var validateName = db.Partner.FirstOrDefault(x => x.Name != currentPartner.Name && x.Name == p.Name);
+                if (validateName == null)
                 {
-                    db.Entry(p).State = EntityState.Modified;
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                    try
+                    {
+                        currentPartner.Name = p.Name;
+                        currentPartner.Description = p.Description;
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    catch (Exception)
+                    {
+                        ModelState.AddModelError("", "Some thing went wrong while save partner!");
+                    }
                 }
-                catch (Exception)
+                else
                 {
-
+                    ModelState.AddModelError("Name", "Partner Name is already exist!");
                 }
             }
             return View();

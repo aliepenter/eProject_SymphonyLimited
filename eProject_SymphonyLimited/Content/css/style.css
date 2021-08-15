@@ -1,0 +1,2083 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.institutePartner{
+    display:none;
+}
+.cusLecturer {
+    padding: 10px;
+    margin: 20px;
+    border: none;
+    border-radius: 50%;
+}
+    .cusLecturer img {
+        border-radius: 50%;
+    }
+    .cusLecturer:hover img{
+        border: 2px solid #884049;
+    }
+.slider-nav {
+    width: 100%;
+    margin: 20px auto;
+    text-align: center;
+    padding: 20px;
+    color: white;
+}
+
+.slider-nav img {
+    display: block;
+    margin: auto;
+}
+.mainLecturesInfor .title{
+    text-align: center;
+    padding: 20px 0;
+    text-transform: UPPERCASE;
+    font-size: 30px;
+    font-weight: bold;
+    color: wheat;
+}
+/* responsive header */
+.mobile-header {
+    display: block;
+}
+
+.mobile-header .left {
+    margin: auto;
+    font-size: 30px;
+}
+
+.mobile-header .left i {
+    border-right: 1px dotted black;
+    padding-right: 10px;
+}
+
+.mobile-header .right {
+    text-align: center;
+}
+
+.mobile-menu {
+    height: 100%;
+    position: fixed;
+    top: 0;
+    width: 50%;
+    background-color: white;
+    z-index: 20;
+    display: none;
+}
+
+.mobile-menu .logo {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.mobile-menu .menu {
+    padding: 0 20px;
+}
+
+.mobile-menu ul li {
+    padding: 20px 0;
+    border-bottom: 1px dotted black;
+    list-style: none
+}
+
+.mobile-menu ul li a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #000;
+    text-transform: uppercase;
+}
+
+
+/* Header css */
+
+.containerHeader {
+    width: 70%;
+    margin: 0 auto;
+}
+
+.header {
+    padding: 20px 0 0 0;
+}
+
+.menuDefault {
+    display: none;
+}
+
+.header .marquee {
+    height: 50px;
+    overflow: hidden;
+    position: relative;
+    background: #fefefe;
+    color: #333;
+    background-color: rgb(110, 19, 19);
+}
+
+.header .marquee p {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    line-height: 50px;
+    text-align: center;
+    transform: translateX(100%);
+    font-size: 20px;
+    color: white;
+}
+
+
+/* main css */
+.main .page1{
+    margin: 20px 0;
+}
+.main .page1 .category {
+    display: none;
+}
+
+.main .page1 .mid {
+    width: 100%;
+}
+
+.main .cusBanner .fa-chevron-left,
+.fa-chevron-right {
+    font-size: 30px;
+    position: relative;
+    top: 50%;
+}
+
+.main .page1 .vCrs {
+    display: none;
+}
+
+
+/*Page2*/
+
+.main .page2 {
+    padding: 30px 0;
+}
+
+.main .page2 .bg {
+    background-image: url("../images/banner/tubebanner-0247c6d0e0891.jpg");
+    background-position: center center;
+    background-size: cover;
+    display: flex;
+    min-height: 400px;
+}
+
+.main .page2 .bg .bgEl {
+    position: absolute;
+    right: 10%;
+    padding: 60px 0px;
+}
+
+.main .page2 .bg h2 {
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: white;
+    text-align: center;
+}
+
+.main .page2 .countdown {
+    padding: 30px 0;
+    color: white;
+}
+
+.main .page2 .countdown .countdownEl {
+    text-align: center;
+}
+
+.main .page2 .countdown .countdownEl span {
+    font-size: 12px;
+}
+
+.main .page2 .countdown .countdownEl .big-text {
+    font-size: 3rem;
+    line-height: 1;
+    margin: 0 10px;
+}
+
+.main .page2 .butt {
+    text-align: center;
+    padding: 10px;
+}
+
+.main .page2 .butt button {
+    padding: 10px;
+    width: 50%;
+    font-size: 12px;
+    font-weight: bold;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+}
+
+
+/* css Footer */
+
+.containerFooter {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.footer .titleFooter {
+    text-align: center;
+    width: 100%;
+}
+
+.footer .titleFooter .slogan span {
+    text-transform: uppercase;
+    font-size: 20px;
+}
+
+.footer .titleFooter .contactInfor {
+    font-size: 15px;
+    padding: 10px 0;
+}
+
+.footer .titleFooter .contactInfor a i {
+    margin: 0 20px;
+    color: black;
+}
+
+.footer .mainFooter {
+    margin-top: 20px;
+    background-color: #6E1313;
+    color: white;
+    padding: 20px 0px;
+}
+
+.footer .mainFooter .title {
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-bottom: 1px groove white;
+}
+
+.footer .mainFooter .item {
+    padding: 20px 0;
+}
+
+.footer .mainFooter .icon i {
+    width: 100%;
+}
+
+.footer .mainFooter .infor {
+    margin: auto;
+}
+
+.footer .mainFooter ul li {
+    list-style: none;
+    display: list-item;
+    line-height: 2.5;
+}
+
+.footer .mainFooter ul li a {
+    color: white;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.footer .mainFooter .map iframe {
+    border-radius: 20px;
+}
+
+.cusFooter {
+    padding: 0 20px 0 0;
+    width: 100%;
+}
+
+.cusItemFooter {
+    padding: 20px 0px;
+}
+
+.cusItemFooter .icon {
+    text-align: center;
+}
+
+
+/* page3 */
+
+.page3 .title {
+    background-color: #6E1313;
+    height: 50px;
+}
+
+.page3 .title .left {
+    margin: auto;
+}
+
+.page3 .title .left span {
+    padding: 0 20px;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.page3 .title .right {
+    margin: auto;
+    text-align: right;
+}
+
+.page3 .title .right a {
+    padding: 0 20px;
+    color: white;
+    font-style: italic;
+    font-size: 10px;
+}
+
+.page3 .title .right i {
+    color: white;
+    font-style: italic;
+    font-size: 10px;
+}
+
+.page3 .item {
+    padding: 20px 0;
+}
+
+.page3 .item .description {
+    padding: 10px 10px 10px 0;
+    font-size: 20px;
+}
+
+.cusCourseItem {
+    width: 100%;
+    position: relative;
+    top: 0;
+    transition: top ease 0.5s;
+    padding: 10px;
+    margin-bottom: 30px;
+}
+
+.cusCourseItem:hover {
+    top: -10px;
+    background-color: lightgray;
+}
+
+.cusCourseItem .moreInfor {
+    border-top: 1px groove #6E1313;
+    padding: 10px 0;
+}
+
+.containerMoreInfor {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.cusCourseItem .moreInfor .price {
+    text-align: right;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+/* js menumobi */
+
+.menuMobileActive {
+    display: block;
+    animation-duration: 01s;
+    animation-delay: 0s;
+    animation-name: fadeInDown;
+    z-index: 1001
+}
+
+.header .childMenu .menu {
+    position: relative;
+    height: 50px;
+    width: 100%;
+    background: linear-gradient(to bottom, #474747 0, #212121 100%);
+}
+
+.header .childMenu .btnBar .bor {
+    color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px 10px;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    margin: 0 10px;
+    font-size: 20px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.header .childMenu .btnBar i {
+    transition: all 0.4s ease;
+}
+
+.childBarActive {
+    transform: rotateZ(90deg);
+}
+
+
+/* css child course Category Menu */
+
+.childCourseCategory {
+    background-color: black;
+    opacity: 0.9;
+    height: 100%;
+    position: fixed;
+    width: 100%;
+    z-index: 16;
+    top: -1000px;
+    display: block;
+}
+
+
+/* css Course Page */
+
+.main .containerCourseMain {
+    width: 90%;
+    margin: 20px auto;
+}
+
+.main .containerCourseMain .left {
+    display: none;
+}
+
+.main .containerCourseMain .right {
+    width: 100%;
+}
+
+/*css about us*/
+.cusSpan {
+    color: #E89155;
+}
+.norSpan {
+    color: white;
+}
+.containerBannerAboutUs{
+    width: 80%;
+    margin: 0 auto;
+}
+.main .aboutUsMain .bannerAboutUs {
+    background-image: url("https://bachkhoa-aptech.edu.vn/public/assets/imgs/themes/inner-header-title.jpg");
+    background-position: center center;
+    background-size: cover;
+    min-height: 200px;
+    position:relative;
+}
+    .main .aboutUsMain .bannerAboutUs .pos {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .main .aboutUsMain .bannerAboutUs .title span{
+        font-size: 50px;
+        font-weight: bold;
+        color: #F9B248;
+        border-bottom: 3px solid #F9B248;
+    }
+    .main .aboutUsMain .instituteInfor .left{
+        display: none;
+    }
+.main .aboutUsMain .instituteInfor .right {
+    width: 100%;
+}
+.main .aboutUsMain .instituteInfor .containerAboutUsInfor {
+        width: 80%;
+        margin: 0 auto;
+    }
+.instituteInfor .right .title{
+    font-weight: bold;
+    font-size: 30px
+}
+.instituteInfor .right .p {
+    text-transform: uppercase;
+    font-size: 10px;
+}
+.instituteInfor .right .italic {
+    font-style: italic;
+    padding: 10px 0px;
+    color: #E89155;
+}
+.instituteInfor .right .h3 {
+    font-weight: bold;
+}
+.main .aboutUsMain .whyChoose{
+    padding: 30px 0;
+}
+.containerWhyChoose {
+    width: 90%;
+    margin: 0 auto
+}
+.main .aboutUsMain .whyChoose .left {
+    width: 100%
+}
+.main .aboutUsMain .whyChoose .right {
+    width: 100%
+}
+.main .aboutUsMain .whyChoose .left .title{
+    font-size: 30px;
+    font-weight: bold;
+    padding: 30px 0
+}
+.main .aboutUsMain .whyChoose .left .icon{
+    width: 20%
+}
+.main .aboutUsMain .whyChoose .left .content{
+    width: 80%
+}
+.main .aboutUsMain .whyChoose .left .content p {
+    font-size: 20px;
+    color: #6E1313;
+    font-weight: bold
+}
+
+.cusWhyChoose {
+    transition: top ease 0.5s;
+    top: 0;
+    position: relative
+}
+    .cusWhyChoose:hover {
+        top: -10px;
+        border: 1px solid #E89155
+    }
+.main .instituteLecturers {
+    /*height: 659px;*/
+    width: 100%;
+    height: 800px;
+    background-image: url('../images/banner/By Design.jpg');
+}
+.cusInfor {
+    line-height: 30px
+}
+.containerLecturer {
+    height: 400px
+}
+.containerLecturer {
+    width: 90%;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 10px
+}
+
+.detailInfor .inforLecture .text {
+    padding: 20px
+}
+
+.detailInfor .text .name span {
+    color: #513079;
+    font-weight: bold
+}
+
+.detailInfor .img {
+    padding: 10px
+}
+
+    .detailInfor .img img {
+        width: 200px;
+        border-radius: 10px
+    }
+/*css contact us*/
+.main .ContactUsMain .bannerContactUs {
+    background-image: url("https://bachkhoa-aptech.edu.vn/public/assets/imgs/contact/banner-contact.jpg");
+    background-position: center center;
+    background-size: cover;
+    min-height: 200px;
+    position: relative;
+}
+
+    .main .ContactUsMain .bannerContactUs .title {
+        position: absolute;
+        top: 50%;
+        left: 20%;
+        transform: translateY(-50%);
+    }
+        .main .ContactUsMain .bannerContactUs .title span {
+            font-weight: bold;
+            color: #F9B248;
+            font-size: 50px;
+            border-bottom: 3px solid #F9B248;
+        }
+.main .ContactUsMain .title{ 
+    margin: 30px 0;
+    text-align: center
+}
+.main .ContactUsMain .title span{
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 30px
+}
+    .main .ContactUsMain .title p {
+        font-size: 20px
+    }
+.containerContactUs{
+    width: 90%;
+    margin: 0 auto
+}
+.cusItemContact {
+    width: 100%;
+    margin: 50px 0;
+    height: 200px;
+    text-align: center;
+    padding: 10px;
+}
+    .cusItemContact .item {
+        background: #EBEBEB;
+        width: 100%
+    }
+.cusItemContact span{
+    font-size: 18px
+}
+    .cusItemContact .detail span {
+        font-weight: bold
+    }
+    /*css form*/
+.formRegister {
+    box-shadow: -1px 3px 9px 0px rgba(0,0,0,0.67);
+    padding: 20px
+}
+.containerForm{
+    width: 90%;
+    margin: 0 auto
+}
+.formRegister .form-row{
+    margin: 30px 0
+}
+    .formRegister .form-row .left {
+        text-align: left;
+        width: 100%;
+        padding: 10px 0
+    }
+
+    .formRegister .form-row .right {
+        text-align: right;
+        width: 100%;
+        padding: 10px 0
+    }
+
+    .formRegister .form-row input {
+        padding: 10px;
+        width: 100%;
+        outline: none
+    }
+
+    .formRegister .form-row select {
+        padding: 10px;
+        width: 100%;
+        outline: none
+    }
+    .formRegister .form-row textarea {
+        width: 100%;
+        outline: none;
+        padding: 10px
+    }
+.formRegister .form-btn{
+    width: 100%;
+    text-align: center
+}
+    .formRegister .form-btn button {
+        padding: 10px;
+        width: 150px;
+        outline: none;
+        border: none;
+        background: #0069D9;
+        border-radius: 5px;
+        color: white;
+        font-size: 16px
+    }
+    .formRegister .form-btn button {
+        padding: 10px;
+        width: 150px;
+        outline: #0069D9;
+        border: none;
+        background: #0069D9;
+        border-radius: 5px;
+        color: white;
+        font-size: 16px
+    }
+.ContactUsMain .mapContact {
+    margin: 30px 0;
+}
+/* css page4*/
+.page4 {
+   
+    position: relative;
+}
+.page4 .registerPage{
+    padding: 20px 0
+}
+    .page4 .registerPage .containerFormIndex {
+        text-align: center;
+        width: 90%;
+        margin: 0px auto;
+    }
+
+        .page4 .registerPage .containerFormIndex .title {
+            padding: 30px 0;
+            font-size: 20px;
+            font-weight: bold;
+            color: black;
+            text-transform: uppercase;
+            background-color: #E0A800;
+            border-radius: 5px;
+            line-height: 1.5
+        }
+        .page4 .registerPage .containerFormIndex .form {
+            margin: 10px 0 
+        }
+        .page4 .registerPage .containerFormIndex .form-row{
+            margin: 30px 0;
+           
+        }
+            .page4 .registerPage .containerFormIndex .form-row input {
+                padding: 25px;
+                width: 100%;
+                outline: none;
+                background-color: #fff;
+                background-clip: padding-box;
+                border: 1px solid #ced4da;
+                border-radius: .25rem;
+            }
+            .page4 .registerPage .containerFormIndex .form-row select {
+                padding: 25px;
+                width: 100%;
+                outline: none;
+                background-color: #fff;
+                background-clip: padding-box;
+                border: 1px solid #ced4da;
+                border-radius: .25rem;
+            }
+            .page4 .registerPage .containerFormIndex .form-row textarea {
+                padding: 25px;
+                width: 100%;
+                outline: none;
+                background-color: #fff;
+                background-clip: padding-box;
+                border: 1px solid #ced4da;
+                border-radius: .25rem;
+            }
+        .page4 .registerPage .containerFormIndex button {
+            padding: 10px;
+            width: 50%;
+            outline: none;
+            border-radius: 5px;
+            border: 1px solid #CED4DA;
+            background-color: #E0A800;
+            text-transform: uppercase; font-weight: bold
+        }
+            .page4 .registerPage .containerFormIndex button:hover {
+                background-color: #FF9600
+            }
+.containerPage4 .img {
+    display: none
+}
+.containerPage4 .registerPage {
+    width: 100%;
+    margin: auto 0
+}
+/*css bannerCourse*/
+.bannerCourse {
+     background-image: url("https://bachkhoa-aptech.edu.vn/public/assets/imgs/themes/inner-header-title.jpg");
+    background-position: center center;
+    background-size: cover;
+    min-height: 500px;
+    position: relative
+}
+    .bannerCourse .title {
+        position: absolute;
+        width: 50%;
+        top: 50%;
+        left: 20%;
+        transform: translateY(-50%);
+    }
+    .bannerCourse .title span{
+        color: #F9B248;
+        font-size: 50px;
+        font-weight: bold;
+        border-bottom: 3px solid #F9B248;
+    }
+.formCourse {
+    background-image: url("https://bachkhoa-aptech.edu.vn/public/assets/imgs/themes/bg-form.jpg");
+    background-position: center center;
+    background-size: cover;
+    min-height: 600px;
+    position: relative;
+    margin: 30px 0
+}
+    .formCourse .left{
+        width: 100%;
+        text-align: center;
+        padding: 10px
+    }
+    .formCourse .left .title{
+        font-weight: bold;
+        color: white;
+        font-size: 30px
+    }
+        .formCourse .left input {
+            padding: 15px;
+            width: 100%;
+            margin: 20px 0;
+            outline: none;
+            border-radius: 5px
+        }
+        .formCourse .left select {
+            padding: 15px;
+            width: 100%;
+            margin: 20px 0;
+            outline: none;
+            border-radius: 5px
+        }
+        .formCourse .left textarea {
+            padding: 15px;
+            width: 100%;
+            margin: 20px 0;
+            outline: none;
+            border-radius: 5px
+        }
+        .formCourse .left button {
+            padding: 15px;
+            width: 50%;
+            margin: 20px 0;
+            outline: none;
+            background-color: #ffc107;
+            border-radius: 5px
+        }
+            .formCourse .left button:hover {
+                background-color: #E0A800
+            }
+    .formCourse .right {
+        display: none
+    }
+
+/* css Exam Result*/
+.mainExamResult {
+    background-color: #F7F7F7;
+    height: auto;
+    padding: 30px 0
+}
+    .mainExamResult .containerExamResult {
+        width: 90%;
+        margin: 0px auto;
+        background-color: white;
+        padding: 10px 0 20px 0
+        
+    }
+    .mainExamResult .containerExamResult .title{
+        text-align: center;
+        text-transform: uppercase;
+        padding: 10px;
+        font-size: 20px
+    }
+.containerContentResult {
+    width: 90%;
+    margin: 0 auto;
+
+}
+    .containerContentResult .content {
+        margin: auto;
+        font-weight: bold;
+        background: #F7F7F7;
+        padding: 20px 10px;
+    }
+    .containerContentResult .content .labelSearch {
+        margin: auto;
+        font-weight: bold
+    }
+
+.containerContentResult .content input{
+    padding: 10px;
+    width: 100%
+}
+.cusCate {
+    width: 50%;
+    padding: 10px;
+    font-weight: bold
+}
+
+.cusCate2 {
+    width: 0%;
+}
+.cateActive {
+    background: #F7F7F7;
+}
+.tableCheckResult table tr th {
+    height: 44px;
+    padding: 0px 30px 0 10px;
+}
+.tableCheckResult table tr td {
+    height: 44px;
+    padding: 0px 30px 0 10px;
+}
+table, th, td {
+    border: 1px solid black;
+}
+.cusInfoCheckResult {
+    margin: 10px 0;
+}
+.tableCheckResult{
+    overflow-x: scroll
+}
+.labelSearch{
+    width: 30%
+}
+.containerContentResult .content .form-row{
+    width: 70%
+}
+.bannerFaq {
+    background:none;
+    min-height: 100px;
+    position: relative;
+    margin: 10px auto;
+
+}
+.containerFaq{
+    width: 90%;
+    margin: 0 auto
+}
+.bannerFaq .title {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    font-size: 25px;
+    color: cornflowerblue
+}
+.containerFaq .mainFaq ul li {
+    list-style: none;
+    padding: 10px;
+    border: 1px groove #DADCE0
+}
+.mainEE{
+    margin: 30px 0
+}
+.containerEE {
+    width: 90%;
+    margin: 0 auto
+}
+.containerEE .left{
+    width: 0%;
+    display: none;
+}
+.containerEE .midEE{
+    width: 100%
+}
+.containerEE .right{
+    width: 100%
+}
+.containerEE .right .formRegis .title{
+    text-align: center;
+    padding: 20px;
+    font-size: 25px;
+    text-transform: uppercase;
+    font-weight: bold;
+    background: #E0A800
+}
+.mainEE .containerEE .form {
+    margin: 10px 0
+}
+
+.mainEE .containerEE .form-row {
+    margin: 30px 0;
+}
+
+.mainEE .containerEE .form-row input {
+    padding: 25px;
+    width: 100%;
+    outline: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+}
+
+
+.mainEE .containerEE .form-row textarea {
+    padding: 25px;
+    width: 100%;
+    outline: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+}
+
+.mainEE .containerEE button {
+    padding: 10px;
+    width: 50%;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #CED4DA;
+    background-color: #E0A800;
+    text-transform: uppercase;
+    font-weight: bold
+}
+
+.mainEE .containerEE button:hover {
+    background-color: #FF9600
+}
+
+.main .cusBannerEE .category {
+    /*padding: 0px 30px;*/
+    display: block;
+    position: relative;
+}
+
+
+.main .cusBannerEE .category .cat {
+    background-color: #6E1313;
+    padding: 10px 0px;
+}
+
+    .main .cusBannerEE .category .cat span {
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        padding: 0px 10px;
+    }
+
+.main .cusBannerEE .category ul li {
+    list-style: none;
+    display: list-item;
+}
+
+    .main .cusBannerEE .category ul li .defaultMenu {
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 0 24px;
+        line-height: 46px;
+        display: block;
+        border: 1px dotted #6E1313;
+        border-top: none;
+        font-weight: bold;
+    }
+.midEE .infor .title{
+    text-align: center;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color:#E0A800
+}
+.midEE .containerItem{
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px 0
+}
+.midEE .containerItem .csSpan{
+    font-weight: bold
+}
+.midEE .cusItem{
+    padding: 20px 0;
+    font-size: 15px
+}
+
+.st, .et{
+    width: 100%;
+    padding: 10px 0
+}
+.menuEEMobi .menu {
+    position: fixed;
+    width: 100%;
+    height: 76%;
+    top: 24%;
+    background: black;
+    z-index: 15;
+}
+.menuEEMobi .menu ul{
+    width: 80%;
+    margin: 0 auto
+}
+.menuEEMobi .menu ul li{
+    list-style: none;
+    padding: 10px;
+}
+.menuEEMobi .menu ul li a{
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    
+}
+.containerCourseDetail{
+    width: 90%;
+    margin: 30px auto
+}
+.containerCourseDetail .left{
+    width: 100%
+}
+.containerCourseDetail .right{
+    width: 100%
+}
+.containerCourseDetail .left .price{
+    font-weight: bold;
+    font-size: 20px;
+    padding: 10px 0
+}
+.containerCourseDetail .right .containerItem{
+    font-size: 18px
+}
+.containerCourseDetail .right .containerItem .cusItem{
+    padding: 10px 0
+}
+.cdSpan{
+    font-weight:bold;
+    
+}
+/* minwidth 768 */
+@media screen and (min-width: 768px) {
+    .containerCourseDetail .left {
+        width: 50%
+    }
+
+    .containerCourseDetail .right {
+        width: 50%;
+        padding:0 20px
+    }
+    .st, .et {
+        width: 50%;
+        padding: 10px 0
+    }
+    .bannerFaq .title {
+        font-size: 35px
+    }
+    .labelSearch {
+        width: 20%
+    }
+
+    .containerContentResult .content .form-row {
+        width: 80%
+    }
+    .tableCheckResult {
+        overflow-x: hidden;
+    }
+    .formRegister .form-row .left {
+        text-align: left;
+        width: 50%
+    }
+
+    .formRegister .form-row .right {
+        text-align: right;
+        width: 50%
+    }
+
+    .formRegister .form-row input {
+        padding: 10px;
+        width: 95%;
+        outline: none
+    }
+
+    .formRegister .form-row select {
+        padding: 10px;
+        width: 95%;
+        outline: none
+    }
+    .slider-nav {
+        width: 60%;
+        
+    }
+    .detailInfor .img img {
+        width: 300px;
+        border-radius: 10px
+    }
+    .detailInfor .inforLecture .text {
+        width: 50%
+    }
+    .detailInfor .img {
+        width: 50%
+    }
+    .main .aboutUsMain .whyChoose .left {
+        width: 50%;
+        padding-right: 20px
+    }
+
+    .main .aboutUsMain .whyChoose .right {
+        width: 50%;
+        align-items: center;
+        justify-content: center;
+        display: flex
+    }
+
+    .main .aboutUsMain .instituteInfor .left {
+        display: block;
+        width: 50%;
+        
+    }
+    .main .aboutUsMain .instituteInfor .right {
+        padding-left: 20px;
+        width: 50%;
+    }
+    .main .aboutUsMain .bannerAboutUs {
+        background-image: url("https://bachkhoa-aptech.edu.vn/public/assets/imgs/themes/inner-header-title.jpg");
+        background-position: center center;
+        background-size: cover;
+        min-height: 667px;
+        position: relative;
+        margin-bottom: 50px
+    }
+    .containerBannerAboutUs {
+        width: 60%;
+        margin: 0 auto;
+    }
+        .main .aboutUsMain .bannerAboutUs .title {
+            font-size: 30px
+        }
+        .main .aboutUsMain .bannerAboutUs .moreInforAboutUs {
+            font-size: 20px
+        }
+    .main .page2 {
+        padding: 30px 0;
+    }
+    .main .page2 .bg {
+        background-image: url("../images/banner/tubebanner-0247c6d0e0891.jpg");
+        background-position: center center;
+        background-size: cover;
+        display: flex;
+        min-height: 400px;
+    }
+    .main .page2 .bg .bgEl {
+        position: absolute;
+        right: 10%;
+        padding: 60px 0px;
+    }
+    .main .page2 .bg h2 {
+        font-size: 30px;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: white;
+        text-align: center;
+    }
+    .main .page2 .countdown {
+        padding: 30px 0;
+        color: white;
+    }
+    .main .page2 .countdown .countdownEl {
+        text-align: center;
+    }
+    .main .page2 .countdown .countdownEl span {
+        font-size: 17px;
+    }
+    .main .page2 .countdown .countdownEl .big-text {
+        font-size: 8rem;
+        line-height: 1;
+        margin: 0 30px;
+    }
+    .main .page2 .butt {
+        text-align: center;
+        padding: 20px;
+    }
+    .main .page2 .butt button {
+        padding: 10px;
+        width: 50%;
+        font-size: 20px;
+        font-weight: bold;
+        border: none;
+        border-radius: 20px;
+        outline: none;
+    }
+    .main .page2 .butt button:hover {
+        background-color: #6E1313;
+        color: white;
+    }
+    /* page3 */
+    .cusCourseItem {
+        padding: 10px;
+        width: 50%;
+    }
+    .containerCourseItem {
+        width: 80%;
+        margin: 20 auto;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .formCourse .left {
+        width: 35%;
+        text-align: center;
+        padding: 10px
+    }
+    .formCourse .right {
+        width: 65%;
+        display: block
+    }
+        .formCourse .left input {
+            padding: 15px;
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        .formCourse .left select {
+            padding: 15px;
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        .formCourse .left textarea {
+            padding: 15px;
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        .formCourse .left button {
+            padding: 15px;
+            width: 100%;
+            margin: 20px 0;
+        }
+
+    
+    .containerPage4 .img {
+        width: 70%;
+        display: block;
+        margin: auto 0
+    }
+
+    .containerPage4 .registerPage {
+        width: 30%;
+        margin: auto 0
+    }
+    .cusItemContact {
+        width: 33.33333334%;
+    }
+    .containerContactUs {
+        width: 80%;
+        margin: 0 auto
+    }
+    .main .ContactUsMain .bannerContactUs {
+        min-height: 604px;
+    }
+    .containerLecturer {
+        width: 70%;
+        margin: 0 auto;
+        background-color: white;
+        border-radius: 10px
+    }
+    .containerLecturer {
+        height: 350px
+    }
+    .menuDefault {
+        display: block;
+    }
+    .mobile-header {
+        display: none;
+    }
+    .menuMobileActive {
+        display: none;
+    }
+    .childMenu {
+        display: none;
+    }
+    .childCourseCategory {
+        display: none;
+    }
+    .menuDefault .right .subMenuCourse {
+        position: absolute;
+        z-index: 1;
+        box-shadow: -1px 3px 9px 0px rgba(0,0,0,0.67);
+        background-color: white;
+        left: 15%;
+        display: none;
+    }
+
+    .subMenuEE {
+        position: absolute;
+        z-index: 1;
+        background-color: white;
+        left: 15%;
+        box-shadow: -1px 3px 9px 0px rgba(0,0,0,0.67);
+        display: none;
+        width: 350px;
+    }
+    .subMenuEntranceExam:hover .subMenuEE {
+        display: block
+    }
+    .menuDefault .right .subMenuCourse li {
+        width: 300px;
+    }
+    .menuDefault .right .courseSubMenu:hover .subMenuCourse {
+        display: block;
+    }
+    .header .right ul li .menuA {
+        text-transform: uppercase;
+        font-size: 13px;
+        text-decoration: none;
+        padding: 0px 5px;
+        line-height: 35px;
+        display: inline-block;
+        font-weight: bold;
+    }
+    .header .left img {
+        width: 120px;
+    }
+    .header .right ul li {
+        list-style: none;
+        position: relative;
+        display: list-item;
+    }
+    .header .right ul li a:hover {
+        color: red;
+    }
+    .opacityAll {
+        display: none;
+    }
+    /* page1 */
+    .cusBanner {
+        width: 90%;
+        margin: 0 auto;
+    }
+    .main .cusBanner .category {
+        /*padding: 0px 30px;*/
+        display: block;
+        position: relative;
+    }
+    .main .cusBanner .mid {
+        width: 50%;
+    }
+    .main .cusBanner .category .cat {
+        background-color: #6E1313;
+        padding: 10px 0px;
+    }
+    .main .cusBanner .category .cat span {
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        padding: 0px 10px;
+    }
+    .main .cusBanner .category ul li {
+        list-style: none;
+        display: list-item;
+    }
+    .main .cusBanner .category ul li .defaultMenu {
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 0 24px;
+        line-height: 46px;
+        display: block;
+        border: 1px dotted #6E1313;
+        border-top: none;
+        border-right: none;
+        font-weight: bold;
+    }
+        .main .cusBanner .category ul li .defaultMenu i {
+            font-size: 10px;
+        }
+        .main .cusBanner .category ul li .defaultMenu span {
+            font-size: 10px;
+        }
+        .main .cusBanner .category ul li ul .subMenu {
+            left: 100%;
+            z-index: 17;
+            background-color: #6E1313;
+            top: 0;
+            width: 200%;
+            height: 300px;
+            position: absolute;
+            display: none;
+        }
+        .main .cusBanner .category ul li:hover ul .subMenu {
+            display: block
+        }
+        .main .cusBanner .category ul li ul li {
+            padding: 10px
+        }
+        .main .cusBanner .category ul li ul .subMenu a{
+            color: white;
+        }
+    .main .cusBanner .fa-chevron-left,
+    .fa-chevron-right {
+        font-size: 30px;
+        position: relative;
+        top: 50%;
+    }
+    .main .cusBanner .vCrs {
+        padding: 0px 30px;
+        border: none;
+        display: block;
+    }
+    .table-responsive {
+        height: 215px;
+        width: 100%;
+        overflow-y: auto;
+        border: none
+    }
+    .main .vCrs .table-responsive {
+        overflow: hidden;
+        border: none;
+    }
+    .main .vCrs table {
+        width: 100%;
+        border: none;
+    }
+    .main .vCrs td {
+        padding: 10px 20px 20px 20px;
+    }
+    .main .vCrs td .img {
+        text-align: center;
+    }
+    .main .vCrs td .price {
+        text-align: center;
+        font-weight: bold;
+        font-size: 16px;
+        padding-top: 10px;
+        color: red;
+    }
+    .main .vCrs td:hover .img h3 {
+        color: red;
+    }
+    .main .vCrs .table-bordered>thead>tr>th,
+    .table-bordered>tbody>tr>th,
+    .table-bordered>tfoot>tr>th,
+    .table-bordered>thead>tr>td,
+    .table-bordered>tbody>tr>td,
+    .table-bordered>tfoot>tr>td {
+        border: none;
+        border-bottom: 1px dotted gray;
+    }
+    /* common Course css */
+    .main .containerCourseMain {
+        width: 90%;
+        margin: 20px auto;
+    }
+    .containerCourseMain .cusCourseItem {
+        padding: 10px;
+        width: 33.333333%;
+    }
+    .containerCourseItem {
+        width: 70%;
+        margin: 0 auto;
+    }
+    /* Course css */
+    .main .containerCourseMain .left {
+        display: block;
+        width: 25%;
+    }
+    .main .containerCourseMain .right {
+        width: 75%;
+    }
+    /* footer */
+    .containerFooter {
+        width: 80%;
+        margin: 0 auto;
+    }
+    .footer .titleFooter {
+        text-align: center;
+        width: 100%;
+    }
+    .footer .titleFooter .slogan span {
+        text-transform: uppercase;
+        font-size: 30px;
+    }
+    .footer .titleFooter .contactInfor {
+        font-size: 18px;
+    }
+    .footer .titleFooter .contactInfor a i {
+        margin: 0 20px;
+    }
+    .footer .mainFooter .icon i {
+        font-size: 30px;
+    }
+    .cusFooter {
+        padding: 0 20px 0 0;
+        width: 50%;
+    }
+}
+
+@media screen and (min-width:1440px) {
+    .containerCourseDetail .left {
+        width: 30%
+    }
+
+    .containerCourseDetail .right {
+        width: 70%;
+        padding: 0 20px 0 200px;
+    }
+    .containerCourseDetail .right span{
+        font-size: 25px
+    }
+    .menuEEMobi{
+        display:none
+    }
+    .st, .et{
+        font-size: 20px
+    }
+    .mainEE{
+    margin: 30px 0
+}
+.containerEE {
+    width: 90%;
+    margin: 0 auto
+}
+.containerEE .left{
+    width: 25%;
+    display: block
+}
+.containerEE .midEE{
+    width: 50%
+}
+.containerEE .right{
+    width: 25%
+}
+.containerEE .right .formRegis .title{
+    text-align: center;
+    padding: 20px;
+    font-size: 25px;
+    text-transform: uppercase;
+    font-weight: bold;
+    background: #E0A800
+}
+.mainEE .containerEE .form {
+    margin: 10px 0
+}
+
+.mainEE .containerEE .form-row {
+    margin: 30px 0;
+}
+
+.mainEE .containerEE .form-row input {
+    padding: 25px;
+    width: 100%;
+    outline: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+}
+
+
+.mainEE .containerEE .form-row textarea {
+    padding: 25px;
+    width: 100%;
+    outline: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+}
+
+.mainEE .containerEE button {
+    padding: 10px;
+    width: 50%;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #CED4DA;
+    background-color: #E0A800;
+    text-transform: uppercase;
+    font-weight: bold
+}
+
+.mainEE .containerEE button:hover {
+    background-color: #FF9600
+}
+
+.main .cusBannerEE .category {
+    /*padding: 0px 30px;*/
+    display: block;
+    position: relative;
+}
+
+
+.main .cusBannerEE .category .cat {
+    background-color: #6E1313;
+    padding: 10px 0px;
+}
+
+    .main .cusBannerEE .category .cat span {
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        padding: 0px 10px;
+    }
+
+.main .cusBannerEE .category ul li {
+    list-style: none;
+    display: list-item;
+}
+
+    .main .cusBannerEE .category ul li .defaultMenu {
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 0 24px;
+        line-height: 46px;
+        display: block;
+        border: 1px dotted #6E1313;
+        border-top: none;
+        font-weight: bold;
+    }
+.midEE .infor .title{
+    text-align: center;
+    font-size: 30px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color:#E0A800
+}
+.midEE .containerItem{
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px 0
+}
+.midEE .containerItem .csSpan{
+    font-weight: bold
+}
+.midEE .cusItem{
+    padding: 20px 0;
+    font-size: 20px
+}
+    .bannerFaq {
+        background-image: url("https://ssl.gstatic.com/support/content/images/static/banners/youtube.svg");
+        background-position: center center;
+        background-size: cover;
+        min-height: 315px;
+        width: 70%;
+        position: relative;
+        margin: 30px auto
+    }
+
+    .containerFaq {
+        width: 70%;
+        margin: 0 auto
+    }
+    .cusCate {
+        width: 15%;
+        padding: 10px;
+    }
+
+    .cusCate2 {
+        width: 70%;
+    }
+    .labelSearch {
+        width: 10%
+    }
+
+    .containerContentResult .content .form-row {
+        width: 90%
+    }
+    .containerContentResult .content input {
+        padding: 10px;
+        width: 50%;
+    }
+    .formCourse .left {
+        width: 50%;
+        text-align: center;
+        padding: 10px 0 10px 300px
+    }
+    .formCourse .left form{
+        width: 50%;
+        text-align: center;
+    }
+    .formCourse .right {
+        width: 50%;
+        display: block
+    }
+    .page4 .registerPage .containerFormIndex {
+        width: 70%;
+        margin: 0px auto;
+    }
+    .containerPage4 .img {
+        width: 50%;
+        display: block;
+        margin: auto 0
+    }
+
+    .containerPage4 .registerPage {
+        width: 50%;
+        margin: auto 0
+    }
+    .containerContactUs {
+        width: 60%;
+        margin: 0 auto
+    }
+    .main .ContactUsMain .bannerContactUs .title {
+        font-size: 50px;
+    }
+    .cusPartner {
+        width: 70%;
+        margin: 20px auto;
+        text-align: center;
+        padding: 50px;
+        color: white;
+        top: 50%;
+        position: relative;
+        transform: translateY(-60%);
+    }
+
+    .logoPartner {
+        padding: 20px;
+        width: 182px
+    }
+
+    .institutePartner {
+        background: #D7D7D7;
+        height: 300px;
+        margin-bottom: 30px;
+        display: block
+    }
+
+        .institutePartner .title {
+            text-align: center;
+            padding: 20px 0 0 0
+        }
+
+            .institutePartner .title span {
+                text-transform: uppercase;
+                font-size: 30px
+            }
+    .containerLecturer {
+        width: 60%;
+        height: 350px
+    }
+    .cusInfor {
+        line-height: 50px
+    }
+    .main .aboutUsMain .whyChoose .left {
+        width: 35%;
+        padding-right: 50px;
+        padding-left: 10%;
+    }
+    .detailInfor .img img {
+        width: 250px;
+        border-radius: 10px
+    }
+    .detailInfor .inforLecture .text {
+        padding: 50px;
+        font-size: 15px;
+    }
+    .main .aboutUsMain .whyChoose .right {
+        width: 65%;
+        align-items: center;
+        justify-content: center;
+        display: flex
+    }
+    .main .aboutUsMain .instituteInfor .right {
+        padding-left: 20px;
+        width: 30%;
+    }
+    .table-responsive {
+        height: 300px;
+    }
+    .cusFooter {
+        padding: 0 20px 0 0;
+        width: 25%;
+    }
+    .header .left img {
+        width: 120px;
+    }
+    .header .right ul li {
+        list-style: none;
+        position: relative;
+        display: list-item;
+    }
+    .header .right ul li .menuA {
+        text-transform: uppercase;
+        font-size: 16px;
+        text-decoration: none;
+        padding: 0 24px;
+        line-height: 46px;
+        display: inline-block;
+        font-weight: bold;
+    }
+    .header .right ul li a:hover {
+        color: red;
+    }
+    .main .containerCourseMain {
+        width: 70%;
+        margin: 20 auto;
+    }
+    .cusCourseItem {
+        padding: 10px;
+        width: 25%;
+    }
+    /* page3 */
+}
+
+@media screen and (min-width:1920px) {
+    .bannerFaq {
+        background-image: url("https://ssl.gstatic.com/support/content/images/static/banners/youtube.svg");
+        background-position: center center;
+        background-size: cover;
+        min-height: 315px;
+        width: 50%;
+        position: relative;
+        margin: 30px auto
+    }
+
+    .containerFaq {
+        width: 50%;
+        margin: 0 auto
+    }
+    .table-responsive {
+        height: 400px;
+    }
+    .containerLecturer {
+        width: 50%;
+        height: 400px
+    }
+
+    .cusInfor {
+        line-height: 50px
+    }
+
+    .main .aboutUsMain .whyChoose .left {
+        width: 35%;
+        padding-right: 50px;
+        padding-left: 10%;
+    }
+
+    .detailInfor .img img {
+        width: 360px;
+        border-radius: 10px
+    }
+
+    .detailInfor .inforLecture .text {
+        padding: 50px;
+        font-size: 20px;
+    }
+}
+
+@media screen and (min-width:2560px) {
+    .table-responsive {
+        height: 535px;
+    }
+}
+
+
+/*Animation*/
+
+.menufix {
+    box-shadow: 0 0px 30px 5px grey;
+    animation-duration: 0.5s;
+    animation-delay: 0s;
+    animation-name: fadeInDown;
+    position: fixed;
+    background-color: white;
+    width: 100%;
+    z-index: 16;
+    top: 0;
+    padding: 10px 0px;
+}
+
+.childMenufix {
+    box-shadow: 0 0px 30px 5px grey;
+    animation-duration: 0.5s;
+    animation-delay: 0s;
+    animation-name: fadeInDown;
+    position: fixed;
+    background-color: white;
+    width: 100%;
+    z-index: 16;
+    top: 92px;
+}
+
+.marqueeAni {
+    animation: scroll-left 50s linear infinite;
+}
+
+.menuMobileActive {
+    display: block;
+    animation-duration: .6s;
+    animation-delay: 0s;
+    animation-name: fadeInDown;
+    z-index: 20;
+}
+
+.childMenuMobileActiveDown {
+    top: 142px;
+    animation-duration: .6s;
+    animation-delay: 0s;
+    animation-name: fadeInDown;
+    z-index: 16;
+}
+
+.childMenuMobileActiveUp {
+    top: -1000px;
+    animation-duration: 1s;
+    animation-delay: 0s;
+    animation-name: fadeInUp;
+    z-index: 16;
+}
+.fadeinAni {
+    animation-duration: 1s;
+    animation-delay: 0s;
+    animation-name: fadeIn;
+    z-index: 15;
+    opacity: .9 
+}
+@keyframes scroll-left {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes animatetop {
+    0% {
+        top: -300px;
+        opacity: 0;
+    }
+    20% {
+        top: -240px;
+        opacity: 0.20;
+    }
+    40% {
+        top: -180px;
+        opacity: 0.4;
+    }
+    60% {
+        top: -120px;
+        opacity: 0.6;
+    }
+    80% {
+        top: -60px;
+        opacity: 0.8;
+    }
+    100% {
+        top: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInDown {
+    0% {
+        /* opacity: 0; */
+        transform: translate3d(0, -100%, 0);
+    }
+    100% {
+        /* opacity: 1; */
+        transform: none;
+    }
+}
+
+@keyframes fadeInUp {
+    0% {
+        top: 142px;
+    }
+    100% {
+        top: -1000px;
+    }
+}
+@keyframes menuleft {
+    0% {
+        left: -300px;
+        opacity: 0;
+    }
+    100% {
+        left: 0;
+        opacity: 1;
+    }
+}
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0.9;
+    }
+}
+@keyframes boxs2 {
+    0% {
+        box-shadow: 0 0 0 0px rgba(255, 0, 0, 0.9);
+    }
+
+    70% {
+        box-shadow: 0 0 0 10px rgba(255, 0, 0, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0px rgba(255, 0, 0, 0);
+    }
+}

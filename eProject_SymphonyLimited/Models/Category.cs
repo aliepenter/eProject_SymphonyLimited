@@ -21,7 +21,7 @@ namespace eProject_SymphonyLimited.Models
         [Display(Name = "Level")]
         public int Level { get; set; }
 
-        [Display(Name = "Parent")]
+        [Display(Name = "Parent Id")]
         [Required(ErrorMessage = "Please choose parent category!")]
         public int ParentId { get; set; }
 

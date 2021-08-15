@@ -1,0 +1,121 @@
+﻿
+@{
+    ViewBag.Title = "EntranceExam";
+}
+
+
+<div class="mainEE">
+    <div class="menuEEMobi">
+        <div class="barEE" style="padding: 0 30px;font-size: 20px;">
+            <i class="fas fa-bars" id="barE"></i>
+        </div>
+        <div class="menu disNone" id="menuEE">
+            <div class="exit" style="text-align:right; padding: 10px">
+                <span id="exitEE">
+                    <i class="fa fa-times" aria-hidden="true" style="font-size: 20px; color: white"></i>
+                </span>
+            </div>
+            <ul>
+                @{ foreach (var item in ViewBag.admission)
+                    {
+                        <li id="">
+                            <a class="defaultMenu" href="">@item.Name</a>
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="containerEE flex">
+        <div class="left cusBannerEE">
+            <div class="category">
+                <div class="cat">
+                    <span>Admissions</span>
+                </div>
+                <div class="menu">
+                    <ul>
+                        @{ foreach (var item in ViewBag.admission)
+                            {
+                                <li id="">
+                                    <a class="defaultMenu" href="">@item.Name</a>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="midEE">
+            <div class="infor">
+                <div class="title">
+                    <span><span>Admission</span></span>
+                </div>
+                <div class="containerItem">
+                    <div class="name cusItem">
+                        <span><span class="csSpan">Admission's Name: </span>Tên kì tuyển sinh</span>
+                    </div>
+                    <div class="time flex">
+                        <div class="st">
+                            <span><span class="csSpan">Start Time: </span>Thòi gian bắt đầu</span>
+                        </div>
+                        <div class="et">
+                            <span><span class="csSpan">End Time: </span>Thòi gian kết thúc</span>
+                        </div>
+                    </div>
+                    <div class="stQuantity cusItem">
+                        <span><span class="csSpan">Admissions criteria: </span>Chỉ tiêu</span>
+                    </div>
+                    <div class="eePrice cusItem">
+                        <span><span class="csSpan">Entrance Exam Fees: </span>Giá kì thi đầu vào</span>
+                    </div>
+                    <div class="markPass cusItem">
+                        <span><span class="csSpan">Entry Point: </span>Điểm đầu vào</span>
+                    </div>
+                    <div class="course cusItem">
+                        <span><span class="csSpan">Course: </span>Khoá học</span>
+                    </div>
+                    <div class="coursePrice cusItem">
+                        <span><span class="csSpan">Course Fees: </span>Học phí</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+
+            <div class="formRegis">
+                <div class="title">
+                    <span>Register now!</span>
+                </div>
+                @using (Html.BeginForm("Application", "Lecturer", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form">
+                        <div class="form-row">
+                            <input type="type" name="name" value="" placeholder="Fullname*" />
+                        </div>
+                        <div class="form-row">
+                            <input type="type" name="name" value="" placeholder="Email*" />
+                        </div>
+                        <div class="form-row">
+                            <input type="type" name="name" value="" placeholder="Phone*" />
+                        </div>
+                        <div class="form-row">
+                            @{ foreach (var item in ViewBag.admission)
+                                {
+                                    <input type="type" name="name" value="@item.Name" placeholder="" disabled />
+                                }
+                            }
+                        </div>
+                        <div class="form-row">
+                            <textarea rows="5" placeholder="Give us questions"></textarea>
+                        </div>
+                        <div class="btnFormIndex" style="text-align: center">
+                            <button type="submit" style="animation: boxs2 1s infinite;">Apply</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

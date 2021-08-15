@@ -1,10 +1,4 @@
 ﻿using eProject_SymphonyLimited.Areas.Admin.Data;
-using eProject_SymphonyLimited.Areas.Admin.Data.Model;
-using eProject_SymphonyLimited.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace eProject_SymphonyLimited.Areas.Admin.Controllers
@@ -22,7 +16,12 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
             return View();
         }
 
-        public ActionResult NotFound404()
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        public ActionResult UnAuthorize()
         {
             return View();
         }
