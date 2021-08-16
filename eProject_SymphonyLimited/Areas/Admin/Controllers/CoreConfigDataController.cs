@@ -103,6 +103,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                     try
                     {
                         currentCoreConfigData.Name = ccd.Name;
+                        currentCoreConfigData.Value = ccd.Value;
                         currentCoreConfigData.Code = ccd.Name.ToLower().Replace(" ", "_");
                         db.SaveChanges();
                         return RedirectToAction("Index");

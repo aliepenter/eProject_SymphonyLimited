@@ -78,223 +78,238 @@
                                                 <ul>
                                                     <div class="subMenu">
                                                         @{
-                                                            <li class="" style="padding: 10px">
-                                                                <div class="">
-                                                                    <a href="" class="subMenuATag"></a>
-                                                                </div>
-                                                            </li>
+                                                        <li class="" style="padding: 10px">
+                                                            <div class="">
+                                                                <a href="" class="subMenuATag"></a>
+                                                            </div>
+                                                        </li>
+                                                        }
+                                </div>
+                                </ul>
+                                </li>
+                            }
+                                    }
+                                    </ul>
+                                    </li>
+                                    <li class="subMenuEntranceExam">
+                                        <a class="menuA" href="@Url.Action("EntranceExam","Home")">Entrance Examitaion</a>
+                                        <ul class="subMenuEE">
+                                            <li>
+                                                <a class="menuA" href="@Url.Action("EntranceExam","Home")">Upcoming Entrance Examination</a>
+                                            </li>
+                                            <li>
+                                                <a class="menuA" href="@Url.Action("ExamResult","Home")">Result</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a class="menuA" href="@Url.Action("About","Home")">About us</a>
+                                    </li>
+                                    <li>
+                                        <a class="menuA" href="@Url.Action("Faq","Home")">FAQ</a>
+                                    </li>
+                                    <li>
+                                        <a class="menuA" href="@Url.Action("Contact","Home")">Contact us</a>
+                                    </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mobile-header" id="headerMobile">
+                        <div class="containerHeader flex">
+                            <div class="left width20">
+                                <i class="fas fa-bars" id="menuBar"></i>
+                            </div>
+                            <div class="right width80">
+                                <div class="logo">
+                                    <a href="@Url.Action("Index","Home")"><img src="~/Content/images/Logo/coollogo_com-18441964-removebg-preview.png" alt="" width="150px"></a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="childMenu" id="childMenu">
+                        <div class="menu flex">
+                            <div class="btnBar width20">
+                                <div class="bor" id="childBar">
+                                    <i class="fas fa-chevron-right" id="childBarI"></i>
+                                </div>
+                            </div>
+                            <div class="btnSearch width80">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="childCourseCategory" id="childCourseCategory">
+                        <div class="menu">
+                            <ul>
+                                @{ foreach (var item in ViewBag.categoryLevel2)
+                                    {
+                                        <li id="fLi" style="padding-top: 20px; padding-left:20%; border-bottom: 1px solid white;">
+                                            <a class="defaultMenu" href="" style="color: white; text-transform: uppercase;">@item.Name</a>
+                                            @*<ul>
+                                                    <div class="subMenu flex" id="subMenu">
+
+                                                        @{
+                                                            foreach (var subItem in ViewBag.categoryLevel3)
+                                                            {
+                                                                if (item.EntityId == subItem.ParentId)
+                                                                {
+                                                                <li class="width20" style="display: inline-block">
+                                                                    <div class="">
+                                                                        <a href="" class="subMenuATag">@subItem.Name</a>
+                                                                    </div>
+                                                                </li>
+                                                            }
+                                                        }
                                                         }
                                                     </div>
-                                                </ul>
-                                            </li>
-                                        }
+                                                </ul>*@
+                                        </li>
                                     }
-                                </ul>
-                            </li>
-                            <li class="subMenuEntranceExam">
-                                <a class="menuA" href="@Url.Action("EntranceExam","Home")">Entrance Examitaion</a>
-                                <ul class="subMenuEE">
-                                    <li>
-                                        <a class="menuA" href="@Url.Action("EntranceExam","Home")">Upcoming Entrance Examination</a>
-                                    </li>
-                                    <li>
-                                        <a class="menuA" href="@Url.Action("ExamResult","Home")">Result</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a class="menuA" href="@Url.Action("About","Home")">About us</a>
-                            </li>
-                            <li>
-                                <a class="menuA" href="@Url.Action("Faq","Home")">FAQ</a>
-                            </li>
-                            <li>
-                                <a class="menuA" href="@Url.Action("Contact","Home")">Contact us</a>
-                            </li>
-                        </ul>
+                                }
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="mobile-header" id="headerMobile">
-            <div class="containerHeader flex">
-                <div class="left width20">
-                    <i class="fas fa-bars" id="menuBar"></i>
-                </div>
-                <div class="right width80">
-                    <div class="logo">
-                        <a href="@Url.Action("Index","Home")"><img src="~/Content/images/Logo/coollogo_com-18441964-removebg-preview.png" alt="" width="150px"></a>
+                    <div class="marquee">
+                        <div class="text">
+                            <p class="marqueeAni">Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores deserunt iusto non accusantium, nisi quae repellendus culpa suscipit doloremque rem nam. Dicta asperiores labore itaque ratione quam magnam placeat unde?</p>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="main">
+                        @RenderBody()
+
                     </div>
 
-                </div>
-            </div>
-        </div>
-        <div class="childMenu" id="childMenu">
-            <div class="menu flex">
-                <div class="btnBar width20">
-                    <div class="bor" id="childBar">
-                        <i class="fas fa-chevron-right" id="childBarI"></i>
-                    </div>
-                </div>
-                <div class="btnSearch width80">
-
-                </div>
-            </div>
-        </div>
-        <div class="childCourseCategory" id="childCourseCategory">
-            <div class="menu">
-                <ul>
-                    @{ foreach (var item in ViewBag.categoryLevel2)
-                        {
-                            <li id="fLi" style="padding-top: 20px; padding-left:20%; border-bottom: 1px solid white;">
-                                <a class="defaultMenu" href="" style="color: white; text-transform: uppercase;">@item.Name</a>
-                                @*<ul>
-                                        <div class="subMenu flex" id="subMenu">
-
-                                            @{
-                                                foreach (var subItem in ViewBag.categoryLevel3)
-                                                {
-                                                    if (item.EntityId == subItem.ParentId)
+                    <div class="footer">
+                        <div class="titleFooter">
+                            <div class="logo">
+                                <img src="~/Content/images/Logo/coollogo_com-18441964-removebg-preview.png" alt="" width="200px">
+                            </div>
+                            <div class="slogan">
+                                <span>Symphony Ltd. International IT Training Institute</span>
+                            </div>
+                            <div class="contactInfor">
+                                <span><i class="fa fa-phone" aria-hidden="true"></i> HOTLINE: <span style="font-weight: bold">+84818 260 399</span> <a href=""><i class="fab fa-facebook-f"></i> </a><a href=""><i class="fas fa-envelope"></i></a></span>
+                            </div>
+                        </div>
+                        <div class="mainFooter">
+                            <div class="containerFooter flex">
+                                <div class="contact cusFooter">
+                                    <div class="title">
+                                        <span>Contact</span>
+                                    </div>
+                                    <div class="item">
+                                        <div class="address cusItemFooter flex">
+                                            <div class="icon width20">
+                                                <i class="fas fa-map-marked-alt"></i>
+                                                <!-- <i class="fa fa-phone" aria-hidden="true"></i>
+                                                <i class="fas fa-envelope"></i> -->
+                                            </div>
+                                            <div class="infor width80">
+                                                @{
+                                                    if (ViewBag.addressInFooter != null)
                                                     {
-                                                    <li class="width20" style="display: inline-block">
-                                                        <div class="">
-                                                            <a href="" class="subMenuATag">@subItem.Name</a>
-                                                        </div>
-                                                    </li>
+                                                        <span>@ViewBag.addressInFooter.Value</span>
+                                                    }
                                                 }
-                                            }
-                                            }
+                                            </div>
                                         </div>
-                                    </ul>*@
-                            </li>
-                        }
-                    }
-                </ul>
-            </div>
-        </div>
-        <div class="marquee">
-            <div class="text">
-                <p class="marqueeAni">Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores deserunt iusto non accusantium, nisi quae repellendus culpa suscipit doloremque rem nam. Dicta asperiores labore itaque ratione quam magnam placeat unde?</p>
-            </div>
-        </div>
-    </div>
-    <div class="main">
-        @RenderBody()
-
-    </div>
-
-    <div class="footer">
-        <div class="titleFooter">
-            <div class="logo">
-                <img src="~/Content/images/Logo/coollogo_com-18441964-removebg-preview.png" alt="" width="200px">
-            </div>
-            <div class="slogan">
-                <span>Symphony Ltd. International IT Training Institute</span>
-            </div>
-            <div class="contactInfor">
-                <span><i class="fa fa-phone" aria-hidden="true"></i> HOTLINE: <span style="font-weight: bold">+84818 260 399</span> <a href=""><i class="fab fa-facebook-f"></i> </a><a href=""><i class="fas fa-envelope"></i></a></span>
-            </div>
-        </div>
-        <div class="mainFooter">
-            <div class="containerFooter flex">
-                <div class="contact cusFooter">
-                    <div class="title">
-                        <span>Contact</span>
-                    </div>
-                    <div class="item">
-                        <div class="address cusItemFooter flex">
-                            <div class="icon width20">
-                                <i class="fas fa-map-marked-alt"></i>
-                                <!-- <i class="fa fa-phone" aria-hidden="true"></i>
-                                <i class="fas fa-envelope"></i> -->
-                            </div>
-                            <div class="infor width80">
-                                <span>xxx</span>
-                            </div>
-                        </div>
-                        <div class="phone cusItemFooter flex">
-                            <div class="icon width20">
-                                <i class="fa fa-phone" aria-hidden="true"></i>
-                            </div>
-                            <div class="infor width80">
-                                <span>xxx</span>
-                            </div>
-                        </div>
-                        <div class="mail cusItemFooter flex">
-                            <div class="icon width20">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div class="infor width80">
-                                <span>xxx</span>
+                                        <div class="phone cusItemFooter flex">
+                                            <div class="icon width20">
+                                                <i class="fa fa-phone" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="infor width80">
+                                                @{
+                                                    if (ViewBag.phoneInFooter != null)
+                                                    {
+                                                        <span>Hotline: @ViewBag.phoneInFooter.Value</span>
+                                                    }
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="mail cusItemFooter flex">
+                                            <div class="icon width20">
+                                                <i class="fas fa-envelope"></i>
+                                            </div>
+                                            <div class="infor width80">
+                                                @{
+                                                    if (ViewBag.emailInFooter != null)
+                                                    {
+                                                        <span>Email: @ViewBag.emailInFooter.Value</span>
+                                                    }
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="aboutInstitute cusFooter">
+                                    <div class="title">
+                                        <span>About Symphony ltd</span>
+                                    </div>
+                                    <div class="item">
+                                        <ul>
+                                            <li>
+                                                <a href="@Url.Action("Index","Home")">Home Page</a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Action("About","Home")">About Us</a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Action("Faq","Home")">FAQ</a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Action("Contact","Home")">Contact Us</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="map cusFooter">
+                                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.6576008138977!2d105.78126221534751!3d21.04638198598892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab3b4220c2bd%3A0x1c9e359e2a4f618c!2sB%C3%A1ch%20Khoa%20Aptech!5e0!3m2!1svi!2s!4v1628077954173!5m2!1svi!2s"
+                                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="aboutInstitute cusFooter">
-                    <div class="title">
-                        <span>About Symphony ltd</span>
-                    </div>
-                    <div class="item">
-                        <ul>
-                            <li>
-                                <a href="@Url.Action("Index","Home")">Home Page</a>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("About","Home")">About Us</a>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("Faq","Home")">FAQ</a>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("Contact","Home")">Contact Us</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="map cusFooter">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.6576008138977!2d105.78126221534751!3d21.04638198598892!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab3b4220c2bd%3A0x1c9e359e2a4f618c!2sB%C3%A1ch%20Khoa%20Aptech!5e0!3m2!1svi!2s!4v1628077954173!5m2!1svi!2s"
-                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
-    <script src="~/Scripts/js/jquery.min.js"></script>
-    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    <script src="~/Scripts/js/slick.min.js"></script>
-    <script src="~/Scripts/js/owl.carousel.min.js"></script>
-    <script src="~/Scripts/js/jquery.validate.min.js"></script>
-    <script src="~/Scripts/js/bootstrap.min.js"></script>
-    <script src="~/Scripts/js/wow.min.js"></script>
-    <script>
-        new WOW().init();
-    </script>
-    <script src="~/Scripts/js/scritp.js?v=@Guid.NewGuid().ToString()"></script>
-    <script>
+                    <script src="~/Scripts/js/jquery.min.js"></script>
+                    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+                    <script src="~/Scripts/js/slick.min.js"></script>
+                    <script src="~/Scripts/js/owl.carousel.min.js"></script>
+                    <script src="~/Scripts/js/jquery.validate.min.js"></script>
+                    <script src="~/Scripts/js/bootstrap.min.js"></script>
+                    <script src="~/Scripts/js/wow.min.js"></script>
+                    <script>
+                        new WOW().init();
+                    </script>
+                    <script src="~/Scripts/js/scritp.js?v=@Guid.NewGuid().ToString()"></script>
+                    <script>
 
-        var baseUrl = window.location.protocol + "//" + window.location.host + "/";
-
-
-        $.ajax({
-            type: "GET",
-            url: baseUrl + "Home/GetChildCategory",
-            success: function (res) {
-
-                $('.getId').mouseover(function () {
-                    var x = this.id;
-                    $.each(res.data, function (index, value) {
-                        if (value.ParentId == x) {
-                            value.Name
-                        }
-                    });
-                });
-
-            }
-        })
-    </script>
+                        var baseUrl = window.location.protocol + "//" + window.location.host + "/";
 
 
-</body>
+                        $.ajax({
+                            type: "GET",
+                            url: baseUrl + "Home/GetChildCategory",
+                            success: function (res) {
 
-</html>
+                                $('.getId').mouseover(function () {
+                                    var x = this.id;
+                                    $.each(res.data, function (index, value) {
+                                        if (value.ParentId == x) {
+                                            value.Name
+                                        }
+                                    });
+                                });
+
+                            }
+                        })
+                    </script>
+
+
+                </body>
+
+            </html>

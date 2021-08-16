@@ -101,11 +101,7 @@
                             <input type="type" name="name" value="" placeholder="Phone*" />
                         </div>
                         <div class="form-row">
-                            @{ foreach (var item in ViewBag.admission)
-                                {
-                                    <input type="type" name="name" value="@item.Name" placeholder="" disabled />
-                                }
-                            }
+                            <input type="type" name="name" value="Admission" placeholder="" disabled />
                         </div>
                         <div class="form-row">
                             <textarea rows="5" placeholder="Give us questions"></textarea>

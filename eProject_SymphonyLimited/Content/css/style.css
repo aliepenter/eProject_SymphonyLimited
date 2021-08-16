@@ -705,7 +705,7 @@ body {
 }
 /* css page4*/
 .page4 {
-   
+    padding: 30px 0;
     position: relative;
 }
 .page4 .registerPage{
@@ -773,8 +773,14 @@ body {
             .page4 .registerPage .containerFormIndex button:hover {
                 background-color: #FF9600
             }
+.containerPage4 {
+    width: 90%;
+    margin: 0 auto;
+    background: lavender;
+    border-radius: 10px
+}
 .containerPage4 .img {
-    display: none
+    display: none;
 }
 .containerPage4 .registerPage {
     width: 100%;
