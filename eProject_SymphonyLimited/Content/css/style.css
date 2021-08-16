@@ -1,6 +1,10 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box
+}
+body {
+    font-family: Roboto,sans-serif;
 }
 .institutePartner{
     display:none;
@@ -17,8 +21,11 @@
     .cusLecturer:hover img{
         border: 2px solid #884049;
     }
+    .cusLecturer span{
+        margin: 10px 0
+    }
 .slider-nav {
-    width: 100%;
+    width: 65%;
     margin: 20px auto;
     text-align: center;
     padding: 20px;
@@ -53,7 +60,7 @@
 }
 
 .mobile-header .right {
-    text-align: center;
+    
 }
 
 .mobile-menu {
@@ -92,7 +99,7 @@
 /* Header css */
 
 .containerHeader {
-    width: 70%;
+    width: 90%;
     margin: 0 auto;
 }
 
@@ -128,7 +135,6 @@
 
 /* main css */
 .main .page1{
-    margin: 20px 0;
 }
 .main .page1 .category {
     display: none;
@@ -153,68 +159,52 @@
 /*Page2*/
 
 .main .page2 {
-    padding: 30px 0;
 }
-
-.main .page2 .bg {
-    background-image: url("../images/banner/tubebanner-0247c6d0e0891.jpg");
-    background-position: center center;
-    background-size: cover;
+.main .page2 .bgPage2{
+    background: #F8FCFC;
+    padding: 40px 0
+}
+.main .page2 .title{
+    justify-content:center;
+    align-items: center;
     display: flex;
-    min-height: 400px;
+    text-transform: uppercase
 }
+.main .page2 .title h1{
+    padding: 0 10px 0 15px;
+    font-size: 36px;
+    font-weight: 700;
 
-.main .page2 .bg .bgEl {
-    position: absolute;
-    right: 10%;
-    padding: 60px 0px;
 }
+.main .page2 .title h2{
+    font-size: 22px;
+    text-align: center
 
-.main .page2 .bg h2 {
-    font-size: 20px;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: white;
-    text-align: center;
 }
+.main .page2 .title h2 p{
+    font-weight: 700;
 
-.main .page2 .countdown {
-    padding: 30px 0;
-    color: white;
 }
-
-.main .page2 .countdown .countdownEl {
-    text-align: center;
+.reasonText h2{
+    font-size: 22px;
+    font-weight: 700;
 }
-
-.main .page2 .countdown .countdownEl span {
-    font-size: 12px;
+.reasonText h2 span{
+    font-size: 16px;
+    display: block;
+    padding: 5px 0;
+    line-height: 22px;
+    height: 48px;
+    overflow: hidden;
 }
-
-.main .page2 .countdown .countdownEl .big-text {
-    font-size: 3rem;
-    line-height: 1;
-    margin: 0 10px;
+.containerReason{
+    width: 90%;
+    margin: 0 auto
 }
-
-.main .page2 .butt {
-    text-align: center;
-    padding: 10px;
+.cusItemReason{
+    width: 100%;
 }
-
-.main .page2 .butt button {
-    padding: 10px;
-    width: 50%;
-    font-size: 12px;
-    font-weight: bold;
-    border: none;
-    border-radius: 20px;
-    outline: none;
-}
-
-
 /* css Footer */
-
 .containerFooter {
     width: 80%;
     margin: 0 auto;
@@ -228,6 +218,8 @@
 .footer .titleFooter .slogan span {
     text-transform: uppercase;
     font-size: 20px;
+        font-weight: 500;
+
 }
 
 .footer .titleFooter .contactInfor {
@@ -292,7 +284,7 @@
 }
 
 .cusItemFooter .icon {
-    text-align: center;
+    text-align: left;
 }
 
 
@@ -538,14 +530,16 @@
 .main .instituteLecturers {
     /*height: 659px;*/
     width: 100%;
-    height: 800px;
+    height: 850px;
     background-image: url('../images/banner/By Design.jpg');
+    background-position: center center;
+    background-size: cover
 }
 .cusInfor {
     line-height: 30px
 }
 .containerLecturer {
-    height: 400px
+    /*height: 400px*/
 }
 .containerLecturer {
     width: 90%;
@@ -555,17 +549,22 @@
 }
 
 .detailInfor .inforLecture .text {
-    padding: 20px
+    padding: 20px;
+    width: 100%;
 }
-
+.detailInfor .img {
+    padding: 20px;
+    width: 100%;
+}
+.detailInfor .img .slider-for{
+    padding: 0 24px;
+}
 .detailInfor .text .name span {
     color: #513079;
     font-weight: bold
 }
 
-.detailInfor .img {
-    padding: 10px
-}
+
 
     .detailInfor .img img {
         width: 200px;
@@ -576,7 +575,7 @@
     background-image: url("https://bachkhoa-aptech.edu.vn/public/assets/imgs/contact/banner-contact.jpg");
     background-position: center center;
     background-size: cover;
-    min-height: 200px;
+    min-height: 300px;
     position: relative;
 }
 
@@ -589,7 +588,7 @@
         .main .ContactUsMain .bannerContactUs .title span {
             font-weight: bold;
             color: #F9B248;
-            font-size: 50px;
+            font-size: 30px;
             border-bottom: 3px solid #F9B248;
         }
 .main .ContactUsMain .title{ 
@@ -604,21 +603,32 @@
     .main .ContactUsMain .title p {
         font-size: 20px
     }
+.ContactUsMain .content {
+    background: #EBEBEB;
+    padding: 20px 0;
+    margin: 20px 0
+    
+}
 .containerContactUs{
     width: 90%;
     margin: 0 auto
 }
 .cusItemContact {
     width: 100%;
-    margin: 50px 0;
-    height: 200px;
-    text-align: center;
     padding: 10px;
 }
-    .cusItemContact .item {
-        background: #EBEBEB;
-        width: 100%
+    .cusItemContact .itemC {
+        width: 100%;
+        align-items: center;
+        text-align: center;
+        padding: 20px 0;
     }
+    .cusContact{
+        width: 30%
+    }
+.cusContact1 {
+    width: 70%
+}
 .cusItemContact span{
     font-size: 18px
 }
@@ -635,7 +645,7 @@
     margin: 0 auto
 }
 .formRegister .form-row{
-    margin: 30px 0
+   
 }
     .formRegister .form-row .left {
         text-align: left;
@@ -663,7 +673,8 @@
     .formRegister .form-row textarea {
         width: 100%;
         outline: none;
-        padding: 10px
+        padding: 10px;
+        margin-top: 10px
     }
 .formRegister .form-btn{
     width: 100%;
@@ -1118,8 +1129,66 @@ table, th, td {
     font-weight:bold;
     
 }
+.cusItemReason .img{
+    width: 40%
+}
+.cusItemReason .reasonText {
+    width: 60%
+}
+.cusItemReason {
+    text-align:center;
+    padding: 0px
+}
 /* minwidth 768 */
 @media screen and (min-width: 768px) {
+    .cusItemContact .itemC {
+        width: 33.333334%;;
+    }
+
+    .cusContact {
+        width: 100%
+    }
+
+    .cusContact1 {
+        width: 100%
+    }
+    .cusItemReason {
+    padding: 20px
+}
+    .cusItemReason .img{
+    width: 100%
+}
+.cusItemReason .reasonText {
+    width: 100%;
+}
+    .text-violet{
+        margin-bottom: 30px
+    }
+    .reasonText h2{
+    font-size: 24px;
+    font-weight: 700;
+}
+.reasonText h2 span{
+    font-size: 18px;
+    display: block;
+    padding: 5px 0;
+    line-height: 22px;
+    height: 48px;
+    overflow: hidden;
+}
+.containerReason{
+    width: 80%;
+    margin: 0 auto
+}
+.cusItemReason{
+    width: 50%;
+}
+    .main .ContactUsMain .bannerContactUs .title span {
+        font-size: 50px;
+    }
+    .detailInfor .img .slider-for {
+        padding: 0;
+    }
     .containerCourseDetail .left {
         width: 50%
     }
@@ -1167,7 +1236,7 @@ table, th, td {
         outline: none
     }
     .slider-nav {
-        width: 60%;
+        width: 75%;
         
     }
     .detailInfor .img img {
@@ -1220,58 +1289,6 @@ table, th, td {
             font-size: 20px
         }
     .main .page2 {
-        padding: 30px 0;
-    }
-    .main .page2 .bg {
-        background-image: url("../images/banner/tubebanner-0247c6d0e0891.jpg");
-        background-position: center center;
-        background-size: cover;
-        display: flex;
-        min-height: 400px;
-    }
-    .main .page2 .bg .bgEl {
-        position: absolute;
-        right: 10%;
-        padding: 60px 0px;
-    }
-    .main .page2 .bg h2 {
-        font-size: 30px;
-        font-weight: bold;
-        text-transform: uppercase;
-        color: white;
-        text-align: center;
-    }
-    .main .page2 .countdown {
-        padding: 30px 0;
-        color: white;
-    }
-    .main .page2 .countdown .countdownEl {
-        text-align: center;
-    }
-    .main .page2 .countdown .countdownEl span {
-        font-size: 17px;
-    }
-    .main .page2 .countdown .countdownEl .big-text {
-        font-size: 8rem;
-        line-height: 1;
-        margin: 0 30px;
-    }
-    .main .page2 .butt {
-        text-align: center;
-        padding: 20px;
-    }
-    .main .page2 .butt button {
-        padding: 10px;
-        width: 50%;
-        font-size: 20px;
-        font-weight: bold;
-        border: none;
-        border-radius: 20px;
-        outline: none;
-    }
-    .main .page2 .butt button:hover {
-        background-color: #6E1313;
-        color: white;
     }
     /* page3 */
     .cusCourseItem {
@@ -1280,11 +1297,28 @@ table, th, td {
     }
     .containerCourseItem {
         width: 80%;
-        margin: 20 auto;
+        margin: 20px auto;
     }
 }
 
 @media screen and (min-width: 1024px) {
+    .main .page2 .title h1 {
+        font-size: 94px;
+    }
+
+    .main .page2 .title h2 {
+        font-size: 40px;
+        padding-left: 10px;
+        text-align:left
+    }
+    .containerReason {
+        width: 90%;
+        margin: 0 auto
+    }
+
+    .cusItemReason {
+        width: 25%;
+    }
     .formCourse .left {
         width: 35%;
         text-align: center;
@@ -1330,7 +1364,7 @@ table, th, td {
         margin: auto 0
     }
     .cusItemContact {
-        width: 33.33333334%;
+        width: 100% ;
     }
     .containerContactUs {
         width: 80%;
@@ -1346,7 +1380,7 @@ table, th, td {
         border-radius: 10px
     }
     .containerLecturer {
-        height: 350px
+        /*height: 350px*/
     }
     .menuDefault {
         display: block;
@@ -1392,9 +1426,9 @@ table, th, td {
     }
     .header .right ul li .menuA {
         text-transform: uppercase;
-        font-size: 13px;
+        font-size: 15px;
         text-decoration: none;
-        padding: 0px 5px;
+        padding: 0px 10px;
         line-height: 35px;
         display: inline-block;
         font-weight: bold;
@@ -1415,8 +1449,7 @@ table, th, td {
     }
     /* page1 */
     .cusBanner {
-        width: 90%;
-        margin: 0 auto;
+        width: 100%;
     }
     .main .cusBanner .category {
         /*padding: 0px 30px;*/
@@ -1424,7 +1457,7 @@ table, th, td {
         position: relative;
     }
     .main .cusBanner .mid {
-        width: 50%;
+        width: 100%;
     }
     .main .cusBanner .category .cat {
         background-color: #6E1313;
@@ -1571,11 +1604,22 @@ table, th, td {
     }
     .cusFooter {
         padding: 0 20px 0 0;
-        width: 50%;
+        width: 33.333334%;
     }
 }
 
 @media screen and (min-width:1440px) {
+    .slider-nav {
+        width: 40%;
+    }
+    .containerReason {
+        width: 70%;
+        margin: 0 auto
+    }
+
+    .cusItemReason {
+        width: 25%;
+    }
     .containerCourseDetail .left {
         width: 30%
     }
@@ -1816,7 +1860,7 @@ table, th, td {
             }
     .containerLecturer {
         width: 60%;
-        height: 350px
+       /* height: 350px*/
     }
     .cusInfor {
         line-height: 50px
@@ -1849,7 +1893,7 @@ table, th, td {
     }
     .cusFooter {
         padding: 0 20px 0 0;
-        width: 25%;
+        width: 33.333334%;
     }
     .header .left img {
         width: 120px;
@@ -1902,7 +1946,7 @@ table, th, td {
     }
     .containerLecturer {
         width: 50%;
-        height: 400px
+        /*height: 400px*/
     }
 
     .cusInfor {

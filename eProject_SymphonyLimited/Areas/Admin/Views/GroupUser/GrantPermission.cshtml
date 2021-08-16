@@ -4,11 +4,11 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>GrantPermission</h2>
+<h2>Grant Permissions</h2>
 
 <div class="form-inline">
-    @Html.DropDownList("GroupUser", null, new { @class = "form-control" })
-    @Html.DropDownList("Business", null, new { @class = "form-control" })
+    @Html.DropDownList("GroupUser", null, new { @class = "form-control mr-1 mb-2" })
+    @Html.DropDownList("Business", null, new { @class = "form-control mb-2" })
 </div>
 
 <div class="row lst_permission">
@@ -29,7 +29,7 @@
                     $.each(res, function (idex, item) {
                         html += `<div class="col-md-4">
                                     <label>
-                                        <input class="item_per" type="checkbox"  ${item.IsGranted ? "checked" : ""} ${item.IsAdmin ? "disabled" : ""}   name="name" value=" ${item.EntityId}"/>${item.Description}
+                                        <input class="item_per mr-1" type="checkbox"  ${item.IsGranted ? "checked" : ""} ${item.IsAdmin ? "disabled" : ""}   name="name" value=" ${item.EntityId}"/>${item.Description}
                                     </label>
                                 </div>`;
                     });

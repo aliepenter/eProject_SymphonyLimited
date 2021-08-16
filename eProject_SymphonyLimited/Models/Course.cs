@@ -13,7 +13,7 @@ namespace eProject_SymphonyLimited.Models
         public int EntityId { get; set; }
 
         [Display(Name = "Course Name")]
-        [Required(ErrorMessage = "Please enter course's name!")]
+        [Required(ErrorMessage = "Please enter course name!")]
         public string Name { get; set; }
 
         [Display(Name = "Time")]
@@ -21,7 +21,6 @@ namespace eProject_SymphonyLimited.Models
         public string Time { get; set; }
 
         [Display(Name = "Description")]
-        [Required(ErrorMessage = "Please enter course's description!")]
         public string Description { get; set; }
 
         [Display(Name = "Price")]

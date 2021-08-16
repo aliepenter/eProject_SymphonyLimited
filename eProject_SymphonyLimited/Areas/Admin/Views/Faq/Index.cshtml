@@ -1,22 +1,33 @@
-﻿@{
+﻿@model IEnumerable<eProject_SymphonyLimited.Models.Faq>
+
+@{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Faqs</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<div class="form-inline">
-    <input type="search" name="key" id="key" value="" />
-    <select id="type">
-        <option value="EntityId" selected>Id</option>
-        <option value="Question">Question</option>
-        <option value="Answer">Answer</option>
-    </select>
+@Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary float-left mb-3" })
+<div class="form-inline mb-3 float-right">
+    <div class="input-group">
+        <label class="font-weight-bold m-0 mr-1 d-flex align-items-center">Search : </label>
+        <input type="text" name="key" id="key" value="" class="form-control mr-1 bg-light border-0 small" placeholder="Enter to search..." aria-label="Search" aria-describedby="basic-addon2">
+    </div>
+    <div class="input-group">
+        <label class="font-weight-bold m-0 mr-1 d-flex align-items-center">Search By : </label>
+        <select id="type" class="form-control">
+            <option value="EntityId" selected>Entity Id</option>
+            <option value="Question">Question</option>
+            <option value="Answer">Answer</option>
+        </select>
+    </div>
 </div>
-<table class="table"></table>
+
+<div class="table-responsive">
+    <table class="table table-bordered"></table>
+</div>
+
 <ul class="pagination"></ul>
+
 @section scripts{
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script>
@@ -30,17 +41,17 @@
                         url: baseUrl + "Admin/Faq/Get",
                         data: { page: page, type: type, key: key },
                         success: function (res) {
-                            var _html = '<tr><th>Id</th><th>Question</th><th>Answer</th><th></th></tr>';
+                            var _html = ' <thead class="thead-dark"><tr><th>Entity Id</th><th>Question</th><th>Answer</th><th>Action</th></tr></thead>';
                             for (var item of JSON.parse(res.Data)) {
-                                _html += '<tr>' +
+                                _html += '<tbody><tr>' +
                                     '<td>' + item.EntityId + '</td>' +
                                     '<td>' + item.Question + '</td>' +
                                     '<td>' + item.Answer + '</td>' +
                                     '<td>' +
-                                    '<button class="btn btn-warning btn-edit mr-1" data-id="' + item.EntityId + '">Edit</button>' +
-                                    '<button class="btn btn-danger btn-delete" data-id="' + item.EntityId + '">Delete</button>' +
+                                    '<button class="btn btn-warning btn-edit mr-1 mb-1" data-id="' + item.EntityId + '">Edit</button>' +
+                                    '<button class="btn btn-danger btn-delete mb-1" data-id="' + item.EntityId + '">Delete</button>' +
                                     '</td>'
-                                    + '</tr>';
+                                    + '</tr></tbody>';
                             }
                             $('.table').html(_html);
                             var pages = '';
@@ -54,7 +65,7 @@
                             $(".pagination").html(pages);
                         }
                     })
-                }
+                },
             }
             manager.load();
             $(document).on("click", ".btn-edit", function () {
@@ -68,6 +79,11 @@
                 manager.load(page, type, key);
             });
             $('#key').keyup(function () {
+                var key = $("#key").val(),
+                    type = $("#type").val();
+                manager.load(1, type, key);
+            });
+            $(document).on("change", "#key", function () {
                 var key = $("#key").val(),
                     type = $("#type").val();
                 manager.load(1, type, key);

@@ -1,5 +1,13 @@
-﻿@{ ViewBag.Title = "Contact"; }
-
+﻿@{
+    ViewBag.Title = "Contact";
+}
+<script type="text/javascript">
+    window.onload = function () {
+        // code
+        document.getElementById('active').classList.add("active")
+    };
+    
+</script>
 <div class="ContactUsMain">
     <div class="bannerContactUs">
         <div class="containerBannerContactUs">
@@ -17,45 +25,117 @@
                 With a team of enthusiastic consultants, 24/7 support will help you answer any questions about Symphony Limited's products and training programs.
             </p>
         </div>
-        <div class="content flex">
+
+        <div class="content">
+            <div id="carousel-id" class="carousel slide" data-pause="false" data-ride="carousel">
+                <div class="carousel-inner" style=" width:100%">
+                    @{
+                        foreach (var item in ViewBag.branch)
+                        {
+                            <div class="item" id="active">
+                                <div class="name" style="text-align: center; font-weight: bold; font-size: 20px">
+                                    <span>@item.Name</span>
+                                </div>
+                                <div class="phone flex cusItemContact">
+                                    <div class="itemC flex">
+                                        <div class="icon cusContact" style="margin: 20px 0; text-align: center">
+                                            <img src="https://bachkhoa-aptech.edu.vn/public/assets/imgs/themes/icon-smartphone.png" alt="Alternate Text" />
+                                        </div>
+                                        <div class="detail cusContact1" style="margin: 10px 0">
+                                            <span>@item.Phone</span>
+                                            <p style="margin: 10px 0">Support 24/7 - Online 24 hours</p>
+                                        </div>
+                                    </div>
+                                    <div class="itemC flex">
+                                        <div class="icon cusContact" style="margin: 20px 0; text-align: center">
+                                            <img src="https://bachkhoa-aptech.edu.vn/public/assets/imgs/themes/icon-location.png" alt="Alternate Text" />
+                                        </div>
+                                        <div class="detail cusContact1" style="margin: 10px 0">
+                                            <span>@item.Address</span>
+                                            <p style="margin: 10px 0">Mon-Sat: 8.00 - 17.30</p>
+                                        </div>
+                                    </div>
+                                    <div class="itemC flex">
+                                        <div class="icon cusContact" style="margin: 20px 0; text-align: center">
+                                            <img src="https://bachkhoa-aptech.edu.vn/public/assets/imgs/themes/icon-email.png" alt="Alternate Text" />
+                                        </div>
+                                        <div class="detail cusContact1" style="margin: 10px 0">
+                                            <span>
+                                                @item.Email
+                                            </span>
+                                            <p style="margin: 10px 0">Mon-Sat: 8.00 - 17.30</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    @*<div class="item">
             <div class="phone flex cusItemContact">
-                <div class="item">
-                    <div class="icon width100" style="margin: 20px 0">
-                        <img src="https://bachkhoa-aptech.edu.vn/public/assets/imgs/themes/icon-smartphone.png" alt="Alternate Text"/>
+                <div class="itemC flex">
+                    <div class="icon cusContact" style="margin: 20px 0; text-align: center">
+                        <img src="https://bachkhoa-aptech.edu.vn/public/assets/imgs/themes/icon-smartphone.png" alt="Alternate Text" />
                     </div>
-                    <div class="detail width100" style="margin: 10px 0; height: 44px">
-                        <span>0123456673</span>
-                    </div>
-                    <div class="description width100" style="margin: 20px 0">
-                        <span>Support 24/7 - Online 24 hours</span>
+                    <div class="detail cusContact1" style="margin: 10px 0">
+                        <span>01293123</span>
+                        <p style="margin: 10px 0">Support 24/7 - Online 24 hours</p>
                     </div>
                 </div>
-            </div>
-            <div class="address flex cusItemContact">
-                <div class="item">
-                    <div class="icon width100" style="margin: 20px 0">
-                        <img src="https://bachkhoa-aptech.edu.vn/public/assets/imgs/themes/icon-location.png" alt="Alternate Text"  height="63px"/>
+                <div class="itemC flex">
+                    <div class="icon cusContact" style="margin: 20px 0; text-align: center">
+                        <img src="https://bachkhoa-aptech.edu.vn/public/assets/imgs/themes/icon-location.png" alt="Alternate Text" />
                     </div>
-                    <div class="detail width100" style="margin: 10px 0; height: 44px">
+                    <div class="detail cusContact1" style="margin: 10px 0">
                         <span>250 Hoàng Quốc Việt, Bắc Từ Liêm, Hà Nội.</span>
+                        <p style="margin: 10px 0">Mon-Sat: 8.00 - 17.30</p>
                     </div>
-                    <div class="description width100" style="margin: 20px 0">
-                        <span>Thứ 2-7: 8.00 - 17.30</span>
+                </div>
+                <div class="itemC flex">
+                    <div class="icon cusContact" style="margin: 20px 0; text-align: center">
+                        <img src="https://bachkhoa-aptech.edu.vn/public/assets/imgs/themes/icon-email.png" alt="Alternate Text" />
+                    </div>
+                    <div class="detail cusContact1" style="margin: 10px 0">
+                        <span>
+                            tuyensinh@bachkhoa-aptech.edu.vn
+                        </span>
+                        <p style="margin: 10px 0">Mon-Sat: 8.00 - 17.30</p>
                     </div>
                 </div>
             </div>
-            
-            <div class="email flex cusItemContact">
-                <div class="item">
-                    <div class="icon width100" style="margin: 20px 0">
-                        <img src="https://bachkhoa-aptech.edu.vn/public/assets/imgs/themes/icon-email.png" alt="Alternate Text" height="63px"/>
+        </div>
+        <div class="item active">
+            <div class="phone flex cusItemContact">
+                <div class="itemC flex">
+                    <div class="icon cusContact" style="margin: 20px 0; text-align: center">
+                        <img src="https://bachkhoa-aptech.edu.vn/public/assets/imgs/themes/icon-smartphone.png" alt="Alternate Text" />
                     </div>
-                    <div class="detail width100" style="margin: 10px 0; height: 44px">
-                        <span>tuyensinh@bachkhoa-aptech.edu.vn</span>
+                    <div class="detail cusContact1" style="margin: 10px 0">
+                        <span>01293123</span>
+                        <p style="margin: 10px 0">Support 24/7 - Online 24 hours</p>
                     </div>
-                    <div class="description width100" style="margin: 20px 0">
-                        <span>Thứ 2-7: 8.00 - 17.30</span>
+                </div>
+                <div class="itemC flex">
+                    <div class="icon cusContact" style="margin: 20px 0; text-align: center">
+                        <img src="https://bachkhoa-aptech.edu.vn/public/assets/imgs/themes/icon-location.png" alt="Alternate Text" />
                     </div>
+                    <div class="detail cusContact1" style="margin: 10px 0">
+                        <span>250 Hoàng Quốc Việt, Bắc Từ Liêm, Hà Nội.</span>
+                        <p style="margin: 10px 0">Mon-Sat: 8.00 - 17.30</p>
+                    </div>
+                </div>
+                <div class="itemC flex">
+                    <div class="icon cusContact" style="margin: 20px 0; text-align: center">
+                        <img src="https://bachkhoa-aptech.edu.vn/public/assets/imgs/themes/icon-email.png" alt="Alternate Text" />
+                    </div>
+                    <div class="detail cusContact1" style="margin: 10px 0">
+                        <span>
+                            tuyensinh@bachkhoa-aptech.edu.vn
+                        </span>
+                        <p style="margin: 10px 0">Mon-Sat: 8.00 - 17.30</p>
+                    </div>
+                </div>
+            </div>
+        </div>*@
                 </div>
             </div>
         </div>

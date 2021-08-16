@@ -1,5 +1,6 @@
 ﻿using eProject_SymphonyLimited.Areas.Admin.Data;
 using eProject_SymphonyLimited.Models;
+using Newtonsoft.Json;
 using System;
 using System.Data.Entity;
 using System.Linq;
@@ -17,43 +18,39 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
             return View(db.Branch.AsEnumerable());
         }
 
-        public ActionResult FindId(int id)
+        [HttpGet]
+        public ActionResult Get(int page = 1, string type = null, string key = null)
         {
-            return Json(db.Branch.Find(id), JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpPost]
-        public ActionResult DeleteData(int id)
-        {
-            if (ModelState.IsValid)
+            int pageSize = 5;
+            var branchs = db.Branch.AsEnumerable();
+            if (!String.IsNullOrEmpty(type) && !String.IsNullOrEmpty(key))
             {
-                var findBranch = db.Branch.Find(id);
-                if (findBranch != null)
+                switch (type)
                 {
-                    db.Branch.Remove(findBranch);
-                    db.SaveChanges();
-                    return Json(new
-                    {
-                        statusCode = 200,
-                        message = "Xóa thành công!",
-                        data = id,
-                    }, JsonRequestBehavior.AllowGet);
-                }
-                else
-                {
-                    return Json(new
-                    {
-                        statusCode = 403,
-                        message = "Xóa thất bại!",
-                        data = id,
-                    }, JsonRequestBehavior.AllowGet);
+                    case "Name":
+                        branchs = db.Branch.Where(x => x.Name.Contains(key)).AsEnumerable();
+                        break;
+                    case "Email":
+                        branchs = db.Branch.Where(x => x.Email.Contains(key)).AsEnumerable();
+                        break;
+                    case "Address":
+                        branchs = db.Branch.Where(x => x.Address.Contains(key)).AsEnumerable();
+                        break; 
+                    case "Phone":
+                        branchs = db.Branch.Where(x => x.Phone.Contains(key)).AsEnumerable();
+                        break;
+                    default:
+                        break;
                 }
             }
+            decimal totalPages = Math.Ceiling((decimal)branchs.Count() / pageSize);
+            string jsonData = JsonConvert.SerializeObject(branchs.Skip((page - 1) * pageSize).Take(pageSize));
             return Json(new
             {
-                statusCode = 403,
-                message = "Xóa thất bại!",
-                data = id,
+                TotalPages = totalPages,
+                CurrentPage = page,
+                StatusCode = 200,
+                Data = jsonData
             }, JsonRequestBehavior.AllowGet);
         }
 
@@ -67,16 +64,31 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                try
+                var validateName = db.Branch.FirstOrDefault(x => x.Name == b.Name);
+                var validateAddress = db.Branch.FirstOrDefault(x => x.Address == b.Address);
+                if (validateName == null)
                 {
-                    var branch = db.Branch.FirstOrDefault(x => x.EntityId == b.EntityId);
-                    db.Branch.Add(b);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                    if (validateAddress == null)
+                    {
+                        try
+                        {
+                            db.Branch.Add(b);
+                            db.SaveChanges();
+                            return RedirectToAction("Index");
+                        }
+                        catch (Exception)
+                        {
+                            ModelState.AddModelError("", "Some thing went wrong while save branch!");
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Address", "Branch Address is already exist!");
+                    }
                 }
-                catch (Exception)
+                else
                 {
-
+                    ModelState.AddModelError("Name", "Branch Name is already exist!");
                 }
             }
             return View();
@@ -97,15 +109,57 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                var currentBranch = db.Branch.Find(b.EntityId);
+                var validateName = db.Branch.FirstOrDefault(x => x.Name != currentBranch.Name && x.Name == b.Name);
+                var validateAddress = db.Branch.FirstOrDefault(x => x.Address != currentBranch.Address && x.Address == b.Address);
+                if (validateName == null)
+                {
+                    if (validateAddress == null)
+                    {
+                        try
+                        {
+                            currentBranch.Name = b.Name;
+                            currentBranch.Email = b.Email;
+                            currentBranch.Image = b.Image;
+                            currentBranch.Time = b.Time;
+                            currentBranch.Phone = b.Phone;
+                            currentBranch.Address = b.Address;
+                            currentBranch.Description = b.Description;
+                            db.SaveChanges();
+                            return RedirectToAction("Index");
+                        }
+                        catch (Exception)
+                        {
+                            ModelState.AddModelError("", "Some thing went wrong while save branch!");
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Address", "Branch Address is already exist!");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("Name", "Branch Name is already exist!");
+                }
+
+            }
+            return View();
+        }
+
+        public ActionResult Delete(int id)
+        {
+            if (db.Branch.Find(id) != null)
+            {
                 try
                 {
-                    db.Entry(b).State = EntityState.Modified;
+                    db.Branch.Remove(db.Branch.Find(id));
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
                 catch (Exception)
                 {
-
+                    ModelState.AddModelError("", "Some thing went wrong while delete branch!");
                 }
             }
             return View();

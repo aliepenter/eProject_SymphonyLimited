@@ -45,7 +45,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Data
 
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
         {
-            filterContext.Result = new RedirectResult("/Admin/Home/Unauthorize");
+            filterContext.Result = new RedirectResult("/Admin/Home/UnAuthorize");
         }
     }
 }

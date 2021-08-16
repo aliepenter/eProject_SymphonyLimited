@@ -1,15 +1,15 @@
 ﻿using eProject_SymphonyLimited.Areas.Admin.Data;
 using eProject_SymphonyLimited.Models;
 using eProject_SymphonyLimited.Models.Authorize;
+using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace eProject_SymphonyLimited.Areas.Admin.Controllers.Authorize
 {
-    public class BusinessController : Controller
+    [CustomizeAuthorize]
+    public class BusinessController : BaseController
     {
         SymphonyLimitedDBContext db;
 
@@ -23,6 +23,40 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers.Authorize
         {
             var data = db.Business.AsEnumerable();
             return View(data);
+        }
+        public ActionResult FindId(int id)
+        {
+            return Json(db.Business.Find(id), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult Get(int page = 1, string type = null, string key = null)
+        {
+            int pageSize = 5;
+            var businesses = db.Business.AsEnumerable();
+            if (!String.IsNullOrEmpty(type) && !String.IsNullOrEmpty(key))
+            {
+                switch (type)
+                {
+                    case "EntityId":
+                        businesses = db.Business.Where(x => x.EntityId.Contains(key)).AsEnumerable();
+                        break;
+                    case "Name":
+                        businesses = db.Business.Where(x => x.Name.Contains(key)).AsEnumerable();
+                        break;
+                    default:
+                        break;
+                }
+            }
+            decimal totalPages = Math.Ceiling((decimal)businesses.Count() / pageSize);
+            string jsonData = JsonConvert.SerializeObject(businesses.Skip((page - 1) * pageSize).Take(pageSize));
+            return Json(new
+            {
+                TotalPages = totalPages,
+                CurrentPage = page,
+                StatusCode = 200,
+                Data = jsonData
+            }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Update()
@@ -57,6 +91,42 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers.Authorize
                 }
             }
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Edit(string id)
+        {
+            var business = db.Business.FirstOrDefault(x => x.EntityId == id);
+            if (business != null)
+            {
+                return View(business);
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Business b)
+        {
+            var currentBusiness = db.Business.Find(b.EntityId);
+            var validateName = db.Business.FirstOrDefault(x => x.Name != currentBusiness.Name && x.Name == b.Name);
+            if (validateName != null)
+            {
+                ModelState.AddModelError("Name", "Business name can't be the same!");
+            }
+            if (ModelState.IsValid)
+            {
+
+                try
+                {
+                    currentBusiness.Name = b.Name;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (Exception)
+                {
+                    ModelState.AddModelError("", "Some thing went wrong while save Business!");
+                }
+            }
+            return View();
         }
     }
 }

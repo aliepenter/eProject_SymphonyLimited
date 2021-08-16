@@ -115,10 +115,10 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         public ActionResult Edit(Partner p, HttpPostedFileBase imgFile)
         {
             var currentPartner = db.Partner.Find(p.EntityId);
-            var validateName = db.Course.FirstOrDefault(x => x.Name != currentPartner.Name && x.Name == p.Name);
+            var validateName = db.Partner.FirstOrDefault(x => x.Name != currentPartner.Name && x.Name == p.Name);
             if (validateName != null)
             {
-                ModelState.AddModelError("Name", "Course name can't be the same!");
+                ModelState.AddModelError("Name", "Partner name can't be the same!");
             }
             if (ModelState.IsValid)
             {

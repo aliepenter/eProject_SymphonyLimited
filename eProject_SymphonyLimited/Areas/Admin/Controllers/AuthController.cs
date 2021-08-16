@@ -32,13 +32,14 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                 if (findUser != null)
                 {
                     Session["User"] = findUser;
-                    Session["AdminName"] = findUser.FullName;
-                    Session["AdminImage"] = findUser.Image;
+                    Session["UserName"] = findUser.FullName;
+                    Session["UserImage"] = findUser.Image;
+                    Session["UserRole"] = findUser.GroupUsers.Name;
                     return RedirectToAction("Index", "Home");
                 }
                 else
                 {
-                    TempData["ErrorMessage"] = "Account or Password is not valid!";
+                    TempData["Message"] = "Account or Password does not exist";
                 }
             }
             return View();

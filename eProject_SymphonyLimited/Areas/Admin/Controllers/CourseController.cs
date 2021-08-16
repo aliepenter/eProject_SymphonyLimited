@@ -1,6 +1,6 @@
 ﻿using eProject_SymphonyLimited.Areas.Admin.Data;
+using eProject_SymphonyLimited.Areas.Admin.Data.ViewModel;
 using eProject_SymphonyLimited.Models;
-using eProject_SymphonyLimited.Models.ViewModel;
 using Newtonsoft.Json;
 using System;
 using System.Data.Entity;

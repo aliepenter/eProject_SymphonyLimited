@@ -1,15 +1,14 @@
-﻿using eProject_SymphonyLimited.Areas.Admin.Data.ViewModel;
+﻿using eProject_SymphonyLimited.Areas.Admin.Data;
+using eProject_SymphonyLimited.Areas.Admin.Data.ViewModel;
 using eProject_SymphonyLimited.Models;
 using eProject_SymphonyLimited.Models.Authorize;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace eProject_SymphonyLimited.Areas.Admin.Controllers.Authorize
 {
-    public class GroupUserController : Controller
+    [CustomizeAuthorize]
+    public class GroupUserController : BaseController
     {
         SymphonyLimitedDBContext db;
 

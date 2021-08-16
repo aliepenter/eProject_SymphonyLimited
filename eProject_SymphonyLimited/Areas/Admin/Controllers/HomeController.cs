@@ -16,7 +16,12 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
             return View();
         }
 
-        public ActionResult NotFound404()
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        public ActionResult UnAuthorize()
         {
             return View();
         }

@@ -113,47 +113,45 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Edit(Category c)
         {
+            var currentCategory = db.Category.FirstOrDefault(x => x.EntityId == c.EntityId);
+            var validateName = db.Category.FirstOrDefault(x => x.Name != currentCategory.Name && x.Name == c.Name);
+            if (validateName != null)
+            {
+                ModelState.AddModelError("Name", "Category is already exist!");
+            }
             if (ModelState.IsValid)
             {
-                var currentCategory = db.Category.FirstOrDefault(x => x.EntityId == c.EntityId);
-                var validateName = db.Category.FirstOrDefault(x => x.Name != currentCategory.Name && x.Name == c.Name);
-                if (validateName == null)
+                try
                 {
-                    try
+                    var parentCategory = db.Category.FirstOrDefault(x => x.EntityId == c.ParentId);
+                    var childCategories = db.Category.Where(x => x.Path.Contains("/" + c.EntityId.ToString() + "/")).AsEnumerable();
+                    var mainCategory = db.Category.Find(c.EntityId);
+                    var oldPath = mainCategory.Path;
+                    if (parentCategory != null)
                     {
-                        var parentCategory = db.Category.FirstOrDefault(x => x.EntityId == c.ParentId);
-                        var childCategories = db.Category.Where(x => x.Path.Contains("/" + c.EntityId.ToString() + "/")).AsEnumerable();
-                        var mainCategory = db.Category.Find(c.EntityId);
-                        var oldPath = mainCategory.Path;
-                        if (parentCategory != null)
+                        if (parentCategory.Level == 1)
                         {
-                            if (parentCategory.Level == 1)
-                            {
-                                mainCategory.Path = parentCategory.Path + "/";
-                            }
-                            else
-                            {
-                                mainCategory.Path = parentCategory.Path + parentCategory.EntityId + "/";
-                            }
-                            foreach (var child in childCategories)
-                            {
-                                child.Level = parentCategory.Level + (child.Level - mainCategory.Level) + 1;
-                                child.Path = child.Path.Replace(oldPath, mainCategory.Path);
-                            }
-                            mainCategory.Level = parentCategory.Level + 1;
-                            mainCategory.ParentId = parentCategory.EntityId;
+                            mainCategory.Path = parentCategory.Path + "/";
                         }
-                        db.SaveChanges();
-                        return RedirectToAction("Index");
+                        else
+                        {
+                            mainCategory.Path = parentCategory.Path + parentCategory.EntityId + "/";
+                        }
+                        foreach (var child in childCategories)
+                        {
+                            child.Level = parentCategory.Level + (child.Level - mainCategory.Level) + 1;
+                            child.Path = child.Path.Replace(oldPath, mainCategory.Path);
+                        }
+                        mainCategory.Name = c.Name;
+                        mainCategory.Level = parentCategory.Level + 1;
+                        mainCategory.ParentId = parentCategory.EntityId;
                     }
-                    catch (Exception)
-                    {
-                        ModelState.AddModelError("", "Some thing went wrong while save category!");
-                    }
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
                 }
-                else
+                catch (Exception)
                 {
-                    ModelState.AddModelError("Name", "Category is already exist!");
+                    ModelState.AddModelError("", "Some thing went wrong while save category!");
                 }
             }
             ViewBag.ParentList = db.Category.Where(x => x.ParentId != c.EntityId).ToList();

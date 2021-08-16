@@ -1,6 +1,6 @@
 ﻿using eProject_SymphonyLimited.Areas.Admin.Data;
+using eProject_SymphonyLimited.Areas.Admin.Data.ViewModel;
 using eProject_SymphonyLimited.Models;
-using eProject_SymphonyLimited.Models.ViewModel;
 using Newtonsoft.Json;
 using System;
 using System.Data.Entity;
@@ -209,8 +209,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         public ActionResult Create(Admission a)
         {
             var validateName = db.Admission.FirstOrDefault(x => x.Name == a.Name);
-            var validateStartTime = db.Admission.FirstOrDefault(x => x.StartTime <= a.StartTime && x.EndTime >= a.StartTime && x.CourseId == a.CourseId);
-            var validateEndTime = db.Admission.FirstOrDefault(x => x.StartTime <= a.EndTime && x.EndTime >= a.EndTime && x.CourseId == a.CourseId);
+            var admission = db.Admission.AsEnumerable();
             if (a.StartTime <= DateTime.Now)
             {
                 ModelState.AddModelError("StartTime", "Start time must bigger than current time!");
@@ -227,13 +226,24 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
             {
                 ModelState.AddModelError("Name", "Admission name can't be the same!");
             }
-            if (validateStartTime != null)
+            foreach (var item in admission)
             {
-                ModelState.AddModelError("StartTime", "Start time is already in another admission!");
-            }
-            if (validateEndTime != null)
-            {
-                ModelState.AddModelError("EndTime", "End time is already in another admission!");
+                if (a.StartTime < item.StartTime)
+                {
+                    if (a.EndTime > item.StartTime)
+                    {
+                        ModelState.AddModelError("EndTime", "End time is already in another admission!");
+                    }
+                    if (a.EndTime > item.EndTime)
+                    {
+                        ModelState.AddModelError("StartTime", "Start time is already in another admission!");
+                        ModelState.AddModelError("EndTime", "End time is already in another admission!");
+                    }
+                }
+                if (item.StartTime <= a.StartTime && a.StartTime < item.EndTime)
+                {
+                    ModelState.AddModelError("", "Time is already in another admission!");
+                }
             }
             if (ModelState.IsValid)
             {
@@ -255,22 +265,30 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
 
         public ActionResult Edit(int id)
         {
+
             var admissionById = db.Admission.FirstOrDefault(x => x.EntityId == id);
+
             if (admissionById != null)
             {
-                ViewBag.CourseList = db.Course.ToList();
-                return View(admissionById);
+                if (admissionById.EndTime < DateTime.Now)
+                {
+                    TempData["ErrorMessage"] = "Admission Ended!";
+                }
+                else
+                {
+                    ViewBag.CourseList = db.Course.ToList();
+                    return View(admissionById);
+                }
             }
             return RedirectToAction("Index");
         }
-
+        
         [HttpPost]
         public ActionResult Edit(Admission a)
         {
             var currentAdmission = db.Admission.Find(a.EntityId);
-            var validateName = db.Course.FirstOrDefault(x => x.Name != currentAdmission.Name && x.Name == a.Name);
-            var validateStartTime = db.Admission.FirstOrDefault(x => x.StartTime <= a.StartTime && x.EndTime >= a.StartTime && x.CourseId == a.CourseId);
-            var validateEndTime = db.Admission.FirstOrDefault(x => x.StartTime <= a.EndTime && x.EndTime >= a.EndTime && x.CourseId == a.CourseId);
+            var admission = db.Admission.Where(x => x.EntityId != currentAdmission.EntityId).AsEnumerable();
+            var validateName = db.Admission.FirstOrDefault(x => x.Name != currentAdmission.Name && x.Name == a.Name);
             if (a.StartTime <= DateTime.Now)
             {
                 ModelState.AddModelError("StartTime", "Start time must bigger than current time!");
@@ -285,15 +303,27 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
             }
             if (validateName != null)
             {
+
                 ModelState.AddModelError("Name", "Admission name can't be the same!");
             }
-            if (validateStartTime != null)
+            foreach (var item in admission)
             {
-                ModelState.AddModelError("StartTime", "Start time is already in another admission!");
-            }
-            if (validateEndTime != null)
-            {
-                ModelState.AddModelError("EndTime", "End time is already in another admission!");
+                if (a.StartTime < item.StartTime)
+                {
+                    if (a.EndTime > item.StartTime)
+                    {
+                        ModelState.AddModelError("EndTime", "End time is already in another admission!");
+                    }
+                    if (a.EndTime > item.EndTime)
+                    {
+                        ModelState.AddModelError("StartTime", "Start time is already in another admission!");
+                        ModelState.AddModelError("EndTime", "End time is already in another admission!");
+                    }
+                }
+                if (item.StartTime <= a.StartTime && a.StartTime < item.EndTime)
+                {
+                    ModelState.AddModelError("", "Time is already in another admission!");
+                }
             }
             if (ModelState.IsValid)
             {
@@ -320,17 +350,26 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
 
         public ActionResult Delete(int id)
         {
+            var admissionById = db.Admission.FirstOrDefault(x => x.EntityId == id);
             if (db.Admission.Find(id) != null)
             {
-                try
+                if (admissionById.EndTime < DateTime.Now)
                 {
-                    db.Admission.Remove(db.Admission.Find(id));
-                    db.SaveChanges();
+                    TempData["ErrorMessage"] = "Can't delete this admission!";
                     return RedirectToAction("Index");
                 }
-                catch (Exception)
+                else
                 {
-                    ModelState.AddModelError("", "Some thing went wrong while save admission!");
+                    try
+                    {
+                        db.Admission.Remove(db.Admission.Find(id));
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
+                    catch (Exception)
+                    {
+                        ModelState.AddModelError("", "Some thing went wrong while save admission!");
+                    }
                 }
             }
             return View();
