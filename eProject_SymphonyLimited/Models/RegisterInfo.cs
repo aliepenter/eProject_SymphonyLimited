@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace eProject_SymphonyLimited.Models
 {
@@ -18,5 +20,14 @@ namespace eProject_SymphonyLimited.Models
 
         [Display(Name = "Comment")]
         public string Comment { get; set; }
+        [Display(Name = "Created At")]
+        public DateTime CreatedAt { get; set; }
+        [Display(Name = "Status")]
+        public bool Status { get; set; }
+        public int AdmissionId { get; set; }
+
+        [ForeignKey("AdmissionId")]
+
+        public Admission Admission { get; set; }
     }
 }
