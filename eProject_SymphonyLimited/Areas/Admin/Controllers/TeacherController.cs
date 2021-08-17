@@ -77,7 +77,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                     else
                     {
                         string imgName = Path.GetFileName(imgFile.FileName);
-                        string imgPath = Path.Combine(Server.MapPath("~/Areas/Admin/Content/img/Teacher/"), imgName);
+                        string imgPath = Path.Combine(Server.MapPath("~/Areas/Admin/Content/img/"), imgName);
                         t.Image = imgName;
                         if (imgFile.ContentLength > 0)
                         {
@@ -128,7 +128,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                     if (imgFile != null)
                     {
                         string imgName = Path.GetFileName(imgFile.FileName);
-                        string imgPath = Path.Combine(Server.MapPath("~/Areas/Admin/Content/img/Teacher"), imgName);
+                        string imgPath = Path.Combine(Server.MapPath("~/Areas/Admin/Content/img/"), imgName);
                         currentTeacher.Image = imgName;
                         if (imgFile.ContentLength > 0)
                         {

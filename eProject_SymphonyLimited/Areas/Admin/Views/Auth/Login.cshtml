@@ -45,6 +45,10 @@
 
                                     @using (Html.BeginForm("Login", "Auth", null, FormMethod.Post, new { @class = "user" }))
                                     {
+                                        if (TempData["ErrorMessage"] != null)
+                                        {
+                                            <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+                                        }
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user" id="exampleInputEmail" name="Account" aria-describedby="emailHelp" placeholder="Enter Email Address...">
                                             @Html.ValidationMessageFor(model => model.Account, "", new { @class = "text-danger" })
@@ -53,16 +57,12 @@
                                             <input type="password" class="form-control form-control-user" id="exampleInputPassword" name="Password" placeholder="Password">
                                             @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                                         </div>
-                                        if (TempData["ErrorMessage"] != null)
-                                        {
-                                            <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
-                                        }
                                         <button class="btn btn-primary btn-user btn-block" type="submit">Login</button>
                                     }
 
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="@Url.Action("ForgotPassword","Home")">Forgot Password?</a>
+                                        <a class="small" href="@Url.Action("ForgotPassword","Auth")">Forgot Password?</a>
                                     </div>
                                 </div>
                             </div>
@@ -82,12 +82,6 @@
 
     <!-- Custom scripts for all pages-->
     <script src="~/Areas/Admin/Content/js/sb-admin-2.min.js"></script>
-    @if (TempData["Message"] != null)
-    {
-        <script>
-            alert("@TempData["Message"]")
-        </script>
-    }
 </body>
 
 </html>

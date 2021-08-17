@@ -77,7 +77,6 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                     else
                     {
                         string imgName = Path.GetFileName(imgFile.FileName);
-                        string imgText = Path.GetExtension(imgName);
                         string imgPath = Path.Combine(Server.MapPath("~/Areas/Admin/Content/img/"), imgName);
                         p.Image = imgName;
                         if (imgFile.ContentLength > 0)
@@ -86,7 +85,6 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                             if (db.SaveChanges() > 0)
                             {
                                 imgFile.SaveAs(imgPath);
-                                ViewBag.msg = "Record Added";
                                 ModelState.Clear();
                             }
                         }

@@ -59,18 +59,26 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var validateName = db.CoreConfigData.FirstOrDefault(x => x.Name == ccd.Name);
+                var validateCode = db.CoreConfigData.FirstOrDefault(x => x.Code == ccd.Code);
                 if (validateName == null)
                 {
-                    try
+                    if (validateCode == null)
                     {
-                        ccd.Code = ccd.Name.ToLower().Replace(" ", "_");
-                        db.CoreConfigData.Add(ccd);
-                        db.SaveChanges();
-                        return RedirectToAction("Index");
+                        try
+                        {
+                            ccd.Code = ccd.Name.ToLower().Replace(" ", "_");
+                            db.CoreConfigData.Add(ccd);
+                            db.SaveChanges();
+                            return RedirectToAction("Index");
+                        }
+                        catch (Exception)
+                        {
+                            ModelState.AddModelError("", "Some thing went wrong while save coreconfigdata!");
+                        }
                     }
-                    catch (Exception)
+                    else
                     {
-                        ModelState.AddModelError("", "Some thing went wrong while save coreconfigdata!");
+                        ModelState.AddModelError("", "CoreConfigData Code is already exist!");
                     }
                 }
                 else
@@ -98,19 +106,26 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
             {
                 var currentCoreConfigData = db.CoreConfigData.Find(ccd.EntityId);
                 var validateName = db.CoreConfigData.FirstOrDefault(x => x.Name != currentCoreConfigData.Name && x.Name == ccd.Name);
+                var validateCode = db.CoreConfigData.FirstOrDefault(x => x.Code != currentCoreConfigData.Code && x.Code == ccd.Code);
                 if (validateName == null)
                 {
-                    try
+                    if (validateCode == null)
                     {
-                        currentCoreConfigData.Name = ccd.Name;
-                        currentCoreConfigData.Value = ccd.Value;
-                        currentCoreConfigData.Code = ccd.Name.ToLower().Replace(" ", "_");
-                        db.SaveChanges();
-                        return RedirectToAction("Index");
+                        try
+                        {
+                            currentCoreConfigData.Name = ccd.Name;
+                            currentCoreConfigData.Code = ccd.Name.ToLower().Replace(" ", "_");
+                            db.SaveChanges();
+                            return RedirectToAction("Index");
+                        }
+                        catch (Exception)
+                        {
+                            ModelState.AddModelError("", "Some thing went wrong while save coreconfigdata!");
+                        }
                     }
-                    catch (Exception)
+                    else
                     {
-                        ModelState.AddModelError("", "Some thing went wrong while save coreconfigdata!");
+                        ModelState.AddModelError("", "CoreConfigData Code is already exist!");
                     }
                 }
                 else

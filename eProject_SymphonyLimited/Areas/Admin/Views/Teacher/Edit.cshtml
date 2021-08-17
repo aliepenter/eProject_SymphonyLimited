@@ -28,7 +28,7 @@
             @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <input type="file" name="imgFile" id="imgFile" onchange="ShowPreview(this)" />
-                <img id="imgPreview" style="width: 200px" src="/Areas/Admin/Content/img/Teacher/@Model.Image" />
+                <img id="imgPreview" style="width: 200px" src="/Areas/Admin/Content/img/@Model.Image" />
             </div>
         </div>
 

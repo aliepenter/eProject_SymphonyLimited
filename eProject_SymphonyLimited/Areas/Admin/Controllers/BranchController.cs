@@ -3,7 +3,9 @@ using eProject_SymphonyLimited.Models;
 using Newtonsoft.Json;
 using System;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace eProject_SymphonyLimited.Areas.Admin.Controllers
@@ -60,7 +62,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Branch b)
+        public ActionResult Create(Branch b, HttpPostedFileBase imgFile)
         {
             if (ModelState.IsValid)
             {
@@ -72,9 +74,29 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                     {
                         try
                         {
-                            db.Branch.Add(b);
-                            db.SaveChanges();
-                            return RedirectToAction("Index");
+                            if (imgFile == null && b.Image == null)
+                            {
+                                b.Image = "default.png";
+                                db.Branch.Add(b);
+                                db.SaveChanges();
+                                return RedirectToAction("Index");
+                            }
+                            else
+                            {
+                                string imgName = Path.GetFileName(imgFile.FileName);
+                                string imgPath = Path.Combine(Server.MapPath("~/Areas/Admin/Content/img/"), imgName);
+                                b.Image = imgName;
+                                if (imgFile.ContentLength > 0)
+                                {
+                                    db.Branch.Add(b);
+                                    if (db.SaveChanges() > 0)
+                                    {
+                                        imgFile.SaveAs(imgPath);
+                                        ModelState.Clear();
+                                    }
+                                }
+                                return RedirectToAction("Index");
+                            }
                         }
                         catch (Exception)
                         {
@@ -105,7 +127,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Branch b)
+        public ActionResult Edit(Branch b, HttpPostedFileBase imgFile)
         {
             if (ModelState.IsValid)
             {
@@ -120,12 +142,27 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                         {
                             currentBranch.Name = b.Name;
                             currentBranch.Email = b.Email;
-                            currentBranch.Image = b.Image;
                             currentBranch.Time = b.Time;
                             currentBranch.Phone = b.Phone;
                             currentBranch.Address = b.Address;
                             currentBranch.Description = b.Description;
-                            db.SaveChanges();
+                            if (imgFile != null)
+                            {
+                                string imgName = Path.GetFileName(imgFile.FileName);
+                                string imgPath = Path.Combine(Server.MapPath("~/Areas/Admin/Content/img/"), imgName);
+                                currentBranch.Image = imgName;
+                                if (imgFile.ContentLength > 0)
+                                {
+                                    if (db.SaveChanges() > 0)
+                                    {
+                                        imgFile.SaveAs(imgPath);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                db.SaveChanges();
+                            }
                             return RedirectToAction("Index");
                         }
                         catch (Exception)

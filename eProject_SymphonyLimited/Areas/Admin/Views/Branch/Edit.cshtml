@@ -8,10 +8,10 @@
 <h2>Edit</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Branch", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Branch</h4>
         <hr />
@@ -37,8 +37,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                <input type="file" name="imgFile" id="imgFile" onchange="ShowPreview(this)" />
+                <img id="imgPreview" style="width: 200px" src="/Areas/Admin/Content/img/@Model.Image" />
             </div>
         </div>
 
@@ -88,4 +88,18 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        function ShowPreview(input) {
+            if (input.files && input.files[0]) {
+                var ImageDir = new FileReader();
+                ImageDir.onload = function (e) {
+                    $('#imgPreview').attr('src', e.target.result);
+                }
+                $('#imgPreview').removeClass("displayNone");
+                ImageDir.readAsDataURL(input.files[0]);
+            } else {
+                $('#imgPreview').addClass("displayNone");
+            }
+        }
+    </script>
 }
