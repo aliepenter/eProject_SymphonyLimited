@@ -734,7 +734,7 @@ body {
             margin: 30px 0;
            
         }
-            .page4 .registerPage .containerFormIndex .form-row input {
+            .page4 .registerPage .containerFormIndex .form-row .input {
                 padding: 25px;
                 width: 100%;
                 outline: none;
@@ -994,7 +994,7 @@ table, th, td {
     margin: 30px 0;
 }
 
-.mainEE .containerEE .form-row input {
+.mainEE .containerEE .form-row .input {
     padding: 25px;
     width: 100%;
     outline: none;

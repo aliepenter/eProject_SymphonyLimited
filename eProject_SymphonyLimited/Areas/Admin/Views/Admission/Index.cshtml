@@ -62,7 +62,8 @@
                                     '<td>' + item.Course + '</td>' +
                                     '<td>' +
                                     '<button class="btn btn-warning btn-edit mr-1 mb-1" data-id="' + item.EntityId + '">Edit</button>' +
-                                    '<button class="btn btn-danger btn-delete mb-1" data-id="' + item.EntityId + '">Delete</button>' +
+                                    '<button class="btn btn-warning btn-detail mr-1 mb-1" data-id="' + item.EntityId + '">Detail</button>' +
+                                    '<button class="btn btn-danger btn-delete mb-1" data-id="' + item.EntityId + '">Delete</button>'
                                     '</td>'
                                     + '</tr></tbody>';
                             }
@@ -113,6 +114,10 @@
                 } else {
                     return false;
                 }
+            });
+            $(document).on("click", ".btn-detail", function () {
+                var id = $(this).data("id");
+                window.location.href = baseUrl + "Admin/Admission/Edit/" + id;
             });
         });
     </script>

@@ -1,4 +1,5 @@
-﻿
+﻿@model eProject_SymphonyLimited.Models.RegisterInfo
+
 @{
     ViewBag.Title = "EntranceExam";
 }
@@ -86,28 +87,28 @@
                 <div class="title">
                     <span>Register now!</span>
                 </div>
-                @using (Html.BeginForm("Application", "Lecturer", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                @using (Html.BeginForm("Application", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
                     @Html.AntiForgeryToken()
 
                     <div class="form">
                         <div class="form-row">
-                            <input type="type" name="name" value="" placeholder="Fullname*" />
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "input", @placeholder = "FullName*" } })
                         </div>
                         <div class="form-row">
-                            <input type="type" name="name" value="" placeholder="Email*" />
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "input", @placeholder = "Email*" } })
                         </div>
                         <div class="form-row">
-                            <input type="type" name="name" value="" placeholder="Phone*" />
+                            @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "input", @placeholder = "Phone*" } })
                         </div>
                         <div class="form-row">
-                            <input type="type" name="name" value="Admission" placeholder="" disabled />
+                            @Html.DropDownListFor(model => model.AdmissionId, new SelectList(ViewBag.admissionList, "EntityId", "Name", "Select"), new { @class = "input" })
                         </div>
                         <div class="form-row">
-                            <textarea rows="5" placeholder="Give us questions"></textarea>
+                            @Html.TextAreaFor(model => model.Comment, new { @class = "input", @placeholder = "Give us questions", @rows = "5" })
                         </div>
-                        <div class="btnFormIndex" style="text-align: center">
-                            <button type="submit" style="animation: boxs2 1s infinite;">Apply</button>
+                        <div class="btnFormIndex">
+                            <button type="submit">Send</button>
                         </div>
                     </div>
                 }

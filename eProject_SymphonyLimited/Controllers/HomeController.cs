@@ -20,10 +20,12 @@ namespace eProject_SymphonyLimited.Controllers
             var admission = db.Admission.AsEnumerable();
             ViewBag.admission = admission;
             var teacher = db.Teacher.AsEnumerable();
+            ViewBag.admissionList = db.Admission.ToList();
             ViewBag.teacher = teacher;
             ViewBag.phoneInFooter = db.CoreConfigData.FirstOrDefault(x=>x.Code == "phone_in_footer");
             ViewBag.emailInFooter = db.CoreConfigData.FirstOrDefault(x=>x.Code == "email_in_footer");
             ViewBag.addressInFooter = db.CoreConfigData.FirstOrDefault(x=>x.Code == "address_in_footer");
+
         }
 
         public ActionResult GetChildCategories()
@@ -136,9 +138,10 @@ namespace eProject_SymphonyLimited.Controllers
         }
 
         [HttpPost]
-        public ActionResult Application(Faq f)
+        public ActionResult Application(RegisterInfo f)
         {
-            db.Faq.Add(f);
+            f.CreatedAt = DateTime.Now;
+            db.RegisterInfo.Add(f);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

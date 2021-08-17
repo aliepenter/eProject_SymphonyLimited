@@ -23,6 +23,7 @@ namespace eProject_SymphonyLimited.Models
         public virtual DbSet<Partner> Partner { get; set; }
         public virtual DbSet<Teacher> Teacher { get; set; }
         public virtual DbSet<Faq> Faq { get; set; }
+        public virtual DbSet<PaidRegister> PaidRegister { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<GroupUser> GroupUser { get; set; }
         public virtual DbSet<Business> Business { get; set; }

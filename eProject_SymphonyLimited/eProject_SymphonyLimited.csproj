@@ -149,6 +149,7 @@
     <Compile Include="Areas\Admin\Data\ViewModel\CourseViewModel.cs" />
     <Compile Include="Areas\Admin\Data\ViewModel\LoginViewModel.cs" />
     <Compile Include="Areas\Admin\Data\ViewModel\PermissionViewModel.cs" />
+    <Compile Include="Areas\Admin\Data\ViewModel\RegisterViewModel.cs" />
     <Compile Include="Areas\Admin\Data\ViewModel\UserViewModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">

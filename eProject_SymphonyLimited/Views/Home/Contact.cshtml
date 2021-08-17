@@ -1,4 +1,6 @@
-﻿@{
+﻿@model eProject_SymphonyLimited.Models.RegisterInfo
+
+@{
     ViewBag.Title = "Contact";
 }
 <script type="text/javascript">
@@ -6,7 +8,7 @@
         // code
         document.getElementById('active').classList.add("active")
     };
-    
+
 </script>
 <div class="ContactUsMain">
     <div class="bannerContactUs">
@@ -71,109 +73,106 @@
                         }
                     }
                     @*<div class="item">
-            <div class="phone flex cusItemContact">
-                <div class="itemC flex">
-                    <div class="icon cusContact" style="margin: 20px 0; text-align: center">
-                        <img src="https://bachkhoa-aptech.edu.vn/public/assets/imgs/themes/icon-smartphone.png" alt="Alternate Text" />
-                    </div>
-                    <div class="detail cusContact1" style="margin: 10px 0">
-                        <span>01293123</span>
-                        <p style="margin: 10px 0">Support 24/7 - Online 24 hours</p>
-                    </div>
-                </div>
-                <div class="itemC flex">
-                    <div class="icon cusContact" style="margin: 20px 0; text-align: center">
-                        <img src="https://bachkhoa-aptech.edu.vn/public/assets/imgs/themes/icon-location.png" alt="Alternate Text" />
-                    </div>
-                    <div class="detail cusContact1" style="margin: 10px 0">
-                        <span>250 Hoàng Quốc Việt, Bắc Từ Liêm, Hà Nội.</span>
-                        <p style="margin: 10px 0">Mon-Sat: 8.00 - 17.30</p>
-                    </div>
-                </div>
-                <div class="itemC flex">
-                    <div class="icon cusContact" style="margin: 20px 0; text-align: center">
-                        <img src="https://bachkhoa-aptech.edu.vn/public/assets/imgs/themes/icon-email.png" alt="Alternate Text" />
-                    </div>
-                    <div class="detail cusContact1" style="margin: 10px 0">
-                        <span>
-                            tuyensinh@bachkhoa-aptech.edu.vn
-                        </span>
-                        <p style="margin: 10px 0">Mon-Sat: 8.00 - 17.30</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="item active">
-            <div class="phone flex cusItemContact">
-                <div class="itemC flex">
-                    <div class="icon cusContact" style="margin: 20px 0; text-align: center">
-                        <img src="https://bachkhoa-aptech.edu.vn/public/assets/imgs/themes/icon-smartphone.png" alt="Alternate Text" />
-                    </div>
-                    <div class="detail cusContact1" style="margin: 10px 0">
-                        <span>01293123</span>
-                        <p style="margin: 10px 0">Support 24/7 - Online 24 hours</p>
-                    </div>
-                </div>
-                <div class="itemC flex">
-                    <div class="icon cusContact" style="margin: 20px 0; text-align: center">
-                        <img src="https://bachkhoa-aptech.edu.vn/public/assets/imgs/themes/icon-location.png" alt="Alternate Text" />
-                    </div>
-                    <div class="detail cusContact1" style="margin: 10px 0">
-                        <span>250 Hoàng Quốc Việt, Bắc Từ Liêm, Hà Nội.</span>
-                        <p style="margin: 10px 0">Mon-Sat: 8.00 - 17.30</p>
-                    </div>
-                </div>
-                <div class="itemC flex">
-                    <div class="icon cusContact" style="margin: 20px 0; text-align: center">
-                        <img src="https://bachkhoa-aptech.edu.vn/public/assets/imgs/themes/icon-email.png" alt="Alternate Text" />
-                    </div>
-                    <div class="detail cusContact1" style="margin: 10px 0">
-                        <span>
-                            tuyensinh@bachkhoa-aptech.edu.vn
-                        </span>
-                        <p style="margin: 10px 0">Mon-Sat: 8.00 - 17.30</p>
-                    </div>
-                </div>
-            </div>
-        </div>*@
+                            <div class="phone flex cusItemContact">
+                                <div class="itemC flex">
+                                    <div class="icon cusContact" style="margin: 20px 0; text-align: center">
+                                        <img src="https://bachkhoa-aptech.edu.vn/public/assets/imgs/themes/icon-smartphone.png" alt="Alternate Text" />
+                                    </div>
+                                    <div class="detail cusContact1" style="margin: 10px 0">
+                                        <span>01293123</span>
+                                        <p style="margin: 10px 0">Support 24/7 - Online 24 hours</p>
+                                    </div>
+                                </div>
+                                <div class="itemC flex">
+                                    <div class="icon cusContact" style="margin: 20px 0; text-align: center">
+                                        <img src="https://bachkhoa-aptech.edu.vn/public/assets/imgs/themes/icon-location.png" alt="Alternate Text" />
+                                    </div>
+                                    <div class="detail cusContact1" style="margin: 10px 0">
+                                        <span>250 Hoàng Quốc Việt, Bắc Từ Liêm, Hà Nội.</span>
+                                        <p style="margin: 10px 0">Mon-Sat: 8.00 - 17.30</p>
+                                    </div>
+                                </div>
+                                <div class="itemC flex">
+                                    <div class="icon cusContact" style="margin: 20px 0; text-align: center">
+                                        <img src="https://bachkhoa-aptech.edu.vn/public/assets/imgs/themes/icon-email.png" alt="Alternate Text" />
+                                    </div>
+                                    <div class="detail cusContact1" style="margin: 10px 0">
+                                        <span>
+                                            tuyensinh@bachkhoa-aptech.edu.vn
+                                        </span>
+                                        <p style="margin: 10px 0">Mon-Sat: 8.00 - 17.30</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item active">
+                            <div class="phone flex cusItemContact">
+                                <div class="itemC flex">
+                                    <div class="icon cusContact" style="margin: 20px 0; text-align: center">
+                                        <img src="https://bachkhoa-aptech.edu.vn/public/assets/imgs/themes/icon-smartphone.png" alt="Alternate Text" />
+                                    </div>
+                                    <div class="detail cusContact1" style="margin: 10px 0">
+                                        <span>01293123</span>
+                                        <p style="margin: 10px 0">Support 24/7 - Online 24 hours</p>
+                                    </div>
+                                </div>
+                                <div class="itemC flex">
+                                    <div class="icon cusContact" style="margin: 20px 0; text-align: center">
+                                        <img src="https://bachkhoa-aptech.edu.vn/public/assets/imgs/themes/icon-location.png" alt="Alternate Text" />
+                                    </div>
+                                    <div class="detail cusContact1" style="margin: 10px 0">
+                                        <span>250 Hoàng Quốc Việt, Bắc Từ Liêm, Hà Nội.</span>
+                                        <p style="margin: 10px 0">Mon-Sat: 8.00 - 17.30</p>
+                                    </div>
+                                </div>
+                                <div class="itemC flex">
+                                    <div class="icon cusContact" style="margin: 20px 0; text-align: center">
+                                        <img src="https://bachkhoa-aptech.edu.vn/public/assets/imgs/themes/icon-email.png" alt="Alternate Text" />
+                                    </div>
+                                    <div class="detail cusContact1" style="margin: 10px 0">
+                                        <span>
+                                            tuyensinh@bachkhoa-aptech.edu.vn
+                                        </span>
+                                        <p style="margin: 10px 0">Mon-Sat: 8.00 - 17.30</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>*@
                 </div>
             </div>
         </div>
         <div class="formRegister">
-            <form>
+            @using (Html.BeginForm("Application", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
                 <div class="title">
                     <span>Register</span>
                 </div>
                 <div class="containerForm">
                     <div class="form-row flex">
                         <div class="left">
-                            <input type="type" name="name" value="" placeholder="Fullname*" />
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "input", @placeholder = "FullName*" } })
                         </div>
                         <div class="right">
-                            <input type="type" name="name" value="" placeholder="Email*" />
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "input", @placeholder = "Email*" } })
                         </div>
                     </div>
                     <div class="form-row flex">
                         <div class="left">
-                            <input type="type" name="name" value="" placeholder="Phone*" />
+                            @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "input", @placeholder = "Phone*" } })
                         </div>
                         <div class="right">
-                            <select name="cars" id="cars">
-                                <option selected>Choose course</option>
-                                <option value="saab">Saab</option>
-                                <option value="mercedes">Mercedes</option>
-                                <option value="audi">Audi</option>
-                            </select>
+                            @Html.DropDownListFor(model => model.AdmissionId, new SelectList(ViewBag.admissionList, "EntityId", "Name", "Select"), new { @class = "input" })
                         </div>
                     </div>
                     <div class="form-row">
-                        <textarea rows="10" placeholder="Give us questions"></textarea>
+                        @Html.TextAreaFor(model => model.Comment, new { @class = "input", @placeholder = "Give us questions", @rows = "5" })
                     </div>
                 </div>
                 <div class="form-btn">
                     <button type="submit">Send</button>
                 </div>
-            </form>
+            }
         </div>
 
     </div>

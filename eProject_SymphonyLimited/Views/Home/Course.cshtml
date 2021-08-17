@@ -1,4 +1,5 @@
-﻿
+﻿@model eProject_SymphonyLimited.Models.RegisterInfo
+
 @{
     ViewBag.Title = "Courses Detail";
 }
@@ -76,34 +77,31 @@
     </div>
     <div class="formCourse flex">
         <div class="left">
-            <form action="/" method="post">
-                <div class="title">
-                    <span>SIGN UP FOR FREE</span>
+            @using (Html.BeginForm("Application", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form">
+                    <div class="form-row">
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "input", @placeholder = "FullName*" } })
+                    </div>
+                    <div class="form-row">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "input", @placeholder = "Email*" } })
+                    </div>
+                    <div class="form-row">
+                        @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "input", @placeholder = "Phone*" } })
+                    </div>
+                    <div class="form-row">
+                        @Html.DropDownListFor(model => model.AdmissionId, new SelectList(ViewBag.admissionList, "EntityId", "Name", "Select"), new { @class = "input" })
+                    </div>
+                    <div class="form-row">
+                        @Html.TextAreaFor(model => model.Comment, new { @class = "input", @placeholder = "Give us questions", @rows = "5" })
+                    </div>
+                    <div class="btnFormIndex">
+                        <button type="submit">Send</button>
+                    </div>
                 </div>
-                <div class="form-row">
-                    <input type="type" name="name" value="" placeholder="Fullname*" />
-                </div>
-                <div class="form-row">
-                    <input type="type" name="name" value="" placeholder="Email*" />
-                </div>
-                <div class="form-row">
-                    <input type="type" name="name" value="" placeholder="Phone*" />
-                </div>
-                <div class="form-row">
-                    <select name="cars" id="cars" placeholder="Give us questions">
-                        <option selected>Choose course</option>
-                        <option value="saab">Saab</option>
-                        <option value="mercedes">Mercedes</option>
-                        <option value="audi">Audi</option>
-                    </select>
-                </div>
-                <div class="form-row">
-                    <textarea rows="5" placeholder="Give us questions"></textarea>
-                </div>
-                <div class="btnFormIndex">
-                    <button type="submit">Send</button>
-                </div>
-            </form>
+            }
         </div>
         <div class="right">
             <img src="https://bachkhoa-aptech.edu.vn/public/assets/imgs/themes/subscribe.png" alt="Alternate Text" style="margin-top: 148px;" />

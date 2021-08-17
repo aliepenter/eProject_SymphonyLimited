@@ -1,4 +1,5 @@
 ﻿using eProject_SymphonyLimited.Areas.Admin.Data;
+using eProject_SymphonyLimited.Areas.Admin.Data.ViewModel;
 using eProject_SymphonyLimited.Models;
 using Newtonsoft.Json;
 using System;
@@ -21,16 +22,57 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         public ActionResult Get(int page = 1, string type = null, string key = null)
         {
             int pageSize = 5;
-            var registerInfos = db.RegisterInfo.AsEnumerable();
+            var registerInfos = db.RegisterInfo.Join(db.Admission,
+               re => re.AdmissionId,
+               ad => ad.EntityId,
+               (re, ad) => new
+               RegisterViewModel
+               {
+                   EntityId = re.EntityId,
+                   Name = re.Name,
+                   Phone = re.Phone,
+                   Email = re.Email,
+                   Comment = re.Comment,
+                   CreatedAt = re.CreatedAt,
+                   Status = re.Status,
+                   Admission = ad.Name
+               }).AsEnumerable();
             if (!String.IsNullOrEmpty(key))
             {
                 switch (type)
                 {
                     case "EntityId":
-                        registerInfos = db.RegisterInfo.Where(x => x.EntityId.ToString().Contains(key)).AsEnumerable();
+                    registerInfos = db.RegisterInfo.Join(db.Admission,
+                       re => re.AdmissionId,
+                       ad => ad.EntityId,
+                       (re, ad) => new
+                       RegisterViewModel
+                       {
+                       EntityId = re.EntityId,
+                       Name = re.Name,
+                       Phone = re.Phone,
+                       Email = re.Email,
+                       Comment = re.Comment,
+                       CreatedAt = re.CreatedAt,
+                       Status = re.Status,
+                       Admission = ad.Name }).Where(x => x.EntityId.ToString().Contains(key)).AsEnumerable();
                         break;
                     case "Name":
-                        registerInfos = db.RegisterInfo.Where(x => x.Name.Contains(key)).AsEnumerable();
+                        registerInfos = db.RegisterInfo.Join(db.Admission,
+                       re => re.AdmissionId,
+                       ad => ad.EntityId,
+                       (re, ad) => new
+                       RegisterViewModel
+                       {
+                           EntityId = re.EntityId,
+                           Name = re.Name,
+                           Phone = re.Phone,
+                           Email = re.Email,
+                           Comment = re.Comment,
+                           CreatedAt = re.CreatedAt,
+                           Status = re.Status,
+                           Admission = ad.Name
+                       }).Where(x => x.Name.Contains(key)).AsEnumerable();
                         break;
                     default:
                         break;
