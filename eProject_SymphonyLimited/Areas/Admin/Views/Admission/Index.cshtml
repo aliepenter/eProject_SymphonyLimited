@@ -24,7 +24,6 @@
                 <option value="EndTime">End Time</option>
                 <option value="QuantityStudent">Student Quantity</option>
                 <option value="Price">Price</option>
-                <option value="MarkPass">Mark Pass</option>
                 <option value="Course">Course</option>
             </select>
         </div>
@@ -86,7 +85,7 @@
                         url: baseUrl + "Admin/Admission/Get",
                         data: { page: page, type: type, key: key },
                         success: function (res) {
-                            var _html = ' <thead class="thead-dark"><tr><th>Entity Id</th><th>Name</th><th>Start Time</th><th>End Time</th><th>Student Quantity</th><th>Price</th><th>Mark Pass</th><th>Course</th><th>Action</th></tr></thead>';
+                            var _html = ' <thead class="thead-dark"><tr><th>Entity Id</th><th>Name</th><th>Start Time</th><th>End Time</th><th>Student Quantity</th><th>Price</th><th>Course</th><th>Action</th></tr></thead>';
                             for (var item of JSON.parse(res.Data)) {
                                 _html += '<tbody><tr>' +
                                     '<td>' + item.EntityId + '</td>' +
@@ -95,7 +94,6 @@
                                     '<td>' + item.EndTime + '</td>' +
                                     '<td>' + item.QuantityStudent + '</td>' +
                                     '<td>' + item.Price + '</td>' +
-                                    '<td>' + item.MarkPass + '</td>' +
                                     '<td>' + item.Course + '</td>' +
                                     '<td>' +
                                     '<button class="btn btn-warning btn-edit mr-1 mb-1" data-id="' + item.EntityId + '"><i class="fas fa-edit"></i> Edit</button>' +

@@ -35,7 +35,6 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                     StartTime = a.StartTime,
                     EndTime = a.EndTime,
                     QuantityStudent = a.QuantityStudent,
-                    MarkPass = a.MarkPass,
                     Course = c.Name
                 }).AsEnumerable();
             if (!String.IsNullOrEmpty(key))
@@ -55,7 +54,6 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                     StartTime = a.StartTime,
                     EndTime = a.EndTime,
                     QuantityStudent = a.QuantityStudent,
-                    MarkPass = a.MarkPass,
                     Course = c.Name
                 }).Where(x => x.EntityId.ToString().Contains(key)).AsEnumerable();
                         break;
@@ -72,7 +70,6 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                     StartTime = a.StartTime,
                     EndTime = a.EndTime,
                     QuantityStudent = a.QuantityStudent,
-                    MarkPass = a.MarkPass,
                     Course = c.Name
                 }).Where(x => x.Name.Contains(key)).AsEnumerable();
                         break;
@@ -89,7 +86,6 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                     StartTime = a.StartTime,
                     EndTime = a.EndTime,
                     QuantityStudent = a.QuantityStudent,
-                    MarkPass = a.MarkPass,
                     Course = c.Name
                 }).Where(x => x.StartTime.ToString().Contains(key)).AsEnumerable();
                         break;
@@ -106,7 +102,6 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                     StartTime = a.StartTime,
                     EndTime = a.EndTime,
                     QuantityStudent = a.QuantityStudent,
-                    MarkPass = a.MarkPass,
                     Course = c.Name
                 }).Where(x => x.EndTime.ToString().Contains(key)).AsEnumerable();
                         break;
@@ -123,7 +118,6 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                     StartTime = a.StartTime,
                     EndTime = a.EndTime,
                     QuantityStudent = a.QuantityStudent,
-                    MarkPass = a.MarkPass,
                     Course = c.Name
                 }).Where(x => x.Price.ToString().Contains(key)).AsEnumerable();
                         break;
@@ -140,26 +134,8 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                     StartTime = a.StartTime,
                     EndTime = a.EndTime,
                     QuantityStudent = a.QuantityStudent,
-                    MarkPass = a.MarkPass,
                     Course = c.Name
                 }).Where(x => x.QuantityStudent.ToString().Contains(key)).AsEnumerable();
-                        break;
-                    case "MarkPass":
-                        admissions = db.Admission.Join(db.Course,
-                a => a.CourseId,
-                c => c.EntityId,
-                (a, c) => new
-                AdmissionViewModel
-                {
-                    EntityId = a.EntityId,
-                    Name = a.Name,
-                    Price = a.Price,
-                    StartTime = a.StartTime,
-                    EndTime = a.EndTime,
-                    QuantityStudent = a.QuantityStudent,
-                    MarkPass = a.MarkPass,
-                    Course = c.Name
-                }).Where(x => x.MarkPass.ToString().Contains(key)).AsEnumerable();
                         break;
                     case "Course":
                         admissions = db.Admission.Join(db.Course,
@@ -174,7 +150,6 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                     StartTime = a.StartTime,
                     EndTime = a.EndTime,
                     QuantityStudent = a.QuantityStudent,
-                    MarkPass = a.MarkPass,
                     Course = c.Name
                 }).Where(x => x.Course.Contains(key)).AsEnumerable();
                         break;
@@ -282,7 +257,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
             }
             return RedirectToAction("Index");
         }
-        
+
         [HttpPost]
         public ActionResult Edit(Admission a)
         {
@@ -334,7 +309,6 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                     currentAdmission.EndTime = a.EndTime;
                     currentAdmission.QuantityStudent = a.QuantityStudent;
                     currentAdmission.Price = a.Price;
-                    currentAdmission.MarkPass = a.MarkPass;
                     currentAdmission.CourseId = a.CourseId;
                     db.SaveChanges();
                     return RedirectToAction("Index");

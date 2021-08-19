@@ -32,8 +32,6 @@ namespace eProject_SymphonyLimited.Models
         [Required(ErrorMessage = "Please enter admission's price!")]
         public double Price { get; set; }
 
-        public double MarkPass { get; set; }
-
         [Display(Name = "Course")]
         public int CourseId { get; set; }
 
@@ -42,6 +40,7 @@ namespace eProject_SymphonyLimited.Models
         public Course Course { get; set; }
 
         public ICollection<Class> Classes { get; set; }
+
         public ICollection<RegisterInfo> RegisterInfoes { get; set; }
     }
 }
