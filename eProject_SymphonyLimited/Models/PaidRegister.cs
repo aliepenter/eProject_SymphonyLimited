@@ -16,5 +16,6 @@ namespace eProject_SymphonyLimited.Models
         [Display(Name = "Result")]
         public double Result { get; set; }
         public int RegisterInfoId { get; set; }
+        
     }
-}
+}   

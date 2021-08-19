@@ -138,6 +138,7 @@
     <Compile Include="Areas\Admin\Controllers\CourseController.cs" />
     <Compile Include="Areas\Admin\Controllers\FaqController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PaidRegisterController.cs" />
     <Compile Include="Areas\Admin\Controllers\PartnerController.cs" />
     <Compile Include="Areas\Admin\Controllers\RegisterInfoController.cs" />
     <Compile Include="Areas\Admin\Controllers\TeacherController.cs" />
@@ -148,6 +149,7 @@
     <Compile Include="Areas\Admin\Data\ViewModel\ChangePasswordViewModel.cs" />
     <Compile Include="Areas\Admin\Data\ViewModel\CourseViewModel.cs" />
     <Compile Include="Areas\Admin\Data\ViewModel\LoginViewModel.cs" />
+    <Compile Include="Areas\Admin\Data\ViewModel\PaidRegisterViewModel.cs" />
     <Compile Include="Areas\Admin\Data\ViewModel\PermissionViewModel.cs" />
     <Compile Include="Areas\Admin\Data\ViewModel\RegisterViewModel.cs" />
     <Compile Include="Areas\Admin\Data\ViewModel\UserViewModel.cs" />
@@ -179,6 +181,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\Content\css\admission.css" />
     <Content Include="Areas\Admin\Content\css\sb-admin-2.css" />
     <Content Include="Areas\Admin\Content\css\sb-admin-2.min.css" />
     <Content Include="Areas\Admin\Content\font_style_default.css" />
@@ -4052,6 +4055,7 @@
     <Content Include="Areas\Admin\Views\User\Index.cshtml" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\RegisterInfo\Edit.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -4097,6 +4101,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Views\PaidRegister\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

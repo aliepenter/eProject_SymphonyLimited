@@ -17,6 +17,10 @@
         <select id="type" class="form-control">
             <option value="EntityId" selected>Entity Id</option>
             <option value="Name">Name</option>
+            <option value="Phone">Phone</option>
+            <option value="Email">Email</option>
+            <option value="Status">Status</option>
+            <option value="Admission">Admission</option>
         </select>
     </div>
 </div>
@@ -49,9 +53,10 @@
                                     '<td>' + item.Email + '</td>' +
                                     '<td>' + item.Comment + '</td>' +
                                     '<td>' + item.CreatedAt + '</td>' +
-                                    '<td>' + item.Status + '</td>'+
-                                    '<td>' + item.Admission + '</td>'+
+                                    '<td>' + item.Status + '</td>' +
+                                    '<td>' + item.Admission + '</td>' +
                                     '<td>' +
+                                    '<button class="btn btn-warning btn-edit mb-1" data-id="' + item.EntityId + '">Edit</button>' +
                                     '<button class="btn btn-danger btn-delete mb-1" data-id="' + item.EntityId + '">Delete</button>' +
                                     '</td>'
                                     + '</tr></tbody>';
@@ -87,10 +92,14 @@
                     type = $("#type").val();
                 manager.load(1, type, key);
             });
+            $(document).on("click", ".btn-edit", function () {
+                var id = $(this).data("id");
+                window.location.href = baseUrl + "Admin/RegisterInfo/Edit/" + id;
+            });
             $(document).on("click", ".btn-delete", function () {
                 var id = $(this).data("id");
                 if (confirm('Are you sure want delete partner with id = ' + id + '?')) {
-                    window.location.href = baseUrl + "Admin/Teacher/Delete/" + id;
+                    window.location.href = baseUrl + "Admin/RegisterInfo/Delete/" + id;
                 } else {
                     return false;
                 }

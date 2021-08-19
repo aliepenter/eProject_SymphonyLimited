@@ -94,7 +94,7 @@
                 <div class="title">
                     <span>Register now to receive many offers from <br />Symphony Limited</span>
                 </div>
-                @using (Html.BeginForm("Application", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                @using (Html.BeginForm("Application", "Home", FormMethod.Post, new { enctype = "multipart/form-data"}))
                 {
                     @Html.AntiForgeryToken()
 
@@ -103,7 +103,7 @@
                             @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "input", @placeholder = "FullName*" } })
                         </div>
                         <div class="form-row">
-                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "input", @placeholder = "Email*" } })
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "input", @placeholder = "Email*", @type = "email" } })
                         </div>
                         <div class="form-row">
                             @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "input", @placeholder = "Phone*" } })
