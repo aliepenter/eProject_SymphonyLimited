@@ -6,12 +6,11 @@
 }
 
 <h2>Businesses</h2>
-
-@Html.ActionLink("Update", "Update", null, new { @class = "btn btn-primary float-left mb-3" })
+<a class="btn btn-primary float-left mb-3" href="/Admin/Business/Update"><i class="far fa-plus-square"></i> Update</a>
 <div class="form-inline mb-3 float-right">
     <div class="input-group">
         <label class="font-weight-bold m-0 mr-1 d-flex align-items-center">Search : </label>
-        <input type="text" name="key" id="key" value="" class="form-control mr-1 bg-light border-0 small" placeholder="Enter to search..." aria-label="Search" aria-describedby="basic-addon2">
+        <input type="text" name="key" id="key" value="" class="form-control mr-1 bg-light small" placeholder="Enter to search..." aria-label="Search" aria-describedby="basic-addon2">
     </div>
     <div class="input-group">
         <label class="font-weight-bold m-0 mr-1 d-flex align-items-center">Search By : </label>
@@ -45,7 +44,7 @@
                                 '<td>' + item.EntityId + '</td>' +
                                 '<td>' + item.Name + '</td>' +
                                 '<td>' +
-                                '<button class="btn btn-warning btn-edit mr-1 mb-1" data-id="' + item.EntityId + '">Edit</button>' +
+                                '<button class="btn btn-warning btn-edit mr-1 mb-1" data-id="' + item.EntityId + '"><i class="fas fa-edit"></i> Edit</button>' +
                                 '</td>'
                                 + '</tr></tbody>';
                         }

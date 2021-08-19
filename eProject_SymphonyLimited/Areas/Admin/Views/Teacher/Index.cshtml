@@ -4,11 +4,11 @@
 
 <h2>Teachers</h2>
 
-@Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary float-left mb-3" })
+<a class="btn btn-primary float-left mb-3" href="/Admin/Teacher/Create"><i class="far fa-plus-square"></i> Create New</a>
 <div class="form-inline mb-3 float-right">
     <div class="input-group">
         <label class="font-weight-bold m-0 mr-1 d-flex align-items-center">Search : </label>
-        <input type="text" name="key" id="key" value="" class="form-control mr-1 bg-light border-0 small" placeholder="Enter to search..." aria-label="Search" aria-describedby="basic-addon2">
+        <input type="text" name="key" id="key" value="" class="form-control mr-1 bg-light small" placeholder="Enter to search..." aria-label="Search" aria-describedby="basic-addon2">
     </div>
     <div class="input-group">
         <label class="font-weight-bold m-0 mr-1 d-flex align-items-center">Search By : </label>
@@ -47,8 +47,8 @@
                                     '<td>' + item.Specialize + '</td>' +
                                     '<td>' + item.Subject + '</td>' +
                                     '<td>' +
-                                    '<button class="btn btn-warning btn-edit mr-1 mb-1" data-id="' + item.EntityId + '">Edit</button>' +
-                                    '<button class="btn btn-danger btn-delete mb-1" data-id="' + item.EntityId + '">Delete</button>' +
+                                    '<button class="btn btn-warning btn-edit mr-1 mb-1" data-id="' + item.EntityId + '"><i class="fas fa-edit"></i> Edit</button>' +
+                                    '<button class="btn btn-danger btn-delete mb-1" data-id="' + item.EntityId + '"><i class="far fa-trash-alt"></i> Delete</button>' +
                                     '</td>'
                                     + '</tr></tbody>';
                             }
