@@ -4018,8 +4018,6 @@
     <Content Include="Areas\Admin\Views\Admission\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Admission\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Admission\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Auth\ForgotPassword.cshtml" />
-    <Content Include="Areas\Admin\Views\Auth\Login.cshtml" />
     <Content Include="Areas\Admin\Views\Branch\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Branch\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Branch\Index.cshtml" />
@@ -4038,10 +4036,6 @@
     <Content Include="Areas\Admin\Views\Faq\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Faq\Index.cshtml" />
     <Content Include="Areas\Admin\Views\GroupUser\GrantPermission.cshtml" />
-    <Content Include="Areas\Admin\Views\Home\ChangePassword.cshtml" />
-    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Home\UnAuthorize.cshtml" />
-    <Content Include="Areas\Admin\Views\Home\UserProfile.cshtml" />
     <Content Include="Areas\Admin\Views\Partner\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Partner\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Partner\Index.cshtml" />
@@ -4056,6 +4050,14 @@
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\RegisterInfo\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Auth\ForgotPassword.cshtml" />
+    <Content Include="Areas\Admin\Views\Auth\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Auth\ResetPassword.cshtml" />
+    <Content Include="Areas\Admin\Views\Auth\UnAuthorize.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\ChangePassword.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\UserProfile.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\UserProfileEdit.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />

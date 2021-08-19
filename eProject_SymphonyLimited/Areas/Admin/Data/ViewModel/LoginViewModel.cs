@@ -8,6 +8,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Data.ViewModel
         public string Account { get; set; }
 
         [Required(ErrorMessage = "Please enter password!")]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
     }
 }

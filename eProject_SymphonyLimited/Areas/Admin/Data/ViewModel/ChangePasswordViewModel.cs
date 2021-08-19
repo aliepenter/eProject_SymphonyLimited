@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace eProject_SymphonyLimited.Areas.Admin.Data.ViewModel
 {
     public class ChangePasswordViewModel
     {
+        public int EntityId { get; set; }
         [Required]
+        [DataType(DataType.Password)]
         public string OldPassword { get; set; }
         [Required]
+        [DataType(DataType.Password)]
         public string NewPassword { get; set; }
         [Required]
-        [Compare(nameof(NewPassword),ErrorMessage = "Confirm Password doesn't match.")]
+        [DataType(DataType.Password)]
+        [Compare(nameof(NewPassword), ErrorMessage = "Confirm Password doesn't match.")]
         public string ConfirmPassword { get; set; }
     }
 }

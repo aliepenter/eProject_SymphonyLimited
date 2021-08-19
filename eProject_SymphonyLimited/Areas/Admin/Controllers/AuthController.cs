@@ -18,7 +18,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
 
         public ActionResult Login()
         {
-            if (!Session["User"].Equals(""))
+            if (Session["User"] != null)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -51,7 +51,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
 
         public ActionResult Logout()
         {
-            Session["User"] = "";
+            Session.Remove("User");
             return RedirectToAction("Index", "Home");
         }
 
@@ -59,13 +59,14 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         {
             return View();
         }
-        
+
         [HttpPost]
         public ActionResult ForgotPassword(string Email)
         {
             var findUser = db.User.FirstOrDefault(x => x.Email == Email);
             if (findUser != null)
             {
+                var link = "Click here to reset your password => " + Request.Url.Scheme + "://" + Request.Url.Authority + @Url.Action("ResetPassword", "Auth", new { id = findUser.EntityId });
                 var senderEmail = new MailAddress("hoangcaolong2311@gmail.com", "Eternal Nightmare");
                 var receiverEmail = new MailAddress(Email, "Receiver");
                 var password = "Longdaica123";
@@ -80,25 +81,63 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                 };
                 using (var mess = new MailMessage(senderEmail, receiverEmail)
                 {
-                    Subject = "Your Password Here !",
-                    Body = findUser.Password
+                    Subject = "Confirm to reset password",
+                    Body = link
                 })
                 {
                     try
                     {
                         smtp.Send(mess);
-                        TempData["SuccessMessage"] = "Send successful!";
+                        //TempData["SuccessMessage"] = "Send successful!";
+                        return Json(new
+                        {
+                            StatusCode = 200,
+                        }, JsonRequestBehavior.AllowGet);
                     }
                     catch (System.Exception)
                     {
-                        TempData["ErrorMessage"] = "Send fail!";
+                        return Json(new
+                        {
+                            StatusCode = 400,
+                        }, JsonRequestBehavior.AllowGet);
                     }
                 }
             }
             else
             {
-                TempData["ErrorMessage"] = "Email not registered";
+                return Json(new
+                {
+                    StatusCode = 500,
+                }, JsonRequestBehavior.AllowGet);
             }
+           
+        }
+
+        public ActionResult ResetPassword(int id)
+        {
+            var user = db.User.Find(id);
+            ChangePasswordViewModel cpvm = new ChangePasswordViewModel();
+            cpvm.EntityId = user.EntityId;
+            cpvm.OldPassword = user.Password;
+            return View(cpvm);
+        }
+
+        [HttpPost]
+        public ActionResult ResetPassword(ChangePasswordViewModel cpvm)
+        {
+            var user = db.User.Find(cpvm.EntityId);
+            if (ModelState.IsValid)
+            {
+                user.Password = cpvm.NewPassword;
+                db.SaveChanges();
+                TempData["SuccessMessage"] = "Change successful!";
+                return RedirectToAction("Login");
+            }
+            return View();
+        }
+
+        public ActionResult UnAuthorize()
+        {
             return View();
         }
     }

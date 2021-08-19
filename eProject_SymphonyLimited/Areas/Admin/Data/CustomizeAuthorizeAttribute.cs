@@ -17,7 +17,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Data
                 return false;
             }
             // Nếu đăng nhập rồi lấy user ra đăng nhập
-            User user = (User)httpContext.Session["user"];
+            User user = (User)httpContext.Session["User"];
             // Kiểm tra nhóm quyền của user
             GroupUser grUser = db.GroupUser.Find(user.GroupId);
             if (grUser.IsAdmin)
@@ -45,7 +45,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Data
 
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
         {
-            filterContext.Result = new RedirectResult("/Admin/Home/UnAuthorize");
+            filterContext.Result = new RedirectResult("/Admin/Auth/UnAuthorize");
         }
     }
 }

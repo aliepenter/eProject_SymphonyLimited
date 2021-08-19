@@ -11,15 +11,15 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.GroupUsers.Name)
+            Image :
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.GroupUsers.Name)
+            <img style="width: 100px" src="/Areas/Admin/Content/img/@Model.Image">
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Account)
+            @Html.DisplayNameFor(model => model.Account) :
         </dt>
 
         <dd>
@@ -27,15 +27,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Password)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FullName)
+            Full Name :
         </dt>
 
         <dd>
@@ -43,7 +35,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Email)
+            @Html.DisplayNameFor(model => model.Email) :
         </dt>
 
         <dd>
@@ -51,7 +43,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Phone)
+            @Html.DisplayNameFor(model => model.Phone) :
         </dt>
 
         <dd>
@@ -59,20 +51,36 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Image)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Image)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
+            @Html.DisplayNameFor(model => model.Address) :
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Address)
         </dd>
 
+        <dt>
+            Role :
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GroupUsers.Name)
+        </dd>
+
     </dl>
 </div>
+
+
+<div>
+    <button class="btn btn-warning btn-edit mr-1 mb-1" data-id="@Model.EntityId">Edit</button>
+</div>
+
+@section scripts{
+    <script>
+        var getUrl = window.location;
+        var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
+        $(document).on("click", ".btn-edit", function () {
+            var userId = $(this).data("id");
+            window.location.href = baseUrl + "Admin/Home/UserProfileEdit/" + userId;
+        });
+    </script>
+}
