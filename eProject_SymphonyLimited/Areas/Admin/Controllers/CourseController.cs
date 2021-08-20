@@ -15,7 +15,6 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
     {
         SymphonyLimitedDBContext db = new SymphonyLimitedDBContext();
 
-        // GET: Admin/Course
         public ActionResult Index()
         {
             return View();
@@ -331,18 +330,24 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         {
             if (db.Course.Find(id) != null)
             {
-                try
+                if (db.Admission.FirstOrDefault(x => x.CourseId == id) != null)
                 {
-                    db.Course.Remove(db.Course.Find(id));
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                    TempData["ErrorMessage"] = "There are admissions in course!";
                 }
-                catch (Exception)
+                else
                 {
-                    ModelState.AddModelError("", "Some thing went wrong while delete course!");
+                    try
+                    {
+                        db.Course.Remove(db.Course.Find(id));
+                        db.SaveChanges();
+                    }
+                    catch (Exception)
+                    {
+                        TempData["ErrorMessage"] = "Some thing went wrong while delete course!";
+                    }
                 }
             }
-            return View();
+            return RedirectToAction("Index");
         }
     }
 }

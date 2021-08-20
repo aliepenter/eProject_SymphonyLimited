@@ -2,6 +2,7 @@
 using eProject_SymphonyLimited.Models;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
@@ -12,7 +13,6 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
     {
         SymphonyLimitedDBContext db = new SymphonyLimitedDBContext();
 
-        // GET: Admin/Category
         public ActionResult Index()
         {
             return View();
@@ -60,40 +60,36 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create(Category c)
         {
+            var validateName = db.Category.FirstOrDefault(x => x.Name == c.Name);
+            if (validateName != null)
+            {
+                ModelState.AddModelError("Name", "Category is already exist!");
+            }
             if (ModelState.IsValid)
             {
-                var validateName = db.Category.FirstOrDefault(x => x.Name == c.Name);
-                if (validateName == null)
+                try
                 {
-                    try
+                    var categoryById = db.Category.FirstOrDefault(x => x.EntityId == c.ParentId);
+                    if (categoryById != null)
                     {
-                        var categoryById = db.Category.FirstOrDefault(x => x.EntityId == c.ParentId);
-                        if (categoryById != null)
+                        if (categoryById.Level == 1)
                         {
-                            if (categoryById.Level == 1)
-                            {
-                                c.Path = categoryById.Path + "/";
-                            }
-                            else
-                            {
-                                c.Path = categoryById.Path + categoryById.EntityId + "/";
-                            }
-                            c.Level = categoryById.Level + 1;
-                            db.Category.Add(c);
-                            db.SaveChanges();
-                            return RedirectToAction("Index");
+                            c.Path = categoryById.Path + "/";
                         }
-                    }
-                    catch (Exception)
-                    {
-                        ModelState.AddModelError("", "Some thing went wrong while save category!");
+                        else
+                        {
+                            c.Path = categoryById.Path + categoryById.EntityId + "/";
+                        }
+                        c.Level = categoryById.Level + 1;
+                        db.Category.Add(c);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
                     }
                 }
-                else
+                catch (Exception)
                 {
-                    ModelState.AddModelError("Name", "Category is already exist!");
+                    ModelState.AddModelError("", "Some thing went wrong while save category!");
                 }
-
             }
             ViewBag.ParentList = db.Category.ToList();
             return View();
@@ -162,23 +158,44 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         {
             if (db.Category.Find(id) != null)
             {
-                try
+                if (db.Course.FirstOrDefault(x => x.CategoryId == id) != null)
                 {
-                    var childCategories = db.Category.Where(x => x.Path.Contains("/" + id.ToString() + "/")).AsEnumerable();
-                    foreach (var item in childCategories)
-                    {
-                        db.Category.Remove(db.Category.Find(item.EntityId));
-                    }
-                    db.Category.Remove(db.Category.Find(id));
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                    TempData["ErrorMessage"] = "There are courses in category!";
                 }
-                catch (Exception)
+                else
                 {
-                    ModelState.AddModelError("", "Some thing went wrong while delete category!");
+                    try
+                    {
+                        var childCategories = db.Category.Where(x => x.Path.Contains("/" + id.ToString() + "/")).AsEnumerable();
+                        List<int> childCategoriesInCourse = new List<int>();
+                        foreach (var item in childCategories)
+                        {
+                            if (db.Course.FirstOrDefault(x => x.CategoryId == item.EntityId) != null)
+                            {
+                                childCategoriesInCourse.Add(item.EntityId);
+                            }
+                        }
+                        if (childCategoriesInCourse.Count.Equals(null))
+                        {
+                            foreach (var item in childCategories)
+                            {
+                                db.Category.Remove(db.Category.Find(item.EntityId));
+                            }
+                            db.Category.Remove(db.Category.Find(id));
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            TempData["ErrorMessage"] = "There are courses in child category!";
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        TempData["ErrorMessage"] = "Some thing went wrong while delete category!";
+                    }
                 }
             }
-            return View();
+            return RedirectToAction("Index");
         }
     }
 }
