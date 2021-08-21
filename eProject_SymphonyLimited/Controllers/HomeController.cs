@@ -185,6 +185,32 @@ namespace eProject_SymphonyLimited.Controllers
                             }
                         }
                         ViewBag.ChildCategories = childCategoriesById;
+                        switch (sorter)
+                        {
+                            case "name":
+                                if (orderBy == "asc")
+                                {
+                                    coursesByCatgoryId = coursesByCatgoryId.OrderBy(x => x.Name).Skip((page - 1) * limiter).Take(limiter).ToList();
+                                }
+                                else if (orderBy == "desc")
+                                {
+                                    coursesByCatgoryId = coursesByCatgoryId.OrderByDescending(x => x.Name).Skip((page - 1) * limiter).Take(limiter).ToList();
+                                }
+                                break;
+                            case "price":
+                                if (orderBy == "asc")
+                                {
+                                    coursesByCatgoryId = coursesByCatgoryId.OrderBy(x => x.Price).Skip((page - 1) * limiter).Take(limiter).ToList();
+                                }
+                                else if (orderBy == "desc")
+                                {
+                                    coursesByCatgoryId = coursesByCatgoryId.OrderByDescending(x => x.Price).Skip((page - 1) * limiter).Take(limiter).ToList();
+                                }
+                                break;
+                            default:
+                                coursesByCatgoryId = coursesByCatgoryId.Skip((page - 1) * limiter).Take(limiter).ToList();
+                                break;
+                        }
                         ViewBag.Coures = coursesByCatgoryId;
                     }
                 }
