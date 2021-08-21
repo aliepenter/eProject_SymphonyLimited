@@ -38,6 +38,33 @@
             </div>
         </div>
         <div class="right">
+            <div class="toolbar-sorter sorter">
+                <label class="sorter-label" for="sorter">Sort by</label>
+                <select id="sorter">
+                    @if (ViewBag.Sorter == "price")
+                    {
+                        <option value="name">Course name</option>
+                        <option value="price" selected>Price</option>
+                    }
+                    else
+                    {
+                        <option value="name" selected>Course name</option>
+                        <option value="price">Price</option>
+                    }
+                </select>
+                @if (ViewBag.OrderBy == "desc")
+                {
+                    <a title="Set ascending direction" href="" class="orderBy" data-value="asc">
+                        <i class="glyphicon glyphicon-arrow-up"></i>
+                    </a>
+                }
+                else
+                {
+                    <a title="Set descending direction" href="" class="orderBy" data-value="desc">
+                        <i class="glyphicon glyphicon-arrow-down"></i>
+                    </a>
+                }
+            </div>
             <div class="courseItem flex">
                 @{if (ViewBag.Coures != null)
                     {
@@ -72,6 +99,55 @@
                         <h3>No courses here</h3>
                     }
                 }
+            </div>
+            <div class="pages">
+                <ul class="pagination">
+                    @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                    {
+                        if (i == ViewBag.CurrentPage)
+                        {
+                            <li class="active mr-1">
+                                <a href="javascript:void(0)" data-page-id="@i">
+                                    <button class="btn btn-info">@i</button>
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a class="item_page mr-1" href="javascript:void(0)" data-page-id="@i">
+                                    <button class="btn btn-info">@i</button>
+                                </a>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+            <div class="field limiter">
+                <span>Show</span>
+                <div class="control">
+                    <select id="limiter" class="limiter-options">
+                        @if (ViewBag.Limiter == 24)
+                        {
+                            <option value="12">12</option>
+                            <option value="24" selected>24</option>
+                            <option value="36">36</option>
+                        }
+                        else if (ViewBag.Limiter == 36)
+                        {
+                            <option value="12">12</option>
+                            <option value="24">24</option>
+                            <option value="36" selected>36</option>
+                        }
+                        else
+                        {
+                            <option value="12" selected>12</option>
+                            <option value="24">24</option>
+                            <option value="36">36</option>
+                        }
+                    </select>
+                </div>
+                <span class="limiter-text">on the page</span>
             </div>
         </div>
     </div>
@@ -108,5 +184,45 @@
         </div>
     </div>
 </div>
+@if (ViewBag.TotalPages == 1)
+{
+    <script>
+        var queryParams = new URLSearchParams(window.location.search);
+        if (queryParams.has('page')) {
+            queryParams.set("page", 1);
+            history.replaceState(null, null, "?" + queryParams.toString());
+        }
+    </script>
+}
+<script>
+    $(document).ready(function () {
+        var queryParams = new URLSearchParams(window.location.search);
+        $(document).on('click', '.orderBy', function (e) {
+            e.preventDefault();
+            var orderBy = $(this).data('value');
+            queryParams.set("orderBy", orderBy);
+            history.replaceState(null, null, "?" + queryParams.toString());
+            window.location.href = window.location.href;
+        });
+        $(document).on('change', '#sorter', function () {
+            var sorter = $('#sorter').val();
+            queryParams.set("sorter", sorter);
+            history.replaceState(null, null, "?" + queryParams.toString());
+            window.location.href = window.location.href;
+        });
+        $(document).on('change', '#limiter', function () {
+            var limiter = $('#limiter').val();
+            queryParams.set("limiter", limiter);
+            history.replaceState(null, null, "?" + queryParams.toString());
+            window.location.href = window.location.href;
+        });
+        $(document).on("click", ".item_page", function () {
+            var page = $(this).data('page-id');
+            queryParams.set("page", page);
+            history.replaceState(null, null, "?" + queryParams.toString());
+            window.location.href = window.location.href;
+        });
+    });
+</script>
 
 
