@@ -153,28 +153,28 @@
     </div>
     <div class="formCourse flex">
         <div class="left">
-            @using (Html.BeginForm("Application", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            @using (Html.BeginForm("Application", "Home", FormMethod.Post, new { enctype = "multipart/form-data", @id = "formSubmit" }))
             {
                 @Html.AntiForgeryToken()
 
                 <div class="form">
                     <div class="form-row">
-                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "input", @placeholder = "FullName*" } })
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "input", @placeholder = "FullName*", @required = "" } })
                     </div>
                     <div class="form-row">
-                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "input", @placeholder = "Email*" } })
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "input", @placeholder = "Email*", @type = "email", @required = "" } })
                     </div>
                     <div class="form-row">
-                        @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "input", @placeholder = "Phone*" } })
+                        @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "input", @placeholder = "Phone*", @required = "", @id = "phoneNumber" } })
                     </div>
                     <div class="form-row">
-                        @Html.DropDownListFor(model => model.AdmissionId, new SelectList(ViewBag.admissionList, "EntityId", "Name", "Select"), new { @class = "input" })
+                        @Html.DropDownListFor(model => model.AdmissionId, new SelectList(ViewBag.admissionList, "EntityId", "Name", "Select"), new { @class = "input", @required = "" })
                     </div>
                     <div class="form-row">
                         @Html.TextAreaFor(model => model.Comment, new { @class = "input", @placeholder = "Give us questions", @rows = "5" })
                     </div>
                     <div class="btnFormIndex">
-                        <button type="submit">Send</button>
+                        <button type="submit" id="submitForm">Send</button>
                     </div>
                 </div>
             }

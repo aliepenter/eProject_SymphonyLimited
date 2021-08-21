@@ -201,18 +201,20 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                             db.SaveChanges();
 
                             var paidRegister = db.RegisterInfo.Where(c => c.Status != false);
-
-                            foreach (var item in paidRegister)
+                            if (db.PaidRegister.Where(x => x.RegisterInfoId == r.EntityId).FirstOrDefault() == null)
                             {
-                                var obj = new PaidRegister()
+                                foreach (var item in paidRegister)
                                 {
-                                    RollNumber = "SL0" + item.EntityId,
-                                    RegisterInfoId = item.EntityId
-                                };
-                                db.PaidRegister.Add(obj);
+                                
+                                    var obj = new PaidRegister()
+                                    {
+                                        RollNumber = "SL0" + item.EntityId,
+                                        RegisterInfoId = item.EntityId
+                                    };
+                                    db.PaidRegister.Add(obj);
+                                }
+                                db.SaveChanges();
                             }
-                            db.SaveChanges();
-
                             return RedirectToAction("Index");
                         }
                     }

@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 
@@ -225,6 +227,45 @@ namespace eProject_SymphonyLimited.Controllers
             f.CreatedAt = DateTime.Now;
             db.RegisterInfo.Add(f);
             db.SaveChanges();
+            var findUser = db.RegisterInfo.FirstOrDefault(x => x.Email == f.Email);
+            if (findUser != null)
+            {
+                var senderEmail = new MailAddress("hoangcaolong2311@gmail.com", "Eternal Nightmare");
+                var receiverEmail = new MailAddress(f.Email, "Receiver");
+                var password = "Longdaica123";
+                var smtp = new SmtpClient
+                {
+                    Port = 587,
+                    Host = "smtp.gmail.com",
+                    EnableSsl = true,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(senderEmail.Address, password),
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                };
+                using (var mess = new MailMessage(senderEmail, receiverEmail)
+                {
+
+                    Subject = "Symphony Limited",
+                    Body = "<span style='color:red'>helo</span>"
+                })
+
+                {
+                    try
+                    {
+                        mess.IsBodyHtml = true;
+                        smtp.Send(mess);
+                        //TempData["SuccessMessage"] = "Send successful!";
+                    }
+                    catch (System.Exception)
+                    {
+
+                    }
+                }
+            }
+            else
+            {
+
+            }
             return RedirectToAction("Index");
         }
 
