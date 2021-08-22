@@ -28,7 +28,7 @@ namespace eProject_SymphonyLimited.Controllers
             ViewBag.phoneInFooter = db.CoreConfigData.FirstOrDefault(x => x.Code == "phone_in_footer");
             ViewBag.emailInFooter = db.CoreConfigData.FirstOrDefault(x => x.Code == "email_in_footer");
             ViewBag.addressInFooter = db.CoreConfigData.FirstOrDefault(x => x.Code == "address_in_footer");
-
+            ViewBag.partner = db.Partner.AsEnumerable();
         }
 
         public ActionResult GetChildCategories()

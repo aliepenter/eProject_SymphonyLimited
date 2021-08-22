@@ -35,7 +35,7 @@
                     <a href="@Url.Action("Course","Home")">Course Details</a>
                 </li>
                 <li>
-                    <a href="@Url.Action("EntranceExam","Home")">Entrance Examitaion</a>
+                    <a href="@Url.Action("EntranceExam","Home")">Entrance Examination</a>
                 </li>
                 <li>
                     <a href="@Url.Action("About","Home")">About us</a>
@@ -96,25 +96,14 @@
                                     @{ foreach (var item in ViewBag.categoryLevel2)
                                         {
                                             <li id="@item.EntityId" style="" class="getId">
-                                                <a class="menuA" href="">@item.Name</a>
-                                                <ul>
-                                                    <div class="subMenu">
-                                                        @{
-                                                        <li class="" style="padding: 10px">
-                                                            <div class="">
-                                                                <a href="" class="subMenuATag"></a>
-                                                            </div>
-                                                        </li>
-                                                        }
-                                </div>
-                                </ul>
-                                </li>
-                            }
+                                                <a class="menuA" href="~/Home/Course/@item.EntityId">@item.Name</a>
+                                            </li>
+                                        }
                                     }
                                     </ul>
                                     </li>
                                     <li class="subMenuEntranceExam">
-                                        <a class="menuA" href="@Url.Action("EntranceExam","Home")">Entrance Examitaion</a>
+                                        <a class="menuA" href="@Url.Action("EntranceExam","Home")">Entrance Examination</a>
                                         <ul class="subMenuEE">
                                             <li>
                                                 <a class="menuA" href="@Url.Action("EntranceExam","Home")">Upcoming Entrance Examination</a>

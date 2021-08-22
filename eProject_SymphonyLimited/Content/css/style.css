@@ -1463,7 +1463,9 @@ table, th, td {
 .containerCourseDetail .topItemCourseDetail .cate {
     width: 60%
 }
-
+.cusCourseItem .img {
+    border: 1px solid #e5e5e5;
+}
 /* minwidth 768 */
 @media screen and (min-width: 768px) {
     .popUpSubmit {
