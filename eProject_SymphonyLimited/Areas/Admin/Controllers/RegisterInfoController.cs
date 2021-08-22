@@ -179,7 +179,6 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                 {
                     var reById = db.RegisterInfo.FirstOrDefault(x => x.EntityId == r.EntityId);
                     if (reById != null)
-                    if (reById != null)
                     {
                         if (reById.Status == true && r.Status == false)
                         {
@@ -191,23 +190,16 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                             reById.Phone = r.Phone;
                             reById.Email = r.Email;
                             reById.Status = true;
-                            db.SaveChanges();
 
-                            var paidRegister = db.RegisterInfo.Where(c => c.Status != false);
-                            if (db.PaidRegister.Where(x => x.RegisterInfoId == r.EntityId).FirstOrDefault() == null)
+                            if (db.PaidRegister.FirstOrDefault(x => x.RegisterInfoId == r.EntityId) == null)
                             {
-                                foreach (var item in paidRegister)
-                                {
-
-                                    var obj = new PaidRegister()
-                                    {
-                                        RollNumber = "SL0" + item.EntityId,
-                                        RegisterInfoId = item.EntityId
-                                    };
-                                    db.PaidRegister.Add(obj);
-                                }
+                                PaidRegister addPaidRegister = new PaidRegister();
+                                addPaidRegister.RollNumber = "SL0" + r.EntityId;
+                                addPaidRegister.RegisterInfoId = r.EntityId;
+                                db.PaidRegister.Add(addPaidRegister);
                                 db.SaveChanges();
                             }
+
                             return RedirectToAction("Index");
                         }
                     }

@@ -44,7 +44,7 @@
                         url: baseUrl + "Admin/RegisterInfo/Get",
                         data: { page: page, type: type, key: key },
                         success: function (res) {
-                            var _html = ' <thead class="thead-dark"><tr><th>Entity Id</th>><th>Name</th><th>Phone</th><th>Email</th><th>Comment</th><th>CreateAt</th><th>Status</th><th>Admission</th><th>Action</th></tr></thead>';
+                            var _html = ' <thead class="thead-dark"><tr><th>Entity Id</th>><th>Name</th><th>Phone</th><th>Email</th><th>Comment</th><th>CreateAt</th><th>Paid Status</th><th>Admission</th><th>Action</th></tr></thead>';
                             for (var item of JSON.parse(res.Data)) {
                                 if (item.Status == true) {
                                     var status = "Paid";

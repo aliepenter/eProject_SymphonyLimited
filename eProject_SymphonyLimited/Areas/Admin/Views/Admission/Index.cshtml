@@ -22,6 +22,7 @@
                 <option value="Name">Name</option>
                 <option value="StartTime">Start Time</option>
                 <option value="EndTime">End Time</option>
+                <option value="BillTime">Bill Time</option>
                 <option value="QuantityStudent">Student Quantity</option>
                 <option value="Price">Price</option>
                 <option value="Course">Course</option>
@@ -50,6 +51,7 @@
                             <option value="Phone">Phone</option>
                             <option value="Email">Email</option>
                             <option value="Status">Status</option>
+                            <option value="RollNumber">Roll Number</option>
                             <option value="Admission">Admission</option>
                         </select>
                     </div>
@@ -105,13 +107,14 @@
                         url: baseUrl + "Admin/Admission/Get",
                         data: { page: page, type: type, key: key },
                         success: function (res) {
-                            var _html = ' <thead class="thead-dark"><tr><th>Entity Id</th><th>Name</th><th>Start Time</th><th>End Time</th><th>Student Quantity</th><th>Price</th><th>Course</th><th>Action</th></tr></thead>';
+                            var _html = ' <thead class="thead-dark"><tr><th>Entity Id</th><th>Name</th><th>Start Time</th><th>End Time</th><th>Bill Time</th><th>Student Quantity</th><th>Price</th><th>Course</th><th>Action</th></tr></thead>';
                             for (var item of JSON.parse(res.Data)) {
                                 _html += '<tbody><tr>' +
                                     '<td>' + item.EntityId + '</td>' +
                                     '<td>' + item.Name + '</td>' +
                                     '<td>' + item.StartTime + '</td>' +
                                     '<td>' + item.EndTime + '</td>' +
+                                    '<td>' + item.BillTime + '</td>' +
                                     '<td>' + item.QuantityStudent + '</td>' +
                                     '<td>' + item.Price + '</td>' +
                                     '<td>' + item.Course + '</td>' +
@@ -282,17 +285,17 @@
                     var page = $(this).text(),
                         key = $('#keyP').val(),
                         type = $("#typeP").val();
-                    managerPaidRegister.load(page, type, key);
+                    managerPaidRegister.load(page, type, key, id);
                 });
                 $('#keyP').keyup(function () {
                     var key = $("#keyP").val(),
                         type = $("#typeP").val();
-                    managerPaidRegister.load(1, type, key);
+                    managerPaidRegister.load(1, type, key, id);
                 });
                 $(document).on("change", "#typeP", function () {
                     var key = $("#keyP").val(),
                         type = $("#typeP").val();
-                    managerPaidRegister.load(1, type, key);
+                    managerPaidRegister.load(1, type, key, id);
                 });
                 $(document).on("click", ".btn-back", function () {
                     $('#paidRegisterPage').addClass('disActiveRight');

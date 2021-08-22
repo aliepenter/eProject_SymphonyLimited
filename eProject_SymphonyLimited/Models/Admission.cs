@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace eProject_SymphonyLimited.Models
 {
@@ -25,6 +23,10 @@ namespace eProject_SymphonyLimited.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Required(ErrorMessage = "Please enter admission's end time!")]
         public DateTime EndTime { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Required(ErrorMessage = "Please enter admission's bill time!")]
+        public DateTime BillTime { get; set; }
 
         [Required(ErrorMessage = "Please enter admission's quantity student!")]
         public int QuantityStudent { get; set; }

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace eProject_SymphonyLimited.Areas.Admin.Data.ViewModel
 {
@@ -14,6 +11,8 @@ namespace eProject_SymphonyLimited.Areas.Admin.Data.ViewModel
         public DateTime StartTime { get; set; }
 
         public DateTime EndTime { get; set; }
+
+        public DateTime BillTime { get; set; }
 
         public int QuantityStudent { get; set; }
 

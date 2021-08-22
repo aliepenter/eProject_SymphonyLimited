@@ -34,6 +34,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                     Price = a.Price,
                     StartTime = a.StartTime,
                     EndTime = a.EndTime,
+                    BillTime = a.BillTime,
                     QuantityStudent = a.QuantityStudent,
                     Course = c.Name
                 }).AsEnumerable();
@@ -53,6 +54,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                     Price = a.Price,
                     StartTime = a.StartTime,
                     EndTime = a.EndTime,
+                    BillTime = a.BillTime,
                     QuantityStudent = a.QuantityStudent,
                     Course = c.Name
                 }).Where(x => x.EntityId.ToString().Contains(key)).AsEnumerable();
@@ -69,6 +71,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                     Price = a.Price,
                     StartTime = a.StartTime,
                     EndTime = a.EndTime,
+                    BillTime = a.BillTime,
                     QuantityStudent = a.QuantityStudent,
                     Course = c.Name
                 }).Where(x => x.Name.Contains(key)).AsEnumerable();
@@ -85,6 +88,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                     Price = a.Price,
                     StartTime = a.StartTime,
                     EndTime = a.EndTime,
+                    BillTime = a.BillTime,
                     QuantityStudent = a.QuantityStudent,
                     Course = c.Name
                 }).Where(x => x.StartTime.ToString().Contains(key)).AsEnumerable();
@@ -101,9 +105,27 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                     Price = a.Price,
                     StartTime = a.StartTime,
                     EndTime = a.EndTime,
+                    BillTime = a.BillTime,
                     QuantityStudent = a.QuantityStudent,
                     Course = c.Name
                 }).Where(x => x.EndTime.ToString().Contains(key)).AsEnumerable();
+                        break;
+                    case "BillTime":
+                        admissions = db.Admission.Join(db.Course,
+                a => a.CourseId,
+                c => c.EntityId,
+                (a, c) => new
+                AdmissionViewModel
+                {
+                    EntityId = a.EntityId,
+                    Name = a.Name,
+                    Price = a.Price,
+                    StartTime = a.StartTime,
+                    EndTime = a.EndTime,
+                    BillTime = a.BillTime,
+                    QuantityStudent = a.QuantityStudent,
+                    Course = c.Name
+                }).Where(x => x.BillTime.ToString().Contains(key)).AsEnumerable();
                         break;
                     case "Price":
                         admissions = db.Admission.Join(db.Course,
@@ -117,6 +139,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                     Price = a.Price,
                     StartTime = a.StartTime,
                     EndTime = a.EndTime,
+                    BillTime = a.BillTime,
                     QuantityStudent = a.QuantityStudent,
                     Course = c.Name
                 }).Where(x => x.Price.ToString().Contains(key)).AsEnumerable();
@@ -133,6 +156,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                     Price = a.Price,
                     StartTime = a.StartTime,
                     EndTime = a.EndTime,
+                    BillTime = a.BillTime,
                     QuantityStudent = a.QuantityStudent,
                     Course = c.Name
                 }).Where(x => x.QuantityStudent.ToString().Contains(key)).AsEnumerable();
@@ -149,6 +173,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                     Price = a.Price,
                     StartTime = a.StartTime,
                     EndTime = a.EndTime,
+                    BillTime = a.BillTime,
                     QuantityStudent = a.QuantityStudent,
                     Course = c.Name
                 }).Where(x => x.Course.Contains(key)).AsEnumerable();
@@ -185,6 +210,10 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         {
             var validateName = db.Admission.FirstOrDefault(x => x.Name == a.Name);
             var admission = db.Admission.Where(x => x.CourseId == a.CourseId).AsEnumerable();
+            if (a.BillTime < a.EndTime)
+            {
+                ModelState.AddModelError("BillTime", "Bill time must bigger than end time!");
+            }
             if (a.StartTime <= DateTime.Now)
             {
                 ModelState.AddModelError("StartTime", "Start time must bigger than current time!");
@@ -264,6 +293,10 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
             var currentAdmission = db.Admission.Find(a.EntityId);
             var admission = db.Admission.Where(x => x.EntityId != currentAdmission.EntityId && x.CourseId == a.CourseId).AsEnumerable();
             var validateName = db.Admission.FirstOrDefault(x => x.Name != currentAdmission.Name && x.Name == a.Name);
+            if (a.BillTime < a.EndTime)
+            {
+                ModelState.AddModelError("BillTime", "Bill time must bigger than end time!");
+            }
             if (a.StartTime <= DateTime.Now)
             {
                 ModelState.AddModelError("StartTime", "Start time must bigger than current time!");
@@ -307,6 +340,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                     currentAdmission.Name = a.Name;
                     currentAdmission.StartTime = a.StartTime;
                     currentAdmission.EndTime = a.EndTime;
+                    currentAdmission.BillTime = a.BillTime;
                     currentAdmission.QuantityStudent = a.QuantityStudent;
                     currentAdmission.Price = a.Price;
                     currentAdmission.CourseId = a.CourseId;
