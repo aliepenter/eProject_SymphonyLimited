@@ -1,0 +1,121 @@
+﻿@model eProject_SymphonyLimited.Models.RegisterInfo
+
+@{
+    ViewBag.Title = "EntranceExam";
+}
+
+
+<div class="mainEE">
+    <div class="menuEEMobi">
+        <div class="barEE" style="padding: 0 30px;font-size: 20px;">
+            <i class="fas fa-bars" id="barE"></i>
+        </div>
+        <div class="menu disNone" id="menuEE">
+            <div class="exit" style="text-align:right; padding: 10px">
+                <span id="exitEE">
+                    <i class="fa fa-times" aria-hidden="true" style="font-size: 20px; color: white"></i>
+                </span>
+            </div>
+            <ul>
+                @{ foreach (var item in ViewBag.admission)
+                    {
+                        <li id="">
+                            <a class="defaultMenu" href="">@item.Name</a>
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="containerEEDetail flex">
+        <div class="left cusBannerEE">
+            <div class="category">
+                <div class="cat">
+                    <span>Admissions</span>
+                </div>
+                <div class="menu">
+                    <ul>
+                        @{ foreach (var item in ViewBag.admission)
+                            {
+                                <li id="">
+                                    <a class="defaultMenu" href="">@item.Name</a>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="midEE">
+            <div class="infor">
+                <div class="title">
+                    <span><span>Admission</span></span>
+                </div>
+                <div class="containerItem">
+                    <div class="name cusItem">
+                        <span><span class="csSpan">Admission's Name: </span>Tên kì tuyển sinh</span>
+                    </div>
+                    <div class="time flex">
+                        <div class="st">
+                            <span><span class="csSpan">Start Time: </span>Thòi gian bắt đầu</span>
+                        </div>
+                        <div class="et">
+                            <span><span class="csSpan">End Time: </span>Thòi gian kết thúc</span>
+                        </div>
+                    </div>
+                    <div class="stQuantity cusItem">
+                        <span><span class="csSpan">Admissions criteria: </span>Chỉ tiêu</span>
+                    </div>
+                    <div class="eePrice cusItem">
+                        <span><span class="csSpan">Entrance Exam Fees: </span>Giá kì thi đầu vào</span>
+                    </div>
+                    <div class="markPass cusItem">
+                        <span><span class="csSpan">Entry Point: </span>Điểm đầu vào</span>
+                    </div>
+                    <div class="course cusItem">
+                        <span><span class="csSpan">Course: </span>Khoá học</span>
+                    </div>
+                    <div class="coursePrice cusItem">
+                        <span><span class="csSpan">Course Fees: </span>Học phí</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+
+            <div class="formRegis">
+                <div class="title">
+                    <span>Register now!</span>
+                </div>
+                @using (Html.BeginForm("Application", "Home", FormMethod.Post, new { enctype = "multipart/form-data", @id = "formSubmit" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form">
+                        <div class="form-row">
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "input", @placeholder = "FullName*", @required = "" } })
+                        </div>
+                        <div class="form-row">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "input", @placeholder = "Email*", @type = "email", @required = "" } })
+                        </div>
+                        <div class="form-row">
+                            @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "input", @placeholder = "Phone*", @required = "", @pattern = "(84|0[3|5|7|8|9])+([0-9]{8})", @title = ".e.g 0812345678" } })
+                        </div>
+                        <div class="form-row">
+                            @Html.DropDownListFor(model => model.AdmissionId, new SelectList(ViewBag.admissionList, "EntityId", "Name", "Select"), new { @class = "input", @required = "" })
+                        </div>
+                        <div class="form-row">
+                            @Html.TextAreaFor(model => model.Comment, new { @class = "input", @placeholder = "Give us questions", @rows = "5" })
+                        </div>
+                        <div class="btnFormIndex">
+                            <button type="submit" id="submitForm">Send</button>
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+

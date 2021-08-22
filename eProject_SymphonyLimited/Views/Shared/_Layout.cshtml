@@ -169,25 +169,7 @@
                                 @{ foreach (var item in ViewBag.categoryLevel2)
                                     {
                                         <li id="fLi" style="padding-top: 20px; padding-left:20%; border-bottom: 1px solid white;">
-                                            <a class="defaultMenu" href="" style="color: white; text-transform: uppercase;">@item.Name</a>
-                                            @*<ul>
-                                                    <div class="subMenu flex" id="subMenu">
-
-                                                        @{
-                                                            foreach (var subItem in ViewBag.categoryLevel3)
-                                                            {
-                                                                if (item.EntityId == subItem.ParentId)
-                                                                {
-                                                                <li class="width20" style="display: inline-block">
-                                                                    <div class="">
-                                                                        <a href="" class="subMenuATag">@subItem.Name</a>
-                                                                    </div>
-                                                                </li>
-                                                            }
-                                                        }
-                                                        }
-                                                    </div>
-                                                </ul>*@
+                                            <a class="defaultMenu" href="~/Home/Course/@item.EntityId" style="color: white; text-transform: uppercase;">@item.Name</a>
                                         </li>
                                     }
                                 }

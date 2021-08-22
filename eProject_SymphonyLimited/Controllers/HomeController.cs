@@ -1,4 +1,5 @@
-﻿using eProject_SymphonyLimited.Models;
+﻿using eProject_SymphonyLimited.Areas.Admin.Data.ViewModel;
+using eProject_SymphonyLimited.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,6 +55,20 @@ namespace eProject_SymphonyLimited.Controllers
         }
         public ActionResult EntranceExam()
         {
+            ViewBag.Adms = db.Admission.Join(db.Course,
+               ad => ad.CourseId,
+               co => co.EntityId,
+               (ad, co) => new
+               AdmissionViewModel
+               {
+                   EntityId = ad.EntityId,
+                   Name = ad.Name,
+                   Price = ad.Price,
+                   StartTime = ad.StartTime,
+                   EndTime = ad.EndTime,
+                   QuantityStudent = ad.QuantityStudent,
+                   Course = co.Image
+               }).AsEnumerable();
             return View();
         }
         [HttpGet]
@@ -300,7 +315,10 @@ namespace eProject_SymphonyLimited.Controllers
             }
             return RedirectToAction("Index");
         }
-
+        public ActionResult AdmissionDetail()
+        {
+            return View();
+        }
         public ActionResult CourseDetail()
         {
             var id = RouteData.Values["id"];
@@ -308,6 +326,22 @@ namespace eProject_SymphonyLimited.Controllers
             {
                 bool isInt = Int32.TryParse(id.ToString(), out int entityId);
                 var courseById = db.Course.FirstOrDefault(x => x.EntityId == entityId);
+                ViewBag.Courses = db.Course.Join(db.Category,
+               co => co.CategoryId,
+               ca => ca.EntityId,
+               (co, ca) => new
+               CourseViewModel
+               {
+                   EntityId = co.EntityId,
+                   Name = co.Name,
+                   Price = co.Price,
+                   Subject = co.Subject,
+                   Certificate = co.Certificate,
+                   Image = co.Image,
+                   Description = co.Description,
+                   Time = co.Time,
+                   Category = ca.Name
+               }).FirstOrDefault(x => x.EntityId == entityId);
                 if (courseById != null)
                 {
                     return View(courseById);

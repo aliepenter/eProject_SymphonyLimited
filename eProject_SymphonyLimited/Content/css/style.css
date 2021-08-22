@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: Roboto,sans-serif;
+        font-family: Roboto,sans-serif;
 }
 
 .popUpSubmit {
@@ -414,14 +414,29 @@ body {
     padding: 10px;
     margin-bottom: 30px;
 }
-
     .cusCourseItem:hover {
         top: -10px;
+    }
+    .cusCourseItem:hover .description{
         background-color: lightgray;
     }
-
+    .cusCourseItem:hover .moreInfor {
+        background-color: lightgray;
+    }
+.midEE .cusCourseItem:hover .rd {
+    background-color: lightgray;
+}
+.rd{
+    padding: 0 10px;
+    color: black
+}
+.rd .time{
+    color: rebeccapurple;
+    font-weight: bold;
+    font-size: 16px
+}
     .cusCourseItem .moreInfor {
-        border-top: 1px groove #6E1313;
+        border: 1px solid #e5e5e5;
         padding: 10px 0;
     }
 
@@ -432,13 +447,16 @@ body {
 
 .cusCourseItem .moreInfor .price {
     text-align: right;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
+    color: #F38271;
+    font-family: roboto slab;
 }
 
-
+.admissionCriteria {
+    color: #999999
+}
 /* js menumobi */
-
 .menuMobileActive {
     display: block;
     animation-duration: 01s;
@@ -500,6 +518,7 @@ body {
 
     .main .containerCourseMain .left {
         display: none;
+        padding: 0 20px 0 0;
     }
 
     .main .containerCourseMain .right {
@@ -1149,37 +1168,62 @@ table, th, td {
             font-weight: bold;
             background: #E0A800
         }
+.containerEEDetail {
+    width: 90%;
+    margin: 0 auto
+}
 
-.mainEE .containerEE .form {
+.containerEEDetail .left {
+    width: 0%;
+    display: none;
+}
+
+.containerEEDetail .midEE {
+    width: 100%
+}
+
+.containerEEDetail .right {
+    width: 100%
+}
+
+.containerEEDetail .right .formRegis .title {
+    text-align: center;
+    padding: 20px;
+    font-size: 25px;
+    text-transform: uppercase;
+    font-weight: bold;
+    background: #E0A800
+}
+.mainEE .containerEEDetail .form {
     margin: 10px 0
 }
 
-.mainEE .containerEE .form-row {
+.mainEE .containerEEDetail .form-row {
     margin: 30px 0;
 }
 
-    .mainEE .containerEE .form-row .input {
-        padding: 25px;
-        width: 100%;
-        outline: none;
-        background-color: #fff;
-        background-clip: padding-box;
-        border: 1px solid #ced4da;
-        border-radius: .25rem;
-    }
+.mainEE .containerEEDetail .form-row .input {
+    padding: 25px;
+    width: 100%;
+    outline: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+}
 
 
-    .mainEE .containerEE .form-row textarea {
-        padding: 25px;
-        width: 100%;
-        outline: none;
-        background-color: #fff;
-        background-clip: padding-box;
-        border: 1px solid #ced4da;
-        border-radius: .25rem;
-    }
+.mainEE .containerEEDetail .form-row textarea {
+    padding: 25px;
+    width: 100%;
+    outline: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+}
 
-.mainEE .containerEE button {
+.mainEE .containerEEDetail button {
     padding: 10px;
     width: 50%;
     outline: none;
@@ -1190,9 +1234,9 @@ table, th, td {
     font-weight: bold
 }
 
-    .mainEE .containerEE button:hover {
-        background-color: #FF9600
-    }
+.mainEE .containerEEDetail button:hover {
+    background-color: #FF9600
+}
 
 .main .cusBannerEE .category {
     /*padding: 0px 30px;*/
@@ -1282,10 +1326,6 @@ table, th, td {
                 font-size: 16px;
             }
 
-.containerCourseDetail {
-    width: 90%;
-    margin: 30px auto
-}
 
     .containerCourseDetail .left {
         width: 100%
@@ -1298,7 +1338,8 @@ table, th, td {
     .containerCourseDetail .left .price {
         font-weight: bold;
         font-size: 20px;
-        padding: 10px 0
+        padding: 10px 0;
+        
     }
 
     .containerCourseDetail .right .containerItem {
@@ -1306,9 +1347,11 @@ table, th, td {
     }
 
         .containerCourseDetail .right .containerItem .cusItem {
-            padding: 10px 0
+            padding: 10px 0;
         }
-
+        .containerCourseDetail .right .containerItem .topItemCourseDetail .name {
+            font-size: 30px
+        }
 .cdSpan {
     font-weight: bold;
 }
@@ -1325,6 +1368,102 @@ table, th, td {
     text-align: center;
     padding: 0px
 }
+.toolbar-sorter {
+    margin: 0 0 10px 0;
+    padding: 0 10px;
+    text-align: right;
+    font-size: 1.4rem
+}
+.toolbar-sorter select{
+    padding: 5px
+}
+.midEE .cusCourseItem .description {
+    text-align: center;
+    color: black;
+    text-transform: uppercase;
+    font-weight: bold;
+    height: 100px;
+    font-size: 20px;
+    padding: 20px 0 10px 0;
+    font-family: roboto slab;
+    border: 1px solid #e5e5e5;
+    border-bottom: none;
+    border-top: none;
+}
+.cusCourseItem .description {
+    text-align: center;
+    color: black;
+    text-transform: uppercase;
+    font-weight: bold;
+    height: 100px;
+    font-size: 16px;
+    padding: 20px 0 10px 0;
+    font-family: roboto slab;
+    border: 1px solid #e5e5e5;
+    border-bottom: none;
+    border-top: none;
+}
+.cusCourseItem .description span:hover {
+    color: #ED4B23;
+}
+.mainInfor{
+    font-size: 16px
+}
+.containerCourseDetail {
+    width: 90%;
+    margin: 30px auto
+}
+.topItemCourseDetail {
+    border-bottom: 1px solid #c1c1c1
+}
+.topItemCourseDetail .name{
+    font-size: 20px;
+    font-weight: bold
+}
+.topItemCourseDetail .cate span{
+    font-size: 14px;
+    font-weight: bold
+}
+.botItemCourseDetail .name{
+    width: 40%
+}
+.botItemCourseDetail .value {
+    width: 60%
+}
+.containerCourseDetail .butt button {
+    width: 100%;
+    padding: 10px;
+    background: purple;
+    color: wheat;
+    font-size : 20px;
+    outline: none;
+    border: none;
+    border-radius: 5px
+}
+.containerCourseDetail .butt button:hover {
+    background: rgb(110, 19, 19);
+}
+.containerCourseDetail .description {
+    border: 1px solid #ccc;
+    padding: 30px;
+    margin: 30px 0;
+    border-radius: 5px
+}
+.containerCourseDetail .description .title{
+    font-weight: bold;
+    font-size: 20px;
+    margin: 0 0 20px 0
+}
+.containerCourseDetail .description .content{
+    line-height: 2;
+}
+.containerCourseDetail .topItemCourseDetail .price{
+    width: 40%
+}
+.containerCourseDetail .topItemCourseDetail .cate {
+    width: 60%
+}
+
 /* minwidth 768 */
 @media screen and (min-width: 768px) {
     .popUpSubmit {
@@ -1519,6 +1658,16 @@ table, th, td {
 }
 
 @media screen and (min-width: 1024px) {
+    .midEE .cusCourseItem{
+        width: 33.33334%
+    }
+    .containerCourseDetail .topItemCourseDetail .price {
+        width: 30%
+    }
+
+    .containerCourseDetail .topItemCourseDetail .cate {
+        width: 70%
+    }
     .main .page2 .title h1 {
         font-size: 94px;
     }
@@ -1727,7 +1876,6 @@ table, th, td {
             display: block;
             border: 1px dotted #6E1313;
             border-top: none;
-            border-right: none;
             font-weight: bold;
         }
 
@@ -1828,7 +1976,7 @@ table, th, td {
     }
 
     .containerCourseMain .cusCourseItem {
-        padding: 10px;
+        padding: 20px;
         width: 33.333333%;
     }
 
@@ -1880,6 +2028,13 @@ table, th, td {
 }
 
 @media screen and (min-width:1440px) {
+    .containerCourseDetail .butt button {
+        width: 50%;
+    }
+    .containerCourseDetail {
+        width: 60%;
+        margin: 30px auto
+    }
     .popUpSubmit {
         width: 20%;
     }
@@ -1898,17 +2053,13 @@ table, th, td {
     }
 
     .containerCourseDetail .left {
-        width: 30%
+        width: 50%
     }
 
     .containerCourseDetail .right {
-        width: 70%;
-        padding: 0 20px 0 200px;
+        width: 50%;
+        padding: 0 20px 0 20px;
     }
-
-        .containerCourseDetail .right span {
-            font-size: 25px
-        }
 
     .menuEEMobi {
         display: none
@@ -1923,22 +2074,77 @@ table, th, td {
     }
 
     .containerEE {
+        width: 60%;
+        margin: 0 auto
+    }
+    .containerEEDetail {
         width: 90%;
         margin: 0 auto
     }
-
-        .containerEE .left {
+        .containerEEDetail .left {
             width: 25%;
             display: block
         }
-
-        .containerEE .midEE {
+        .containerEEDetail .midEE {
             width: 50%
         }
-
-        .containerEE .right {
+        .containerEEDetail .right {
             width: 25%
         }
+            .containerEEDetail .right .formRegis .title {
+                text-align: center;
+                padding: 20px;
+                font-size: 25px;
+                text-transform: uppercase;
+                font-weight: bold;
+                background: #E0A800
+            }
+
+    .mainEE .containerEEDetail .form {
+        margin: 10px 0
+    }
+
+    .mainEE .containerEEDetail .form-row {
+        margin: 30px 0;
+    }
+
+        .mainEE .containerEEDetail .form-row input {
+            padding: 25px;
+            width: 100%;
+            outline: none;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+        }
+
+
+        .mainEE .containerEEDetail .form-row textarea {
+            padding: 25px;
+            width: 100%;
+            outline: none;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+        }
+
+    .mainEE .containerEEDetail button {
+        padding: 10px;
+        width: 50%;
+        outline: none;
+        border-radius: 5px;
+        border: 1px solid #CED4DA;
+        background-color: #E0A800;
+        text-transform: uppercase;
+        font-weight: bold
+    }
+
+        .mainEE .containerEEDetail button:hover {
+            background-color: #FF9600
+        }
+
+
 
             .containerEE .right .formRegis .title {
                 text-align: center;
@@ -2239,7 +2445,7 @@ table, th, td {
 
     .cusCourseItem {
         padding: 10px;
-        width: 25%;
+        width: 33.3334%;
     }
     /* page3 */
 }

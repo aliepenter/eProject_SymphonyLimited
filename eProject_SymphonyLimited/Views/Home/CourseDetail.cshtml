@@ -10,34 +10,75 @@
         </div>
     </div>
     <div class="containerCourseDetail flex">
-        <div class="left">
-            <div class="img">
-                <img src="~/Areas/Admin/Content/img/@Model.Image" alt="Alternate Text" width="100%" />
+        <div class="flex">
+            <div class="left">
+                <div class="img" style="padding: 20px">
+                    <img src="~/Areas/Admin/Content/img/@Model.Image" alt="Alternate Text" width="100%" />
+                </div>
             </div>
-        </div>
-        <div class="right">
-            <div class="infor">
-                <div class="containerItem">
-                    <div class="name cusItem">
-                        <span><span class="cdSpan">Course's Name: </span>@Model.Name</span>
-                    </div>
-                    <div class="name cusItem">
-                        <span><span class="cdSpan">Course's fees: </span>@Model.Price</span>
-                    </div>
-                    <div class="time">
-                        <span><span class="cdSpan">Time: </span>@Model.Time</span>
-                    </div>
-                    <div class="subject cusItem">
-                        <span><span class="cdSpan">Subject: </span>@Model.Subject</span>
-                    </div>
-                    <div class="certi cusItem">
-                        <span><span class="cdSpan">Certificate: </span>@Model.Certificate</span>
-                    </div>
-                    <div class="at cusItem">
-                        <span><span class="cdSpan">Admission time: </span>thời gian tuyển sinh</span>
+            <div class="right">
+                <div class="infor">
+                    <div class="containerItem">
+                        <div class="topItemCourseDetail">
+                            <div class="name cusItem">
+                                <span>@Model.Name</span>
+                            </div>
+                            <div class="flex">
+
+                                <div class="price cusItem" style="margin: auto; color: #F38271">
+                                    <h1>$ @Model.Price</h1>
+
+                                </div>
+                                <div class="cate cusItem" style="text-align: right;;">
+                                    <span>Category</span>
+                                    <p>@ViewBag.Courses.Category</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="botItemCourseDetail" style="margin: 50px 0">
+                            <div class="time flex">
+                                <div class="name flex" style="margin: 0 0 20px 0">
+                                    <div class="icon width10" style="margin: auto"><i class="far fa-clock" style="color: #ffb606"></i></div>
+                                    <div class="width90" style="margin: auto; padding: 0 0 0 10px"><span>Duration</span></div>
+                                </div>
+                                <div class="value">
+                                    <span>@Model.Time</span>
+                                </div>
+                            </div>
+                            <div class="subject flex" style="margin: 0 0 20px 0">
+                                <div class="name flex">
+                                    <div class="icon width10" style="margin: auto"><i class="far fa-clock" style="color: #ffb606"></i></div>
+                                    <div class="width90" style="margin: auto; padding: 0 0 0 10px "><span>Object</span></div>
+                                </div>
+                                <div class="value">
+                                    <span>@Model.Subject</span>
+                                </div>
+                            </div>
+                            <div class="certi flex" style="margin: 0 0 20px 0">
+                                <div class="name flex">
+                                    <div class="icon width10" style="margin: auto"><i class="fas fa-certificate" style="color: #ffb606"></i></div>
+                                    <div class="width90" style="margin: auto; padding: 0 0 0 10px "><span>Certificate</span></div>
+                                </div>
+                                <div class="value">
+                                    <span>@Model.Certificate</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="butt">
+                            <button>Register</button>
+                        </div>
+                        </div>
                     </div>
                 </div>
             </div>
+        <div class="description">
+            <div class="title">
+                <span>Description</span>
+            </div>
+            <div class="content">
+                <span>@Model.Description</span>
+            </div>
+        </div>
         </div>
     </div>
     <div class="instituteLecturers">
@@ -79,7 +120,7 @@
                                                 <span>@item.Specialize</span>
                                             </div>
                                             <div class="subject cusInfor">
-                                                <span>Các môn giảng dạy: <span>@item.Subject</span></span>
+                                                <span>Subjects: <span>@item.Subject</span></span>
                                             </div>
                                         </div>
                                     }

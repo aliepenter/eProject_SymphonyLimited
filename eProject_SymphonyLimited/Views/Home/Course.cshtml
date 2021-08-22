@@ -71,7 +71,7 @@
                         foreach (var item in ViewBag.Coures)
                         {
                             <div class="course cusCourseItem">
-                                <a href="~/Home/CourseDetail/@item.EntityId">
+                                <a href="~/Home/CourseDetail/@item.EntityId" style="text-decoration:none">
                                     <div class="img">
                                         <img src="~/Areas/Admin/Content/img/@item.Image" alt="" width="100%">
                                     </div>
@@ -80,13 +80,14 @@
                                     </div>
                                     <div class="moreInfor ">
                                         <div class="containerMoreInfor flex">
-                                            <div class="admissionCriteria width50">
+                                            <div class="admissionCriteria width80">
                                                 <span>
-                                                    <i class="fa fa-user" aria-hidden="true"></i> 100
+                                                    <i class="far fa-clock"></i>
+                                                        Duration: @item.Time
                                                 </span>
                                             </div>
-                                            <div class="price width50">
-                                                <span>@item.Price</span>
+                                            <div class="price width20">
+                                                <span>$ @item.Price</span>
                                             </div>
                                         </div>
                                     </div>
@@ -100,54 +101,58 @@
                     }
                 }
             </div>
-            <div class="pages">
-                <ul class="pagination">
-                    @for (int i = 1; i <= ViewBag.TotalPages; i++)
-                    {
-                        if (i == ViewBag.CurrentPage)
+            <div class="flex">
+                <div class="pages width50">
+                    <ul class="pagination">
+                        @for (int i = 1; i <= ViewBag.TotalPages; i++)
                         {
-                            <li class="active mr-1">
-                                <a href="javascript:void(0)" data-page-id="@i">
-                                    <button class="btn btn-info">@i</button>
-                                </a>
-                            </li>
+                            if (i == ViewBag.CurrentPage)
+                            {
+                                <li class="active mr-1">
+                                    <a href="javascript:void(0)" data-page-id="@i">
+                                        <button class="btn btn-info">@i</button>
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a class="item_page mr-1" href="javascript:void(0)" data-page-id="@i">
+                                        <button class="btn btn-info">@i</button>
+                                    </a>
+                                </li>
+                            }
                         }
-                        else
-                        {
-                            <li>
-                                <a class="item_page mr-1" href="javascript:void(0)" data-page-id="@i">
-                                    <button class="btn btn-info">@i</button>
-                                </a>
-                            </li>
-                        }
-                    }
-                </ul>
-            </div>
-            <div class="field limiter">
-                <span>Show</span>
-                <div class="control">
-                    <select id="limiter" class="limiter-options">
-                        @if (ViewBag.Limiter == 24)
-                        {
-                            <option value="12">12</option>
-                            <option value="24" selected>24</option>
-                            <option value="36">36</option>
-                        }
-                        else if (ViewBag.Limiter == 36)
-                        {
-                            <option value="12">12</option>
-                            <option value="24">24</option>
-                            <option value="36" selected>36</option>
-                        }
-                        else
-                        {
-                            <option value="12" selected>12</option>
-                            <option value="24">24</option>
-                            <option value="36">36</option>
-                        }
-                    </select>
+                    </ul>
                 </div>
-                <span class="limiter-text">on the page</span>
+                <div class="field limiter width50" style="margin: auto">
+                    <div class="flex"  style="float:right">
+                        <span style="margin: auto">Show</span>
+                        <div class="control" style="margin: 0 10px">
+                            <select id="limiter" class="limiter-options" style="padding: 4px">
+                                @if (ViewBag.Limiter == 24)
+                                {
+                                    <option value="12">12</option>
+                                    <option value="24" selected>24</option>
+                                    <option value="36">36</option>
+                                }
+                                else if (ViewBag.Limiter == 36)
+                                {
+                                    <option value="12">12</option>
+                                    <option value="24">24</option>
+                                    <option value="36" selected>36</option>
+                                }
+                                else
+                                {
+                                    <option value="12" selected>12</option>
+                                    <option value="24">24</option>
+                                    <option value="36">36</option>
+                                }
+                            </select>
+                        </div>
+                        <span class="limiter-text" style="margin: auto" >items on the page</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -165,7 +170,7 @@
                         @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "input", @placeholder = "Email*", @type = "email", @required = "" } })
                     </div>
                     <div class="form-row">
-                        @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "input", @placeholder = "Phone*", @required = "", @id = "phoneNumber" } })
+                        @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "input", @placeholder = "Phone*", @required = "", @pattern = "(84|0[3|5|7|8|9])+([0-9]{8})", @title = ".e.g 0812345678" } })
                     </div>
                     <div class="form-row">
                         @Html.DropDownListFor(model => model.AdmissionId, new SelectList(ViewBag.admissionList, "EntityId", "Name", "Select"), new { @class = "input", @required = "" })
@@ -177,6 +182,7 @@
                         <button type="submit" id="submitForm">Send</button>
                     </div>
                 </div>
+
             }
         </div>
         <div class="right">

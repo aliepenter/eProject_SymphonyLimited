@@ -94,7 +94,7 @@
                     </div>
                     <div class="form-row flex">
                         <div class="left">
-                            @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "input", @placeholder = "Phone*", @required = "", @id = "phoneNumber" } })
+                            @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "input", @placeholder = "Phone*", @required = "", @pattern = "(84|0[3|5|7|8|9])+([0-9]{8})", @title = ".e.g 0812345678" } })
                         </div>
                         <div class="right">
                             @Html.DropDownListFor(model => model.AdmissionId, new SelectList(ViewBag.admissionList, "EntityId", "Name", "Select"), new { @class = "input" })

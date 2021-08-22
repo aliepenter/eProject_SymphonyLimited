@@ -119,13 +119,6 @@ owl.owlCarousel({
     autoplayTimeout: 3000,
     autoplayHoverPause: true
 });
-$('#submitForm').click(function () {
-    var vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
-    var mobile = $('#phoneNumber').val();
-    if (vnf_regex.test(mobile) == false) {
-        alert('Phone Number is not valid!');
-    }
-});
 $('#formSubmit').on("submit", function () {
     localStorage.fadeInSuccessMessage = "1"
 });
