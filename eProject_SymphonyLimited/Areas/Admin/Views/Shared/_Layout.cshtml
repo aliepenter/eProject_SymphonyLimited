@@ -18,6 +18,7 @@
     <!-- Custom styles for this template-->
     <link href="~/Areas/Admin/Content/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="~/Areas/Admin/Content/css/sb-admin-2.css?v=@Guid.NewGuid().ToString()" rel="stylesheet" />
+    @RenderSection("css", required: false)
 </head>
 
 <body id="page-top">
@@ -145,16 +146,6 @@
                 </li>
               }
 
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("Logout","Auth")">
-                    <i class="fas fa-fw fa-sign-out-alt"></i>
-                    <span>Log out</span>
-                </a>
-            </li>
-
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -190,7 +181,7 @@
                                  aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="@Url.Action("UserProfile","Home", new { id = Convert.ToInt32(Session["UserEntityId"])})">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
+                                    My Profile
                                 </a>
                                 <a class="dropdown-item" href="@Url.Action("ChangePassword","Home")">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
