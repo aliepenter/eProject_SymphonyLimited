@@ -26,27 +26,31 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
 
         public ActionResult UserProfile(int id)
         {
-            return View(db.User.Find(id));
-        }
-
-        public ActionResult UserProfileEdit(int id)
-        {
-            var findGroupId = db.User.Find(id).GroupId;
-            var user = db.User.FirstOrDefault(x => x.EntityId == id);
-            if (user != null)
+            var u = db.User.Find(id);
+            UserViewModel uvm = new UserViewModel
             {
-                return View(user);
-            }
-            return RedirectToAction("UserProfile", new { id = id });
+                EntityId = u.EntityId,
+                Account = u.Account,
+                Password = u.Password,
+                FullName = u.FullName,
+                Email = u.Email,
+                Phone = u.Phone,
+                Image = u.Image,
+                Address = u.Address,
+                GroupId = u.GroupId,
+                GroupUserName = u.GroupUsers.Name
+            };
+            return View(uvm);
         }
 
         [HttpPost]
-        public ActionResult UserProfileEdit(UserViewModel u, HttpPostedFileBase imgFile)
+        public ActionResult UserProfile(UserViewModel uvm, HttpPostedFileBase imgFile)
         {
-            var currentUser = db.User.Find(u.EntityId);
-            var validateFullName = db.User.FirstOrDefault(x => x.FullName != currentUser.FullName && x.FullName == u.FullName);
-            var validateEmail = db.User.FirstOrDefault(x => x.Email != currentUser.Email && x.Email == u.Email);
-            var validatePhone = db.User.FirstOrDefault(x => x.Phone != currentUser.Phone && x.Phone == u.Phone);
+            var currentUser = db.User.Find(uvm.EntityId);
+            var validateFullName = db.User.FirstOrDefault(x => x.FullName != currentUser.FullName && x.FullName == uvm.FullName);
+            var validateEmail = db.User.FirstOrDefault(x => x.Email != currentUser.Email && x.Email == uvm.Email);
+            var validatePhone = db.User.FirstOrDefault(x => x.Phone != currentUser.Phone && x.Phone == uvm.Phone);
+
             if (validateFullName != null)
             {
                 ModelState.AddModelError("FullName", "User full name can't be the same!");
@@ -59,20 +63,22 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
             {
                 ModelState.AddModelError("Phone", "User phone can't be the same!");
             }
+
             if (ModelState.IsValid)
             {
                 try
                 {
-                    currentUser.FullName = u.FullName;
-                    currentUser.Email = u.Email;
-                    currentUser.Phone = u.Phone;
-                    currentUser.Address = u.Address;
+                    currentUser.FullName = uvm.FullName;
+                    currentUser.Email = uvm.Email;
+                    currentUser.Phone = uvm.Phone;
+                    currentUser.Address = uvm.Address;
                     if (imgFile != null)
                     {
+
                         string imgName = Path.GetFileName(imgFile.FileName);
-                        string imgText = Path.GetExtension(imgName);
                         string imgPath = Path.Combine(Server.MapPath("~/Areas/Admin/Content/img/"), imgName);
                         currentUser.Image = imgName;
+                        uvm.Image = imgName;
                         if (imgFile.ContentLength > 0)
                         {
                             if (db.SaveChanges() > 0)
@@ -85,15 +91,20 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                     {
                         db.SaveChanges();
                     }
-                    return RedirectToAction("UserProfile", new { id = u.EntityId });
-
+                    TempData["SuccessMessage"] = "Save Success!";
+                    Session["User"] = currentUser;
+                    Session["UserEntityId"] = currentUser.EntityId;
+                    Session["UserAccount"] = currentUser.Account;
+                    Session["UserName"] = currentUser.FullName;
+                    Session["UserImage"] = currentUser.Image;
+                    Session["UserRole"] = currentUser.GroupUsers.IsAdmin.ToString();
                 }
                 catch (Exception)
                 {
                     ModelState.AddModelError("", "Some thing went wrong while save user!");
                 }
             }
-            return View(currentUser);
+            return View(uvm);
         }
 
         public ActionResult ChangePassword()
@@ -110,13 +121,20 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
             {
                 if (findUser.Password.Equals(cpvm.OldPassword))
                 {
-                    findUser.Password = cpvm.NewPassword;
-                    db.SaveChanges();
-                    TempData["SuccessMessage"] = "Change successful!";
+                    if (!cpvm.OldPassword.Equals(cpvm.NewPassword))
+                    {
+                        findUser.Password = cpvm.NewPassword;
+                        db.SaveChanges();
+                        TempData["SuccessMessage"] = "Change successful!";
+                    }
+                    else
+                    {
+                        TempData["ErrorMessage"] = "Your new password is same old password";
+                    }
                 }
                 else
                 {
-                    TempData["ErrorMessage"] = "Your password is wrong";
+                    TempData["ErrorMessage"] = "Your old password is wrong";
                 }
             }
             return View();

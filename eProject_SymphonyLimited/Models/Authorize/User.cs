@@ -14,6 +14,8 @@ namespace eProject_SymphonyLimited.Models.Authorize
         [Required(ErrorMessage = "Please enter full name!")]
         public string FullName { get; set; }
         [Required(ErrorMessage = "Please enter email!")]
+        [DataType(DataType.EmailAddress)]
+        [EmailAddress]
         public string Email { get; set; }
         [Required(ErrorMessage = "Please enter phone!")]
         [RegularExpression("^(84|0[3|5|7|8|9])+([0-9]{8})$", ErrorMessage = "Please enter valid phone no.")]
