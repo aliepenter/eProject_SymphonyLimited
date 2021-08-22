@@ -28,6 +28,7 @@ namespace eProject_SymphonyLimited.Controllers
             ViewBag.phoneInFooter = db.CoreConfigData.FirstOrDefault(x => x.Code == "phone_in_footer");
             ViewBag.emailInFooter = db.CoreConfigData.FirstOrDefault(x => x.Code == "email_in_footer");
             ViewBag.addressInFooter = db.CoreConfigData.FirstOrDefault(x => x.Code == "address_in_footer");
+            ViewBag.partner = db.Partner.AsEnumerable();
 
         }
 
@@ -66,7 +67,9 @@ namespace eProject_SymphonyLimited.Controllers
                    Price = ad.Price,
                    StartTime = ad.StartTime,
                    EndTime = ad.EndTime,
+                   BillTime = ad.BillTime,
                    QuantityStudent = ad.QuantityStudent,
+                   CourseId = ad.CourseId,
                    Course = co.Image
                }).AsEnumerable();
             return View();
@@ -317,6 +320,33 @@ namespace eProject_SymphonyLimited.Controllers
         }
         public ActionResult AdmissionDetail()
         {
+            var id = RouteData.Values["id"];
+            if (id != null)
+            {
+                bool isInt = Int32.TryParse(id.ToString(), out int entityId);
+                var admById = db.Admission.FirstOrDefault(x => x.EntityId == entityId);
+                ViewBag.admById = db.Admission.Join(db.Course,
+               ad => ad.CourseId,
+               co => co.EntityId,
+               (ad, co) => new
+               AdmissionViewModel
+               {
+                   EntityId = ad.EntityId,
+                   Name = ad.Name,
+                   Price = ad.Price,
+                   StartTime = ad.StartTime,
+                   EndTime = ad.EndTime,
+                   BillTime = ad.BillTime,
+                   QuantityStudent = ad.QuantityStudent,
+                   CourseId = ad.CourseId,
+                   Image = co.Image,
+                   Course = co.Name
+               }).FirstOrDefault(x => x.EntityId == entityId);
+                //if (admById != null)
+                //{
+                //    return View(admById);
+                //}
+            }
             return View();
         }
         public ActionResult CourseDetail()

@@ -405,7 +405,10 @@ body {
         padding: 10px 10px 10px 0;
         font-size: 20px;
     }
-
+.cusCourseItem .img {
+    border: 1px solid #e5e5e5;
+    
+}
 .cusCourseItem {
     width: 100%;
     position: relative;
@@ -1286,7 +1289,12 @@ table, th, td {
     margin: 0 auto;
     padding: 20px 0
 }
-
+    .midEE .containerItem .img{
+        width: 100%;
+    }
+    .midEE .containerItem .content {
+        width: 100%;
+    }
     .midEE .containerItem .csSpan {
         font-weight: bold
     }
@@ -1369,7 +1377,6 @@ table, th, td {
     padding: 0px
 }
 .toolbar-sorter {
-    margin: 0 0 10px 0;
     padding: 0 10px;
     text-align: right;
     font-size: 1.4rem
@@ -1658,6 +1665,9 @@ table, th, td {
 }
 
 @media screen and (min-width: 1024px) {
+    .midEE .containerItem .img img {
+        padding: 30px
+    }
     .midEE .cusCourseItem{
         width: 33.33334%
     }
@@ -2028,6 +2038,10 @@ table, th, td {
 }
 
 @media screen and (min-width:1440px) {
+    .st, .et {
+        width: 100%;
+        padding: 10px 0
+    }
     .containerCourseDetail .butt button {
         width: 50%;
     }
@@ -2082,11 +2096,11 @@ table, th, td {
         margin: 0 auto
     }
         .containerEEDetail .left {
-            width: 25%;
+            width: 20%;
             display: block
         }
         .containerEEDetail .midEE {
-            width: 50%
+            width: 55%
         }
         .containerEEDetail .right {
             width: 25%
@@ -2243,11 +2257,19 @@ table, th, td {
     }
 
     .midEE .containerItem {
-        width: 90%;
-        margin: 0 auto;
-        padding: 20px 0
+        width: 100%;
+        padding: 0
     }
-
+        .midEE .containerItem .img {
+            width: 50%;
+        }
+        .midEE .containerItem .img img {
+            padding: 30px
+        }
+        .midEE .containerItem .content {
+            width: 50%;
+            margin-top: 15px
+        }
         .midEE .containerItem .csSpan {
             font-weight: bold
         }

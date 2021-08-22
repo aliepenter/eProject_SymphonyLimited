@@ -21,5 +21,6 @@ namespace eProject_SymphonyLimited.Areas.Admin.Data.ViewModel
         public int CourseId { get; set; }
 
         public string Course { get; set; }
+        public string Image { get; set; }
     }
 }

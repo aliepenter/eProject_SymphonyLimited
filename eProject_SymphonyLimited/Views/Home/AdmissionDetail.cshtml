@@ -20,7 +20,7 @@
                 @{ foreach (var item in ViewBag.admission)
                     {
                         <li id="">
-                            <a class="defaultMenu" href="">@item.Name</a>
+                            <a class="defaultMenu" href="~/Home/AdmissionDetail/@item.EntityId">@item.Name</a>
                         </li>
                     }
                 }
@@ -38,7 +38,7 @@
                         @{ foreach (var item in ViewBag.admission)
                             {
                                 <li id="">
-                                    <a class="defaultMenu" href="">@item.Name</a>
+                                    <a class="defaultMenu" href="~/Home/AdmissionDetail/@item.EntityId">@item.Name</a>
                                 </li>
                             }
                         }
@@ -49,34 +49,33 @@
         <div class="midEE">
             <div class="infor">
                 <div class="title">
-                    <span><span>Admission</span></span>
+                    <span><span>@ViewBag.admById.Name</span></span>
                 </div>
-                <div class="containerItem">
-                    <div class="name cusItem">
-                        <span><span class="csSpan">Admission's Name: </span>Tên kì tuyển sinh</span>
+                <div class="containerItem flex">
+                    <div class="img">
+                        <img src="~/Areas/Admin/Content/img/@ViewBag.admById.Image" alt="Alternate Text" width="100%"/>
                     </div>
-                    <div class="time flex">
-                        <div class="st">
-                            <span><span class="csSpan">Start Time: </span>Thòi gian bắt đầu</span>
+                    <div class="content">
+                        <div class="time flex">
+                            <div class="st">
+                                <span><span class="csSpan">Start Time: </span>@ViewBag.admById.StartTime</span>
+                            </div>
+                            <div class="et">
+                                <span><span class="csSpan">End Time: </span>@ViewBag.admById.EndTime</span>
+                            </div>
                         </div>
-                        <div class="et">
-                            <span><span class="csSpan">End Time: </span>Thòi gian kết thúc</span>
+                        <div class="stQuantity cusItem">
+                            <span><span class="csSpan">Admissions criteria: </span>@ViewBag.admById.QuantityStudent</span>
                         </div>
-                    </div>
-                    <div class="stQuantity cusItem">
-                        <span><span class="csSpan">Admissions criteria: </span>Chỉ tiêu</span>
-                    </div>
-                    <div class="eePrice cusItem">
-                        <span><span class="csSpan">Entrance Exam Fees: </span>Giá kì thi đầu vào</span>
-                    </div>
-                    <div class="markPass cusItem">
-                        <span><span class="csSpan">Entry Point: </span>Điểm đầu vào</span>
-                    </div>
-                    <div class="course cusItem">
-                        <span><span class="csSpan">Course: </span>Khoá học</span>
-                    </div>
-                    <div class="coursePrice cusItem">
-                        <span><span class="csSpan">Course Fees: </span>Học phí</span>
+                        <div class="eePrice cusItem">
+                            <span><span class="csSpan">Entrance Exam Fees: </span>@ViewBag.admById.Price</span>
+                        </div>
+                        <div class="markPass cusItem">
+                            <span><span class="csSpan">Entry Point: </span>Điểm đầu vào</span>
+                        </div>
+                        <div class="course cusItem">
+                            <span><span class="csSpan">Course: </span>@ViewBag.admById.Course</span>
+                        </div>
                     </div>
                 </div>
             </div>

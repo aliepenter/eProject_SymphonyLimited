@@ -6,27 +6,6 @@
 
 
 <div class="mainEE">
-    <div class="menuEEMobi">
-        <div class="barEE" style="padding: 0 30px;font-size: 20px;">
-            <i class="fas fa-bars" id="barE"></i>
-        </div>
-        <div class="menu disNone" id="menuEE">
-            <div class="exit" style="text-align:right; padding: 10px">
-                <span id="exitEE">
-                    <i class="fa fa-times" aria-hidden="true" style="font-size: 20px; color: white"></i>
-                </span>
-            </div>
-            <ul>
-                @{ foreach (var item in ViewBag.admission)
-                    {
-                        <li id="">
-                            <a class="defaultMenu" href="">@item.Name</a>
-                        </li>
-                    }
-                }
-            </ul>
-        </div>
-    </div>
     <div class="containerEE flex">
         <div class="midEE">
             <div class="courseItem flex">
@@ -37,7 +16,7 @@
                             <div class="course cusCourseItem">
                                 <a href="~/Home/AdmissionDetail/@item.EntityId" style="text-decoration:none">
                                     <div class="img">
-                                        <img src="~/Areas/Admin/Content/img/@item.Course" alt="" width="100%">
+                                        <img src="~/Areas/Admin/Content/img/@item.Course" alt="" width="100%" height="200px">
                                     </div>
                                     <div class="description">
                                         <span>@item.Name</span>

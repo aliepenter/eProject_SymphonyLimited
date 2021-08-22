@@ -201,18 +201,14 @@
         </div>
         <div class="cusPartner">
             <div class="owl-carousel nav-partner" id="owl-carousel">
-                <div class="logoPartner">
-                    <img src="https://bachkhoa-aptech.edu.vn/public/assets/uploads/images/cmc.png" />
-                </div>
-                <div class="logoPartner">
-                    <img src="https://bachkhoa-aptech.edu.vn/public/assets/uploads/images/misa.png" />
-                </div>
-                <div class="logoPartner">
-                    <img src="https://bachkhoa-aptech.edu.vn/public/assets/uploads/images/FSI.png" />
-                </div>
-                <div class="logoPartner">
-                    <img src="https://bachkhoa-aptech.edu.vn/public/assets/uploads/images/vnp-group.png" />
-                </div>
+                @{
+                    foreach (var item in ViewBag.partner)
+                    {
+                        <div class="logoPartner">
+                            <img src="~/Areas/Admin/Content/img/@item.Image" />
+                        </div>
+                    }
+                }
             </div>
         </div>
     </div>
