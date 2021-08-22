@@ -211,6 +211,12 @@ namespace eProject_SymphonyLimited.Controllers
                                 coursesByCatgoryId = coursesByCatgoryId.Skip((page - 1) * limiter).Take(limiter).ToList();
                                 break;
                         }
+                        ViewBag.TotalPages = Math.Ceiling((decimal)coursesByCatgoryId.Count() / limiter);
+                        if (ViewBag.TotalPages == 1)
+                        {
+                            page = 1;
+                        }
+                        ViewBag.CurrentPage = page;
                         ViewBag.Coures = coursesByCatgoryId;
                     }
                 }
