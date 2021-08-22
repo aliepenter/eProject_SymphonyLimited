@@ -46,6 +46,11 @@
                         success: function (res) {
                             var _html = ' <thead class="thead-dark"><tr><th>Entity Id</th>><th>Name</th><th>Phone</th><th>Email</th><th>Comment</th><th>CreateAt</th><th>Status</th><th>Admission</th><th>Action</th></tr></thead>';
                             for (var item of JSON.parse(res.Data)) {
+                                if (item.Status == true) {
+                                    var status = "Paid";
+                                } else {
+                                    var status = "Unpaid";
+                                }
                                 _html += '<tbody><tr>' +
                                     '<td>' + item.EntityId + '</td>' +
                                     '<td>' + item.Name + '</td>' +
@@ -53,7 +58,7 @@
                                     '<td>' + item.Email + '</td>' +
                                     '<td>' + item.Comment + '</td>' +
                                     '<td>' + item.CreatedAt + '</td>' +
-                                    '<td>' + item.Status + '</td>' +
+                                    '<td>' + status + '</td>' +
                                     '<td>' + item.Admission + '</td>' +
                                     '<td>' +
                                     '<button class="btn btn-warning btn-edit mr-1 mb-1" data-id="' + item.EntityId + '"><i class="fas fa-edit"></i> Edit</button>' +

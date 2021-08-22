@@ -350,5 +350,39 @@ namespace eProject_SymphonyLimited.Controllers
             TempData["CoureNotExist"] = "This course is not exist!";
             return RedirectToAction("Course");
         }
+
+        [HttpPost]
+        public ActionResult ExamResult(string rollNumber)
+        {
+            var resultByRollNumber = db.PaidRegister.Join(db.RegisterInfo,
+                pa => pa.RegisterInfoId,
+                re => re.EntityId,
+                (pa, re) => new
+                PaidRegisterViewModel
+                {
+                    RollNumber = pa.RollNumber,
+                    Name = re.Name,
+                    Result = pa.Result,
+                    Tested = pa.Tested
+                }).FirstOrDefault(x => x.RollNumber == rollNumber);
+            if (resultByRollNumber != null)
+            {
+                if (resultByRollNumber.Tested == false)
+                {
+                    TempData["NotTested"] = "Your entrance exam is not start!";
+                    ViewBag.Result = null;
+                }
+                else
+                {
+                    ViewBag.Result = resultByRollNumber;
+                }
+            }
+            else
+            {
+                TempData["RollNumberNotExist"] = "Your roll number is not exist!";
+                ViewBag.Result = null;
+            }
+            return View();
+        }
     }
 }

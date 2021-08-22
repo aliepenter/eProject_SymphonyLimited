@@ -20,10 +20,13 @@ namespace eProject_SymphonyLimited.Models
 
         [Display(Name = "Comment")]
         public string Comment { get; set; }
+
         [Display(Name = "Created At")]
         public DateTime CreatedAt { get; set; }
+
         [Display(Name = "Status")]
         public bool Status { get; set; }
+
         public int AdmissionId { get; set; }
 
         [ForeignKey("AdmissionId")]

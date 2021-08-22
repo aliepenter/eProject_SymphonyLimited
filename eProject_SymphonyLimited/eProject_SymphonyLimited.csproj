@@ -159,7 +159,6 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admission.cs" />
-    <Compile Include="Models\AttributeViewModel.cs" />
     <Compile Include="Models\Authorize\Business.cs" />
     <Compile Include="Models\Authorize\GroupPermission.cs" />
     <Compile Include="Models\Authorize\GroupUser.cs" />
@@ -173,7 +172,6 @@
     <Compile Include="Models\Faq.cs" />
     <Compile Include="Models\PaidRegister.cs" />
     <Compile Include="Models\Partner.cs" />
-    <Compile Include="Models\RegisterAdmission.cs" />
     <Compile Include="Models\RegisterInfo.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\SymphonyLimitedDBContext.cs" />
@@ -4104,7 +4102,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Views\PaidRegister\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

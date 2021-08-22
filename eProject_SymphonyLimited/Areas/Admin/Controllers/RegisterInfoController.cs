@@ -13,7 +13,6 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
     {
         SymphonyLimitedDBContext db = new SymphonyLimitedDBContext();
 
-        // GET: Admin/RegisterInfo
         public ActionResult Index()
         {
             return View();
@@ -43,20 +42,21 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                 switch (type)
                 {
                     case "EntityId":
-                    registerInfos = db.RegisterInfo.Join(db.Admission,
-                       re => re.AdmissionId,
-                       ad => ad.EntityId,
-                       (re, ad) => new
-                       RegisterViewModel
-                       {
-                       EntityId = re.EntityId,
-                       Name = re.Name,
-                       Phone = re.Phone,
-                       Email = re.Email,
-                       Comment = re.Comment,
-                       CreatedAt = re.CreatedAt,
-                       Status = re.Status,
-                       Admission = ad.Name }).Where(x => x.EntityId.ToString().Contains(key)).AsEnumerable();
+                        registerInfos = db.RegisterInfo.Join(db.Admission,
+                           re => re.AdmissionId,
+                           ad => ad.EntityId,
+                           (re, ad) => new
+                           RegisterViewModel
+                           {
+                               EntityId = re.EntityId,
+                               Name = re.Name,
+                               Phone = re.Phone,
+                               Email = re.Email,
+                               Comment = re.Comment,
+                               CreatedAt = re.CreatedAt,
+                               Status = re.Status,
+                               Admission = ad.Name
+                           }).Where(x => x.EntityId.ToString().Contains(key)).AsEnumerable();
                         break;
                     case "Name":
                         registerInfos = db.RegisterInfo.Join(db.Admission,
@@ -165,7 +165,6 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
 
             if (reById != null)
             {
-                ViewBag.Admissions = db.Admission.ToList();
                 return View(reById);
             }
             return RedirectToAction("Index");
@@ -178,25 +177,19 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
             {
                 try
                 {
-                    
                     var reById = db.RegisterInfo.FirstOrDefault(x => x.EntityId == r.EntityId);
-
+                    if (reById != null)
                     if (reById != null)
                     {
                         if (reById.Status == true && r.Status == false)
                         {
-                            
                             TempData["ErrorMess"] = "Can't edit status!";
                         }
                         else
                         {
-                            reById.EntityId = r.EntityId;
                             reById.Name = r.Name;
                             reById.Phone = r.Phone;
                             reById.Email = r.Email;
-                            reById.Comment = r.Comment;
-                            reById.CreatedAt = r.CreatedAt;
-                            reById.AdmissionId = r.AdmissionId;
                             reById.Status = true;
                             db.SaveChanges();
 
@@ -205,7 +198,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                             {
                                 foreach (var item in paidRegister)
                                 {
-                                
+
                                     var obj = new PaidRegister()
                                     {
                                         RollNumber = "SL0" + item.EntityId,
@@ -218,7 +211,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                             return RedirectToAction("Index");
                         }
                     }
-                        
+
                 }
                 catch (Exception)
                 {

@@ -184,7 +184,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         public ActionResult Create(Admission a)
         {
             var validateName = db.Admission.FirstOrDefault(x => x.Name == a.Name);
-            var admission = db.Admission.AsEnumerable();
+            var admission = db.Admission.Where(x => x.CourseId == a.CourseId).AsEnumerable();
             if (a.StartTime <= DateTime.Now)
             {
                 ModelState.AddModelError("StartTime", "Start time must bigger than current time!");
@@ -262,7 +262,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         public ActionResult Edit(Admission a)
         {
             var currentAdmission = db.Admission.Find(a.EntityId);
-            var admission = db.Admission.Where(x => x.EntityId != currentAdmission.EntityId).AsEnumerable();
+            var admission = db.Admission.Where(x => x.EntityId != currentAdmission.EntityId && x.CourseId == a.CourseId).AsEnumerable();
             var validateName = db.Admission.FirstOrDefault(x => x.Name != currentAdmission.Name && x.Name == a.Name);
             if (a.StartTime <= DateTime.Now)
             {

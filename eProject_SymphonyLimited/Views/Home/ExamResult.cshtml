@@ -24,50 +24,39 @@
                             <span>Search</span>
                         </div>
                         <div class="form-row">
-                            <form action="/" method="post">
-                                <input type="type" name="name" value="" placeholder="Roll Number" />
+                            <form action="/Home/ExamResult" method="post">
+                                <input type="text" name="rollNumber" value="" placeholder="Roll Number" />
                             </form>
                         </div>
-                    </div>
-                    <div class="info" style="margin: 20px 0">
-                        <div class="name cusInfoCheckResult">
-                            <span>Full Name: <span>Đặng Tuấn Đạt</span></span>
-                        </div>
-                        <div class="phone cusInfoCheckResult">
-                            <span>Phone: <span>0818260399</span></span>
-                        </div>
-                        <div class="email cusInfoCheckResult">
-                            <span>Email: <span>dangtuandat99@gmail.com</span></span>
+                        <div class="resultCheck">
+                            @if (@TempData["RollNumberNotExist"] != null)
+                            {
+                                <h2>@TempData["RollNumberNotExist"]</h2>
+                            }
+                            else if (@TempData["NotTested"] != null)
+                            {
+                                <h2>@TempData["NotTested"]</h2>
+                            }
+                            else
+                            {
+                                if (ViewBag.Result != null)
+                                {
+                                    <div class="info" style="margin: 20px 0">
+                                        <div class="name cusInfoCheckResult">
+                                            <span>Roll Number: <span>@ViewBag.Result.RollNumber</span></span>
+                                        </div>
+                                        <div class="name cusInfoCheckResult">
+                                            <span>Name: <span>@ViewBag.Result.Name</span></span>
+                                        </div>
+                                        <div class="name cusInfoCheckResult">
+                                            <span>Result: <span>@ViewBag.Result.Result</span></span>
+                                        </div>
+                                    </div>
+                                }
+                            }
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="resultCheck">
-            
-            <div class="tableCheckResult" id="tableCheckResult">
-                <table style="width: 90%;margin: 0 auto">
-                    <tr>
-                        <th>No</th>
-                        <th>Roll Number</th>
-                        <th>Entrance Exam</th>
-                        <th>Mark</th>
-                        <th>Result</th>
-                        <th>Class</th>
-                        <th>Course fees</th>
-                        <th>Date to pay</th>
-                    </tr>
-                    <tr>
-                        <td>Jill</td>
-                        <td>Smith</td>
-                        <td>50</td>
-                        <td>50</td>
-                        <td style="font-weight: bold">Jill</td>
-                        <td>Jill</td>
-                        <td>Smith</td>
-                        <td>50</td>
-                    </tr>
-                </table>
             </div>
         </div>
         <div class="resultAll">
