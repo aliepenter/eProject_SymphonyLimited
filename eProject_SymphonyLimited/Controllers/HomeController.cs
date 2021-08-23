@@ -56,30 +56,30 @@ namespace eProject_SymphonyLimited.Controllers
         }
         public ActionResult EntranceExam()
         {
-            var adms = db.Admission.Join(db.Course,
-               ad => ad.CourseId,
-               co => co.EntityId,
-               (ad, co) => new
-               AdmissionViewModel
-               {
-                   EntityId = ad.EntityId,
-                   Name = ad.Name,
-                   Price = ad.Price,
-                   StartTime = ad.StartTime,
-                   EndTime = ad.EndTime,
-                   BillTime = ad.BillTime,
-                   QuantityStudent = ad.QuantityStudent,
-                   CourseId = ad.CourseId,
-                   Course = co.Image
-               }).Where(x=> x.StartTime <= DateTime.Now && x.EndTime>=DateTime.Now).AsEnumerable();
-            if (adms.Count() > 0)
-            {
-                ViewBag.Adms = adms;
-            }
-            else
-            {
-                ViewBag.Adms = null;
-            }
+            //var adms = db.Admission.Join(db.Course,
+            //   ad => ad.CourseId,
+            //   co => co.EntityId,
+            //   (ad, co) => new
+            //   AdmissionViewModel
+            //   {
+            //       EntityId = ad.EntityId,
+            //       Name = ad.Name,
+            //       Price = ad.Price,
+            //       StartTime = ad.StartTime,
+            //       EndTime = ad.EndTime,
+            //       BillTime = ad.BillTime,
+            //       QuantityStudent = ad.QuantityStudent,
+            //       CourseId = ad.CourseId,
+            //       Course = co.Image
+            //   }).Where(x=> x.StartTime <= DateTime.Now && x.EndTime>=DateTime.Now).AsEnumerable();
+            //if (adms.Count() > 0)
+            //{
+            //    ViewBag.Adms = adms;
+            //}
+            //else
+            //{
+            //    ViewBag.Adms = null;
+            //}
             return View();
 
         }
@@ -339,29 +339,29 @@ namespace eProject_SymphonyLimited.Controllers
 
         public ActionResult AdmissionDetail()
         {
-            var id = RouteData.Values["id"];
-            if (id != null)
-            {
-                bool isInt = Int32.TryParse(id.ToString(), out int entityId);
-                var admById = db.Admission.FirstOrDefault(x => x.EntityId == entityId);
-                ViewBag.admById = db.Admission.Join(db.Course,
-               ad => ad.CourseId,
-               co => co.EntityId,
-               (ad, co) => new
-               AdmissionViewModel
-               {
-                   EntityId = ad.EntityId,
-                   Name = ad.Name,
-                   Price = ad.Price,
-                   StartTime = ad.StartTime,
-                   EndTime = ad.EndTime,
-                   BillTime = ad.BillTime,
-                   QuantityStudent = ad.QuantityStudent,
-                   CourseId = ad.CourseId,
-                   Image = co.Image,
-                   Course = co.Name
-               }).FirstOrDefault(x => x.EntityId == entityId);
-            }
+            //var id = RouteData.Values["id"];
+            //if (id != null)
+            //{
+            //    bool isInt = Int32.TryParse(id.ToString(), out int entityId);
+            //    var admById = db.Admission.FirstOrDefault(x => x.EntityId == entityId);
+            //    ViewBag.admById = db.Admission.Join(db.Course,
+            //   ad => ad.CourseId,
+            //   co => co.EntityId,
+            //   (ad, co) => new
+            //   AdmissionViewModel
+            //   {
+            //       EntityId = ad.EntityId,
+            //       Name = ad.Name,
+            //       Price = ad.Price,
+            //       StartTime = ad.StartTime,
+            //       EndTime = ad.EndTime,
+            //       BillTime = ad.BillTime,
+            //       QuantityStudent = ad.QuantityStudent,
+            //       CourseId = ad.CourseId,
+            //       Image = co.Image,
+            //       Course = co.Name
+            //   }).FirstOrDefault(x => x.EntityId == entityId);
+            //}
             return View();
         }
         public ActionResult CourseDetail()

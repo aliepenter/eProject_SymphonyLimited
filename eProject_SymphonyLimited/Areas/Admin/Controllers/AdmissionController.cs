@@ -3,6 +3,7 @@ using eProject_SymphonyLimited.Areas.Admin.Data.ViewModel;
 using eProject_SymphonyLimited.Models;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
@@ -23,167 +24,159 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         public ActionResult Get(int page = 1, string type = null, string key = null)
         {
             int pageSize = 5;
-            var admissions = db.Admission.Join(db.Course,
-                a => a.CourseId,
-                c => c.EntityId,
-                (a, c) => new
-                AdmissionViewModel
+            List<AdmissionViewModel> admissionModel = new List<AdmissionViewModel>();
+            foreach (var item in db.Admission.Include(x => x.Course))
+            {
+                admissionModel.Add(new AdmissionViewModel
                 {
-                    EntityId = a.EntityId,
-                    Name = a.Name,
-                    Price = a.Price,
-                    StartTime = a.StartTime,
-                    EndTime = a.EndTime,
-                    BillTime = a.BillTime,
-                    QuantityStudent = a.QuantityStudent,
-                    Course = c.Name
-                }).AsEnumerable();
+                    EntityId = item.EntityId,
+                    Name = item.Name,
+                    Price = item.Price,
+                    StartTime = String.Format("{0:dd/MM/yyyy}", item.StartTime),
+                    EndTime = String.Format("{0:dd/MM/yyyy}", item.EndTime),
+                    BillTime = String.Format("{0:dd/MM/yyyy}", item.BillTime),
+                    QuantityStudent = item.QuantityStudent,
+                    Course = item.Course.Name
+                });
+            }
             if (!String.IsNullOrEmpty(key))
             {
                 switch (type)
                 {
                     case "EntityId":
-                        admissions = db.Admission.Join(db.Course,
-                a => a.CourseId,
-                c => c.EntityId,
-                (a, c) => new
-                AdmissionViewModel
-                {
-                    EntityId = a.EntityId,
-                    Name = a.Name,
-                    Price = a.Price,
-                    StartTime = a.StartTime,
-                    EndTime = a.EndTime,
-                    BillTime = a.BillTime,
-                    QuantityStudent = a.QuantityStudent,
-                    Course = c.Name
-                }).Where(x => x.EntityId.ToString().Contains(key)).AsEnumerable();
+                        foreach (var item in db.Admission.Include(x => x.Course).Where(x => x.EntityId.ToString().Contains(key)))
+                        {
+                            admissionModel.Add(new AdmissionViewModel
+                            {
+                                EntityId = item.EntityId,
+                                Name = item.Name,
+                                Price = item.Price,
+                                StartTime = String.Format("{0:dd/MM/yyyy}", item.StartTime),
+                                EndTime = String.Format("{0:dd/MM/yyyy}", item.EndTime),
+                                BillTime = String.Format("{0:dd/MM/yyyy}", item.BillTime),
+                                QuantityStudent = item.QuantityStudent,
+                                Course = item.Course.Name
+                            });
+                        }
                         break;
                     case "Name":
-                        admissions = db.Admission.Join(db.Course,
-                a => a.CourseId,
-                c => c.EntityId,
-                (a, c) => new
-                AdmissionViewModel
-                {
-                    EntityId = a.EntityId,
-                    Name = a.Name,
-                    Price = a.Price,
-                    StartTime = a.StartTime,
-                    EndTime = a.EndTime,
-                    BillTime = a.BillTime,
-                    QuantityStudent = a.QuantityStudent,
-                    Course = c.Name
-                }).Where(x => x.Name.Contains(key)).AsEnumerable();
+                        foreach (var item in db.Admission.Include(x => x.Course).Where(x => x.Name.ToString().Contains(key)))
+                        {
+                            admissionModel.Add(new AdmissionViewModel
+                            {
+                                EntityId = item.EntityId,
+                                Name = item.Name,
+                                Price = item.Price,
+                                StartTime = String.Format("{0:dd/MM/yyyy}", item.StartTime),
+                                EndTime = String.Format("{0:dd/MM/yyyy}", item.EndTime),
+                                BillTime = String.Format("{0:dd/MM/yyyy}", item.BillTime),
+                                QuantityStudent = item.QuantityStudent,
+                                Course = item.Course.Name
+                            });
+                        }
                         break;
                     case "StartTime":
-                        admissions = db.Admission.Join(db.Course,
-                a => a.CourseId,
-                c => c.EntityId,
-                (a, c) => new
-                AdmissionViewModel
-                {
-                    EntityId = a.EntityId,
-                    Name = a.Name,
-                    Price = a.Price,
-                    StartTime = a.StartTime,
-                    EndTime = a.EndTime,
-                    BillTime = a.BillTime,
-                    QuantityStudent = a.QuantityStudent,
-                    Course = c.Name
-                }).Where(x => x.StartTime.ToString().Contains(key)).AsEnumerable();
+                        foreach (var item in db.Admission.Include(x => x.Course).Where(x => x.StartTime.ToString().Contains(key)))
+                        {
+                            admissionModel.Add(new AdmissionViewModel
+                            {
+                                EntityId = item.EntityId,
+                                Name = item.Name,
+                                Price = item.Price,
+                                StartTime = String.Format("{0:dd/MM/yyyy}", item.StartTime),
+                                EndTime = String.Format("{0:dd/MM/yyyy}", item.EndTime),
+                                BillTime = String.Format("{0:dd/MM/yyyy}", item.BillTime),
+                                QuantityStudent = item.QuantityStudent,
+                                Course = item.Course.Name
+                            });
+                        }
                         break;
                     case "EndTime":
-                        admissions = db.Admission.Join(db.Course,
-                a => a.CourseId,
-                c => c.EntityId,
-                (a, c) => new
-                AdmissionViewModel
-                {
-                    EntityId = a.EntityId,
-                    Name = a.Name,
-                    Price = a.Price,
-                    StartTime = a.StartTime,
-                    EndTime = a.EndTime,
-                    BillTime = a.BillTime,
-                    QuantityStudent = a.QuantityStudent,
-                    Course = c.Name
-                }).Where(x => x.EndTime.ToString().Contains(key)).AsEnumerable();
+                        foreach (var item in db.Admission.Include(x => x.Course).Where(x => x.EndTime.ToString().Contains(key)))
+                        {
+                            admissionModel.Add(new AdmissionViewModel
+                            {
+                                EntityId = item.EntityId,
+                                Name = item.Name,
+                                Price = item.Price,
+                                StartTime = String.Format("{0:dd/MM/yyyy}", item.StartTime),
+                                EndTime = String.Format("{0:dd/MM/yyyy}", item.EndTime),
+                                BillTime = String.Format("{0:dd/MM/yyyy}", item.BillTime),
+                                QuantityStudent = item.QuantityStudent,
+                                Course = item.Course.Name
+                            });
+                        }
                         break;
                     case "BillTime":
-                        admissions = db.Admission.Join(db.Course,
-                a => a.CourseId,
-                c => c.EntityId,
-                (a, c) => new
-                AdmissionViewModel
-                {
-                    EntityId = a.EntityId,
-                    Name = a.Name,
-                    Price = a.Price,
-                    StartTime = a.StartTime,
-                    EndTime = a.EndTime,
-                    BillTime = a.BillTime,
-                    QuantityStudent = a.QuantityStudent,
-                    Course = c.Name
-                }).Where(x => x.BillTime.ToString().Contains(key)).AsEnumerable();
+                        foreach (var item in db.Admission.Include(x => x.Course).Where(x => x.BillTime.ToString().Contains(key)))
+                        {
+                            admissionModel.Add(new AdmissionViewModel
+                            {
+                                EntityId = item.EntityId,
+                                Name = item.Name,
+                                Price = item.Price,
+                                StartTime = String.Format("{0:dd/MM/yyyy}", item.StartTime),
+                                EndTime = String.Format("{0:dd/MM/yyyy}", item.EndTime),
+                                BillTime = String.Format("{0:dd/MM/yyyy}", item.BillTime),
+                                QuantityStudent = item.QuantityStudent,
+                                Course = item.Course.Name
+                            });
+                        }
                         break;
                     case "Price":
-                        admissions = db.Admission.Join(db.Course,
-                a => a.CourseId,
-                c => c.EntityId,
-                (a, c) => new
-                AdmissionViewModel
-                {
-                    EntityId = a.EntityId,
-                    Name = a.Name,
-                    Price = a.Price,
-                    StartTime = a.StartTime,
-                    EndTime = a.EndTime,
-                    BillTime = a.BillTime,
-                    QuantityStudent = a.QuantityStudent,
-                    Course = c.Name
-                }).Where(x => x.Price.ToString().Contains(key)).AsEnumerable();
+                        foreach (var item in db.Admission.Include(x => x.Course).Where(x => x.Price.ToString().Contains(key)))
+                        {
+                            admissionModel.Add(new AdmissionViewModel
+                            {
+                                EntityId = item.EntityId,
+                                Name = item.Name,
+                                Price = item.Price,
+                                StartTime = String.Format("{0:dd/MM/yyyy}", item.StartTime),
+                                EndTime = String.Format("{0:dd/MM/yyyy}", item.EndTime),
+                                BillTime = String.Format("{0:dd/MM/yyyy}", item.BillTime),
+                                QuantityStudent = item.QuantityStudent,
+                                Course = item.Course.Name
+                            });
+                        }
                         break;
                     case "QuantityStudent":
-                        admissions = db.Admission.Join(db.Course,
-                a => a.CourseId,
-                c => c.EntityId,
-                (a, c) => new
-                AdmissionViewModel
-                {
-                    EntityId = a.EntityId,
-                    Name = a.Name,
-                    Price = a.Price,
-                    StartTime = a.StartTime,
-                    EndTime = a.EndTime,
-                    BillTime = a.BillTime,
-                    QuantityStudent = a.QuantityStudent,
-                    Course = c.Name
-                }).Where(x => x.QuantityStudent.ToString().Contains(key)).AsEnumerable();
+                        foreach (var item in db.Admission.Include(x => x.Course).Where(x => x.QuantityStudent.ToString().Contains(key)))
+                        {
+                            admissionModel.Add(new AdmissionViewModel
+                            {
+                                EntityId = item.EntityId,
+                                Name = item.Name,
+                                Price = item.Price,
+                                StartTime = String.Format("{0:dd/MM/yyyy}", item.StartTime),
+                                EndTime = String.Format("{0:dd/MM/yyyy}", item.EndTime),
+                                BillTime = String.Format("{0:dd/MM/yyyy}", item.BillTime),
+                                QuantityStudent = item.QuantityStudent,
+                                Course = item.Course.Name
+                            });
+                        }
                         break;
                     case "Course":
-                        admissions = db.Admission.Join(db.Course,
-                a => a.CourseId,
-                c => c.EntityId,
-                (a, c) => new
-                AdmissionViewModel
-                {
-                    EntityId = a.EntityId,
-                    Name = a.Name,
-                    Price = a.Price,
-                    StartTime = a.StartTime,
-                    EndTime = a.EndTime,
-                    BillTime = a.BillTime,
-                    QuantityStudent = a.QuantityStudent,
-                    Course = c.Name
-                }).Where(x => x.Course.Contains(key)).AsEnumerable();
+                        foreach (var item in db.Admission.Include(x => x.Course).Where(x => x.Course.ToString().Contains(key)))
+                        {
+                            admissionModel.Add(new AdmissionViewModel
+                            {
+                                EntityId = item.EntityId,
+                                Name = item.Name,
+                                Price = item.Price,
+                                StartTime = String.Format("{0:dd/MM/yyyy}", item.StartTime),
+                                EndTime = String.Format("{0:dd/MM/yyyy}", item.EndTime),
+                                BillTime = String.Format("{0:dd/MM/yyyy}", item.BillTime),
+                                QuantityStudent = item.QuantityStudent,
+                                Course = item.Course.Name
+                            });
+                        }
                         break;
                     default:
                         break;
                 }
             }
-            decimal totalPages = Math.Ceiling((decimal)admissions.Count() / pageSize);
-            string jsonData = JsonConvert.SerializeObject(admissions.Skip((page - 1) * pageSize).Take(pageSize));
+            decimal totalPages = Math.Ceiling((decimal)admissionModel.Count() / pageSize);
+            string jsonData = JsonConvert.SerializeObject(admissionModel.Skip((page - 1) * pageSize).Take(pageSize));
             return Json(new
             {
                 TotalPages = totalPages,
