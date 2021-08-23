@@ -399,17 +399,44 @@ namespace eProject_SymphonyLimited.Controllers
         [HttpPost]
         public ActionResult ExamResult(string rollNumber)
         {
-            var resultByRollNumber = db.PaidRegister.Join(db.RegisterInfo,
-                pa => pa.RegisterInfoId,
-                re => re.EntityId,
-                (pa, re) => new
-                PaidRegisterViewModel
-                {
-                    RollNumber = pa.RollNumber,
-                    Name = re.Name,
-                    Result = pa.Result,
-                    Tested = pa.Tested
-                }).FirstOrDefault(x => x.RollNumber == rollNumber);
+            var resultByRollNumber = db.RegisterInfo
+                .Join(
+                    db.Admission,
+                       reg => reg.AdmissionId,
+                       ad => ad.EntityId,
+                       (reg, ad) => new
+                       {
+                           reg,
+                           ad
+                       })
+                .Join(
+            db.PaidRegister,
+               re => re.reg.EntityId,
+               pr => pr.RegisterInfoId,
+               (re, pr) => new
+               {
+                   re,
+                   pr
+               }).Join(db.Course,
+               ad => ad.re.ad.CourseId,
+               co => co.EntityId,
+               (ad, co) => new
+               PaidRegisterViewModel
+               {
+                   EntityId = ad.pr.EntityId,
+                   RollNumber = ad.pr.RollNumber,
+                   Result = ad.pr.Result,
+                   Name = ad.re.reg.Name,
+                   Phone = ad.re.reg.Phone,
+                   Email = ad.re.reg.Email,
+                   Comment = ad.re.reg.Comment,
+                   CreatedAt = ad.re.reg.CreatedAt,
+                   AdmissionId = ad.re.reg.AdmissionId,
+                   Admission = ad.re.ad.Name,
+                   Tested = ad.pr.Tested,
+                   BillTime = ad.re.ad.BillTime,
+                   CourseFee = co.Price
+               }).FirstOrDefault(x => x.RollNumber == rollNumber);
             if (resultByRollNumber != null)
             {
                 if (resultByRollNumber.Tested == false)

@@ -1056,7 +1056,7 @@ body {
     .containerContentResult .content {
         margin: auto;
         font-weight: bold;
-        background: #F7F7F7;
+        background: yellowgreen;
         padding: 20px 10px;
     }
 
@@ -1067,7 +1067,8 @@ body {
 
         .containerContentResult .content input {
             padding: 10px;
-            width: 100%
+            width: 100%;
+            outline: none
         }
 
 .cusCate {
@@ -1082,7 +1083,7 @@ body {
 }
 
 .cateActive {
-    background: #F7F7F7;
+    background: yellowgreen;
 }
 
 .tableCheckResult table tr th {
@@ -1498,8 +1499,16 @@ table, th, td {
     padding: 15px 0px 15px 35px;
     border-bottom: 2px solid #efefef;
 }
+.mainExamResult .cusErrorResult{
+    font-size: 20px;
+    padding:  0 0 0 15px;
+}
 /* minwidth 768 */
 @media screen and (min-width: 768px) {
+    .mainExamResult .cusErrorResult {
+        font-size: 20px;
+        padding: 0 0 0 35px;
+    }
     .popUpSubmit {
         width: 40%;
     }
@@ -1692,6 +1701,10 @@ table, th, td {
 }
 
 @media screen and (min-width: 1024px) {
+    .mainExamResult .cusErrorResult {
+        font-size: 20px;
+        padding: 0 0 0 45px;
+    }
     .containerFaq {
         width: 70%;
         margin: 0 auto
@@ -2069,6 +2082,10 @@ table, th, td {
 }
 
 @media screen and (min-width:1440px) {
+    .mainExamResult .cusErrorResult {
+        font-size: 20px;
+        padding: 0 0 0 65px;
+    }
     .st, .et {
         width: 100%;
         padding: 10px 0
@@ -2504,6 +2521,10 @@ table, th, td {
 }
 
 @media screen and (min-width:1920px) {
+    .mainExamResult .cusErrorResult {
+        font-size: 25px;
+        padding: 0 0 0 95px;
+    }
     .bannerFaq {
         background-image: url("https://ssl.gstatic.com/support/content/images/static/banners/youtube.svg");
         background-position: center center;

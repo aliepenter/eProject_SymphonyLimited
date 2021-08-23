@@ -29,10 +29,14 @@ namespace eProject_SymphonyLimited.Areas.Admin.Data.ViewModel
 
         public DateTime EndTime { get; set; }
 
+        public DateTime BillTime { get; set; }
+
         public bool Tested { get; set; }
 
         public int AdmissionId { get; set; }
 
         public string Admission { get; set; }
+
+        public double CourseFee { get; set; }
     }
 }

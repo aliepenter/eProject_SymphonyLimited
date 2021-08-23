@@ -28,36 +28,53 @@
                                 <input type="text" name="rollNumber" value="" placeholder="Roll Number" />
                             </form>
                         </div>
-                        <div class="resultCheck">
-                            @if (@TempData["RollNumberNotExist"] != null)
-                            {
-                                <h2>@TempData["RollNumberNotExist"]</h2>
-                            }
-                            else if (@TempData["NotTested"] != null)
-                            {
-                                <h2>@TempData["NotTested"]</h2>
-                            }
-                            else
-                            {
-                                if (ViewBag.Result != null)
-                                {
-                                    <div class="info" style="margin: 20px 0">
-                                        <div class="name cusInfoCheckResult">
-                                            <span>Roll Number: <span>@ViewBag.Result.RollNumber</span></span>
-                                        </div>
-                                        <div class="name cusInfoCheckResult">
-                                            <span>Name: <span>@ViewBag.Result.Name</span></span>
-                                        </div>
-                                        <div class="name cusInfoCheckResult">
-                                            <span>Result: <span>@ViewBag.Result.Result</span></span>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                        </div>
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="resultCheck" id="resultCheck">
+            @if (@TempData["RollNumberNotExist"] != null)
+            {
+                <div class="cusErrorResult">
+                    <h2>@TempData["RollNumberNotExist"]</h2>
+                </div>
+            }
+            else if (@TempData["NotTested"] != null)
+            {
+                <div class="cusErrorResult">
+                    <h2>@TempData["NotTested"]</h2>
+                </div>
+            }
+            else
+            {
+                if (ViewBag.Result != null)
+                {
+                    <div class="resultAll" id="resultAll">
+                        <div class="tableCheckResult">
+                            <table style="width: 90%;margin: 0 auto">
+                                <tr>
+                                    <th>Roll Number</th>
+                                    <th>Full Name</th>
+                                    <th>Entrance Exam</th>
+                                    <th>Result</th>
+                                    @*<th>Class</th>*@
+                                    <th>Course Fee</th>
+                                    <th>BillDate</th>
+                                </tr>
+                                <tr>
+                                    <td>@ViewBag.Result.RollNumber</td>
+                                    <td>@ViewBag.Result.Name</td>
+                                    <td>@ViewBag.Result.Admission</td>
+                                    <td>@ViewBag.Result.Result</td>
+                                    @*<td>Jill</td>*@
+                                    <td>@ViewBag.Result.CourseFee</td>
+                                    <td>@ViewBag.Result.BillTime.ToString("MM/dd/yyyy")</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                }
+            }
         </div>
         <div class="resultAll">
             <div class="tableCheckResult disNone" id="tableAllResult">
@@ -90,6 +107,7 @@
         $("#checkResult").addClass("cateActive");
         $("#allResult").removeClass("cateActive");
         $("#tableAllResult").addClass("disNone");
+        $("#resultAll").addClass("disNone");
         $("#tableCheckResult").removeClass("disNone");
         $("#search").removeClass("disNone");
     });
@@ -99,5 +117,7 @@
         $("#tableAllResult").removeClass("disNone");
         $("#tableCheckResult").addClass("disNone");
         $("#search").addClass("disNone");
+        $("#resultCheck").addClass("disNone");
+
     });
 </script>
