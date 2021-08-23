@@ -56,7 +56,7 @@ namespace eProject_SymphonyLimited.Controllers
         }
         public ActionResult EntranceExam()
         {
-            ViewBag.Adms = db.Admission.Join(db.Course,
+            var adms = db.Admission.Join(db.Course,
                ad => ad.CourseId,
                co => co.EntityId,
                (ad, co) => new
@@ -71,8 +71,17 @@ namespace eProject_SymphonyLimited.Controllers
                    QuantityStudent = ad.QuantityStudent,
                    CourseId = ad.CourseId,
                    Course = co.Image
-               }).AsEnumerable();
+               }).Where(x=> x.StartTime <= DateTime.Now && x.EndTime>=DateTime.Now).AsEnumerable();
+            if (adms.Count() > 0)
+            {
+                ViewBag.Adms = adms;
+            }
+            else
+            {
+                ViewBag.Adms = null;
+            }
             return View();
+
         }
         [HttpGet]
         public ActionResult GetChildCategory()
@@ -262,10 +271,7 @@ namespace eProject_SymphonyLimited.Controllers
                 data = StartTime
             }, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult Faq()
-        {
-            return View();
-        }
+
         public ActionResult ExamResult()
         {
             return View();
@@ -318,6 +324,19 @@ namespace eProject_SymphonyLimited.Controllers
             }
             return RedirectToAction("Index");
         }
+        public ActionResult Faq()
+        {
+            ViewBag.faq = db.Faq.AsEnumerable();
+            var id = RouteData.Values["id"];
+            if (id != null)
+            {
+                bool isInt = Int32.TryParse(id.ToString(), out int entityId);
+                var ans = db.Admission.FirstOrDefault(x => x.EntityId == entityId);
+                ViewBag.ans = db.Faq.FirstOrDefault(x => x.EntityId == entityId);
+            }
+            return View();
+        }
+
         public ActionResult AdmissionDetail()
         {
             var id = RouteData.Values["id"];

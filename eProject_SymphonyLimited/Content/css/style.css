@@ -184,7 +184,7 @@ body {
     position: relative;
     background: #fefefe;
     color: #333;
-    background-color: rgb(110, 19, 19);
+    background-color: #AD1B1F;
 }
 
     .header .marquee p {
@@ -496,7 +496,9 @@ body {
 .childBarActive {
     transform: rotateZ(90deg);
 }
-
+.cherFaq {
+    transform: rotateZ(180deg);
+}
 
 /* css child course Category Menu */
 
@@ -1071,7 +1073,8 @@ body {
 .cusCate {
     width: 50%;
     padding: 10px;
-    font-weight: bold
+    font-weight: bold;
+    cursor:pointer
 }
 
 .cusCate2 {
@@ -1134,13 +1137,33 @@ table, th, td {
     font-size: 25px;
     color: cornflowerblue
 }
-
-.containerFaq .mainFaq ul li {
-    list-style: none;
-    padding: 10px;
-    border: 1px groove #DADCE0
+.containerFaq .mainFaq {
+    border: 2px solid #efefef;
+    border-bottom: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    margin: 100px 0
 }
+.containerFaq .mainFaq .childLi{
+    /*border: 2px solid #efefef;
+    border-bottom: none;*/
+}
+.containerFaq .mainFaq ul .parentLiStyle {
+    list-style: none;
+    padding: 15px;
+    border-bottom: 2px solid #efefef;
+    cursor: pointer;
 
+}.containerFaq .mainFaq ul .parentLiStyle:hover {
+    background:#EFEFEF
+
+}
+.containerFaq .mainFaq ul li .ques{
+    margin: auto;
+    padding-left: 20px
+}.containerFaq .mainFaq ul li .icon{
+    margin: auto
+}
 .mainEE {
     margin: 30px 0
 }
@@ -1470,7 +1493,11 @@ table, th, td {
 .containerCourseDetail .topItemCourseDetail .cate {
     width: 60%
 }
-
+.childLiStyle {
+    list-style: none;
+    padding: 15px 0px 15px 35px;
+    border-bottom: 2px solid #efefef;
+}
 /* minwidth 768 */
 @media screen and (min-width: 768px) {
     .popUpSubmit {
@@ -1665,6 +1692,10 @@ table, th, td {
 }
 
 @media screen and (min-width: 1024px) {
+    .containerFaq {
+        width: 70%;
+        margin: 0 auto
+    }
     .midEE .containerItem .img img {
         padding: 30px
     }
@@ -2290,7 +2321,7 @@ table, th, td {
     }
 
     .containerFaq {
-        width: 70%;
+        width: 50%;
         margin: 0 auto
     }
 
@@ -2484,7 +2515,7 @@ table, th, td {
     }
 
     .containerFaq {
-        width: 50%;
+        width: 40%;
         margin: 0 auto
     }
 
@@ -2538,6 +2569,13 @@ table, th, td {
     z-index: 16;
     top: 0;
     padding: 10px 0px;
+}
+.childFaqDown {
+    display: block;
+    animation-duration: 0.6s;
+    animation-delay: 0s;
+    animation-name: fadeInDown;
+    background: #D2E3FC;
 }
 
 .childMenufix {

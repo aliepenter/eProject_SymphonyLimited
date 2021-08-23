@@ -101,7 +101,9 @@
                             @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "input", @placeholder = "Phone*", @required = "", @pattern = "(84|0[3|5|7|8|9])+([0-9]{8})", @title = ".e.g 0812345678" } })
                         </div>
                         <div class="form-row">
-                            @Html.DropDownListFor(model => model.AdmissionId, new SelectList(ViewBag.admissionList, "EntityId", "Name", "Select"), new { @class = "input", @required = "" })
+                            @*@Html.DropDownListFor(model => model.AdmissionId, new SelectList(ViewBag.admissionList, "EntityId", "Name", "Select"), new { @class = "input", @required = "" })*@
+                            <input type="hidden" name="AdmissionId" value="@ViewBag.admById.EntityId" />
+                            <input type ="text" name="name" value="@ViewBag.admById.Name" disabled/>
                         </div>
                         <div class="form-row">
                             @Html.TextAreaFor(model => model.Comment, new { @class = "input", @placeholder = "Give us questions", @rows = "5" })

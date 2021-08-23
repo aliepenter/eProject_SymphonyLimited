@@ -42,10 +42,64 @@
                     }
                     else
                     {
-                        <h3>No courses here</h3>
+                        <h3>No Admission</h3>
                     }
                 }
             </div>
+            <div class="flex">
+                <div class="pages width50">
+                    <ul class="pagination">
+                        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                        {
+                            if (i == ViewBag.CurrentPage)
+                            {
+                                <li class="active mr-1">
+                                    <a href="javascript:void(0)" data-page-id="@i">
+                                        <button class="btn btn-info">@i</button>
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a class="item_page mr-1" href="javascript:void(0)" data-page-id="@i">
+                                        <button class="btn btn-info">@i</button>
+                                    </a>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+                <div class="field limiter width50" style="margin: auto">
+                    <div class="flex" style="float:right">
+                        <span style="margin: auto">Show</span>
+                        <div class="control" style="margin: 0 10px">
+                            <select id="limiter" class="limiter-options" style="padding: 4px">
+                                @if (ViewBag.Limiter == 24)
+                                {
+                                    <option value="12">12</option>
+                                    <option value="24" selected>24</option>
+                                    <option value="36">36</option>
+                                }
+                                else if (ViewBag.Limiter == 36)
+                                {
+                                    <option value="12">12</option>
+                                    <option value="24">24</option>
+                                    <option value="36" selected>36</option>
+                                }
+                                else
+                                {
+                                    <option value="12" selected>12</option>
+                                    <option value="24">24</option>
+                                    <option value="36">36</option>
+                                }
+                            </select>
+                        </div>
+                        <span class="limiter-text" style="margin: auto">items on the page</span>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
