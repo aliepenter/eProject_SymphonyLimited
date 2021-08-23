@@ -1,0 +1,104 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Classes</h2>
+
+<a class="btn btn-primary float-left mb-3" href="/Admin/Class/Create"><i class="far fa-plus-square"></i> Create New</a>
+<div class="form-inline mb-3 float-right">
+    <div class="input-group">
+        <label class="font-weight-bold m-0 mr-1 d-flex align-items-center">Search : </label>
+        <input type="text" name="key" id="key" value="" class="form-control mr-1 bg-light small" placeholder="Enter to search..." aria-label="Search" aria-describedby="basic-addon2">
+    </div>
+    <div class="input-group">
+        <label class="font-weight-bold m-0 mr-1 d-flex align-items-center">Search By : </label>
+        <select id="type" class="form-control">
+            <option value="Name" selected>Name</option>
+            <option value="AdmissionName">Admission Name</option>
+        </select>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-bordered"></table>
+</div>
+
+<ul class="pagination"></ul>
+
+@section scripts{
+    <script>
+        var getUrl = window.location;
+        var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
+        var manager = {
+            load: function (page = 1, type = null, key = null) {
+                $.ajax({
+                    type: "GET",
+                    url: baseUrl + "Admin/Class/Get",
+                    data: { page: page, type: type, key: key },
+                    success: function (res) {
+                        var _html = ' <thead class="thead-dark"><tr><th>Entity Id</th><th>Name</th><th>Quantity Student</th><th>Status</th><th>Admission Name</th><th>Action</th></tr></thead>';
+                        for (var item of JSON.parse(res.Data)) {
+                            if (item.Status == true) {
+                                var status = '<span class="bg-success text-white rounded p-1">Active</span>';
+                            } else {
+                                var status = '<span class="bg-danger text-white rounded p-1">Inactive</span>';
+                            }
+                            _html += '<tbody><tr>' +
+                                '<td>' + item.EntityId + '</td>' +
+                                '<td>' + item.Name + '</td>' +
+                                '<td>' + item.QuantityStudent + '</td>' +
+                                '<td>' + status + '</td>' +
+                                '<td>' + item.AdmissionName + '</td>' +
+                                '<td>' +
+                                '<button class="btn btn-warning btn-edit mr-1 mb-1" data-id="' + item.EntityId + '"><i class="fas fa-edit"></i> Edit</button>' +
+                                '</td>'
+                                + '</tr></tbody>';
+                        }
+                        $('.table').html(_html);
+                        var pages = '';
+                        for (var i = 1; i <= res.TotalPages; i++) {
+                            if (i == res.CurrentPage) {
+                                pages += '<li class="active mr-1"><a href="javascript:void(0)"><button class="btn btn-info">' + i + '</button></a></li>';
+                            } else {
+                                pages += '<li><a class="item_page mr-1" href="javascript:void(0)"><button class="btn btn-info">' + i + '</button></a></li>';
+                            }
+                        }
+                        $(".pagination").html(pages);
+                    }
+                })
+            },
+        }
+
+        $(function () {
+            manager.load();
+            $(document).on("click", ".btn-edit", function () {
+                var id = $(this).data("id");
+                window.location.href = baseUrl + "Admin/Class/Edit/" + id;
+            });
+            $(document).on("click", ".item_page", function () {
+                var page = $(this).text(),
+                    key = $('#key').val(),
+                    type = $("#type").val();
+                manager.load(page, type, key);
+            });
+            $('#key').keyup(function () {
+                var key = $("#key").val(),
+                    type = $("#type").val();
+                manager.load(1, type, key);
+            });
+            $(document).on("change", "#key", function () {
+                var key = $("#key").val(),
+                    type = $("#type").val();
+                manager.load(1, type, key);
+            });
+            $(document).on("change", "#type", function () {
+                var key = $("#key").val(),
+                    type = $("#type").val();
+                manager.load(1, type, key);
+            });
+        })
+    </script>
+}
+

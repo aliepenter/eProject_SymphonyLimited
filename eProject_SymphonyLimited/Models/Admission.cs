@@ -41,7 +41,7 @@ namespace eProject_SymphonyLimited.Models
 
         public Course Course { get; set; }
 
-        public ICollection<Class> Classes { get; set; }
+        public virtual ICollection<Class> Classes { get; set; }
 
         public ICollection<RegisterInfo> RegisterInfoes { get; set; }
     }

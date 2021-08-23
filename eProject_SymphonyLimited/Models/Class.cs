@@ -20,6 +20,6 @@ namespace eProject_SymphonyLimited.Models
 
         [ForeignKey("AdmissionId")]
 
-        public Admission Admission { get; set; }
+        public virtual Admission Admission { get; set; }
     }
 }

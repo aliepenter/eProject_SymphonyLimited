@@ -14,7 +14,6 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
     {
         SymphonyLimitedDBContext db = new SymphonyLimitedDBContext();
 
-        // GET: Admin/CoreConfigData
         public ActionResult Index()
         {
             return View(db.Branch.AsEnumerable());
