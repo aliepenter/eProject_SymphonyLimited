@@ -238,7 +238,8 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                      Comment = re.reg.Comment,
                      CreatedAt = re.reg.CreatedAt,
                      AdmissionId = re.reg.AdmissionId,
-                     Admission = re.ad.Name
+                     Admission = re.ad.Name,
+                     Tested = pr.Tested
                  }).Where(x => x.RollNumber.Contains(key) && x.AdmissionId == admissionId).AsEnumerable();
                         break;
                     case "Admission":
@@ -358,15 +359,55 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult SetIsTested(int prId)
         {
-            var prById = db.PaidRegister.FirstOrDefault(x => x.EntityId == prId);
+            var prById = db.RegisterInfo
+                .Join(
+                    db.Admission,
+                       reg => reg.AdmissionId,
+                       ad => ad.EntityId,
+                       (reg, ad) => new
+                       {
+                           reg,
+                           ad
+                       })
+                .Join(
+            db.PaidRegister,
+               re => re.reg.EntityId,
+               pr => pr.RegisterInfoId,
+               (re, pr) => new
+               PaidRegisterViewModel
+               {
+                   EntityId = pr.EntityId,
+                   RollNumber = pr.RollNumber,
+                   Result = pr.Result,
+                   Name = re.reg.Name,
+                   Phone = re.reg.Phone,
+                   Email = re.reg.Email,
+                   Comment = re.reg.Comment,
+                   CreatedAt = re.reg.CreatedAt,
+                   AdmissionId = re.reg.AdmissionId,
+                   EndTime = re.ad.EndTime,
+                   Admission = re.ad.Name,
+                   Tested = pr.Tested
+               }).FirstOrDefault(x => x.EntityId == prId);
             if (prById != null)
             {
-                prById.Tested = true;
-                db.SaveChanges();
-                return Json(new
+                if (prById.EndTime > DateTime.Now)
                 {
-                    StatusCode = 200
-                }, JsonRequestBehavior.AllowGet);
+                    return Json(new
+                    {
+                        StatusCode = 200,
+                        Message = "Admission is not over yet!"
+                    }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    prById.Tested = true;
+                    db.SaveChanges();
+                    return Json(new
+                    {
+                        StatusCode = 200
+                    }, JsonRequestBehavior.AllowGet);
+                }
             }
             return Json(new
             {

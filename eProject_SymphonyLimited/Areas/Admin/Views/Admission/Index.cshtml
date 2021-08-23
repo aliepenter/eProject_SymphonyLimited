@@ -2,6 +2,9 @@
     ViewBag.Title = "Index";
 }
 <link href="~/Areas/Admin/Content/css/admission.css?v=@Guid.NewGuid().ToString()" rel="stylesheet" />
+<div id="opaAll">
+
+</div>
 <div style="position: relative">
     <h2>Admissions</h2>
 
@@ -219,7 +222,11 @@
                         data: { prId: prId },
                         success: function (res) {
                             if (res.StatusCode == 200) {
-                                managerPaidRegister.load(1, null, null, $("#admissionId").val());
+                                if (res.Message) {
+                                    alert(res.Message);
+                                } else {
+                                    managerPaidRegister.load(1, null, null, $("#admissionId").val());
+                                }
                             }
                         }
                     })
@@ -277,6 +284,7 @@
             });
             $(document).on("click", ".btn-detail", function () {
                 var id = $(this).data("id");
+                $('#opaAll').addClass("opacityAll");
                 $("#admissionId").val(id);
                 $('#paidRegisterPage').addClass('activeRight');
                 $('#paidRegisterPage').removeClass('disActiveRight');
@@ -300,6 +308,13 @@
                 $(document).on("click", ".btn-back", function () {
                     $('#paidRegisterPage').addClass('disActiveRight');
                     $('#paidRegisterPage').removeClass('activeRight');
+                    $('#opaAll').removeClass("opacityAll");
+
+                });
+                $(document).on("click", "#opaAll", function () {
+                    $('#paidRegisterPage').addClass('disActiveRight');
+                    $('#paidRegisterPage').removeClass('activeRight');
+                    $('#opaAll').removeClass("opacityAll");
 
                 });
             });
