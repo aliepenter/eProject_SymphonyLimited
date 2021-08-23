@@ -189,7 +189,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                             reById.Name = r.Name;
                             reById.Phone = r.Phone;
                             reById.Email = r.Email;
-                            reById.Status = true;
+                            reById.Status = r.Status;
 
                             if (db.PaidRegister.FirstOrDefault(x => x.RegisterInfoId == r.EntityId) == null)
                             {

@@ -19,7 +19,6 @@ namespace eProject_SymphonyLimited.Areas.Admin.Data.ViewModel
         [RegularExpression("^(84|0[3|5|7|8|9])+([0-9]{8})$", ErrorMessage = "Please enter valid phone no.")]
         public string Phone { get; set; }
         public string Image { get; set; }
-        public string Address { get; set; }
         public int GroupId { get; set; }
         public string GroupUserName { get; set; }
     }

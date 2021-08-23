@@ -36,7 +36,6 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                 Email = u.Email,
                 Phone = u.Phone,
                 Image = u.Image,
-                Address = u.Address,
                 GroupId = u.GroupId,
                 GroupUserName = u.GroupUsers.Name
             };
@@ -71,7 +70,6 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                     currentUser.FullName = uvm.FullName;
                     currentUser.Email = uvm.Email;
                     currentUser.Phone = uvm.Phone;
-                    currentUser.Address = uvm.Address;
                     if (imgFile != null)
                     {
 

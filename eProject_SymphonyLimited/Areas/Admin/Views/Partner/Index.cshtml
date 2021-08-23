@@ -24,7 +24,7 @@
 </div>
 
 <ul class="pagination"></ul>
-        
+
 @section scripts{
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script>
@@ -38,14 +38,13 @@
                         url: baseUrl + "Admin/Partner/Get",
                         data: { page: page, type: type, key: key },
                         success: function (res) {
-                            var _html = ' <thead class="thead-dark"><tr><th>Entity Id</th>><th>Name</th><th>Image</th><th>Description</th><th>Action</th></tr></thead>';
+                            var _html = ' <thead class="thead-dark"><tr><th>Entity Id</th>><th>Name</th><th>Image</th><th>Action</th></tr></thead>';
                             for (var item of JSON.parse(res.Data)) {
                                 _html += '<tbody><tr>' +
                                     '<td>' + item.EntityId + '</td>' +
                                     '<td>' + item.Name + '</td>' +
                                     '<td>' + '<img style="width: 100px" src="' + baseUrl + "Areas/Admin/Content/img/" + item.Image + '">' + '</td>' +
-                                    '<td>' + item.Description + '</td>' +
-                                    '<td style="width:15%">' +
+                                    '<td width="300px">' +
                                     '<button class="btn btn-warning btn-edit mr-1 mb-1" data-id="' + item.EntityId + '"><i class="fas fa-edit"></i> Edit</button>' +
                                     '<button class="btn btn-danger btn-delete mb-1" data-id="' + item.EntityId + '"><i class="far fa-trash-alt"></i> Delete</button>' +
                                     '</td>'

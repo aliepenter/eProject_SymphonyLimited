@@ -39,7 +39,6 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers.Authorize
                     Email = u.Email,
                     Phone = u.Phone,
                     Image = u.Image,
-                    Address = u.Address,
                     GroupUserName = gu.Name
                 }).AsEnumerable();
             if (!String.IsNullOrEmpty(type) && !String.IsNullOrEmpty(key))
@@ -59,7 +58,6 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers.Authorize
                                 Email = u.Email,
                                 Phone = u.Phone,
                                 Image = u.Image,
-                                Address = u.Address,
                                 GroupUserName = gu.Name
                             }).Where(x => x.Account.ToString().Contains(key)).AsEnumerable();
                         break;
@@ -76,7 +74,6 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers.Authorize
                                  Email = u.Email,
                                  Phone = u.Phone,
                                  Image = u.Image,
-                                 Address = u.Address,
                                  GroupUserName = gu.Name
                              }).Where(x => x.FullName.Contains(key)).AsEnumerable();
                         break;
@@ -93,7 +90,6 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers.Authorize
                                 Email = u.Email,
                                 Phone = u.Phone,
                                 Image = u.Image,
-                                Address = u.Address,
                                 GroupUserName = gu.Name
                             }).Where(x => x.Email.Contains(key)).AsEnumerable();
                         break;
@@ -110,7 +106,6 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers.Authorize
                                 Email = u.Email,
                                 Phone = u.Phone,
                                 Image = u.Image,
-                                Address = u.Address,
                                 GroupUserName = gu.Name
                             }).Where(x => x.GroupUserName.Contains(key)).AsEnumerable();
                         break;
@@ -245,7 +240,6 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers.Authorize
                     currentUser.FullName = u.FullName;
                     currentUser.Email = u.Email;
                     currentUser.Phone = u.Phone;
-                    currentUser.Address = u.Address;
                     currentUser.GroupId = u.GroupId;
                     if (imgFile != null)
                     {

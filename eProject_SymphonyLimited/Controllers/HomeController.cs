@@ -361,10 +361,6 @@ namespace eProject_SymphonyLimited.Controllers
                    Image = co.Image,
                    Course = co.Name
                }).FirstOrDefault(x => x.EntityId == entityId);
-                //if (admById != null)
-                //{
-                //    return View(admById);
-                //}
             }
             return View();
         }

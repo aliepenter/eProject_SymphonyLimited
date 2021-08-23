@@ -38,7 +38,7 @@
                     url: baseUrl + "Admin/User/Get",
                     data: { page: page, type: type, key: key },
                     success: function (res) {
-                        var _html = ' <thead class="thead-dark"><tr><th>Entity Id</th><th>Account</th><th>FullName</th><th>Email</th><th>Phone</th><th>Image</th><th>Address</th><th>Role</th><th>Action</th></tr></thead>';
+                        var _html = ' <thead class="thead-dark"><tr><th>Entity Id</th><th>Account</th><th>FullName</th><th>Email</th><th>Phone</th><th>Image</th><th>Role</th><th>Action</th></tr></thead>';
                         for (var item of JSON.parse(res.Data)) {
                             _html += '<tbody><tr>' +
                                 '<td>' + item.EntityId + '</td>' +
@@ -47,9 +47,8 @@
                                 '<td>' + item.Email + '</td>' +
                                 '<td>' + item.Phone + '</td>' +
                                 '<td>' + '<img style="width: 100px" src="' + baseUrl + "Areas/Admin/Content/img/" + item.Image + '">' + '</td>' +
-                                '<td>' + item.Address + '</td>' +
                                 '<td>' + item.GroupUserName + '</td>' +
-                                '<td>' +
+                                '<td width="300px">' +
                                 '<button class="btn btn-warning btn-edit mr-1 mb-1" data-id="' + item.EntityId + '"><i class="fas fa-edit"></i> Edit</button>' +
                                 '<button class="btn btn-danger btn-delete mb-1" data-id="' + item.EntityId + '"><i class="far fa-trash-alt"></i> Delete</button>' +
                                 '</td>'

@@ -144,7 +144,6 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                             currentBranch.Time = b.Time;
                             currentBranch.Phone = b.Phone;
                             currentBranch.Address = b.Address;
-                            currentBranch.Description = b.Description;
                             if (imgFile != null)
                             {
                                 string imgName = Path.GetFileName(imgFile.FileName);

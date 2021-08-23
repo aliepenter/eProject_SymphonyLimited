@@ -41,7 +41,7 @@
                     url: baseUrl + "Admin/Branch/Get",
                     data: { page: page, type: type, key: key },
                     success: function (res) {
-                        var _html = ' <thead class="thead-dark"><tr><th>Entity Id</th><th>Name</th><th>Email</th><th>Image</th><th>Time</th><th>Phone</th><th>Address</th><th>Description</th><th>Action</th></tr></thead>';
+                        var _html = ' <thead class="thead-dark"><tr><th>Entity Id</th><th>Name</th><th>Email</th><th>Image</th><th>Time</th><th>Phone</th><th>Address</th><th>Action</th></tr></thead>';
                         for (var item of JSON.parse(res.Data)) {
                             _html += '<tbody><tr>' +
                                 '<td>' + item.EntityId + '</td>' +
@@ -51,8 +51,7 @@
                                 '<td>' + item.Time + '</td>' +
                                 '<td>' + item.Phone + '</td>' +
                                 '<td>' + item.Address + '</td>' +
-                                '<td>' + item.Description + '</td>' +
-                                '<td style="width:15%">' +
+                                '<td width="300px">' +
                                 '<button class="btn btn-warning btn-edit mr-1 mb-1" data-id="' + item.EntityId + '"><i class="fas fa-edit"></i> Edit</button>' +
                                 '<button class="btn btn-danger btn-delete mb-1" data-id="' + item.EntityId + '"><i class="far fa-trash-alt"></i> Delete</button>' +
                                 '</td>'
