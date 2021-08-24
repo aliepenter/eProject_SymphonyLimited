@@ -242,11 +242,12 @@
             });
             $(document).on("click", "#save-result", function () {
                 var prId = $('#prId').val(),
-                    result = $('#Result').val();
+                    result = $('#Result').val(),
+                    admissionId = $('#admissionId').val();
                 $.ajax({
                     type: "POST",
                     url: baseUrl + "Admin/PaidRegister/SetResult",
-                    data: { prId: prId, result: result },
+                    data: { prId: prId, result: result, admissionId: admissionId},
                     success: function (res) {
                         if (res.StatusCode == 200) {
                             if (res.Message) {

@@ -426,9 +426,10 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult SetResult(int prId, double result)
+        public ActionResult SetResult(int prId, double result, int admissionId)
         {
             var prById = db.PaidRegister.FirstOrDefault(x => x.EntityId == prId);
+            var adById = db.Admission.FirstOrDefault(x => x.EntityId == admissionId);
             if (prById != null)
             {
                 if (prById.Tested == false)
@@ -441,12 +442,41 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                 }
                 else
                 {
-                    prById.Result = result;
-                    db.SaveChanges();
-                    return Json(new
+                    if (result < 0)
                     {
-                        StatusCode = 200
-                    }, JsonRequestBehavior.AllowGet);
+                        return Json(new
+                        {
+                            StatusCode = 200,
+                            Message = "Result must be bigger than 0"
+                        }, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        prById.Result = result;
+                        if (adById.PassedMark <= result && result <= adById.MaxMark)
+                        {
+                            prById.Passed = true;
+                            if (db.Student.FirstOrDefault(x => x.RegisterInfoId == prById.RegisterInfoId) == null)
+                            {
+                                db.Student.Add(new Student
+                                {
+                                    RegisterInfoId = prById.RegisterInfoId,
+                                    Status = false,
+                                    ClassId = 0
+                                });
+                            }
+                        }
+                        else
+                        {
+                            prById.Passed = false;
+                        }
+                        db.SaveChanges();
+                        return Json(new
+                        {
+                            StatusCode = 200
+                        }, JsonRequestBehavior.AllowGet);
+                    }
+
                 }
             }
             return Json(new
