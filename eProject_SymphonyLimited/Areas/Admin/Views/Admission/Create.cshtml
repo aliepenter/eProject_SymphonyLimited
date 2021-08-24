@@ -47,9 +47,15 @@
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.QuantityStudent, htmlAttributes: new { @class = "control-label" })
-                                @Html.EditorFor(model => model.QuantityStudent, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.QuantityStudent, "", new { @class = "text-danger" })
+                                @Html.LabelFor(model => model.PassedMark, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.PassedMark, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.PassedMark, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.MaxMark, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.MaxMark, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.MaxMark, "", new { @class = "text-danger" })
                             </div>
 
                             <div class="form-group">

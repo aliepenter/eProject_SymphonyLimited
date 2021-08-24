@@ -1230,7 +1230,6 @@ E:\STUDY\Aptech\eProject_SymphonyLimited\eProject_SymphonyLimited\bin\System.Web
 E:\STUDY\Aptech\eProject_SymphonyLimited\eProject_SymphonyLimited\bin\Newtonsoft.Json.xml
 E:\STUDY\Aptech\eProject_SymphonyLimited\eProject_SymphonyLimited\bin\Antlr3.Runtime.pdb
 E:\STUDY\Aptech\eProject_SymphonyLimited\eProject_SymphonyLimited\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-E:\STUDY\Aptech\eProject_SymphonyLimited\eProject_SymphonyLimited\obj\Debug\eProject_SymphonyLimited.csprojAssemblyReference.cache
 E:\STUDY\Aptech\eProject_SymphonyLimited\eProject_SymphonyLimited\obj\Debug\eProject_SymphonyLimited.csproj.CoreCompileInputs.cache
 E:\STUDY\Aptech\eProject_SymphonyLimited\eProject_SymphonyLimited\obj\Debug\eProject_SymphonyLimited.csproj.CopyComplete
 E:\STUDY\Aptech\eProject_SymphonyLimited\eProject_SymphonyLimited\obj\Debug\eProject_SymphonyLimited.dll

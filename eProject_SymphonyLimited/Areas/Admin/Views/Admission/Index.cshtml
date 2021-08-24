@@ -26,7 +26,6 @@
                 <option value="StartTime">Start Time</option>
                 <option value="EndTime">End Time</option>
                 <option value="BillTime">Bill Time</option>
-                <option value="QuantityStudent">Student Quantity</option>
                 <option value="Price">Price</option>
                 <option value="Course">Course</option>
             </select>
@@ -110,7 +109,7 @@
                         url: baseUrl + "Admin/Admission/Get",
                         data: { page: page, type: type, key: key },
                         success: function (res) {
-                            var _html = ' <thead class="thead-dark"><tr><th>Entity Id</th><th>Name</th><th>Start Time</th><th>End Time</th><th>Bill Time</th><th>Student Quantity</th><th>Price</th><th>Course</th><th>Action</th></tr></thead>';
+                            var _html = ' <thead class="thead-dark"><tr><th>Entity Id</th><th>Name</th><th>Start Time</th><th>End Time</th><th>Bill Time</th><th>Passed Mark</th><th>Max Mark</th><th>Price</th><th>Course</th><th>Action</th></tr></thead>';
                             for (var item of JSON.parse(res.Data)) {
                                 _html += '<tbody><tr>' +
                                     '<td>' + item.EntityId + '</td>' +
@@ -118,7 +117,8 @@
                                     '<td>' + item.StartTime + '</td>' +
                                     '<td>' + item.EndTime + '</td>' +
                                     '<td>' + item.BillTime + '</td>' +
-                                    '<td>' + item.QuantityStudent + '</td>' +
+                                    '<td>' + item.PassedMark + '</td>' +
+                                    '<td>' + item.MaxMark + '</td>' +
                                     '<td>' + item.Price + '</td>' +
                                     '<td>' + item.Course + '</td>' +
                                     '<td width="300px">' +
@@ -149,7 +149,7 @@
                         url: baseUrl + "Admin/PaidRegister/Get",
                         data: { page: page, type: type, key: key, admissionId: admissionId },
                         success: function (res) {
-                            var _html = ' <thead class="thead-dark"><tr><th>Entity Id</th><th>Roll Number</th><th>Name</th><th>Phone</th><th>Email</th><th>CreateAt</th><th>Admission</th><th>Result</th><th>Tested</th><th>Action</th></tr></thead>';
+                            var _html = ' <thead class="thead-dark"><tr><th>Entity Id</th><th>Roll Number</th><th>Name</th><th>Phone</th><th>Email</th><th>CreateAt</th><th>Admission</th><th>Result</th><th>Tested</th><th>Passed</th><th>Action</th></tr></thead>';
                             for (var item of JSON.parse(res.Data)) {
                                 if (item.Tested == true) {
                                     var status = "Checked",
@@ -168,6 +168,7 @@
                                     '<td>' + item.Admission + '</td>' +
                                     '<td>' + item.Result + '</td>' +
                                     '<td>' + status + '</td>' +
+                                    '<td>' + item.Passed + '</td>' +
                                     '<td width="300px">' +
                                     '<button class="btn btn-warning btn-change-result mr-1 mb-1" data-pr-id="' + item.EntityId + '"><i class="fas fa-edit"></i>Change Result</button>' +
                                     showButtonIsTested +

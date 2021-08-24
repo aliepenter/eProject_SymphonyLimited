@@ -23,13 +23,17 @@ namespace eProject_SymphonyLimited.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Required(ErrorMessage = "Please enter admission's end time!")]
         public DateTime EndTime { get; set; }
+
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Required(ErrorMessage = "Please enter admission's bill time!")]
         public DateTime BillTime { get; set; }
 
-        [Required(ErrorMessage = "Please enter admission's quantity student!")]
-        public int QuantityStudent { get; set; }
+        [Required(ErrorMessage = "Please enter admission's passed mark!")]
+        public double PassedMark { get; set; }
+
+        [Required(ErrorMessage = "Please enter admission's max mark!")]
+        public double MaxMark { get; set; }
 
         [Required(ErrorMessage = "Please enter admission's price!")]
         public double Price { get; set; }
@@ -40,9 +44,7 @@ namespace eProject_SymphonyLimited.Models
         [ForeignKey("CourseId")]
 
         public Course Course { get; set; }
-
         public virtual ICollection<Class> Classes { get; set; }
-
         public ICollection<RegisterInfo> RegisterInfoes { get; set; }
     }
 }

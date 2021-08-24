@@ -20,6 +20,8 @@ namespace eProject_SymphonyLimited.Models
 
         [Display(Name = "Tested?")]
         public bool Tested { get; set; }
+        [Display(Name = "Passed?")]
+        public bool Passed { get; set; }
 
         public int RegisterInfoId { get; set; }
     }

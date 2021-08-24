@@ -32,6 +32,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Data.ViewModel
         public DateTime BillTime { get; set; }
 
         public bool Tested { get; set; }
+        public bool Passed { get; set; }
 
         public int AdmissionId { get; set; }
 

@@ -14,7 +14,9 @@ namespace eProject_SymphonyLimited.Areas.Admin.Data.ViewModel
 
         public string BillTime { get; set; }
 
-        public int QuantityStudent { get; set; }
+        public double PassedMark { get; set; }
+
+        public double MaxMark { get; set; }
 
         public double Price { get; set; }
 

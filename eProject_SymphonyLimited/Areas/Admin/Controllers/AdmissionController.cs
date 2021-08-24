@@ -35,7 +35,8 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                     StartTime = String.Format("{0:dd/MM/yyyy}", item.StartTime),
                     EndTime = String.Format("{0:dd/MM/yyyy}", item.EndTime),
                     BillTime = String.Format("{0:dd/MM/yyyy}", item.BillTime),
-                    QuantityStudent = item.QuantityStudent,
+                    PassedMark = item.PassedMark,
+                    MaxMark = item.MaxMark,
                     Course = item.Course.Name
                 });
             }
@@ -54,7 +55,8 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                                 StartTime = String.Format("{0:dd/MM/yyyy}", item.StartTime),
                                 EndTime = String.Format("{0:dd/MM/yyyy}", item.EndTime),
                                 BillTime = String.Format("{0:dd/MM/yyyy}", item.BillTime),
-                                QuantityStudent = item.QuantityStudent,
+                                PassedMark = item.PassedMark,
+                                MaxMark = item.MaxMark,
                                 Course = item.Course.Name
                             });
                         }
@@ -70,7 +72,8 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                                 StartTime = String.Format("{0:dd/MM/yyyy}", item.StartTime),
                                 EndTime = String.Format("{0:dd/MM/yyyy}", item.EndTime),
                                 BillTime = String.Format("{0:dd/MM/yyyy}", item.BillTime),
-                                QuantityStudent = item.QuantityStudent,
+                                PassedMark = item.PassedMark,
+                                MaxMark = item.MaxMark,
                                 Course = item.Course.Name
                             });
                         }
@@ -86,7 +89,8 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                                 StartTime = String.Format("{0:dd/MM/yyyy}", item.StartTime),
                                 EndTime = String.Format("{0:dd/MM/yyyy}", item.EndTime),
                                 BillTime = String.Format("{0:dd/MM/yyyy}", item.BillTime),
-                                QuantityStudent = item.QuantityStudent,
+                                PassedMark = item.PassedMark,
+                                MaxMark = item.MaxMark,
                                 Course = item.Course.Name
                             });
                         }
@@ -102,7 +106,8 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                                 StartTime = String.Format("{0:dd/MM/yyyy}", item.StartTime),
                                 EndTime = String.Format("{0:dd/MM/yyyy}", item.EndTime),
                                 BillTime = String.Format("{0:dd/MM/yyyy}", item.BillTime),
-                                QuantityStudent = item.QuantityStudent,
+                                PassedMark = item.PassedMark,
+                                MaxMark = item.MaxMark,
                                 Course = item.Course.Name
                             });
                         }
@@ -118,7 +123,8 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                                 StartTime = String.Format("{0:dd/MM/yyyy}", item.StartTime),
                                 EndTime = String.Format("{0:dd/MM/yyyy}", item.EndTime),
                                 BillTime = String.Format("{0:dd/MM/yyyy}", item.BillTime),
-                                QuantityStudent = item.QuantityStudent,
+                                PassedMark = item.PassedMark,
+                                MaxMark = item.MaxMark,
                                 Course = item.Course.Name
                             });
                         }
@@ -134,23 +140,8 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                                 StartTime = String.Format("{0:dd/MM/yyyy}", item.StartTime),
                                 EndTime = String.Format("{0:dd/MM/yyyy}", item.EndTime),
                                 BillTime = String.Format("{0:dd/MM/yyyy}", item.BillTime),
-                                QuantityStudent = item.QuantityStudent,
-                                Course = item.Course.Name
-                            });
-                        }
-                        break;
-                    case "QuantityStudent":
-                        foreach (var item in db.Admission.Include(x => x.Course).Where(x => x.QuantityStudent.ToString().Contains(key)))
-                        {
-                            admissionModel.Add(new AdmissionViewModel
-                            {
-                                EntityId = item.EntityId,
-                                Name = item.Name,
-                                Price = item.Price,
-                                StartTime = String.Format("{0:dd/MM/yyyy}", item.StartTime),
-                                EndTime = String.Format("{0:dd/MM/yyyy}", item.EndTime),
-                                BillTime = String.Format("{0:dd/MM/yyyy}", item.BillTime),
-                                QuantityStudent = item.QuantityStudent,
+                                PassedMark = item.PassedMark,
+                                MaxMark = item.MaxMark,
                                 Course = item.Course.Name
                             });
                         }
@@ -166,7 +157,8 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                                 StartTime = String.Format("{0:dd/MM/yyyy}", item.StartTime),
                                 EndTime = String.Format("{0:dd/MM/yyyy}", item.EndTime),
                                 BillTime = String.Format("{0:dd/MM/yyyy}", item.BillTime),
-                                QuantityStudent = item.QuantityStudent,
+                                PassedMark = item.PassedMark,
+                                MaxMark = item.MaxMark,
                                 Course = item.Course.Name
                             });
                         }
@@ -334,7 +326,8 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                     currentAdmission.StartTime = a.StartTime;
                     currentAdmission.EndTime = a.EndTime;
                     currentAdmission.BillTime = a.BillTime;
-                    currentAdmission.QuantityStudent = a.QuantityStudent;
+                    currentAdmission.PassedMark = a.PassedMark;
+                    currentAdmission.MaxMark = a.MaxMark;
                     currentAdmission.Price = a.Price;
                     currentAdmission.CourseId = a.CourseId;
                     db.SaveChanges();
