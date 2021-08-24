@@ -134,6 +134,7 @@
     <Compile Include="Areas\Admin\Controllers\Authorize\UserController.cs" />
     <Compile Include="Areas\Admin\Controllers\BranchController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ClassController.cs" />
     <Compile Include="Areas\Admin\Controllers\CoreConfigDataController.cs" />
     <Compile Include="Areas\Admin\Controllers\CourseController.cs" />
     <Compile Include="Areas\Admin\Controllers\FaqController.cs" />
@@ -147,6 +148,7 @@
     <Compile Include="Areas\Admin\Data\Helpers.cs" />
     <Compile Include="Areas\Admin\Data\ViewModel\AdmissionViewModel.cs" />
     <Compile Include="Areas\Admin\Data\ViewModel\ChangePasswordViewModel.cs" />
+    <Compile Include="Areas\Admin\Data\ViewModel\ClassViewModel.cs" />
     <Compile Include="Areas\Admin\Data\ViewModel\CourseViewModel.cs" />
     <Compile Include="Areas\Admin\Data\ViewModel\LoginViewModel.cs" />
     <Compile Include="Areas\Admin\Data\ViewModel\PaidRegisterViewModel.cs" />
@@ -4079,6 +4081,8 @@
     <Content Include="Areas\Admin\Views\Home\ChangePassword.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Home\UserProfile.cshtml" />
+    <Content Include="Areas\Admin\Views\Class\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Class\Index.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />

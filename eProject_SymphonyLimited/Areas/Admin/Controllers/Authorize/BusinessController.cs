@@ -66,27 +66,30 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers.Authorize
             // Lưu vào DB
             foreach (var item in controllers)
             {
-                Business b = new Business();
-                b.EntityId = item.Name;
-                b.Name = item.Name.Replace("Controller", "");
-                if (!db.Business.AsNoTracking().Any(x => x.EntityId.Equals(b.EntityId)))
+                if (!item.Name.Equals("AuthController"))
                 {
-                    db.Business.Add(b);
-                    db.SaveChanges();
-                }
-                // Lấy các Action (Permission) trong controller đó lưu db
-                var acts = Helpers.GetAction(item);
-                foreach (var act in acts)
-                {
-                    Permission p = new Permission();
-                    // ProductController-Index
-                    p.Name = item.Name + "-" + act;
-                    p.Description = act;
-                    p.BusinessId = item.Name;
-                    if (!db.Permission.AsNoTracking().Any(x => x.Name.Equals(p.Name)))
+                    Business b = new Business();
+                    b.EntityId = item.Name;
+                    b.Name = item.Name.Replace("Controller", "");
+                    if (!db.Business.AsNoTracking().Any(x => x.EntityId.Equals(b.EntityId)))
                     {
-                        db.Permission.Add(p);
+                        db.Business.Add(b);
                         db.SaveChanges();
+                    }
+                    // Lấy các Action (Permission) trong controller đó lưu db
+                    var acts = Helpers.GetAction(item);
+                    foreach (var act in acts)
+                    {
+                        Permission p = new Permission();
+                        // ProductController-Index
+                        p.Name = item.Name + "-" + act;
+                        p.Description = act;
+                        p.BusinessId = item.Name;
+                        if (!db.Permission.AsNoTracking().Any(x => x.Name.Equals(p.Name)))
+                        {
+                            db.Permission.Add(p);
+                            db.SaveChanges();
+                        }
                     }
                 }
             }

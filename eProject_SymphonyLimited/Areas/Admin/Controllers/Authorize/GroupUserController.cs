@@ -72,13 +72,13 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers.Authorize
             {
                 db.GroupPermission.Add(new GroupPermission { GroupId = grId, PermissionId = perId });
                 db.SaveChanges();
-                msg = "Gán quyền thành công!";
+                msg = "Successful authorization!";
             }
             else // Gán rồi
             {
                 db.GroupPermission.Remove(groupPermission);
                 db.SaveChanges();
-                msg = "Hủy quyền thành công!";
+                msg = "Cancel permission successfully!";
             }
             return Json(new { msg = msg }, JsonRequestBehavior.AllowGet);
         }
