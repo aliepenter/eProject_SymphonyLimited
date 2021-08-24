@@ -1,5 +1,6 @@
 ﻿using eProject_SymphonyLimited.Areas.Admin.Data.ViewModel;
 using eProject_SymphonyLimited.Models;
+using System;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -87,14 +88,14 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                 {
                     try
                     {
+                        mess.IsBodyHtml = true;
                         smtp.Send(mess);
-                        //TempData["SuccessMessage"] = "Send successful!";
                         return Json(new
                         {
                             StatusCode = 200,
                         }, JsonRequestBehavior.AllowGet);
                     }
-                    catch (System.Exception)
+                    catch (Exception)
                     {
                         return Json(new
                         {

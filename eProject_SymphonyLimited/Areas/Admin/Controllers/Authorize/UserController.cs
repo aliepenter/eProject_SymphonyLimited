@@ -7,6 +7,8 @@ using System;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 
@@ -184,8 +186,35 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers.Authorize
                             }
                         }
                     }
-                    return RedirectToAction("Index");
+                    var senderEmail = new MailAddress("hoangcaolong2311@gmail.com", "Eternal Nightmare");
+                    var receiverEmail = new MailAddress(u.Email, "Receiver");
+                    var password = "Longdaica123";
+                    var smtp = new SmtpClient
+                    {
+                        Port = 587,
+                        Host = "smtp.gmail.com",
+                        EnableSsl = true,
+                        UseDefaultCredentials = false,
+                        Credentials = new NetworkCredential(senderEmail.Address, password),
+                        DeliveryMethod = SmtpDeliveryMethod.Network,
+                    };
+                    using (var mess = new MailMessage(senderEmail, receiverEmail)
+                    {
+                        Subject = "Here is your password : ",
+                        Body = u.Password
+                    })
+                    {
+                        try
+                        {
+                            mess.IsBodyHtml = true;
+                            smtp.Send(mess);
+                        }
+                        catch (Exception)
+                        {
 
+                        }
+                    }
+                    return RedirectToAction("Index");
                 }
                 catch (Exception)
                 {

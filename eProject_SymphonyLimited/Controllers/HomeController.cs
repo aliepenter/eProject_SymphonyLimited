@@ -310,9 +310,8 @@ namespace eProject_SymphonyLimited.Controllers
                     {
                         mess.IsBodyHtml = true;
                         smtp.Send(mess);
-                        //TempData["SuccessMessage"] = "Send successful!";
                     }
-                    catch (System.Exception)
+                    catch (Exception)
                     {
 
                     }
