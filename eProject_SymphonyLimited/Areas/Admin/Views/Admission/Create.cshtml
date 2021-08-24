@@ -29,37 +29,37 @@
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.StartTime, htmlAttributes: new { @class = "control-label" })
+                                @Html.LabelFor(model => model.StartTime, "Start Time", htmlAttributes: new { @class = "control-label" })
                                 @Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.EndTime, htmlAttributes: new { @class = "control-label" })
+                                @Html.LabelFor(model => model.EndTime, "End Time", htmlAttributes: new { @class = "control-label" })
                                 @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.BillTime, htmlAttributes: new { @class = "control-label" })
+                                @Html.LabelFor(model => model.BillTime, "BillTime", htmlAttributes: new { @class = "control-label" })
                                 @Html.EditorFor(model => model.BillTime, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.BillTime, "", new { @class = "text-danger" })
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.PassedMark, htmlAttributes: new { @class = "control-label" })
+                                @Html.LabelFor(model => model.PassedMark, "Passed Mark", htmlAttributes: new { @class = "control-label" })
                                 @Html.EditorFor(model => model.PassedMark, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.PassedMark, "", new { @class = "text-danger" })
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.MaxMark, htmlAttributes: new { @class = "control-label" })
+                                @Html.LabelFor(model => model.MaxMark, "Max Mark", htmlAttributes: new { @class = "control-label" })
                                 @Html.EditorFor(model => model.MaxMark, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.MaxMark, "", new { @class = "text-danger" })
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label" })
+                                @Html.LabelFor(model => model.Price, "Exntrance Exam Price", htmlAttributes: new { @class = "control-label" })
                                 @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
                             </div>

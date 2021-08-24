@@ -25,21 +25,6 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         {
             int pageSize = 5;
             List<AdmissionViewModel> admissionModel = new List<AdmissionViewModel>();
-            foreach (var item in db.Admission.Include(x => x.Course))
-            {
-                admissionModel.Add(new AdmissionViewModel
-                {
-                    EntityId = item.EntityId,
-                    Name = item.Name,
-                    Price = item.Price,
-                    StartTime = String.Format("{0:dd/MM/yyyy}", item.StartTime),
-                    EndTime = String.Format("{0:dd/MM/yyyy}", item.EndTime),
-                    BillTime = String.Format("{0:dd/MM/yyyy}", item.BillTime),
-                    PassedMark = item.PassedMark,
-                    MaxMark = item.MaxMark,
-                    Course = item.Course.Name
-                });
-            }
             if (!String.IsNullOrEmpty(key))
             {
                 switch (type)
@@ -167,6 +152,24 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                         break;
                 }
             }
+            else
+            {
+                foreach (var item in db.Admission.Include(x => x.Course))
+                {
+                    admissionModel.Add(new AdmissionViewModel
+                    {
+                        EntityId = item.EntityId,
+                        Name = item.Name,
+                        Price = item.Price,
+                        StartTime = String.Format("{0:dd/MM/yyyy}", item.StartTime),
+                        EndTime = String.Format("{0:dd/MM/yyyy}", item.EndTime),
+                        BillTime = String.Format("{0:dd/MM/yyyy}", item.BillTime),
+                        PassedMark = item.PassedMark,
+                        MaxMark = item.MaxMark,
+                        Course = item.Course.Name
+                    });
+                }
+            }
             decimal totalPages = Math.Ceiling((decimal)admissionModel.Count() / pageSize);
             string jsonData = JsonConvert.SerializeObject(admissionModel.Skip((page - 1) * pageSize).Take(pageSize));
             return Json(new
@@ -195,7 +198,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         {
             var validateName = db.Admission.FirstOrDefault(x => x.Name == a.Name);
             var admission = db.Admission.Where(x => x.CourseId == a.CourseId).AsEnumerable();
-            if (a.BillTime < a.EndTime)
+            if (a.BillTime <= a.EndTime)
             {
                 ModelState.AddModelError("BillTime", "Bill time must bigger than end time!");
             }
@@ -214,6 +217,10 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
             if (validateName != null)
             {
                 ModelState.AddModelError("Name", "Admission name can't be the same!");
+            }
+            if (a.MaxMark < a.PassedMark)
+            {
+                ModelState.AddModelError("PassedMark", "Passed mark must smaller than max mark!");
             }
             foreach (var item in admission)
             {
@@ -278,7 +285,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
             var currentAdmission = db.Admission.Find(a.EntityId);
             var admission = db.Admission.Where(x => x.EntityId != currentAdmission.EntityId && x.CourseId == a.CourseId).AsEnumerable();
             var validateName = db.Admission.FirstOrDefault(x => x.Name != currentAdmission.Name && x.Name == a.Name);
-            if (a.BillTime < a.EndTime)
+            if (a.BillTime <= a.EndTime)
             {
                 ModelState.AddModelError("BillTime", "Bill time must bigger than end time!");
             }
@@ -296,8 +303,11 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
             }
             if (validateName != null)
             {
-
                 ModelState.AddModelError("Name", "Admission name can't be the same!");
+            }
+            if (a.MaxMark < a.PassedMark)
+            {
+                ModelState.AddModelError("PassedMark", "Passed mark must smaller than max mark!");
             }
             foreach (var item in admission)
             {

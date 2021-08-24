@@ -50,7 +50,8 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                    CreatedAt = re.reg.CreatedAt,
                    AdmissionId = re.reg.AdmissionId,
                    Admission = re.ad.Name,
-                   Tested = pr.Tested
+                   Tested = pr.Tested,
+                   Passed = pr.Passed
                }).Where(x => x.AdmissionId == admissionId).AsEnumerable();
             if (!String.IsNullOrEmpty(key))
             {
@@ -84,7 +85,8 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                    CreatedAt = re.reg.CreatedAt,
                    AdmissionId = re.reg.AdmissionId,
                    Admission = re.ad.Name,
-                   Tested = pr.Tested
+                   Tested = pr.Tested,
+                   Passed = pr.Passed
                }).Where(x => x.EntityId.ToString().Contains(key) && x.AdmissionId == admissionId).AsEnumerable();
                         break;
                     case "Name":
@@ -115,7 +117,8 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                   CreatedAt = re.reg.CreatedAt,
                   AdmissionId = re.reg.AdmissionId,
                   Admission = re.ad.Name,
-                  Tested = pr.Tested
+                  Tested = pr.Tested,
+                  Passed = pr.Passed
               }).Where(x => x.Name.Contains(key) && x.AdmissionId == admissionId).AsEnumerable();
                         break;
                     case "Phone":
@@ -146,7 +149,8 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                    CreatedAt = re.reg.CreatedAt,
                    AdmissionId = re.reg.AdmissionId,
                    Admission = re.ad.Name,
-                   Tested = pr.Tested
+                   Tested = pr.Tested,
+                   Passed = pr.Passed
                }).Where(x => x.Phone.Contains(key) && x.AdmissionId == admissionId).AsEnumerable();
                         break;
                     case "Email":
@@ -177,7 +181,8 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                    CreatedAt = re.reg.CreatedAt,
                    AdmissionId = re.reg.AdmissionId,
                    Admission = re.ad.Name,
-                   Tested = pr.Tested
+                   Tested = pr.Tested,
+                   Passed = pr.Passed
                }).Where(x => x.Email.Contains(key) && x.AdmissionId == admissionId).AsEnumerable();
                         break;
                     case "Status":
@@ -208,7 +213,8 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                    CreatedAt = re.reg.CreatedAt,
                    AdmissionId = re.reg.AdmissionId,
                    Admission = re.ad.Name,
-                   Tested = pr.Tested
+                   Tested = pr.Tested,
+                   Passed = pr.Passed
                }).Where(x => x.Status.ToString().Contains(key) && x.AdmissionId == admissionId).AsEnumerable();
                         break;
                     case "RollNumber":
@@ -239,7 +245,8 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                      CreatedAt = re.reg.CreatedAt,
                      AdmissionId = re.reg.AdmissionId,
                      Admission = re.ad.Name,
-                     Tested = pr.Tested
+                     Tested = pr.Tested,
+                     Passed = pr.Passed
                  }).Where(x => x.RollNumber.Contains(key) && x.AdmissionId == admissionId).AsEnumerable();
                         break;
                     case "Admission":
@@ -270,7 +277,8 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                    CreatedAt = re.reg.CreatedAt,
                    AdmissionId = re.reg.AdmissionId,
                    Admission = re.ad.Name,
-                   Tested = pr.Tested
+                   Tested = pr.Tested,
+                   Passed = pr.Passed
                }).Where(x => x.Admission.Contains(key) && x.AdmissionId == admissionId).AsEnumerable();
                         break;
                     default:
@@ -319,7 +327,8 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                    AdmissionId = re.reg.AdmissionId,
                    EndTime = re.ad.EndTime,
                    Admission = re.ad.Name,
-                   Tested = pr.Tested
+                   Tested = pr.Tested,
+                   Passed = pr.Passed
                }).FirstOrDefault(x => x.EntityId == prId);
             string jsonData = JsonConvert.SerializeObject(prById);
             if (prById != null)
@@ -387,7 +396,8 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                    AdmissionId = re.reg.AdmissionId,
                    EndTime = re.ad.EndTime,
                    Admission = re.ad.Name,
-                   Tested = pr.Tested
+                   Tested = pr.Tested,
+                   Passed = pr.Passed
                }).FirstOrDefault(x => x.EntityId == prId);
             if (prById != null)
             {
