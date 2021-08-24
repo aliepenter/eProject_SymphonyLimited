@@ -21,6 +21,7 @@ namespace eProject_SymphonyLimited.Models
         public string Time { get; set; }
 
         [Display(Name = "Description")]
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
         [Display(Name = "Price")]

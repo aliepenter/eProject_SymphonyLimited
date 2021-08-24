@@ -12,6 +12,7 @@ namespace eProject_SymphonyLimited.Models.Authorize
         [Key]
         public int EntityId { get; set; }
         public string Name { get; set; }
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
         public string BusinessId { get; set; }
 

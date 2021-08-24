@@ -15,6 +15,7 @@ namespace eProject_SymphonyLimited.Models
         public string Question { get; set; }
 
         [Required(ErrorMessage = "Please enter answer!")]
+        [DataType(DataType.MultilineText)]
         public string Answer { get; set; }
     }
 }
