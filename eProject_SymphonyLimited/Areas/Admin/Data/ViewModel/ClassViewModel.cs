@@ -11,7 +11,6 @@ namespace eProject_SymphonyLimited.Areas.Admin.Data.ViewModel
         public int EntityId { get; set; }
         public string Name { get; set; }
         public int QuantityStudent { get; set; }
-        public bool Status { get; set; }
         public int AdmissionId { get; set; }
         public string AdmissionName { get; set; }
 
@@ -25,7 +24,6 @@ namespace eProject_SymphonyLimited.Areas.Admin.Data.ViewModel
             EntityId = c.EntityId;
             Name = c.Name;
             QuantityStudent = c.QuantityStudent;
-            Status = c.Status;
             AdmissionId = c.AdmissionId;
             AdmissionName = c.Admission.Name;
         }

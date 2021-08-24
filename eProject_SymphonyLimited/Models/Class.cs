@@ -16,8 +16,6 @@ namespace eProject_SymphonyLimited.Models
 
         public int QuantityStudent { get; set; }
 
-        public bool Status { get; set; }
-
         public int AdmissionId { get; set; }
 
         [ForeignKey("AdmissionId")]

@@ -38,21 +38,15 @@
                     url: baseUrl + "Admin/Class/Get",
                     data: { page: page, type: type, key: key },
                     success: function (res) {
-                        var _html = ' <thead class="thead-dark"><tr><th>Entity Id</th><th>Name</th><th>Quantity Student</th><th>Status</th><th>Admission Name</th><th>Action</th></tr></thead>';
+                        var _html = ' <thead class="thead-dark"><tr><th>Entity Id</th><th>Name</th><th>Quantity Student</th><th>Admission Name</th><th>Action</th></tr></thead>';
                         for (var item of JSON.parse(res.Data)) {
-                            if (item.Status == true) {
-                                var status = '<span class="bg-success text-white rounded p-1">Active</span>';
-                            } else {
-                                var status = '<span class="bg-danger text-white rounded p-1">Inactive</span>';
-                            }
                             _html += '<tbody><tr>' +
                                 '<td>' + item.EntityId + '</td>' +
                                 '<td>' + item.Name + '</td>' +
                                 '<td>' + item.QuantityStudent + '</td>' +
-                                '<td>' + status + '</td>' +
                                 '<td>' + item.AdmissionName + '</td>' +
                                 '<td>' +
-                                '<button class="btn btn-warning btn-edit mr-1 mb-1" data-id="' + item.EntityId + '"><i class="fas fa-edit"></i> Edit</button>' +
+                                '<button class="btn btn-warning btn-addStudent mr-1 mb-1" data-id="' + item.EntityId + '"><i class="fas fa-edit"></i> Add Student</button>' +
                                 '</td>'
                                 + '</tr></tbody>';
                         }
@@ -73,9 +67,9 @@
 
         $(function () {
             manager.load();
-            $(document).on("click", ".btn-edit", function () {
+            $(document).on("click", ".btn-addStudent", function () {
                 var id = $(this).data("id");
-                window.location.href = baseUrl + "Admin/Class/Edit/" + id;
+                window.location.href = baseUrl + "Admin/Class/AddStudent/" + id;
             });
             $(document).on("click", ".item_page", function () {
                 var page = $(this).text(),

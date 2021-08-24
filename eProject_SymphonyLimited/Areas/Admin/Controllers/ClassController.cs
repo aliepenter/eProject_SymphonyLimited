@@ -65,7 +65,6 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                     try
                     {
                         c.QuantityStudent = 0;
-                        c.Status = false;
                         db.Class.Add(c);
                         db.SaveChanges();
                         return RedirectToAction("Index");
@@ -83,7 +82,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
             return View();
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult AddStudent(int id)
         {
             var _class = db.Class.Find(id);
             if (_class != null)
@@ -94,7 +93,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Class c)
+        public ActionResult AddStudent(Class c)
         {
             if (ModelState.IsValid)
             {

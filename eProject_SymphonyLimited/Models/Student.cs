@@ -13,6 +13,8 @@ namespace eProject_SymphonyLimited.Models
 
         public int RegisterInfoId { get; set; }
 
+        public bool Status { get; set; }
+
         public int ClassId { get; set; }
     }
 }
