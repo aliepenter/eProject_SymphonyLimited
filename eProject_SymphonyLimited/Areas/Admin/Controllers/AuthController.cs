@@ -67,7 +67,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
             var findUser = db.User.FirstOrDefault(x => x.Email == Email);
             if (findUser != null)
             {
-                var link = "Click here to reset your password => " + Request.Url.Scheme + "://" + Request.Url.Authority + @Url.Action("ResetPassword", "Auth", new { id = findUser.EntityId });
+                var link =Request.Url.Scheme + "://" + Request.Url.Authority + @Url.Action("ResetPassword", "Auth", new { id = findUser.EntityId });
                 var senderEmail = new MailAddress("hoangcaolong2311@gmail.com", "Eternal Nightmare");
                 var receiverEmail = new MailAddress(Email, "Receiver");
                 var password = "Longdaica123";
@@ -82,8 +82,17 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                 };
                 using (var mess = new MailMessage(senderEmail, receiverEmail)
                 {
-                    Subject = "Confirm to reset password",
-                    Body = link
+                    Subject = "Symphony Limited",
+                    Body = "<div style=\"background: #fff; margin: 0 auto; width: 300px;    width: 500px; " +
+                    "padding: 20px; border: 1px solid red;\">" +
+                                "<div  style= \" text-align: left\">" +
+                                    "<h1>Dear: " + findUser.FullName + ",</h1>" +
+                                    "<span>To change your password now, please click on the following link:<br/> " +link+ " <br/>" +
+                                    "<span>Thank you,<br/></span>" +
+                                    "<span style = \"font-weight: bold\">Symphony Limited</span>" +
+                                "</div>" +
+                            "</div>"
+                    
                 })
                 {
                     try

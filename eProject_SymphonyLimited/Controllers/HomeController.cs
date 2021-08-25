@@ -23,7 +23,30 @@ namespace eProject_SymphonyLimited.Controllers
             var admission = db.Admission.AsEnumerable();
             ViewBag.admission = admission;
             var teacher = db.Teacher.AsEnumerable();
-            ViewBag.admissionList = db.Admission.ToList();
+            var adms = db.Admission.Join(db.Course,
+               ad => ad.CourseId,
+               co => co.EntityId,
+               (ad, co) => new
+               AdmsViewModel
+               {
+                   EntityId = ad.EntityId,
+                   Name = ad.Name,
+                   Price = ad.Price,
+                   StartTime = ad.StartTime,
+                   EndTime = ad.EndTime,
+                   BillTime = ad.BillTime,
+                   CourseId = ad.CourseId,
+                   Course = co.Image
+               }).Where(x => x.StartTime <= DateTime.Now && x.EndTime >= DateTime.Now).ToList();
+            if (adms.Count() > 0)
+            {
+                ViewBag.admissionList = adms;
+            }
+            else
+            {
+                ViewBag.admissionList = null;
+            }
+            ViewBag.Admss = db.Admission.Where(x => x.EndTime < DateTime.Now).AsEnumerable();
             ViewBag.teacher = teacher;
             ViewBag.phoneInFooter = db.CoreConfigData.FirstOrDefault(x => x.Code == "phone_in_footer");
             ViewBag.emailInFooter = db.CoreConfigData.FirstOrDefault(x => x.Code == "email_in_footer");
@@ -56,30 +79,29 @@ namespace eProject_SymphonyLimited.Controllers
         }
         public ActionResult EntranceExam()
         {
-            //var adms = db.Admission.Join(db.Course,
-            //   ad => ad.CourseId,
-            //   co => co.EntityId,
-            //   (ad, co) => new
-            //   AdmissionViewModel
-            //   {
-            //       EntityId = ad.EntityId,
-            //       Name = ad.Name,
-            //       Price = ad.Price,
-            //       StartTime = ad.StartTime,
-            //       EndTime = ad.EndTime,
-            //       BillTime = ad.BillTime,
-            //       QuantityStudent = ad.QuantityStudent,
-            //       CourseId = ad.CourseId,
-            //       Course = co.Image
-            //   }).Where(x=> x.StartTime <= DateTime.Now && x.EndTime>=DateTime.Now).AsEnumerable();
-            //if (adms.Count() > 0)
-            //{
-            //    ViewBag.Adms = adms;
-            //}
-            //else
-            //{
-            //    ViewBag.Adms = null;
-            //}
+            var adms = db.Admission.Join(db.Course,
+               ad => ad.CourseId,
+               co => co.EntityId,
+               (ad, co) => new
+               AdmsViewModel
+               {
+                   EntityId = ad.EntityId,
+                   Name = ad.Name,
+                   Price = ad.Price,
+                   StartTime = ad.StartTime,
+                   EndTime = ad.EndTime,
+                   BillTime = ad.BillTime,
+                   CourseId = ad.CourseId,
+                   Course = co.Image
+               }).Where(x => x.StartTime <= DateTime.Now && x.EndTime >= DateTime.Now).AsEnumerable();
+            if (adms.Count() > 0)
+            {
+                ViewBag.Adms = adms;
+            }
+            else
+            {
+                ViewBag.Adms = null;
+            }
             return View();
 
         }
@@ -286,6 +308,7 @@ namespace eProject_SymphonyLimited.Controllers
             var findUser = db.RegisterInfo.FirstOrDefault(x => x.Email == f.Email);
             if (findUser != null)
             {
+
                 var senderEmail = new MailAddress("hoangcaolong2311@gmail.com", "Eternal Nightmare");
                 var receiverEmail = new MailAddress(f.Email, "Receiver");
                 var password = "Longdaica123";
@@ -298,11 +321,23 @@ namespace eProject_SymphonyLimited.Controllers
                     Credentials = new NetworkCredential(senderEmail.Address, password),
                     DeliveryMethod = SmtpDeliveryMethod.Network,
                 };
+                var emailAdms = db.Admission.FirstOrDefault(x => x.EntityId == f.AdmissionId);
                 using (var mess = new MailMessage(senderEmail, receiverEmail)
                 {
 
                     Subject = "Symphony Limited",
-                    Body = "<span style='color:red'>helo</span>"
+                    Body = "<div style=\"background: #fff; margin: 0 auto; width: 300px;    width: 500px; " +
+                    "padding: 20px; border: 1px solid red;\">" +
+                                "<div  style= \" text-align: left\">" +
+                                    "<h1>Welcome " + f.Name + ",</h1>" +
+                                    "<span>You have just registered for <span style=\"font-weight: bold; font-size: 16px\">" + emailAdms.Name + "</span>. <br/>" +
+                                    "<span>The entrance examination fees is <span style=\"font-weight: bold; font-size: 16px\">" + emailAdms.Price + " $</span></span><br/>" +
+                                    "Please go to the nearest Symphony Limited center to process the " +
+                                    "payment before <span style=\"font-weight: bold; font-size: 16px\">" + emailAdms.EndTime + "</span> to participate in the entrance exam.<br/></ span>" +
+                                    "<span>Thank you,<br/></span>" +
+                                    "<span style = \"font-weight: bold\">Symphony Limited</span>" +
+                                "</div>" +
+                            "</div>"
                 })
 
                 {
@@ -319,7 +354,7 @@ namespace eProject_SymphonyLimited.Controllers
             }
             else
             {
-
+                
             }
             return RedirectToAction("Index");
         }
@@ -338,29 +373,53 @@ namespace eProject_SymphonyLimited.Controllers
 
         public ActionResult AdmissionDetail()
         {
-            //var id = RouteData.Values["id"];
-            //if (id != null)
-            //{
-            //    bool isInt = Int32.TryParse(id.ToString(), out int entityId);
-            //    var admById = db.Admission.FirstOrDefault(x => x.EntityId == entityId);
-            //    ViewBag.admById = db.Admission.Join(db.Course,
-            //   ad => ad.CourseId,
-            //   co => co.EntityId,
-            //   (ad, co) => new
-            //   AdmissionViewModel
-            //   {
-            //       EntityId = ad.EntityId,
-            //       Name = ad.Name,
-            //       Price = ad.Price,
-            //       StartTime = ad.StartTime,
-            //       EndTime = ad.EndTime,
-            //       BillTime = ad.BillTime,
-            //       QuantityStudent = ad.QuantityStudent,
-            //       CourseId = ad.CourseId,
-            //       Image = co.Image,
-            //       Course = co.Name
-            //   }).FirstOrDefault(x => x.EntityId == entityId);
-            //}
+            var id = RouteData.Values["id"];
+            if (id != null)
+            {
+                bool isInt = Int32.TryParse(id.ToString(), out int entityId);
+                var admById = db.Admission.FirstOrDefault(x => x.EntityId == entityId);
+                ViewBag.admById = db.Admission.Join(db.Course,
+               ad => ad.CourseId,
+               co => co.EntityId,
+               (ad, co) => new
+               AdmsViewModel
+               {
+                   EntityId = ad.EntityId,
+                   Name = ad.Name,
+                   Price = ad.Price,
+                   StartTime = ad.StartTime,
+                   EndTime = ad.EndTime,
+                   BillTime = ad.BillTime,
+                   MaxMark = ad.MaxMark,
+                   PassedMark = ad.PassedMark,
+                   CourseId = ad.CourseId,
+                   Image = co.Image,
+                   Course = co.Name
+               }).FirstOrDefault(x => x.EntityId == entityId);
+            }
+            var adms = db.Admission.Join(db.Course,
+               ad => ad.CourseId,
+               co => co.EntityId,
+               (ad, co) => new
+               AdmsViewModel
+               {
+                   EntityId = ad.EntityId,
+                   Name = ad.Name,
+                   Price = ad.Price,
+                   StartTime = ad.StartTime,
+                   EndTime = ad.EndTime,
+                   BillTime = ad.BillTime,
+                   CourseId = ad.CourseId,
+                   Course = co.Image
+               }).Where(x => x.StartTime <= DateTime.Now && x.EndTime >= DateTime.Now).AsEnumerable();
+            if (adms.Count() > 0)
+            {
+                ViewBag.Adms = adms;
+            }
+            else
+            {
+                ViewBag.Adms = null;
+            }
             return View();
         }
         public ActionResult CourseDetail()

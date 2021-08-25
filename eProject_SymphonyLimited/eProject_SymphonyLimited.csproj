@@ -147,6 +147,7 @@
     <Compile Include="Areas\Admin\Data\CustomizeAuthorizeAttribute.cs" />
     <Compile Include="Areas\Admin\Data\Helpers.cs" />
     <Compile Include="Areas\Admin\Data\ViewModel\AdmissionViewModel.cs" />
+    <Compile Include="Areas\Admin\Data\ViewModel\AdmsViewModel.cs" />
     <Compile Include="Areas\Admin\Data\ViewModel\ChangePasswordViewModel.cs" />
     <Compile Include="Areas\Admin\Data\ViewModel\ClassViewModel.cs" />
     <Compile Include="Areas\Admin\Data\ViewModel\CourseViewModel.cs" />

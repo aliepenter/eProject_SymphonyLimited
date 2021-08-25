@@ -200,8 +200,17 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers.Authorize
                     };
                     using (var mess = new MailMessage(senderEmail, receiverEmail)
                     {
-                        Subject = "Here is your password : ",
-                        Body = u.Password
+                        Subject = "Symphony Limited ",
+                        Body = "<div style=\"background: #fff; margin: 0 auto; width: 300px;    width: 500px; " +
+                    "padding: 20px; border: 1px solid red;\">" +
+                                "<div  style= \" text-align: left\">" +
+                                    "<h1>Dear: " +u.FullName+ ",</h1>" +
+                                    "<span>Your password is: <span style=\"font-weight: bold; font-size: 16px; color: red\">" + u.Password + " <br/></span>" +
+                                    "<span>Thank you,<br/></span>" +
+                                    "<span style = \"font-weight: bold\">Symphony Limited</span>" +
+                                "</div>" +
+                            "</div>"
+
                     })
                     {
                         try

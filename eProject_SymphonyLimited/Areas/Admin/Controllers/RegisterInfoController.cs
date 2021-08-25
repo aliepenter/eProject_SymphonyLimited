@@ -5,6 +5,8 @@ using Newtonsoft.Json;
 using System;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Web.Mvc;
 
 namespace eProject_SymphonyLimited.Areas.Admin.Controllers
@@ -177,6 +179,8 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
             {
                 try
                 {
+                    var adId = db.RegisterInfo.FirstOrDefault(x => x.EntityId == r.EntityId);
+                    var e = db.Admission.FirstOrDefault(x => x.EntityId == adId.AdmissionId);
                     var reById = db.RegisterInfo.FirstOrDefault(x => x.EntityId == r.EntityId);
                     if (reById != null)
                     {
@@ -198,8 +202,46 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                                 addPaidRegister.RegisterInfoId = r.EntityId;
                                 db.PaidRegister.Add(addPaidRegister);
                                 db.SaveChanges();
-                            }
+                                var senderEmail = new MailAddress("hoangcaolong2311@gmail.com", "Eternal Nightmare");
+                                var receiverEmail = new MailAddress(r.Email, "Receiver");
+                                var password = "Longdaica123";
+                                var smtp = new SmtpClient
+                                {
+                                    Port = 587,
+                                    Host = "smtp.gmail.com",
+                                    EnableSsl = true,
+                                    UseDefaultCredentials = false,
+                                    Credentials = new NetworkCredential(senderEmail.Address, password),
+                                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                                };
+                                using (var mess = new MailMessage(senderEmail, receiverEmail)
+                                {
 
+                                    Subject = "Symphony Limited",
+                                    Body = "<div style=\"background: #fff; margin: 0 auto; width: 300px;    width: 500px; " +
+                                    "padding: 20px; border: 1px solid red;\">" +
+                                                "<div  style= \" text-align: left\">" +
+                                                    "<h1>Dear: " + r.Name + "</h1>" +
+                                                    "<span>You have paid for <span style=\"font-weight: bole; font-size: 20px\">" + e.Name + "</span>'s Entrance Examination. " +
+                                                    "Your roll number is <span style=\"font-weight: bole; font-size: 20px\">" + addPaidRegister.RollNumber + "</span>.</ span>" +
+                                                    "The exam will start on <span style=\"font-weight: bole; font-size: 20px\">" + e.EndTime + "</span>.<br/></ span>" +
+                                                    "<span>Good luck with your exam!<br/></span>" +
+                                                    "<span>Thank you,<br/></span>" +
+                                                    "<span style = \"font-weight: bold\">Symphony Limited</span>" +
+                                                "</div>" +
+                                            "</div>"
+                                })
+                                    try
+                                    {
+                                        mess.IsBodyHtml = true;
+                                        smtp.Send(mess);
+                                    }
+                                    catch (Exception)
+                                    {
+
+                                    }
+                            }
+                            
                             return RedirectToAction("Index");
                         }
                     }

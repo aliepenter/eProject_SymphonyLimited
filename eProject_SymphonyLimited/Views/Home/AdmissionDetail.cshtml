@@ -17,7 +17,7 @@
                 </span>
             </div>
             <ul>
-                @{ foreach (var item in ViewBag.admission)
+                @{ foreach (var item in ViewBag.Adms)
                     {
                         <li id="">
                             <a class="defaultMenu" href="~/Home/AdmissionDetail/@item.EntityId">@item.Name</a>
@@ -35,7 +35,7 @@
                 </div>
                 <div class="menu">
                     <ul>
-                        @{ foreach (var item in ViewBag.admission)
+                        @{ foreach (var item in ViewBag.Adms)
                             {
                                 <li id="">
                                     <a class="defaultMenu" href="~/Home/AdmissionDetail/@item.EntityId">@item.Name</a>
@@ -58,20 +58,20 @@
                     <div class="content">
                         <div class="time flex">
                             <div class="st">
-                                <span><span class="csSpan">Start Time: </span>@ViewBag.admById.StartTime</span>
+                                <span class="csSpan">Start: </span><span id="start-time"></span>
                             </div>
                             <div class="et">
-                                <span><span class="csSpan">End Time: </span>@ViewBag.admById.EndTime</span>
+                                <span class="csSpan">End: </span><span id="end-time"></span>
                             </div>
                         </div>
-                        <div class="stQuantity cusItem">
-                            <span><span class="csSpan">Admissions criteria: </span>@ViewBag.admById.QuantityStudent</span>
-                        </div>
                         <div class="eePrice cusItem">
-                            <span><span class="csSpan">Entrance Exam Fees: </span>@ViewBag.admById.Price</span>
+                            <span><span class="csSpan">Entrance Exam Fees: </span>$ @ViewBag.admById.Price</span>
                         </div>
                         <div class="markPass cusItem">
-                            <span><span class="csSpan">Entry Point: </span>Điểm đầu vào</span>
+                            <span><span class="csSpan">Entry Points: </span>@ViewBag.admById.PassedMark / @ViewBag.admById.MaxMark</span>
+                        </div>
+                        <div class="markPass cusItem">
+                            <span><span class="csSpan">Maxium Points: </span>@ViewBag.admById.MaxMark</span>
                         </div>
                         <div class="course cusItem">
                             <span><span class="csSpan">Course: </span>@ViewBag.admById.Course</span>
@@ -111,11 +111,17 @@
                             <button type="submit" id="submitForm">Send</button>
                         </div>
                     </div>
-
                 }
             </div>
         </div>
     </div>
 </div>
-
+<script>
+    var et = '@ViewBag.admById.EndTime';
+    et = et.split(' ')[0];
+    document.getElementById("end-time").innerHTML = et;
+    var st = '@ViewBag.admById.StartTime';
+    st = st.split(' ')[0];
+    document.getElementById("start-time").innerHTML = st;
+</script>
 

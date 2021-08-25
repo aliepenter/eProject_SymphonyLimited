@@ -22,13 +22,13 @@
                                         <span>@item.Name</span>
                                     </div>
                                     <div class="rd" style="border: 1px solid #e5e5e5; border-top: none;border-bottom: none">
-                                        <span>End: <span class="time">@item.EndTime</span></span>
+                                        <span>End: <span class="time" id="et">@item.EndTime</span></span>
                                     </div>
                                     <div class="moreInfor ">
                                         <div class="containerMoreInfor flex">
                                             <div class="admissionCriteria width80">
                                                 <span>
-                                                    <i class="fas fa-users"></i> @item.QuantityStudent
+                                                    <i class="fas fa-users"></i> 
                                                 </span>
                                             </div>
                                             <div class="price width20">
@@ -77,21 +77,21 @@
                             <select id="limiter" class="limiter-options" style="padding: 4px">
                                 @if (ViewBag.Limiter == 24)
                                 {
+                                    <option value="06">6</option>
                                     <option value="12">12</option>
                                     <option value="24" selected>24</option>
-                                    <option value="36">36</option>
                                 }
-                                else if (ViewBag.Limiter == 36)
+                                else if (ViewBag.Limiter == 6)
                                 {
+                                    <option value="06" selected>6</option>
                                     <option value="12">12</option>
                                     <option value="24">24</option>
-                                    <option value="36" selected>36</option>
                                 }
                                 else
                                 {
+                                    <option value="06">6</option>
                                     <option value="12" selected>12</option>
                                     <option value="24">24</option>
-                                    <option value="36">36</option>
                                 }
                             </select>
                         </div>
@@ -103,3 +103,8 @@
         </div>
     </div>
 </div>
+<script>
+    @*var et = '@ViewBag.admById.EndTime';
+    et = et.split(' ')[0];
+    document.getElementById("end-time").innerHTML = et;*@
+</script>

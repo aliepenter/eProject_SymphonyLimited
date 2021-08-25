@@ -1498,6 +1498,7 @@ table, th, td {
     list-style: none;
     padding: 15px 0px 15px 35px;
     border-bottom: 2px solid #efefef;
+    line-height: 2
 }
 .mainExamResult .cusErrorResult{
     font-size: 20px;

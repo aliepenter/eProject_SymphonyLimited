@@ -30,6 +30,24 @@
                         </div>
                     </div>
                 </div>
+                <div class="admsDropdown disNone" id="admsDropdown">
+                    <div class="flex">
+                        <div class="labelSearch">
+                            <span>Admission</span>
+                        </div>
+                        <div class="form-row">
+                            <select style="padding: 6px">
+                                @{
+                                    foreach (var item in ViewBag.Admss)
+                                    {
+                                        <option value="value">@item.Name</option>
+                                    }
+                                }
+                            </select>
+                            <button style="padding: 6px; width: 40px"><i class="fa fa-search" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="resultCheck" id="resultCheck">
@@ -49,7 +67,7 @@
             {
                 if (ViewBag.Result != null)
                 {
-                    <div class="resultAll" id="resultAll">
+                    <div class="resultAll" id="resultByRollNum">
                         <div class="tableCheckResult">
                             <table style="width: 90%;margin: 0 auto">
                                 <tr>
@@ -110,6 +128,9 @@
         $("#resultAll").addClass("disNone");
         $("#tableCheckResult").removeClass("disNone");
         $("#search").removeClass("disNone");
+        $("#resultByRollNum").removeClass("disNone");
+        $("#resultCheck").removeClass("disNone");
+        $("#admsDropdown").addClass("disNone");
     });
     $("#allResult").click(function () {
         $("#checkResult").removeClass("cateActive");
@@ -118,6 +139,7 @@
         $("#tableCheckResult").addClass("disNone");
         $("#search").addClass("disNone");
         $("#resultCheck").addClass("disNone");
+        $("#admsDropdown").removeClass("disNone");
 
     });
 </script>
