@@ -21,16 +21,46 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         public ActionResult Get(int page = 1, string type = null, string key = null)
         {
             int pageSize = 5;
-            var classes = db.Class.AsEnumerable().Select(x => new ClassViewModel(x));
+            var classes = db.Class.Join(db.Admission,
+                    c => c.AdmissionId,
+                    a => a.EntityId,
+                    (c, a) => new ClassViewModel
+                    {
+                        EntityId = c.EntityId,
+                        Name = c.Name,
+                        QuantityStudent = c.QuantityStudent,
+                        AdmissionId = a.EntityId,
+                        AdmissionName = a.Name
+                    }).AsEnumerable();
             if (!String.IsNullOrEmpty(type) && !String.IsNullOrEmpty(key))
             {
                 switch (type)
                 {
                     case "Name":
-                        classes = db.Class.AsEnumerable().Select(x => new ClassViewModel(x)).Where(x => x.Name.Contains(key));
+                        classes = db.Class.Join(db.Admission,
+                                c => c.AdmissionId,
+                                a => a.EntityId,
+                                (c, a) => new ClassViewModel
+                                {
+                                    EntityId = c.EntityId,
+                                    Name = c.Name,
+                                    QuantityStudent = c.QuantityStudent,
+                                    AdmissionId = a.EntityId,
+                                    AdmissionName = a.Name
+                                }).Where(x => x.Name.Contains(key)).AsEnumerable();
                         break;
                     case "AdmissionName":
-                        classes = db.Class.AsEnumerable().Select(x => new ClassViewModel(x)).Where(x => x.AdmissionName.Contains(key));
+                        classes = db.Class.Join(db.Admission,
+                                c => c.AdmissionId,
+                                a => a.EntityId,
+                                (c, a) => new ClassViewModel
+                                {
+                                    EntityId = c.EntityId,
+                                    Name = c.Name,
+                                    QuantityStudent = c.QuantityStudent,
+                                    AdmissionId = a.EntityId,
+                                    AdmissionName = a.Name
+                                }).Where(x => x.AdmissionName.Contains(key)).AsEnumerable();
                         break;
                     default:
                         break;

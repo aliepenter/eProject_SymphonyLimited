@@ -36,6 +36,10 @@
                     </ul>
                 </div>
             </div>
+            @if (ViewBag.ParentHref != null)
+            {
+                <a href="/Home/Course/@ViewBag.ParentHref">Back</a>
+            }
         </div>
         <div class="right">
             <div class="toolbar-sorter sorter">

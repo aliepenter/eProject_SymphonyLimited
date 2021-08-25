@@ -1,5 +1,6 @@
 ﻿using eProject_SymphonyLimited.Areas.Admin.Data.ViewModel;
 using eProject_SymphonyLimited.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,7 +47,6 @@ namespace eProject_SymphonyLimited.Controllers
             {
                 ViewBag.admissionList = null;
             }
-            ViewBag.Admss = db.Admission.Where(x => x.EndTime < DateTime.Now).AsEnumerable();
             ViewBag.teacher = teacher;
             ViewBag.phoneInFooter = db.CoreConfigData.FirstOrDefault(x => x.Code == "phone_in_footer");
             ViewBag.emailInFooter = db.CoreConfigData.FirstOrDefault(x => x.Code == "email_in_footer");
@@ -192,6 +192,14 @@ namespace eProject_SymphonyLimited.Controllers
                 var categoryById = db.Category.FirstOrDefault(x => x.EntityId == entityId);
                 if (categoryById != null)
                 {
+                    if (categoryById.ParentId == 1)
+                    {
+                        ViewBag.ParentHref = "";
+                    }
+                    else
+                    {
+                        ViewBag.ParentHref = categoryById.ParentId;
+                    }
                     ViewBag.TotalPages = Math.Ceiling((decimal)db.Course.Where(x => x.CategoryId == entityId).AsEnumerable().Count() / limiter);
                     if (ViewBag.TotalPages == 1)
                     {
@@ -354,7 +362,7 @@ namespace eProject_SymphonyLimited.Controllers
             }
             else
             {
-                
+
             }
             return RedirectToAction("Index");
         }
@@ -429,22 +437,32 @@ namespace eProject_SymphonyLimited.Controllers
             {
                 bool isInt = Int32.TryParse(id.ToString(), out int entityId);
                 var courseById = db.Course.FirstOrDefault(x => x.EntityId == entityId);
+                var admission = db.Admission.FirstOrDefault(x => x.CourseId == entityId && x.StartTime < DateTime.Now && x.EndTime > DateTime.Now);
+                if (admission != null)
+                {
+                    ViewBag.HasAdmission = true;
+                    ViewBag.AdmissionId = admission.EntityId;
+                }
+                else
+                {
+                    ViewBag.HasAdmission = false;
+                }
                 ViewBag.Courses = db.Course.Join(db.Category,
-               co => co.CategoryId,
-               ca => ca.EntityId,
-               (co, ca) => new
-               CourseViewModel
-               {
-                   EntityId = co.EntityId,
-                   Name = co.Name,
-                   Price = co.Price,
-                   Subject = co.Subject,
-                   Certificate = co.Certificate,
-                   Image = co.Image,
-                   Description = co.Description,
-                   Time = co.Time,
-                   Category = ca.Name
-               }).FirstOrDefault(x => x.EntityId == entityId);
+                   co => co.CategoryId,
+                   ca => ca.EntityId,
+                   (co, ca) => new
+                   CourseViewModel
+                   {
+                       EntityId = co.EntityId,
+                       Name = co.Name,
+                       Price = co.Price,
+                       Subject = co.Subject,
+                       Certificate = co.Certificate,
+                       Image = co.Image,
+                       Description = co.Description,
+                       Time = co.Time,
+                       Category = ca.Name
+                   }).FirstOrDefault(x => x.EntityId == entityId);
                 if (courseById != null)
                 {
                     return View(courseById);
@@ -454,10 +472,36 @@ namespace eProject_SymphonyLimited.Controllers
             return RedirectToAction("Course");
         }
 
-        [HttpPost]
-        public ActionResult ExamResult(string rollNumber)
+        [HttpGet]
+        public ActionResult GetOldAdmission(string key = null)
         {
-            var resultByRollNumber = db.RegisterInfo
+            var oldAdmissions = db.Admission.Where(x => x.EndTime < DateTime.Now).AsEnumerable();
+            string jsonData = "[]";
+            if (!String.IsNullOrEmpty(key))
+            {
+                oldAdmissions = db.Admission.Where(x => x.EndTime < DateTime.Now && x.Name.Contains(key)).AsEnumerable();
+            }
+            if (oldAdmissions.Count() > 0)
+            {
+                jsonData = JsonConvert.SerializeObject(oldAdmissions);
+                return Json(new
+                {
+                    StatusCode = 200,
+                    Data = jsonData
+                }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new
+            {
+                StatusCode = 400,
+                Data = jsonData
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetResultByOldAdmission(int admissionId)
+        {
+            string jsonData = "[]";
+            var result = db.RegisterInfo
                 .Join(
                     db.Admission,
                        reg => reg.AdmissionId,
@@ -494,7 +538,65 @@ namespace eProject_SymphonyLimited.Controllers
                    Tested = ad.pr.Tested,
                    BillTime = ad.re.ad.BillTime,
                    CourseFee = co.Price
-               }).FirstOrDefault(x => x.RollNumber == rollNumber);
+               }).Where(x => x.AdmissionId == admissionId && x.Tested == true);
+            if (result.Count() > 0)
+            {
+                jsonData = JsonConvert.SerializeObject(result);
+                return Json(new
+                {
+                    StatusCode = 200,
+                    Data = jsonData
+                }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new
+            {
+                StatusCode = 400,
+                Data = jsonData
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult ExamResult(string rollNumber)
+        {
+            var resultByRollNumber = db.RegisterInfo
+                .Join(
+                    db.Admission,
+                       reg => reg.AdmissionId,
+                       ad => ad.EntityId,
+                       (reg, ad) => new
+                       {
+                           reg,
+                           ad
+                       })
+                .Join(
+                    db.PaidRegister,
+                       re => re.reg.EntityId,
+                       pr => pr.RegisterInfoId,
+                       (re, pr) => new
+                       {
+                           re,
+                           pr
+                }).Join(
+                db.Course,
+                ad => ad.re.ad.CourseId,
+                co => co.EntityId,
+                (ad, co) => new
+                PaidRegisterViewModel
+                {
+                    EntityId = ad.pr.EntityId,
+                    RollNumber = ad.pr.RollNumber,
+                    Result = ad.pr.Result,
+                    Name = ad.re.reg.Name,
+                    Phone = ad.re.reg.Phone,
+                    Email = ad.re.reg.Email,
+                    Comment = ad.re.reg.Comment,
+                    CreatedAt = ad.re.reg.CreatedAt,
+                    AdmissionId = ad.re.reg.AdmissionId,
+                    Admission = ad.re.ad.Name,
+                    Tested = ad.pr.Tested,
+                    BillTime = ad.re.ad.BillTime,
+                    CourseFee = co.Price
+                }).FirstOrDefault(x => x.RollNumber == rollNumber);
             if (resultByRollNumber != null)
             {
                 if (resultByRollNumber.Tested == false)

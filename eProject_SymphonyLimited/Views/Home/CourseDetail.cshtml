@@ -64,13 +64,20 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="butt">
-                            <button>Register</button>
-                        </div>
-                        </div>
+                        @if (ViewBag.HasAdmission)
+                        {
+                            <div class="butt">
+                                <button id="register-course" data-id="@ViewBag.AdmissionId">Register</button>
+                            </div>
+                        }
+                        else
+                        {
+                            <h3>No admissions now</h3>
+                        }
                     </div>
                 </div>
             </div>
+        </div>
         <div class="description">
             <div class="title">
                 <span>Description</span>
@@ -79,96 +86,103 @@
                 <span>@Model.Description</span>
             </div>
         </div>
-        </div>
     </div>
-    <div class="instituteLecturers">
-        <div class="mainLecturesInfor">
-            <div class="title">
-                <span>
-                    excellent Teachers
-                </span>
-            </div>
-            <section id="features" class="blue">
-                <div class="content">
-                    <div class="slider slider-nav">
-                        @{
-                            foreach (var item in ViewBag.teacher)
-                            {
-                                <div class="cusLecturer">
-                                    <img src="/Areas/Admin/Content/img/Teacher/@item.Image" width="100px" height="100px" />
-                                    <span><br />Mr. @item.Name</span>
-                                </div>
-                            }
-                        }
-                    </div>
-                </div>
-            </section>
-            <div class="detailInfor">
-                <div class="containerLecturer">
-                    <div class="inforLecture flex">
-                        <div class="text">
-                            <span>Lecturer</span>
-                            <div class="slider slider-for">
-                                @{
-                                    foreach (var item in ViewBag.teacher)
-                                    {
-                                        <div>
-                                            <div class="name cusInfor">
-                                                <span>@item.Name</span>
-                                            </div>
-                                            <div class="specialize cusInfor">
-                                                <span>@item.Specialize</span>
-                                            </div>
-                                            <div class="subject cusInfor">
-                                                <span>Subjects: <span>@item.Subject</span></span>
-                                            </div>
-                                        </div>
-                                    }
-                                }
-                            </div>
-                        </div>
-                        <div class="img">
-                            <div class="slider slider-for">
-                                @{
-                                    foreach (var item in ViewBag.teacher)
-                                    {
-                                        <div>
-                                            <img src="/Areas/Admin/Content/img/Teacher/@item.Image" />
-                                        </div>
-                                    }
-                                }
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <div class="institutePartner">
+</div>
+<div class="instituteLecturers">
+    <div class="mainLecturesInfor">
         <div class="title">
             <span>
-                Recruitment partner network
+                excellent Teachers
             </span>
         </div>
-        <div class="cusPartner">
-            <div class="owl-carousel nav-partner" id="owl-carousel">
-                <div class="logoPartner">
-                    <img src="https://bachkhoa-aptech.edu.vn/public/assets/uploads/images/cmc.png" />
+        <section id="features" class="blue">
+            <div class="content">
+                <div class="slider slider-nav">
+                    @{
+                        foreach (var item in ViewBag.teacher)
+                        {
+                            <div class="cusLecturer">
+                                <img src="/Areas/Admin/Content/img/Teacher/@item.Image" width="100px" height="100px" />
+                                <span><br />Mr. @item.Name</span>
+                            </div>
+                        }
+                    }
                 </div>
-                <div class="logoPartner">
-                    <img src="https://bachkhoa-aptech.edu.vn/public/assets/uploads/images/misa.png" />
+            </div>
+        </section>
+        <div class="detailInfor">
+            <div class="containerLecturer">
+                <div class="inforLecture flex">
+                    <div class="text">
+                        <span>Lecturer</span>
+                        <div class="slider slider-for">
+                            @{
+                                foreach (var item in ViewBag.teacher)
+                                {
+                                    <div>
+                                        <div class="name cusInfor">
+                                            <span>@item.Name</span>
+                                        </div>
+                                        <div class="specialize cusInfor">
+                                            <span>@item.Specialize</span>
+                                        </div>
+                                        <div class="subject cusInfor">
+                                            <span>Subjects: <span>@item.Subject</span></span>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="img">
+                        <div class="slider slider-for">
+                            @{
+                                foreach (var item in ViewBag.teacher)
+                                {
+                                    <div>
+                                        <img src="/Areas/Admin/Content/img/Teacher/@item.Image" />
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
                 </div>
-                <div class="logoPartner">
-                    <img src="https://bachkhoa-aptech.edu.vn/public/assets/uploads/images/FSI.png" />
-                </div>
-                <div class="logoPartner">
-                    <img src="https://bachkhoa-aptech.edu.vn/public/assets/uploads/images/vnp-group.png" />
-                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="institutePartner">
+    <div class="title">
+        <span>
+            Recruitment partner network
+        </span>
+    </div>
+    <div class="cusPartner">
+        <div class="owl-carousel nav-partner" id="owl-carousel">
+            <div class="logoPartner">
+                <img src="https://bachkhoa-aptech.edu.vn/public/assets/uploads/images/cmc.png" />
+            </div>
+            <div class="logoPartner">
+                <img src="https://bachkhoa-aptech.edu.vn/public/assets/uploads/images/misa.png" />
+            </div>
+            <div class="logoPartner">
+                <img src="https://bachkhoa-aptech.edu.vn/public/assets/uploads/images/FSI.png" />
+            </div>
+            <div class="logoPartner">
+                <img src="https://bachkhoa-aptech.edu.vn/public/assets/uploads/images/vnp-group.png" />
             </div>
         </div>
     </div>
 </div>
-
+</div>
+<script>
+    var getUrl = window.location;
+    var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
+    $(document).on("click", "#register-course", function () {
+        var admissionId = $(this).data('id');
+        window.location.href = baseUrl + "Home/AdmissionDetail/" + admissionId;
+    })
+</script>
 

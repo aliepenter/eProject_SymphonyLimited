@@ -39,6 +39,8 @@ namespace eProject_SymphonyLimited.Areas.Admin.Data.ViewModel
 
         public string Admission { get; set; }
 
+        public string Class { get; set; }
+
         public double CourseFee { get; set; }
     }
 }
