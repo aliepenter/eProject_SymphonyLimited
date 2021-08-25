@@ -411,7 +411,8 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                 }
                 else
                 {
-                    prById.Tested = true;
+                    var pr = db.PaidRegister.Find(prId);
+                    pr.Tested = true;
                     db.SaveChanges();
                     return Json(new
                     {

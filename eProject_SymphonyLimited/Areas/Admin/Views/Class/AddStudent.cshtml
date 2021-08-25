@@ -1,10 +1,150 @@
-﻿@model eProject_SymphonyLimited.Models.Class
-
+﻿
 @{
     ViewBag.Title = "Add Student";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
+<h2>Add Student</h2>
+
+<a class="btn btn-primary float-left mb-3" id="save-student"><i class="far fa-plus-square"></i> Save</a>
+<div class="form-inline mb-3 float-right">
+    <div class="input-group">
+        <label class="font-weight-bold m-0 mr-1 d-flex align-items-center">Search : </label>
+        <input type="text" name="key" id="key" value="" class="form-control mr-1 bg-light small" placeholder="Enter to search..." aria-label="Search" aria-describedby="basic-addon2">
+    </div>
+    <div class="input-group">
+        <label class="font-weight-bold m-0 mr-1 d-flex align-items-center">Search By : </label>
+        <select id="type" class="form-control">
+            <option value="StudentName" selected>Name</option>
+        </select>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-bordered"></table>
+</div>
+
+<ul class="pagination"></ul>
+
+
+@*<div class="form-inline mb-3 float-right">
+        <div class="input-group">
+            <label class="font-weight-bold m-0 mr-1 d-flex align-items-center">Search : </label>
+            <input type="text" name="key" id="key" value="" class="form-control mr-1 bg-light small" placeholder="Enter to search..." aria-label="Search" aria-describedby="basic-addon2">
+        </div>
+        <div class="input-group">
+            <label class="font-weight-bold m-0 mr-1 d-flex align-items-center">Search By : </label>
+            <select id="type" class="form-control">
+                <option value="Name" selected>Name</option>
+                <option value="AdmissionName">Admission Name</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered"></table>
+    </div>
+
+    <ul class="pagination"></ul>*@
+<input type="hidden" id="ClassId" value="@ViewBag.ClassId" />
+
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+
+        var getUrl = window.location;
+        var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
+        var manager = {
+            load: function (page = 1, type = null, key = null, classId = 0) {
+                $.ajax({
+                    type: "GET",
+                    url: baseUrl + "Admin/Class/GetStudentNotInClass",
+                    data: { page: page, type: type, key: key, classId: classId },
+                    success: function (res) {
+                        var _html = ' <thead class="thead-dark"><tr><th>Entity Id</th><th>Student Name</th><th></th></tr></thead>';
+                        for (var item of JSON.parse(res.Data)) {
+                            _html += '<tbody><tr>' +
+                                '<td>' + item.EntityId + '</td>' +
+                                '<td>' + item.StudentName + '</td>' +
+                                '<td>' + '<input class="itemStudent" data-id="' + item.EntityId + '" type="checkbox" name="name" value=""/>' + '</td>'
+                                + '</tr></tbody>';
+                        }
+                        $('.table').html(_html);
+                        var pages = '';
+                        for (var i = 1; i <= res.TotalPages; i++) {
+                            if (i == res.CurrentPage) {
+                                pages += '<li class="active mr-1"><a href="javascript:void(0)"><button class="btn btn-info">' + i + '</button></a></li>';
+                            } else {
+                                pages += '<li><a class="item_page mr-1" href="javascript:void(0)"><button class="btn btn-info">' + i + '</button></a></li>';
+                            }
+                        }
+                        $(".pagination").html(pages);
+                    }
+                })
+            },
+        }
+
+        $(function () {
+            var classId = $("#ClassId").val();
+            if (classId == null) {
+                classId = 0;
+            }
+            manager.load(1, null, null, classId);
+            $(document).on("click", ".item_page", function () {
+                var page = $(this).text(),
+                    key = $('#key').val(),
+                    type = $("#type").val();
+                manager.load(page, type, key, classId);
+            });
+            $('#key').keyup(function () {
+                var key = $("#key").val(),
+                    type = $("#type").val();
+                manager.load(1, type, key, classId);
+            });
+            $(document).on("change", "#key", function () {
+                var key = $("#key").val(),
+                    type = $("#type").val();
+                manager.load(1, type, key, classId);
+            });
+            $(document).on("change", "#type", function () {
+                var key = $("#key").val(),
+                    type = $("#type").val();
+                manager.load(1, type, key, classId);
+            });
+            var arr = [];
+            function removeArr(arr) {
+                var what, a = arguments, L = a.length, ax;
+                while (L > 1 && arr.length) {
+                    what = a[--L];
+                    while ((ax = arr.indexOf(what)) !== -1) {
+                        arr.splice(ax, 1);
+                    }
+                }
+                return arr;
+            }
+            $(document).on("click", ".itemStudent", function () {
+                var studentId = $(this).data('id');
+
+                if ($(this).is(":checked") && studentId != null && typeof (studentId) === "number") {
+                    arr.push(studentId);
+                } else {
+                    removeArr(arr, studentId);
+                }
+            });
+            $("#save-student").click(function () {
+                var studentArrJson = JSON.stringify(arr);
+                $.ajax({
+                    type: "POST",
+                    url: baseUrl + "Admin/Class/AddStudent",
+                    data: { studentArrJson: studentArrJson, classId: classId },
+                    success: function (res) {
+                        if (res.StatusCode == 200) {
+                            manager.load(1, type, key, classId);
+                        }
+                        alert(res.Message);
+                    }
+                })
+
+            });
+        })
+    </script>
 }

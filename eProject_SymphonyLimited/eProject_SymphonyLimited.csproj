@@ -154,6 +154,7 @@
     <Compile Include="Areas\Admin\Data\ViewModel\PaidRegisterViewModel.cs" />
     <Compile Include="Areas\Admin\Data\ViewModel\PermissionViewModel.cs" />
     <Compile Include="Areas\Admin\Data\ViewModel\RegisterViewModel.cs" />
+    <Compile Include="Areas\Admin\Data\ViewModel\StudentViewModel.cs" />
     <Compile Include="Areas\Admin\Data\ViewModel\UserViewModel.cs" />
     <Compile Include="Controllers\FaqController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
