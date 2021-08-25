@@ -28,30 +28,10 @@
 
 <a href="@Url.Action("Index")" class="btn btn-outline-dark mb-2"><i class="fas fa-arrow-circle-left"></i> Back to list</a>
 
-@*<div class="form-inline mb-3 float-right">
-        <div class="input-group">
-            <label class="font-weight-bold m-0 mr-1 d-flex align-items-center">Search : </label>
-            <input type="text" name="key" id="key" value="" class="form-control mr-1 bg-light small" placeholder="Enter to search..." aria-label="Search" aria-describedby="basic-addon2">
-        </div>
-        <div class="input-group">
-            <label class="font-weight-bold m-0 mr-1 d-flex align-items-center">Search By : </label>
-            <select id="type" class="form-control">
-                <option value="Name" selected>Name</option>
-                <option value="AdmissionName">Admission Name</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="table-responsive">
-        <table class="table table-bordered"></table>
-    </div>
-
-    <ul class="pagination"></ul>*@
 <input type="hidden" id="ClassId" value="@ViewBag.ClassId" />
 
 @section Scripts {
     <script>
-
         var getUrl = window.location;
         var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
         var manager = {

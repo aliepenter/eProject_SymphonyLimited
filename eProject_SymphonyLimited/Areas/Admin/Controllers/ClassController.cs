@@ -189,9 +189,78 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult GetStudentInClass(int page = 1, string type = null, string key = null)
+        public ActionResult ShowStudent(int id)
         {
+            var classById = db.Class.Find(id);
+            if (classById != null)
+            {
+                ViewBag.ClassId = id;
+                ViewBag.ClassName = classById.Name;
+            }
+            else
+            {
+                ViewBag.ClassId = null;
+                ViewBag.ClassName = classById.Name;
+            }
             return View();
+        }
+
+        public ActionResult GetStudentInClass(int page = 1, string type = null, string key = null, int classId = 0)
+        {
+            if (classId != 0)
+            {
+                var _class = db.Class.Find(classId);
+                int pageSize = 10;
+                var students = db.Student.Join(db.RegisterInfo,
+                    st => st.RegisterInfoId,
+                    re => re.EntityId,
+                    (st, re) => new StudentViewModel
+                    {
+                        EntityId = st.EntityId,
+                        StudentName = re.Name,
+                        Phone = re.Phone,
+                        Email = re.Email,
+                        Status = st.Status,
+                        ClassName = _class.Name,
+                        ClassId = classId
+                    }).Where(x => x.Status == true && x.ClassId == classId).AsEnumerable();
+                if (!String.IsNullOrEmpty(type) && !String.IsNullOrEmpty(key))
+                {
+                    switch (type)
+                    {
+                        case "StudentName":
+                            students = db.Student.Join(db.RegisterInfo,
+                                    st => st.RegisterInfoId,
+                                    re => re.EntityId,
+                                    (st, re) => new StudentViewModel
+                                    {
+                                        EntityId = st.EntityId,
+                                        StudentName = re.Name,
+                                        Phone = re.Phone,
+                                        Email = re.Email,
+                                        Status = st.Status,
+                                        ClassName = _class.Name,
+                                        ClassId = classId
+                                    }).Where(x => x.StudentName.Contains(key) && x.Status == true && x.ClassId == classId).AsEnumerable();
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                decimal totalPages = Math.Ceiling((decimal)students.Count() / pageSize);
+                string jsonData = JsonConvert.SerializeObject(students.Skip((page - 1) * pageSize).Take(pageSize));
+                return Json(new
+                {
+                    TotalPages = totalPages,
+                    CurrentPage = page,
+                    StatusCode = 200,
+                    Data = jsonData
+                }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new
+            {
+                StatusCode = 400,
+            }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult GetStudentNotInClass(int page = 1, string type = null, string key = null, int classId = 0)
@@ -243,7 +312,6 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
             {
                 StatusCode = 400,
             }, JsonRequestBehavior.AllowGet);
-
         }
     }
 }

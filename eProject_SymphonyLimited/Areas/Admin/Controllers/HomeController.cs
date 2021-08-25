@@ -21,6 +21,34 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         // GET: Admin/Home
         public ActionResult Index()
         {
+            int countCourse = 0;
+            foreach (var item in db.Course.ToList())
+            {
+                countCourse += 1;
+            }
+            ViewBag.Course = countCourse;
+
+            int countBranch = 0;
+            foreach (var item in db.Branch.ToList())
+            {
+                countBranch += 1;
+            }
+            ViewBag.Branch = countBranch;
+
+            int countTeacher = 0;
+            foreach (var item in db.Teacher.ToList())
+            {
+                countTeacher += 1;
+            }
+            ViewBag.Teacher = countTeacher;
+
+            int countFaq = 0;
+            foreach (var item in db.Faq.ToList())
+            {
+                countFaq += 1;
+            }
+            ViewBag.Faq = countFaq;
+
             return View();
         }
 

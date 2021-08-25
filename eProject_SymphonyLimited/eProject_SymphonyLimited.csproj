@@ -190,6 +190,7 @@
     <Content Include="Areas\Admin\Content\font_style_default.css" />
     <Content Include="Areas\Admin\Content\img\5-critical-steps-for-securing-a-network-infrastructure.jpg" />
     <Content Include="Areas\Admin\Content\img\5203686436372480.png" />
+    <Content Include="Areas\Admin\Content\img\background-login.png" />
     <Content Include="Areas\Admin\Content\img\By Design.jpg" />
     <Content Include="Areas\Admin\Content\img\cmc.png" />
     <Content Include="Areas\Admin\Content\img\coc-coc.png" />
@@ -205,8 +206,6 @@
     <Content Include="Areas\Admin\Content\img\PHP.png" />
     <Content Include="Areas\Admin\Content\img\programming-day-FI-970x485.jpg" />
     <Content Include="Areas\Admin\Content\img\Python-programming-language-feature-image.jpg" />
-    <Content Include="Areas\Admin\Content\img\Screenshot 2021-08-14 164952.png" />
-    <Content Include="Areas\Admin\Content\img\Screenshot 2021-08-15 091026.png" />
     <Content Include="Areas\Admin\Content\img\Software-Testing-.jpg" />
     <Content Include="Areas\Admin\Content\img\sotateck.png" />
     <Content Include="Areas\Admin\Content\img\Teacher\gv_doan_van_nang.jpg" />
@@ -216,7 +215,6 @@
     <Content Include="Areas\Admin\Content\img\Teacher\gv_pham_xuan_hien.jpg" />
     <Content Include="Areas\Admin\Content\img\Teacher\gv_vu_tuan_minh.jpg" />
     <Content Include="Areas\Admin\Content\img\thien-hoang.png" />
-    <Content Include="Areas\Admin\Content\img\toi-khon-nan-qua-thang-shipper-may-lam-gi-me-tao-bba35d0a1d51eec8c04aa1b0bcf5b494.jpg" />
     <Content Include="Areas\Admin\Content\img\undraw_posting_photo.svg" />
     <Content Include="Areas\Admin\Content\img\undraw_profile.svg" />
     <Content Include="Areas\Admin\Content\img\undraw_profile_1.svg" />
@@ -4066,7 +4064,6 @@
     <Content Include="Areas\Admin\Views\Partner\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Partner\Index.cshtml" />
     <Content Include="Areas\Admin\Views\RegisterInfo\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Teacher\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Teacher\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Teacher\Index.cshtml" />
@@ -4081,11 +4078,13 @@
     <Content Include="Areas\Admin\Views\Auth\ResetPassword.cshtml" />
     <Content Include="Areas\Admin\Views\Auth\UnAuthorize.cshtml" />
     <Content Include="Areas\Admin\Views\Home\ChangePassword.cshtml" />
-    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Home\UserProfile.cshtml" />
-    <Content Include="Areas\Admin\Views\Class\AddStudent.cshtml" />
     <Content Include="Areas\Admin\Views\Class\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Class\AddStudent.cshtml" />
     <Content Include="Areas\Admin\Views\Class\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Class\ShowStudent.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
