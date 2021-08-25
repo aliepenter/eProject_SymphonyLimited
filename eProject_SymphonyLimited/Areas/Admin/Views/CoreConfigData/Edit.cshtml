@@ -5,7 +5,7 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>CoreConfigData</h2>
+<h2>Edit "@Model.Name"</h2>
 
 <!-- Outer Row -->
 <div class="row justify-content-center">
@@ -24,13 +24,7 @@
                             <hr />
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             @Html.HiddenFor(model => model.EntityId)
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label" })
-                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-                            </div>
-
+                            <input type="hidden" name="Name" value="@Model.Name" />
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Value, htmlAttributes: new { @class = "control-label" })
                                 @Html.EditorFor(model => model.Value, new { htmlAttributes = new { @class = "form-control" } })

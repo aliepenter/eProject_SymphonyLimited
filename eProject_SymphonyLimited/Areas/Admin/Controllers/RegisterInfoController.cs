@@ -23,7 +23,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Get(int page = 1, string type = null, string key = null)
         {
-            int pageSize = 5;
+            int pageSize = 10;
             var registerInfos = db.RegisterInfo.Join(db.Admission,
                re => re.AdmissionId,
                ad => ad.EntityId,

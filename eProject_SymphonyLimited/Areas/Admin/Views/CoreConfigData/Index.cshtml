@@ -7,7 +7,6 @@
 
 <h2>Core Config Datas</h2>
 
-<a class="btn btn-primary float-left mb-3" href="/Admin/CoreConfigData/Create"><i class="far fa-plus-square"></i> Create New</a>
 <div class="form-inline mb-3 float-right">
     <div class="input-group">
         <label class="font-weight-bold m-0 mr-1 d-flex align-items-center">Search : </label>
@@ -47,7 +46,6 @@
                                 '<td>' + item.Value + '</td>' +
                                 '<td width="300px">' +
                                 '<button class="btn btn-warning btn-edit mr-1 mb-1" data-id="' + item.EntityId + '"><i class="fas fa-edit"></i> Edit</button>' +
-                                '<button class="btn btn-danger btn-delete mb-1" data-id="' + item.EntityId + '"><i class="far fa-trash-alt"></i> Delete</button>' +
                                 '</td>'
                                 + '</tr></tbody>';
                         }
@@ -92,14 +90,6 @@
                 var key = $("#key").val(),
                     type = $("#type").val();
                 manager.load(1, type, key);
-            });
-            $(document).on("click", ".btn-delete", function () {
-                var id = $(this).data("id");
-                if (confirm('Are you sure want delete core config data with id = ' + id + '?')) {
-                    window.location.href = baseUrl + "Admin/CoreConfigData/Delete/" + id;
-                } else {
-                    return false;
-                }
             });
         })
     </script>

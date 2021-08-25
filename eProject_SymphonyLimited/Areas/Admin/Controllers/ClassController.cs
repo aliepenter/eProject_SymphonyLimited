@@ -87,6 +87,13 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
             var classById = db.Class.Find(id);
             if (classById != null)
             {
+                var maxStudentInClass = db.CoreConfigData.FirstOrDefault(x => x.Code == "maximum_student_in_class");
+                var maxStudentIsInt = Int32.TryParse(maxStudentInClass.Value, out int maxStudent);
+                if (classById.QuantityStudent >= maxStudent)
+                {
+                    TempData["ErrorMessage"] = "The class is full of students!";
+                    return RedirectToAction("Index");
+                }
                 ViewBag.ClassId = id;
             }
             else
@@ -162,7 +169,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
             if (classId != 0)
             {
                 var admissionIdByClassId = db.Class.FirstOrDefault(x => x.EntityId == classId).AdmissionId;
-                int pageSize = 5;
+                int pageSize = 10;
                 var students = db.Student.Join(db.RegisterInfo,
                     st => st.RegisterInfoId,
                     re => re.EntityId,

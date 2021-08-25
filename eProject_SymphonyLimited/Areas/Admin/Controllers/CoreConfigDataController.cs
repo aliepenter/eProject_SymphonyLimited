@@ -48,46 +48,6 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Create(CoreConfigData ccd)
-        {
-            if (ModelState.IsValid)
-            {
-                var validateName = db.CoreConfigData.FirstOrDefault(x => x.Name == ccd.Name);
-                var validateCode = db.CoreConfigData.FirstOrDefault(x => x.Code == ccd.Code);
-                if (validateName == null)
-                {
-                    if (validateCode == null)
-                    {
-                        try
-                        {
-                            ccd.Code = ccd.Name.ToLower().Replace(" ", "_");
-                            db.CoreConfigData.Add(ccd);
-                            db.SaveChanges();
-                            return RedirectToAction("Index");
-                        }
-                        catch (Exception)
-                        {
-                            ModelState.AddModelError("", "Some thing went wrong while save coreconfigdata!");
-                        }
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "CoreConfigData Code is already exist!");
-                    }
-                }
-                else
-                {
-                    ModelState.AddModelError("Name", "CoreConfigData Name is already exist!");
-                }
-            }
-            return View();
-        }
 
         public ActionResult Edit(int id)
         {
@@ -102,57 +62,29 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Edit(CoreConfigData ccd)
         {
-            if (ModelState.IsValid)
+            var currentCoreConfigData = db.CoreConfigData.Find(ccd.EntityId);
+            if (currentCoreConfigData.Code == "maximum_student_in_class" || currentCoreConfigData.Code == "minium_student_in_class")
             {
-                var currentCoreConfigData = db.CoreConfigData.Find(ccd.EntityId);
-                var validateName = db.CoreConfigData.FirstOrDefault(x => x.Name != currentCoreConfigData.Name && x.Name == ccd.Name);
-                var validateCode = db.CoreConfigData.FirstOrDefault(x => x.Code != currentCoreConfigData.Code && x.Code == ccd.Code);
-                if (validateName == null)
+                var isInt = Int32.TryParse(ccd.Value, out int number);
+                if (!isInt)
                 {
-                    if (validateCode == null)
-                    {
-                        try
-                        {
-                            currentCoreConfigData.Name = ccd.Name;
-                            currentCoreConfigData.Value = ccd.Value;
-                            currentCoreConfigData.Code = ccd.Name.ToLower().Replace(" ", "_");
-                            db.SaveChanges();
-                            return RedirectToAction("Index");
-                        }
-                        catch (Exception)
-                        {
-                            ModelState.AddModelError("", "Some thing went wrong while save coreconfigdata!");
-                        }
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "CoreConfigData Code is already exist!");
-                    }
-                }
-                else
-                {
-                    ModelState.AddModelError("Name", "CoreConfigData Name is already exist!");
+                    ModelState.AddModelError("Value", "Data must be integer!");
                 }
             }
-            return View();
-        }
-
-        public ActionResult Delete(int id)
-        {
-            if (db.CoreConfigData.Find(id) != null)
+            if (ModelState.IsValid)
             {
                 try
                 {
-                    db.CoreConfigData.Remove(db.CoreConfigData.Find(id));
+                    currentCoreConfigData.Value = ccd.Value;
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
                 catch (Exception)
                 {
-                    ModelState.AddModelError("", "Some thing went wrong while delete core config data!");
+                    ModelState.AddModelError("", "Some thing went wrong while save coreconfigdata!");
                 }
             }
-            return View();
+            return View(currentCoreConfigData);
         }
     }
 }

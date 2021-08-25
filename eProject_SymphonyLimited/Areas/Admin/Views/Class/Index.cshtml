@@ -5,7 +5,10 @@
 }
 
 <h2>Classes</h2>
-
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
 <a class="btn btn-primary float-left mb-3" href="/Admin/Class/Create"><i class="far fa-plus-square"></i> Create New</a>
 <div class="form-inline mb-3 float-right">
     <div class="input-group">
