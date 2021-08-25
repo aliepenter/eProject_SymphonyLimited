@@ -4083,9 +4083,9 @@
     <Content Include="Areas\Admin\Views\Home\ChangePassword.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Home\UserProfile.cshtml" />
+    <Content Include="Areas\Admin\Views\Class\AddStudent.cshtml" />
     <Content Include="Areas\Admin\Views\Class\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Class\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Class\AddStudent.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />

@@ -100,30 +100,32 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         public ActionResult AddStudent(string studentArrJson, int classId)
         {
             dynamic json = System.Web.Helpers.Json.Decode(studentArrJson);
-            var classById = db.Student.Where(x => x.ClassId == classId);
+            var classById = db.Class.Find(classId);
             var maxStudentInClass = db.CoreConfigData.FirstOrDefault(x => x.Code == "maximum_student_in_class");
             var minStudentInClass = db.CoreConfigData.FirstOrDefault(x => x.Code == "minium_student_in_class");
             var maxStudentIsInt = Int32.TryParse(maxStudentInClass.Value, out int maxStudent);
             var minStudentIsInt = Int32.TryParse(minStudentInClass.Value, out int minStudent);
-            if (json.Length > 0)
+            var quantityStudent = db.Class.Find(classId).QuantityStudent;
+            if (json.Length > 0 && classById != null)
             {
                 if (maxStudentIsInt && minStudentIsInt)
                 {
-                    if (maxStudent < classById.Count())
+                    quantityStudent += json.Length;
+                    if (quantityStudent > maxStudent)
                     {
                         return Json(new
                         {
                             StatusCode = 400,
                             Message = "Student In Class must smaller than " + maxStudent + "!"
-                        }, JsonRequestBehavior.AllowGet); ;
+                        }, JsonRequestBehavior.AllowGet);
                     }
-                    if (minStudent > classById.Count())
+                    if (quantityStudent < minStudent)
                     {
                         return Json(new
                         {
                             StatusCode = 400,
                             Message = "Student In Class must bigger than " + minStudent + "!"
-                        }, JsonRequestBehavior.AllowGet); ;
+                        }, JsonRequestBehavior.AllowGet);
                     }
                     foreach (var item in json)
                     {
@@ -134,20 +136,8 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                             studentById.ClassId = classId;
                         }
                     }
+                    classById.QuantityStudent = quantityStudent;
                     db.SaveChanges();
-                    if (classById != null)
-                    {
-                        db.Class.Find(classId).QuantityStudent = classById.Count();
-                        db.SaveChanges();
-                    }
-                    else
-                    {
-                        return Json(new
-                        {
-                            StatusCode = 400,
-                            Message = "Something went wrong while add student to class!"
-                        }, JsonRequestBehavior.AllowGet);
-                    }
                     return Json(new
                     {
                         StatusCode = 200,

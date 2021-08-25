@@ -451,6 +451,14 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                             Message = "Result must be bigger than 0"
                         }, JsonRequestBehavior.AllowGet);
                     }
+                    else if (result > adById.MaxMark)
+                    {
+                        return Json(new
+                        {
+                            StatusCode = 200,
+                            Message = "Result must be smaller than " + adById.MaxMark
+                        }, JsonRequestBehavior.AllowGet); ;
+                    }
                     else
                     {
                         prById.Result = result;

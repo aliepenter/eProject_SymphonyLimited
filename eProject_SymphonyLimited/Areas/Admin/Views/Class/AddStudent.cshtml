@@ -26,6 +26,7 @@
 
 <ul class="pagination"></ul>
 
+<a href="@Url.Action("Index")" class="btn btn-outline-dark mb-2"><i class="fas fa-arrow-circle-left"></i> Back to list</a>
 
 @*<div class="form-inline mb-3 float-right">
         <div class="input-group">
@@ -131,6 +132,8 @@
                 }
             });
             $("#save-student").click(function () {
+                var key = $("#key").val(),
+                    type = $("#type").val();
                 var studentArrJson = JSON.stringify(arr);
                 $.ajax({
                     type: "POST",
