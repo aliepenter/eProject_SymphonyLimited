@@ -12,6 +12,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Data.ViewModel
         public string RollNumber { get; set; }
 
         public double Result { get; set; }
+        public double PassedMark { get; set; }
 
         public int RegisterInfoId { get; set; }
 

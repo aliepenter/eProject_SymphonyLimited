@@ -36,13 +36,21 @@
                     </ul>
                 </div>
             </div>
-            @if (ViewBag.ParentHref != null)
-            {
-                <a href="/Home/Course/@ViewBag.ParentHref">Back</a>
-            }
         </div>
         <div class="right">
-            <div class="toolbar-sorter sorter">
+            
+        <div class="flex">
+            <div class="width20" style="margin: auto; padding: 0 0 0 20px">
+                @if (ViewBag.ParentHref != null)
+                {
+                <a href="/Home/Course/@ViewBag.ParentHref" >
+                    <button id="backCourse" style="padding: 10px;border:none; border-radius: 5px; background: #6E1313;text-decoration: none; color: wheat; font-weight: bold">
+                        <span>Back</span>
+                    </button>
+                </a>
+                }
+            </div>
+            <div class="toolbar-sorter sorter width80">
                 <label class="sorter-label" for="sorter">Sort by</label>
                 <select id="sorter">
                     @if (ViewBag.Sorter == "price")
@@ -69,6 +77,8 @@
                     </a>
                 }
             </div>
+
+        </div>
             <div class="courseItem flex">
                 @{if (ViewBag.Coures != null)
                     {
@@ -87,7 +97,7 @@
                                             <div class="admissionCriteria width80">
                                                 <span>
                                                     <i class="far fa-clock"></i>
-                                                        Duration: @item.Time
+                                                    Duration: @item.Time
                                                 </span>
                                             </div>
                                             <div class="price width20">
@@ -130,7 +140,7 @@
                     </ul>
                 </div>
                 <div class="field limiter width50" style="margin: auto">
-                    <div class="flex"  style="float:right">
+                    <div class="flex" style="float:right">
                         <span style="margin: auto">Show</span>
                         <div class="control" style="margin: 0 10px">
                             <select id="limiter" class="limiter-options" style="padding: 4px">
@@ -154,7 +164,7 @@
                                 }
                             </select>
                         </div>
-                        <span class="limiter-text" style="margin: auto" >items on the page</span>
+                        <span class="limiter-text" style="margin: auto">items on the page</span>
                     </div>
                 </div>
             </div>
@@ -190,7 +200,7 @@
             }
         </div>
         <div class="right">
-            <img src="https://bachkhoa-aptech.edu.vn/public/assets/imgs/themes/subscribe.png" alt="Alternate Text" style="margin-top: 148px;" />
+            <img src="~/Content/images/subscribe.png" alt="Alternate Text" style="margin-top: 148px;" />
         </div>
     </div>
 </div>

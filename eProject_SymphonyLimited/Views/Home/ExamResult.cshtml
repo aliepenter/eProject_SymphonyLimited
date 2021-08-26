@@ -3,8 +3,13 @@
 <div class="mainExamResult">
     <div class="containerExamResult">
         <div class="title">
-            <span>
-                <i class="fa fa-search" aria-hidden="true"></i> The last exam results
+            <span id="titleCheckResult">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                Check your result
+            </span>
+            <span class="disNone" id="titleAllResult">
+                <i class="fa fa-search" aria-hidden="true"></i>
+                All results
             </span>
         </div>
         <div class="containerContentResult">
@@ -19,27 +24,28 @@
             </div>
             <div class="content">
                 <div class="search" id="search">
-                    <div class="flex">
-                        <div class="labelSearch">
-                            <span>Search</span>
-                        </div>
-                        <div class="form-row">
-                            <form action="/Home/ExamResult" method="post">
+                    
+                        
+                    <form action="/Home/ExamResult" method="post">
+                        <div class="flex">
+                            <div class="form-row">
                                 <input type="text" name="rollNumber" value="" placeholder="Roll Number" />
-                            </form>
+                            </div>
+                            <div class="btnSearch">
+                                <button type="submit" style="padding: 10px; width: 40px; border: none; margin: 2px 0 0 2px" id="btnCheckResult"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
+
                 </div>
                 <div class="admsDropdown disNone" id="admsDropdown">
                     <div class="flex">
-                        <input type="search" id="key" placeholder="Admission Name..." value="" />
-                        <br />
-                        <div class="labelSearch">
-                            <span>Admission</span>
+                        <div class="inputAdmsResult">
+                            <input type="search" id="key" placeholder="Admission Name..." value="" style="border: none"/>
                         </div>
-                        <div class="form-row">
-                            <select style="padding: 6px" id="all-old-admissions"></select>
-                            <button style="padding: 6px; width: 40px" id="search-by-admission"><i class="fa fa-search" aria-hidden="true"></i></button>
+                        <div class="form-row2">
+                            <select style="padding: 6px; border: none; outline: none" id="all-old-admissions"></select>
+                            <button style="padding: 6px; width: 40px; border: none" id="search-by-admission"><i class="fa fa-search" aria-hidden="true"></i></button>
                         </div>
                     </div>
                 </div>
@@ -69,17 +75,59 @@
                                     <th>Roll Number</th>
                                     <th>Full Name</th>
                                     <th>Entrance Exam</th>
-                                    <th>Result</th>
-                                    <th>Course Fee</th>
-                                    <th>BillDate</th>
+                                    <th>Mark</th>
+                                    <th>Passed Mark</th>
+                                    @{
+                                        if (ViewBag.Class != null)
+                                        {
+                                            <th>Class</th>
+                                        }
+                                        else
+                                        {
+                                            <th>Result</th>
+                                        }
+                                    }
+                                    @{
+                                        if (ViewBag.Class != null)
+                                        {
+                                            <th>Course Fee</th>
+                                        }
+                                    }
+                                    @{
+                                        if (ViewBag.Class != null)
+                                        {
+                                            <th>Bill Date</th>
+                                        }
+                                    }
                                 </tr>
                                 <tr>
                                     <td>@ViewBag.Result.RollNumber</td>
                                     <td>@ViewBag.Result.Name</td>
                                     <td>@ViewBag.Result.Admission</td>
                                     <td>@ViewBag.Result.Result</td>
-                                    <td>@ViewBag.Result.CourseFee</td>
-                                    <td>@ViewBag.Result.BillTime.ToString("MM/dd/yyyy")</td>
+                                    <td>@ViewBag.Result.PassedMark</td>
+                                    @{
+                                        if (ViewBag.Class != null)
+                                        {
+                                            <td>@ViewBag.Class.Class</td>
+                                        }
+                                        else
+                                        {
+                                            <td>Not Passed</td>
+                                        }
+                                    }
+                                    @{
+                                        if (ViewBag.Class != null)
+                                        {
+                                            <td>@ViewBag.Result.CourseFee</td>
+                                        }
+                                    }
+                                    @{
+                                        if (ViewBag.Class != null)
+                                        {
+                                            <td>@ViewBag.Result.BillTime.ToString("MM/dd/yyyy")</td>
+                                        }
+                                    }
                                 </tr>
                             </table>
                         </div>
@@ -167,6 +215,8 @@
         $("#resultByRollNum").removeClass("disNone");
         $("#resultCheck").removeClass("disNone");
         $("#admsDropdown").addClass("disNone");
+        $("#titleAllResult").addClass("disNone");
+        $("#titleCheckResult").removeClass("disNone");
     });
     $("#allResult").click(function () {
         $("#checkResult").removeClass("cateActive");
@@ -176,6 +226,8 @@
         $("#search").addClass("disNone");
         $("#resultCheck").addClass("disNone");
         $("#admsDropdown").removeClass("disNone");
+        $("#titleAllResult").removeClass("disNone");
+        $("#titleCheckResult").addClass("disNone");
 
     });
 </script>

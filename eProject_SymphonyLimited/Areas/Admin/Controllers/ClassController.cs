@@ -222,7 +222,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                         Email = re.Email,
                         Status = st.Status,
                         ClassName = _class.Name,
-                        ClassId = classId
+                        ClassId = st.ClassId
                     }).Where(x => x.Status == true && x.ClassId == classId).AsEnumerable();
                 if (!String.IsNullOrEmpty(type) && !String.IsNullOrEmpty(key))
                 {
@@ -240,7 +240,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                                         Email = re.Email,
                                         Status = st.Status,
                                         ClassName = _class.Name,
-                                        ClassId = classId
+                                        ClassId = st.ClassId
                                     }).Where(x => x.StudentName.Contains(key) && x.Status == true && x.ClassId == classId).AsEnumerable();
                             break;
                         default:

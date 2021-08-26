@@ -6,6 +6,11 @@
 
 
 <div class="mainEE">
+    <div class="bannerCourse">
+        <div class="title">
+            <span>Admission Detail</span>
+        </div>
+    </div>
     <div class="menuEEMobi">
         <div class="barEE" style="padding: 0 30px;font-size: 20px;">
             <i class="fas fa-bars" id="barE"></i>
@@ -35,10 +40,20 @@
                 </div>
                 <div class="menu">
                     <ul>
-                        @{ foreach (var item in ViewBag.Adms)
+                        @{
+                            if (ViewBag.Adms != null)
+                            {
+                                foreach (var item in ViewBag.Adms)
+                                {
+                                    <li id="">
+                                        <a class="defaultMenu" href="~/Home/AdmissionDetail/@item.EntityId">@item.Name</a>
+                                    </li>
+                                }
+                            }
+                            else
                             {
                                 <li id="">
-                                    <a class="defaultMenu" href="~/Home/AdmissionDetail/@item.EntityId">@item.Name</a>
+                                    <span>There is no admission</span>
                                 </li>
                             }
                         }
@@ -53,7 +68,7 @@
                 </div>
                 <div class="containerItem flex">
                     <div class="img">
-                        <img src="~/Areas/Admin/Content/img/@ViewBag.admById.Image" alt="Alternate Text" width="100%"/>
+                        <img src="~/Areas/Admin/Content/img/@ViewBag.admById.Image" alt="Alternate Text" width="100%" />
                     </div>
                     <div class="content">
                         <div class="time flex">
@@ -102,7 +117,7 @@
                         </div>
                         <div class="form-row">
                             <input type="hidden" name="AdmissionId" value="@ViewBag.admById.EntityId" />
-                            <input type ="text" name="name" value="@ViewBag.admById.Name" disabled/>
+                            <input type="text" name="name" value="@ViewBag.admById.Name" disabled />
                         </div>
                         <div class="form-row">
                             @Html.TextAreaFor(model => model.Comment, new { @class = "input", @placeholder = "Give us questions", @rows = "5" })

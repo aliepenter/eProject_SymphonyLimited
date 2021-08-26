@@ -111,22 +111,6 @@ namespace eProject_SymphonyLimited.Controllers
         {
             int pageSize = 6;
             List<AdmsViewModel> admissionModel = new List<AdmsViewModel>();
-
-            //var admission = db.Admission.Join(db.Course,
-            //                   ad => ad.CourseId,
-            //                   co => co.EntityId,
-            //                   (ad, co) => new
-            //                   AdmsViewModel
-            //                   {
-            //                       EntityId = ad.EntityId,
-            //                       Name = ad.Name,
-            //                       Price = ad.Price,
-            //                       StartTime = ad.StartTime,
-            //                       EndTime = ad.EndTime,
-            //                       BillTime = ad.BillTime,
-            //                       CourseId = ad.CourseId,
-            //                       Course = co.Image
-            //                   }).Where(x => x.StartTime <= DateTime.Now && x.EndTime >= DateTime.Now).AsEnumerable();
             if (!String.IsNullOrEmpty(key))
             {
                 foreach (var item in db.Admission.Include(x => x.Course).Where(x => x.Name.ToString().Contains(key)))
@@ -661,6 +645,7 @@ namespace eProject_SymphonyLimited.Controllers
                     EntityId = ad.pr.EntityId,
                     RollNumber = ad.pr.RollNumber,
                     Result = ad.pr.Result,
+                    PassedMark = ad.re.ad.PassedMark,
                     Name = ad.re.reg.Name,
                     Phone = ad.re.reg.Phone,
                     Email = ad.re.reg.Email,
@@ -670,6 +655,7 @@ namespace eProject_SymphonyLimited.Controllers
                     Admission = ad.re.ad.Name,
                     Tested = ad.pr.Tested,
                     BillTime = ad.re.ad.BillTime,
+                    RegisterInfoId = ad.re.reg.EntityId,
                     CourseFee = co.Price
                 }).FirstOrDefault(x => x.RollNumber == rollNumber);
             if (resultByRollNumber != null)
@@ -682,6 +668,25 @@ namespace eProject_SymphonyLimited.Controllers
                 else
                 {
                     ViewBag.Result = resultByRollNumber;
+                    var cls = db.Student
+                        .Join(db.Class,
+                        st => st.ClassId,
+                        cl => cl.EntityId,
+                        (st, cl) => new
+                        PaidRegisterViewModel
+                        {
+                            EntityId = st.EntityId,
+                            RegisterInfoId = st.RegisterInfoId,
+                            Class = cl.Name
+                        }).Where(x => x.RegisterInfoId == resultByRollNumber.RegisterInfoId).FirstOrDefault();
+                    if (cls != null)
+                    {
+                        ViewBag.Class = cls;
+                    }
+                    else
+                    {
+                        ViewBag.Class = null;
+                    }
                 }
             }
             else
