@@ -28,6 +28,24 @@
 <a href="@Url.Action("Index")" class="btn btn-outline-dark mb-2"><i class="fas fa-arrow-circle-left"></i> Back to list</a>
 
 <input type="hidden" id="ClassId" value="@ViewBag.ClassId" />
+<div class="modal fade" id="modal-change-class" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="stId" value="" />
+                <select id="class-options"></select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="save-class-for-student">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 @section Scripts {
     <script>
@@ -40,13 +58,15 @@
                     url: baseUrl + "Admin/Class/GetStudentInClass",
                     data: { page: page, type: type, key: key, classId: classId },
                     success: function (res) {
-                        var _html = ' <thead class="thead-dark"><tr><th>Entity Id</th><th>Student Name</th><th>Phone</th><th>Email</th></tr></thead>';
+                        var _html = ' <thead class="thead-dark"><tr><th>Student Name</th><th>Phone</th><th>Email</th><th>Action</th></tr></thead>';
                         for (var item of JSON.parse(res.Data)) {
                             _html += '<tbody><tr>' +
-                                '<td>' + item.EntityId + '</td>' +
                                 '<td>' + item.StudentName + '</td>' +
                                 '<td>' + item.Phone + '</td>' +
                                 '<td>' + item.Email + '</td>' +
+                                '<td>'
+                                + '<button class="btn btn-warning btn-changeClass mr-1 mb-1" data-id="' + item.EntityId + '"><i class="fas fa-edit"></i> Change Class</button>'
+                                + '</td>' +
                                 + '</tr></tbody>';
                         }
                         $('.table').html(_html);
@@ -62,6 +82,54 @@
                     }
                 })
             },
+            loadClassOptions: function (studentId = 0) {
+                $.ajax({
+                    type: "GET",
+                    url: baseUrl + "Admin/Class/GetClassForStudent",
+                    data: { studentId: studentId },
+                    success: function (res) {
+                        var _html = '';
+                        if (res.StatusCode == 200) {
+                            var data = JSON.parse(res.Data);
+                            if (data != null) {
+                                for (var item of data) {
+                                    _html += '<option value="' + item.EntityId + '">' + item.Name + '</option>';
+                                }
+                                $('#class-options').html(_html);
+                                $('#modal-change-class').modal('show');
+                            } else {
+                                alert("No class is ready!");
+                            }
+                        } else {
+                            if (res.StatusCode == 400) {
+                                alert(res.Message);
+                            } else {
+                                alert("Some things went wrong while get ready class for student!");
+                            }
+                        }
+                    }
+                })
+            },
+            changeClass: function (classId, studentId) {
+                $.ajax({
+                    type: "POST",
+                    url: baseUrl + "Admin/Class/ChangeClassForStudent",
+                    data: { classId: classId, studentId: studentId },
+                    success: function (res) {
+                        if (res.StatusCode == 200) {
+                            alert(res.Message);
+                            manager.load(1, null, null, $('#ClassId').val());
+                            $('#modal-change-class').modal('hide');
+                        } else {
+                            if (res.StatusCode == 400) {
+                                alert(res.Message);
+                            } else {
+                                alert("Some things went wrong while change class for student!");
+                            }
+                        }
+                    }
+                })
+            }
         }
 
         $(function () {
@@ -69,6 +137,25 @@
             if (classId == null) {
                 classId = 0;
             }
+            $(document).on("click", ".btn-changeClass", function () {
+                var stId = $(this).data('id');
+                if (stId != null && stId != "") {
+                    $("#stId").val(stId);
+                    manager.loadClassOptions(stId);
+                } else {
+                    alert("Student Id is not valid!");
+                }
+            });
+            $(document).on("click", "#save-class-for-student", function () {
+                var classId = $("#class-options").val(),
+                    stId = $("#stId").val();
+                if (stId != null && stId != ""
+                    && classId != null && classId != "") {
+                    manager.changeClass(classId, stId);
+                } else {
+                    alert("Class Id or Student Id is not valid!");
+                }
+            })
             manager.load(1, null, null, classId);
             $(document).on("click", ".item_page", function () {
                 var page = $(this).text(),

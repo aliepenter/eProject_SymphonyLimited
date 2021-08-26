@@ -63,7 +63,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
         public ActionResult Edit(CoreConfigData ccd)
         {
             var currentCoreConfigData = db.CoreConfigData.Find(ccd.EntityId);
-            if (currentCoreConfigData.Code == "maximum_student_in_class" || currentCoreConfigData.Code == "minium_student_in_class")
+            if (currentCoreConfigData.Code == "maximum_student_in_class")
             {
                 var isInt = Int32.TryParse(ccd.Value, out int number);
                 if (!isInt)

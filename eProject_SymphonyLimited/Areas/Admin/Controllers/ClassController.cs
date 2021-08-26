@@ -139,13 +139,11 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
             dynamic json = System.Web.Helpers.Json.Decode(studentArrJson);
             var classById = db.Class.Find(classId);
             var maxStudentInClass = db.CoreConfigData.FirstOrDefault(x => x.Code == "maximum_student_in_class");
-            var minStudentInClass = db.CoreConfigData.FirstOrDefault(x => x.Code == "minium_student_in_class");
             var maxStudentIsInt = Int32.TryParse(maxStudentInClass.Value, out int maxStudent);
-            var minStudentIsInt = Int32.TryParse(minStudentInClass.Value, out int minStudent);
             var quantityStudent = db.Class.Find(classId).QuantityStudent;
             if (json.Length > 0 && classById != null)
             {
-                if (maxStudentIsInt && minStudentIsInt)
+                if (maxStudentIsInt)
                 {
                     quantityStudent += json.Length;
                     if (quantityStudent > maxStudent)
@@ -154,14 +152,6 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                         {
                             StatusCode = 400,
                             Message = "Student In Class must smaller than " + maxStudent + "!"
-                        }, JsonRequestBehavior.AllowGet);
-                    }
-                    if (quantityStudent < minStudent)
-                    {
-                        return Json(new
-                        {
-                            StatusCode = 400,
-                            Message = "Student In Class must bigger than " + minStudent + "!"
                         }, JsonRequestBehavior.AllowGet);
                     }
                     foreach (var item in json)
@@ -311,6 +301,105 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
             return Json(new
             {
                 StatusCode = 400,
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetClassForStudent(int studentId = 0)
+        {
+            if (studentId != 0)
+            {
+                var currentStudent = db.Student.Find(studentId);
+                if (currentStudent != null)
+                {
+                    var maxStudentInClass = db.CoreConfigData.FirstOrDefault(x => x.Code == "maximum_student_in_class");
+                    var maxStudentIsInt = Int32.TryParse(maxStudentInClass.Value, out int maxStudent);
+                    var classByStudentId = db.Class.FirstOrDefault(x => x.EntityId == currentStudent.ClassId);
+                    if (maxStudentIsInt && classByStudentId != null)
+                    {
+                        var classForStudent = db.Class.Where(x => x.AdmissionId == classByStudentId.AdmissionId && x.QuantityStudent < maxStudent && x.EntityId != classByStudentId.EntityId);
+                        string jsonData = JsonConvert.SerializeObject(classForStudent);
+                        return Json(new
+                        {
+                            StatusCode = 200,
+                            Data = jsonData
+                        }, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        return Json(new
+                        {
+                            StatusCode = 400,
+                            Message = "Some things went wrong get class for student!"
+                        }, JsonRequestBehavior.AllowGet);
+                    }
+                }
+            }
+            return Json(new
+            {
+                StatusCode = 400,
+                Message = "Student Id is not correct!"
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public ActionResult ChangeClassForStudent(int classId = 0, int studentId = 0)
+        {
+            if (classId != 0 && studentId != 0)
+            {
+                var maxStudentInClass = db.CoreConfigData.FirstOrDefault(x => x.Code == "maximum_student_in_class");
+                var maxStudentIsInt = Int32.TryParse(maxStudentInClass.Value, out int maxStudent);
+                var classByClassId = db.Class.Find(classId);
+                var currentStudent = db.Student.Find(studentId);
+                var oldClassByStudentId = db.Class.FirstOrDefault(x => x.EntityId == currentStudent.ClassId);
+                oldClassByStudentId = db.Class.Find(oldClassByStudentId.EntityId);
+                if (classByClassId != null && currentStudent != null && maxStudentIsInt)
+                {
+                    try
+                    {
+                        if (classByClassId.QuantityStudent >= maxStudent)
+                        {
+                            return Json(new
+                            {
+                                StatusCode = 400,
+                                Message = "Class is full students!"
+                            }, JsonRequestBehavior.AllowGet);
+                        }
+                        else
+                        {
+                            currentStudent.ClassId = classId;
+                            oldClassByStudentId.QuantityStudent -= 1;
+                            classByClassId.QuantityStudent += 1;
+                            db.SaveChanges();
+                            return Json(new
+                            {
+                                StatusCode = 200,
+                                Message = "Change class for student success!"
+                            }, JsonRequestBehavior.AllowGet);
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        return Json(new
+                        {
+                            StatusCode = 400,
+                            Message = "Some things went wrong while change class for student!"
+                        }, JsonRequestBehavior.AllowGet);
+                    }
+                }
+                else
+                {
+                    return Json(new
+                    {
+                        StatusCode = 400,
+                        Message = "Some things went wrong while change class for student!"
+                    }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            return Json(new
+            {
+                StatusCode = 400,
+                Message = "Student Id or Class Id is not correct!"
             }, JsonRequestBehavior.AllowGet);
         }
     }

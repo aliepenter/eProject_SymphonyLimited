@@ -46,17 +46,15 @@
                     url: baseUrl + "Admin/Class/GetStudentNotInClass",
                     data: { page: page, type: type, key: key, classId: classId },
                     success: function (res) {
-                        var _html = ' <thead class="thead-dark"><tr><th>Entity Id</th><th>Student Name</th><th></th></tr></thead>';
+                        var _html = ' <thead class="thead-dark"><tr><th>Student Name</th><th></th></tr></thead>';
                         for (var item of JSON.parse(res.Data)) {
                             if ($.inArray(item.EntityId, arr) !== -1) {
                                 _html += '<tbody><tr>' +
-                                    '<td>' + item.EntityId + '</td>' +
                                     '<td>' + item.StudentName + '</td>' +
                                     '<td>' + '<input class="itemStudent" data-id="' + item.EntityId + '"checked  type="checkbox" name="name" value=""/>' + '</td>'
                                     + '</tr></tbody>';
                             } else {
                                 _html += '<tbody><tr>' +
-                                    '<td>' + item.EntityId + '</td>' +
                                     '<td>' + item.StudentName + '</td>' +
                                     '<td>' + '<input class="itemStudent" data-id="' + item.EntityId + '" type="checkbox" name="name" value=""/>' + '</td>'
                                     + '</tr></tbody>';
