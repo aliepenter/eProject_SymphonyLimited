@@ -167,10 +167,12 @@ namespace eProject_SymphonyLimited.Controllers
         [HttpGet]
         public ActionResult GetChildCategory()
         {
-            var childCategory = db.Category.Where(x => x.Level != 2 && x.Level != 1).AsEnumerable();
+            var childCategory = db.Category.AsEnumerable();
+            var count = childCategory.Count();
             return Json(new
             {
-                data = childCategory
+                data = childCategory,
+                count = count
             }, JsonRequestBehavior.AllowGet);
         }
 

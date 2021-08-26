@@ -1121,9 +1121,11 @@ table, th, td {
 .containerContentResult .content .form-row {
     width: 80%
 }
-.containerContentResult .content .form-row .btnSearch{
-    width: 20%
-}
+
+    .containerContentResult .content .form-row .btnSearch {
+        width: 20%
+    }
+
 .bannerFaq {
     background: none;
     min-height: 100px;
@@ -1180,12 +1182,14 @@ table, th, td {
         margin: auto
     }
 
-.mainEE .containerEE{
+.mainEE .containerEE {
     margin: 30px auto
 }
+
 .mainEE .containerEEDetail {
     margin: 30px auto
 }
+
 .containerEE {
     width: 90%;
     margin: 0 auto
@@ -1549,15 +1553,18 @@ table, th, td {
     font-size: 20px;
     padding: 0 0 0 15px;
 }
-.inputAdmsResult{
+
+.inputAdmsResult {
     width: 100%;
     margin: 10px 0
 }
+
 .form-row2 {
     width: 100%;
     margin: 10px 0;
     text-align: right
 }
+
 #backCourse span {
     cursor: pointer;
     display: inline-block;
@@ -1582,6 +1589,17 @@ table, th, td {
         opacity: 1;
         right: 0;
     }
+
+.ulChildCate {
+    display: none;
+}
+
+.menuDefault .right .subMenuCourse li:hover > .ulChildCate {
+    display: block;
+    animation-duration: .5s;
+    animation-delay: 0s;
+    animation-name: fadeInLeft;
+}
 /* minwidth 768 */
 @media screen and (min-width: 768px) {
     .mainExamResult .containerExamResult {
@@ -1590,6 +1608,7 @@ table, th, td {
         background-color: white;
         padding: 10px 0 20px 0
     }
+
     .mainExamResult .cusErrorResult {
         font-size: 20px;
         padding: 0 0 0 35px;
@@ -1947,7 +1966,7 @@ table, th, td {
     }
 
     .menuDefault .right .subMenuCourse li {
-        width: 350px;
+        width: 315px;
     }
 
     .menuDefault .right .courseSubMenu:hover .subMenuCourse {
@@ -2182,6 +2201,7 @@ table, th, td {
         width: 50%;
         margin: 10px 0
     }
+
     .mainExamResult .cusErrorResult {
         font-size: 20px;
         padding: 0 0 0 65px;
@@ -2235,12 +2255,14 @@ table, th, td {
         font-size: 20px
     }
 
-    .mainEE .containerEE{
+    .mainEE .containerEE {
         margin: 30px auto
     }
+
     .mainEE .containerEEDetail {
         margin: 30px auto
     }
+
     .containerEE {
         width: 60%;
         margin: 0 auto
@@ -2255,17 +2277,18 @@ table, th, td {
             width: 20%;
             display: block
         }
-        .containerEEDetail .left .menu{
-            max-height: 600px;
-            overflow-y: scroll;
+
+            .containerEEDetail .left .menu {
+                max-height: 600px;
+                overflow-y: scroll;
                 border: 1px solid gray;
-    border-left: none;
-    border-right: none;
-        }
-            /*.containerEEDetail .left .menu::-webkit-scrollbar {
+                border-left: none;
+                border-right: none;
+            }
+        /*.containerEEDetail .left .menu::-webkit-scrollbar {
                 width: 0;*/ /* Remove scrollbar space */
-                /*background: transparent;*/ /* Optional: just make scrollbar invisible */
-            /*}*/
+        /*background: transparent;*/ /* Optional: just make scrollbar invisible */
+        /*}*/
         .containerEEDetail .midEE {
             width: 55%
         }
@@ -2771,7 +2794,17 @@ table, th, td {
     z-index: 15;
     opacity: .9
 }
+@keyframes fadeInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
 
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}   
 @keyframes scroll-left {
     0% {
         transform: translateX(100%);

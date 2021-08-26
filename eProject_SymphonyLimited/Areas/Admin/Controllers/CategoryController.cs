@@ -175,7 +175,7 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
                                 childCategoriesInCourse.Add(item.EntityId);
                             }
                         }
-                        if (childCategoriesInCourse.Count.Equals(null))
+                        if (childCategoriesInCourse.Count == 0)
                         {
                             foreach (var item in childCategories)
                             {
