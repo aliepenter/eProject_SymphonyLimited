@@ -5,7 +5,7 @@
 }
 
 body {
-        font-family: Roboto,sans-serif;
+    font-family: Roboto,sans-serif;
 }
 
 .popUpSubmit {
@@ -405,10 +405,11 @@ body {
         padding: 10px 10px 10px 0;
         font-size: 20px;
     }
+
 .cusCourseItem .img {
     border: 1px solid #e5e5e5;
-    
 }
+
 .cusCourseItem {
     width: 100%;
     position: relative;
@@ -417,31 +418,38 @@ body {
     padding: 10px;
     margin-bottom: 30px;
 }
+
     .cusCourseItem:hover {
         top: -10px;
     }
-    .cusCourseItem:hover .description{
-        background-color: lightgray;
-    }
-    .cusCourseItem:hover .moreInfor {
-        background-color: lightgray;
-    }
+
+        .cusCourseItem:hover .description {
+            background-color: lightgray;
+        }
+
+        .cusCourseItem:hover .moreInfor {
+            background-color: lightgray;
+        }
+
 .midEE .cusCourseItem:hover .rd {
     background-color: lightgray;
 }
-.rd{
+
+.rd {
     padding: 0 10px;
     color: black
 }
-.rd .time{
-    color: rebeccapurple;
-    font-weight: bold;
-    font-size: 16px
-}
-    .cusCourseItem .moreInfor {
-        border: 1px solid #e5e5e5;
-        padding: 10px 0;
+
+    .rd .time {
+        color: rebeccapurple;
+        font-weight: bold;
+        font-size: 16px
     }
+
+.cusCourseItem .moreInfor {
+    border: 1px solid #e5e5e5;
+    padding: 10px 0;
+}
 
 .containerMoreInfor {
     width: 90%;
@@ -496,6 +504,7 @@ body {
 .childBarActive {
     transform: rotateZ(90deg);
 }
+
 .cherFaq {
     transform: rotateZ(180deg);
 }
@@ -1075,7 +1084,7 @@ body {
     width: 50%;
     padding: 10px;
     font-weight: bold;
-    cursor:pointer
+    cursor: pointer
 }
 
 .cusCate2 {
@@ -1138,6 +1147,7 @@ table, th, td {
     font-size: 25px;
     color: cornflowerblue
 }
+
 .containerFaq .mainFaq {
     border: 2px solid #efefef;
     border-bottom: none;
@@ -1145,26 +1155,32 @@ table, th, td {
     border-top-right-radius: 5px;
     margin: 100px 0
 }
-.containerFaq .mainFaq .childLi{
-    /*border: 2px solid #efefef;
+
+    .containerFaq .mainFaq .childLi {
+        /*border: 2px solid #efefef;
     border-bottom: none;*/
-}
-.containerFaq .mainFaq ul .parentLiStyle {
-    list-style: none;
-    padding: 15px;
-    border-bottom: 2px solid #efefef;
-    cursor: pointer;
+    }
 
-}.containerFaq .mainFaq ul .parentLiStyle:hover {
-    background:#EFEFEF
+    .containerFaq .mainFaq ul .parentLiStyle {
+        list-style: none;
+        padding: 15px;
+        border-bottom: 2px solid #efefef;
+        cursor: pointer;
+    }
 
-}
-.containerFaq .mainFaq ul li .ques{
-    margin: auto;
-    padding-left: 20px
-}.containerFaq .mainFaq ul li .icon{
-    margin: auto
-}
+        .containerFaq .mainFaq ul .parentLiStyle:hover {
+            background: #EFEFEF
+        }
+
+    .containerFaq .mainFaq ul li .ques {
+        margin: auto;
+        padding-left: 20px
+    }
+
+    .containerFaq .mainFaq ul li .icon {
+        margin: auto
+    }
+
 .mainEE {
     margin: 30px 0
 }
@@ -1195,32 +1211,34 @@ table, th, td {
             font-weight: bold;
             background: #E0A800
         }
+
 .containerEEDetail {
     width: 90%;
     margin: 0 auto
 }
 
-.containerEEDetail .left {
-    width: 0%;
-    display: none;
-}
+    .containerEEDetail .left {
+        width: 0%;
+        display: none;
+    }
 
-.containerEEDetail .midEE {
-    width: 100%
-}
+    .containerEEDetail .midEE {
+        width: 100%
+    }
 
-.containerEEDetail .right {
-    width: 100%
-}
+    .containerEEDetail .right {
+        width: 100%
+    }
 
-.containerEEDetail .right .formRegis .title {
-    text-align: center;
-    padding: 20px;
-    font-size: 25px;
-    text-transform: uppercase;
-    font-weight: bold;
-    background: #E0A800
-}
+        .containerEEDetail .right .formRegis .title {
+            text-align: center;
+            padding: 20px;
+            font-size: 25px;
+            text-transform: uppercase;
+            font-weight: bold;
+            background: #E0A800
+        }
+
 .mainEE .containerEEDetail .form {
     margin: 10px 0
 }
@@ -1229,26 +1247,26 @@ table, th, td {
     margin: 30px 0;
 }
 
-.mainEE .containerEEDetail .form-row .input {
-    padding: 25px;
-    width: 100%;
-    outline: none;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: .25rem;
-}
+    .mainEE .containerEEDetail .form-row .input {
+        padding: 25px;
+        width: 100%;
+        outline: none;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+    }
 
 
-.mainEE .containerEEDetail .form-row textarea {
-    padding: 25px;
-    width: 100%;
-    outline: none;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: .25rem;
-}
+    .mainEE .containerEEDetail .form-row textarea {
+        padding: 25px;
+        width: 100%;
+        outline: none;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+    }
 
 .mainEE .containerEEDetail button {
     padding: 10px;
@@ -1261,9 +1279,9 @@ table, th, td {
     font-weight: bold
 }
 
-.mainEE .containerEEDetail button:hover {
-    background-color: #FF9600
-}
+    .mainEE .containerEEDetail button:hover {
+        background-color: #FF9600
+    }
 
 .main .cusBannerEE .category {
     /*padding: 0px 30px;*/
@@ -1313,12 +1331,15 @@ table, th, td {
     margin: 0 auto;
     padding: 20px 0
 }
-    .midEE .containerItem .img{
+
+    .midEE .containerItem .img {
         width: 100%;
     }
+
     .midEE .containerItem .content {
         width: 100%;
     }
+
     .midEE .containerItem .csSpan {
         font-weight: bold
     }
@@ -1359,31 +1380,32 @@ table, th, td {
             }
 
 
-    .containerCourseDetail .left {
-        width: 100%
-    }
+.containerCourseDetail .left {
+    width: 100%
+}
 
-    .containerCourseDetail .right {
-        width: 100%
-    }
+.containerCourseDetail .right {
+    width: 100%
+}
 
-    .containerCourseDetail .left .price {
-        font-weight: bold;
-        font-size: 20px;
+.containerCourseDetail .left .price {
+    font-weight: bold;
+    font-size: 20px;
+    padding: 10px 0;
+}
+
+.containerCourseDetail .right .containerItem {
+    font-size: 18px
+}
+
+    .containerCourseDetail .right .containerItem .cusItem {
         padding: 10px 0;
-        
     }
 
-    .containerCourseDetail .right .containerItem {
-        font-size: 18px
+    .containerCourseDetail .right .containerItem .topItemCourseDetail .name {
+        font-size: 30px
     }
 
-        .containerCourseDetail .right .containerItem .cusItem {
-            padding: 10px 0;
-        }
-        .containerCourseDetail .right .containerItem .topItemCourseDetail .name {
-            font-size: 30px
-        }
 .cdSpan {
     font-weight: bold;
 }
@@ -1400,14 +1422,17 @@ table, th, td {
     text-align: center;
     padding: 0px
 }
+
 .toolbar-sorter {
     padding: 0 10px;
     text-align: right;
     font-size: 1.4rem
 }
-.toolbar-sorter select{
-    padding: 5px
-}
+
+    .toolbar-sorter select {
+        padding: 5px
+    }
+
 .midEE .cusCourseItem .description {
     text-align: center;
     color: black;
@@ -1421,6 +1446,7 @@ table, th, td {
     border-bottom: none;
     border-top: none;
 }
+
 .cusCourseItem .description {
     text-align: center;
     color: black;
@@ -1434,75 +1460,92 @@ table, th, td {
     border-bottom: none;
     border-top: none;
 }
-.cusCourseItem .description span:hover {
-    color: #ED4B23;
-}
-.mainInfor{
+
+    .cusCourseItem .description span:hover {
+        color: #ED4B23;
+    }
+
+.mainInfor {
     font-size: 16px
 }
+
 .containerCourseDetail {
     width: 90%;
     margin: 30px auto
 }
+
 .topItemCourseDetail {
     border-bottom: 1px solid #c1c1c1
 }
-.topItemCourseDetail .name{
-    font-size: 20px;
-    font-weight: bold
-}
-.topItemCourseDetail .cate span{
-    font-size: 14px;
-    font-weight: bold
-}
-.botItemCourseDetail .name{
+
+    .topItemCourseDetail .name {
+        font-size: 20px;
+        font-weight: bold
+    }
+
+    .topItemCourseDetail .cate span {
+        font-size: 14px;
+        font-weight: bold
+    }
+
+.botItemCourseDetail .name {
     width: 40%
 }
+
 .botItemCourseDetail .value {
     width: 60%
 }
+
 .containerCourseDetail .butt button {
     width: 100%;
     padding: 10px;
     background: purple;
     color: wheat;
-    font-size : 20px;
+    font-size: 20px;
     outline: none;
     border: none;
     border-radius: 5px
 }
-.containerCourseDetail .butt button:hover {
-    background: rgb(110, 19, 19);
-}
+
+    .containerCourseDetail .butt button:hover {
+        background: rgb(110, 19, 19);
+    }
+
 .containerCourseDetail .description {
     border: 1px solid #ccc;
     padding: 30px;
     margin: 30px 0;
     border-radius: 5px
 }
-.containerCourseDetail .description .title{
-    font-weight: bold;
-    font-size: 20px;
-    margin: 0 0 20px 0
-}
-.containerCourseDetail .description .content{
-    line-height: 2;
-}
-.containerCourseDetail .topItemCourseDetail .price{
+
+    .containerCourseDetail .description .title {
+        font-weight: bold;
+        font-size: 20px;
+        margin: 0 0 20px 0
+    }
+
+    .containerCourseDetail .description .content {
+        line-height: 2;
+    }
+
+.containerCourseDetail .topItemCourseDetail .price {
     width: 40%
 }
+
 .containerCourseDetail .topItemCourseDetail .cate {
     width: 60%
 }
+
 .childLiStyle {
     list-style: none;
     padding: 15px 0px 15px 35px;
     border-bottom: 2px solid #efefef;
     line-height: 2
 }
-.mainExamResult .cusErrorResult{
+
+.mainExamResult .cusErrorResult {
     font-size: 20px;
-    padding:  0 0 0 15px;
+    padding: 0 0 0 15px;
 }
 /* minwidth 768 */
 @media screen and (min-width: 768px) {
@@ -1510,6 +1553,7 @@ table, th, td {
         font-size: 20px;
         padding: 0 0 0 35px;
     }
+
     .popUpSubmit {
         width: 40%;
     }
@@ -1706,16 +1750,20 @@ table, th, td {
         font-size: 20px;
         padding: 0 0 0 45px;
     }
+
     .containerFaq {
         width: 70%;
         margin: 0 auto
     }
+
     .midEE .containerItem .img img {
         padding: 30px
     }
-    .midEE .cusCourseItem{
+
+    .midEE .cusCourseItem {
         width: 33.33334%
     }
+
     .containerCourseDetail .topItemCourseDetail .price {
         width: 30%
     }
@@ -1723,6 +1771,7 @@ table, th, td {
     .containerCourseDetail .topItemCourseDetail .cate {
         width: 70%
     }
+
     .main .page2 .title h1 {
         font-size: 94px;
     }
@@ -2087,17 +2136,21 @@ table, th, td {
         font-size: 20px;
         padding: 0 0 0 65px;
     }
+
     .st, .et {
         width: 100%;
         padding: 10px 0
     }
+
     .containerCourseDetail .butt button {
         width: 50%;
     }
+
     .containerCourseDetail {
         width: 60%;
         margin: 30px auto
     }
+
     .popUpSubmit {
         width: 20%;
     }
@@ -2140,20 +2193,25 @@ table, th, td {
         width: 60%;
         margin: 0 auto
     }
+
     .containerEEDetail {
         width: 90%;
         margin: 0 auto
     }
+
         .containerEEDetail .left {
             width: 20%;
             display: block
         }
+
         .containerEEDetail .midEE {
             width: 55%
         }
+
         .containerEEDetail .right {
             width: 25%
         }
+
             .containerEEDetail .right .formRegis .title {
                 text-align: center;
                 padding: 20px;
@@ -2209,14 +2267,14 @@ table, th, td {
 
 
 
-            .containerEE .right .formRegis .title {
-                text-align: center;
-                padding: 20px;
-                font-size: 25px;
-                text-transform: uppercase;
-                font-weight: bold;
-                background: #E0A800
-            }
+    .containerEE .right .formRegis .title {
+        text-align: center;
+        padding: 20px;
+        font-size: 25px;
+        text-transform: uppercase;
+        font-weight: bold;
+        background: #E0A800
+    }
 
     .mainEE .containerEE .form {
         margin: 10px 0
@@ -2243,24 +2301,21 @@ table, th, td {
             outline: none;
             background-color: #fff;
             background-clip: padding-box;
-            border: 1px solid #ced4da;
+            border: none;
             border-radius: .25rem;
         }
 
     .mainEE .containerEE button {
         padding: 10px;
-        width: 50%;
         outline: none;
         border-radius: 5px;
-        border: 1px solid #CED4DA;
-        background-color: #E0A800;
+        border: none;
+        background-color: #337ab7;
         text-transform: uppercase;
-        font-weight: bold
+        font-weight: bold;
+        color: white
     }
 
-        .mainEE .containerEE button:hover {
-            background-color: #FF9600
-        }
 
     .main .cusBannerEE .category {
         /*padding: 0px 30px;*/
@@ -2309,16 +2364,20 @@ table, th, td {
         width: 100%;
         padding: 0
     }
+
         .midEE .containerItem .img {
             width: 50%;
         }
-        .midEE .containerItem .img img {
-            padding: 30px
-        }
+
+            .midEE .containerItem .img img {
+                padding: 30px
+            }
+
         .midEE .containerItem .content {
             width: 50%;
             margin-top: 15px
         }
+
         .midEE .containerItem .csSpan {
             font-weight: bold
         }
@@ -2526,6 +2585,7 @@ table, th, td {
         font-size: 25px;
         padding: 0 0 0 95px;
     }
+
     .bannerFaq {
         background-image: url("https://ssl.gstatic.com/support/content/images/static/banners/youtube.svg");
         background-position: center center;
@@ -2592,6 +2652,7 @@ table, th, td {
     top: 0;
     padding: 10px 0px;
 }
+
 .childFaqDown {
     display: block;
     animation-duration: 0.6s;

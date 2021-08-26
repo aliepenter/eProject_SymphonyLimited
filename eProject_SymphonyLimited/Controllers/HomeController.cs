@@ -3,6 +3,7 @@ using eProject_SymphonyLimited.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -105,6 +106,80 @@ namespace eProject_SymphonyLimited.Controllers
             return View();
 
         }
+        [HttpGet]
+        public ActionResult GetDataEntranceExam(int page = 1, string key = null)
+        {
+            int pageSize = 6;
+            List<AdmsViewModel> admissionModel = new List<AdmsViewModel>();
+
+            //var admission = db.Admission.Join(db.Course,
+            //                   ad => ad.CourseId,
+            //                   co => co.EntityId,
+            //                   (ad, co) => new
+            //                   AdmsViewModel
+            //                   {
+            //                       EntityId = ad.EntityId,
+            //                       Name = ad.Name,
+            //                       Price = ad.Price,
+            //                       StartTime = ad.StartTime,
+            //                       EndTime = ad.EndTime,
+            //                       BillTime = ad.BillTime,
+            //                       CourseId = ad.CourseId,
+            //                       Course = co.Image
+            //                   }).Where(x => x.StartTime <= DateTime.Now && x.EndTime >= DateTime.Now).AsEnumerable();
+            if (!String.IsNullOrEmpty(key))
+            {
+                foreach (var item in db.Admission.Include(x => x.Course).Where(x => x.Name.ToString().Contains(key)))
+                {
+                    admissionModel.Add(new AdmsViewModel
+                    {
+                        EntityId = item.EntityId,
+                        Name = item.Name,
+                        Price = item.Price,
+                        StartTime = item.StartTime,
+                        StartTimeToDate = String.Format("{0:dd/MM/yyyy}", item.StartTime),
+                        EndTime = item.EndTime,
+                        EndTimeToDate = String.Format("{0:dd/MM/yyyy}", item.EndTime),
+                        BillTime = item.BillTime,
+                        BillTimeToDate = String.Format("{0:dd/MM/yyyy}", item.BillTime),
+                        PassedMark = item.PassedMark,
+                        MaxMark = item.MaxMark,
+                        Course = item.Course.Image
+                    });
+                }
+            }
+            else
+            {
+                foreach (var item in db.Admission.Include(x => x.Course))
+                {
+                    admissionModel.Add(new AdmsViewModel
+                    {
+                        EntityId = item.EntityId,
+                        Name = item.Name,
+                        Price = item.Price,
+                        StartTime = item.StartTime,
+                        StartTimeToDate = String.Format("{0:dd/MM/yyyy}", item.StartTime),
+                        EndTime = item.EndTime,
+                        EndTimeToDate = String.Format("{0:dd/MM/yyyy}", item.EndTime),
+                        BillTime = item.BillTime,
+                        BillTimeToDate = String.Format("{0:dd/MM/yyyy}", item.BillTime),
+                        PassedMark = item.PassedMark,
+                        MaxMark = item.MaxMark,
+                        Course = item.Course.Image
+                    });
+                }
+            }
+            decimal totalPages = Math.Ceiling((decimal)admissionModel.Count() / pageSize);
+            string jsonData = JsonConvert.SerializeObject(admissionModel.Skip((page - 1) * pageSize).Take(pageSize));
+            return Json(new
+            {
+                TotalPages = totalPages,
+                CurrentPage = page,
+                StatusCode = 200,
+                Data = jsonData
+            }, JsonRequestBehavior.AllowGet);
+        }
+
         [HttpGet]
         public ActionResult GetChildCategory()
         {
@@ -576,7 +651,7 @@ namespace eProject_SymphonyLimited.Controllers
                        {
                            re,
                            pr
-                }).Join(
+                       }).Join(
                 db.Course,
                 ad => ad.re.ad.CourseId,
                 co => co.EntityId,

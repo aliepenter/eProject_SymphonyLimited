@@ -12,10 +12,13 @@ namespace eProject_SymphonyLimited.Areas.Admin.Data.ViewModel
         public string Name { get; set; }
 
         public DateTime StartTime { get; set; }
+        public string StartTimeToDate { get; set; }
 
         public DateTime EndTime { get; set; }
+        public string EndTimeToDate { get; set; }
 
         public DateTime BillTime { get; set; }
+        public string BillTimeToDate { get; set; }
 
         public double PassedMark { get; set; }
 

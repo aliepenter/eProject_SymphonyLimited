@@ -4,107 +4,87 @@
     ViewBag.Title = "EntranceExam";
 }
 
-
 <div class="mainEE">
     <div class="containerEE flex">
         <div class="midEE">
-            <div class="courseItem flex">
-                @{if (ViewBag.Adms != null)
-                    {
-                        foreach (var item in ViewBag.Adms)
-                        {
-                            <div class="course cusCourseItem">
-                                <a href="~/Home/AdmissionDetail/@item.EntityId" style="text-decoration:none">
-                                    <div class="img">
-                                        <img src="~/Areas/Admin/Content/img/@item.Course" alt="" width="100%" height="200px">
-                                    </div>
-                                    <div class="description">
-                                        <span>@item.Name</span>
-                                    </div>
-                                    <div class="rd" style="border: 1px solid #e5e5e5; border-top: none;border-bottom: none">
-                                        <span>End: <span class="time" id="et">@item.EndTime</span></span>
-                                    </div>
-                                    <div class="moreInfor ">
-                                        <div class="containerMoreInfor flex">
-                                            <div class="admissionCriteria width80">
-                                                <span>
-                                                    <i class="fas fa-users"></i> 
-                                                </span>
-                                            </div>
-                                            <div class="price width20">
-                                                <span>$ @item.Price</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        }
-                    }
-                    else
-                    {
-                        <h3>No Admission</h3>
-                    }
-                }
-            </div>
-            <div class="flex">
-                <div class="pages width50">
-                    <ul class="pagination">
-                        @for (int i = 1; i <= ViewBag.TotalPages; i++)
-                        {
-                            if (i == ViewBag.CurrentPage)
-                            {
-                                <li class="active mr-1">
-                                    <a href="javascript:void(0)" data-page-id="@i">
-                                        <button class="btn btn-info">@i</button>
-                                    </a>
-                                </li>
-                            }
-                            else
-                            {
-                                <li>
-                                    <a class="item_page mr-1" href="javascript:void(0)" data-page-id="@i">
-                                        <button class="btn btn-info">@i</button>
-                                    </a>
-                                </li>
-                            }
-                        }
-                    </ul>
-                </div>
-                <div class="field limiter width50" style="margin: auto">
-                    <div class="flex" style="float:right">
-                        <span style="margin: auto">Show</span>
-                        <div class="control" style="margin: 0 10px">
-                            <select id="limiter" class="limiter-options" style="padding: 4px">
-                                @if (ViewBag.Limiter == 24)
-                                {
-                                    <option value="06">6</option>
-                                    <option value="12">12</option>
-                                    <option value="24" selected>24</option>
-                                }
-                                else if (ViewBag.Limiter == 6)
-                                {
-                                    <option value="06" selected>6</option>
-                                    <option value="12">12</option>
-                                    <option value="24">24</option>
-                                }
-                                else
-                                {
-                                    <option value="06">6</option>
-                                    <option value="12" selected>12</option>
-                                    <option value="24">24</option>
-                                }
-                            </select>
-                        </div>
-                        <span class="limiter-text" style="margin: auto">items on the page</span>
-                    </div>
+            <div class="form-inline mb-3 float-right">
+                <div class="input-group">
+                    <label class="font-weight-bold m-0 mr-1 d-flex align-items-center">Search : </label>
+                    <input type="text" name="key" id="key" value="" class="form-control mr-1 bg-light small" placeholder="Enter to search..." aria-label="Search" aria-describedby="basic-addon2">
                 </div>
             </div>
-
+            <div class="courseItem flex get-data-exam">
+            </div>
         </div>
+        <ul class="pagination"></ul>
     </div>
 </div>
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
 <script>
-    @*var et = '@ViewBag.admById.EndTime';
-    et = et.split(' ')[0];
-    document.getElementById("end-time").innerHTML = et;*@
+    $(document).ready(function () {
+        var getUrl = window.location;
+        var baseUrl = getUrl.protocol + "//" + getUrl.host + "/";
+        var manager = {
+            load: function (page = 1, key = null) {
+                $.ajax({
+                    type: "GET",
+                    url: baseUrl + "Home/GetDataEntranceExam",
+                    data: { page: page, key: key },
+                    success: function (res) {
+                        var _html = ``;
+                        if (JSON.parse(res.Data) == null) {
+                            _html += `<h3>No Admission</h3>`;
+                        } else {
+                            for (var item of JSON.parse(res.Data)) {
+                                _html += `<div class="course cusCourseItem">
+                                        <a href="/Home/AdmissionDetail/${item.EntityId}" style="text-decoration:none">
+                                            <div class="img">
+                                                <img src="/Areas/Admin/Content/img/${item.Course}" alt="" width="100%" height="200px">
+                                            </div>
+                                            <div class="description">
+                                                <span>${item.Name}</span>
+                                            </div>
+                                           
+                                            <div class="moreInfor ">
+                                                <div class="containerMoreInfor flex">
+                                                    <div class="admissionCriteria width80">
+                                                         <div class="" style="color: black; font-weight:bold">
+                                                            <span>End: <span class="time" id="et">${item.EndTimeToDate}</span></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="price width20">
+                                                        <span>$ ${item.Price}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>`;
+                            }
+                            $('.get-data-exam').html(_html);
+                            var pages = '';
+                            for (var i = 1; i <= res.TotalPages; i++) {
+                                if (i == res.CurrentPage) {
+                                    pages += '<li class="active mr-1"><a href="javascript:void(0)"><button class="btn btn-info">' + i + '</button></a></li>';
+                                } else {
+                                    pages += '<li><a class="item_page mr-1" href="javascript:void(0)"><button class="btn btn-info">' + i + '</button></a></li>';
+                                }
+                            }
+                            $(".pagination").html(pages);
+                        }
+                    }
+                })
+            },
+        }
+        manager.load();
+        $(document).on("click", ".item_page", function () {
+            var page = $(this).text(),
+                key = $('#key').val();
+            manager.load(page, key);
+        });
+        $('#key').keyup(function () {
+            var key = $("#key").val();
+            manager.load(1, key);
+        });
+    });
 </script>

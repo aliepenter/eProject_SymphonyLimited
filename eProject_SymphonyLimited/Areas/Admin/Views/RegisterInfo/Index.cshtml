@@ -51,12 +51,17 @@
                                 } else {
                                     var status = "Unpaid";
                                 }
+                                if (item.Comment == null) {
+                                    var comment = "";
+                                } else {
+                                    var comment = item.Comment
+                                }
                                 _html += '<tbody><tr>' +
                                     '<td>' + item.EntityId + '</td>' +
                                     '<td>' + item.Name + '</td>' +
                                     '<td>' + item.Phone + '</td>' +
                                     '<td>' + item.Email + '</td>' +
-                                    '<td>' + item.Comment + '</td>' +
+                                    '<td>' + comment + '</td>' +
                                     '<td>' + item.CreatedAt + '</td>' +
                                     '<td>' + status + '</td>' +
                                     '<td>' + item.Admission + '</td>' +
