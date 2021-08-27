@@ -24,8 +24,6 @@
             </div>
             <div class="content">
                 <div class="search" id="search">
-                    
-                        
                     <form action="/Home/ExamResult" method="post">
                         <div class="flex">
                             <div class="form-row">
@@ -195,12 +193,51 @@
     manager.load();
     $(document).on("keyup", "#key", function () {
         var key = $(this).val();
-        manager.load(key);
+        $.ajax({
+            type: "GET",
+            url: baseUrl + "Home/GetOldAdmission",
+            data: { key: key },
+            success: function (res) {
+                if (res.StatusCode == 200) {
+                    var _html = '';
+                    for (var item of JSON.parse(res.Data)) {
+                        _html += '<option value="' + item.EntityId + '">' + item.Name + '</option>';
+                    }
+                    $('#all-old-admissions').html(_html);
+                } else {
+                    _html += '<option value="">Not found</option>';
+                    $('#all-old-admissions').html(_html);
+                }
+            }
+        })
     });
     $(document).on("click", "#search-by-admission", function () {
         var admissionId = $('#all-old-admissions').val();
         if (admissionId != null && admissionId != "") {
-            manager.searchByAdmission(admissionId);
+            $.ajax({
+                type: "GET",
+                url: baseUrl + "Home/GetResultByOldAdmission",
+                data: { admissionId: admissionId },
+                success: function (res) {
+                    if (res.StatusCode == 200) {
+                        var _html = '';
+                        _html += '<tr><th>NO</th><th>Roll Number</th><th>Full Name</th><th>Result</th></tr>';
+                        var count = 0;
+                        for (var item of JSON.parse(res.Data)) {
+                            count++;
+                            _html += '<tr><td width="20px">' + count
+                                + '</td><td>' + item.RollNumber
+                                + '</td><td>' + item.Name
+                                + '</td><td>' + item.Result
+                                + '</td></tr>';
+                        }
+                        $('#result-old-admission').html(_html);
+                    } else {
+                        _html += '<option value>Not found</option>';
+                        $('#result-old-admission').html(_html);
+                    }
+                }
+            })
         } else {
             alert("Admission not exist!");
         }

@@ -285,62 +285,74 @@ namespace eProject_SymphonyLimited.Areas.Admin.Controllers
             var currentAdmission = db.Admission.Find(a.EntityId);
             var admission = db.Admission.Where(x => x.EntityId != currentAdmission.EntityId && x.CourseId == a.CourseId).AsEnumerable();
             var validateName = db.Admission.FirstOrDefault(x => x.Name != currentAdmission.Name && x.Name == a.Name);
-            if (a.BillTime <= a.EndTime)
+            if (currentAdmission.Name != a.Name || currentAdmission.StartTime != a.StartTime || currentAdmission.EndTime != a.EndTime || currentAdmission.BillTime != a.BillTime || currentAdmission.PassedMark != a.PassedMark || currentAdmission.MaxMark != a.MaxMark || currentAdmission.Price != a.Price || currentAdmission.CourseId != a.CourseId)
             {
-                ModelState.AddModelError("BillTime", "Bill time must bigger than end time!");
-            }
-            if (a.StartTime <= DateTime.Now)
-            {
-                ModelState.AddModelError("StartTime", "Start time must bigger than current time!");
-            }
-            if (a.EndTime <= DateTime.Now)
-            {
-                ModelState.AddModelError("EndTime", "End time must bigger than current time!");
-            }
-            if (a.StartTime >= a.EndTime)
-            {
-                ModelState.AddModelError("EndTime", "End time must bigger than start time!");
-            }
-            if (validateName != null)
-            {
-                ModelState.AddModelError("Name", "Admission name can't be the same!");
-            }
-            if (a.MaxMark < a.PassedMark)
-            {
-                ModelState.AddModelError("PassedMark", "Passed mark must smaller than max mark!");
-            }
-            foreach (var item in admission)
-            {
-                if (a.StartTime < item.StartTime)
+                if (currentAdmission.StartTime > DateTime.Now)
                 {
-                    if (a.EndTime > item.StartTime)
+                    if (a.BillTime <= a.EndTime)
                     {
-                        ModelState.AddModelError("EndTime", "End time is already in another admission!");
+                        ModelState.AddModelError("BillTime", "Bill time must bigger than end time!");
                     }
-                    if (a.EndTime > item.EndTime)
+                    if (a.StartTime <= DateTime.Now)
                     {
-                        ModelState.AddModelError("StartTime", "Start time is already in another admission!");
-                        ModelState.AddModelError("EndTime", "End time is already in another admission!");
+                        ModelState.AddModelError("StartTime", "Start time must bigger than current time!");
+                    }
+                    if (a.EndTime <= DateTime.Now)
+                    {
+                        ModelState.AddModelError("EndTime", "End time must bigger than current time!");
+                    }
+                    if (a.StartTime >= a.EndTime)
+                    {
+                        ModelState.AddModelError("EndTime", "End time must bigger than start time!");
+                    }
+                    if (validateName != null)
+                    {
+                        ModelState.AddModelError("Name", "Admission name can't be the same!");
+                    }
+                    if (a.MaxMark < a.PassedMark)
+                    {
+                        ModelState.AddModelError("PassedMark", "Passed mark must smaller than max mark!");
+                    }
+                    foreach (var item in admission)
+                    {
+                        if (a.StartTime < item.StartTime)
+                        {
+                            if (a.EndTime > item.StartTime)
+                            {
+                                ModelState.AddModelError("EndTime", "End time is already in another admission!");
+                            }
+                            if (a.EndTime > item.EndTime)
+                            {
+                                ModelState.AddModelError("StartTime", "Start time is already in another admission!");
+                                ModelState.AddModelError("EndTime", "End time is already in another admission!");
+                            }
+                        }
+                        if (item.StartTime <= a.StartTime && a.StartTime < item.EndTime)
+                        {
+                            ModelState.AddModelError("", "Time is already in another admission!");
+                        }
                     }
                 }
-                if (item.StartTime <= a.StartTime && a.StartTime < item.EndTime)
+                else
                 {
-                    ModelState.AddModelError("", "Time is already in another admission!");
+                    ModelState.AddModelError("", "Admission is running!");
                 }
+
             }
+
             if (ModelState.IsValid)
             {
                 try
                 {
-                    currentAdmission.Name = a.Name;
-                    currentAdmission.StartTime = a.StartTime;
-                    currentAdmission.EndTime = a.EndTime;
-                    currentAdmission.BillTime = a.BillTime;
-                    currentAdmission.PassedMark = a.PassedMark;
-                    currentAdmission.MaxMark = a.MaxMark;
-                    currentAdmission.Price = a.Price;
-                    currentAdmission.CourseId = a.CourseId;
-                    db.SaveChanges();
+                        currentAdmission.Name = a.Name;
+                        currentAdmission.StartTime = a.StartTime;
+                        currentAdmission.EndTime = a.EndTime;
+                        currentAdmission.BillTime = a.BillTime;
+                        currentAdmission.PassedMark = a.PassedMark;
+                        currentAdmission.MaxMark = a.MaxMark;
+                        currentAdmission.Price = a.Price;
+                        currentAdmission.CourseId = a.CourseId;
+                        db.SaveChanges();
                     return RedirectToAction("Index");
                 }
                 catch (Exception)
